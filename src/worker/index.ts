@@ -1,3 +1,8 @@
+interface AssetsManifest {
+	scripts: string[];
+	assets: string[];
+}
+
 const injectAssets = (assetPaths: string[]): void => {
 	assetPaths.forEach((assetPath) => {
 		const extension = assetPath.split(".").pop();
@@ -33,7 +38,16 @@ const executeAssetsInjection = async (
 		args: [assetPaths],
 	});
 
-const getAssetPaths = async (): Promise<string[]> => {
+const executeScriptsInjection = async (
+	tabId: NonNullable<chrome.tabs.Tab["id"]>,
+	scriptPaths: string[]
+) =>
+	chrome.scripting.executeScript({
+		target: { tabId },
+		files: scriptPaths,
+	});
+
+const getPaths = async (): Promise<AssetsManifest> => {
 	const assetsManifestUrl = chrome.runtime.getURL("assets-manifest.json");
 	return fetch(assetsManifestUrl).then((response) => response.json());
 };
@@ -51,8 +65,9 @@ const injectContent = async (
 		return;
 	}
 
-	const assetPaths = await getAssetPaths();
-	await executeAssetsInjection(tabId, assetPaths);
+	const paths = await getPaths();
+	await executeAssetsInjection(tabId, paths.assets);
+	// await executeScriptsInjection(tabId, paths.scripts);
 };
 
 chrome.tabs.onUpdated.addListener(injectContent);

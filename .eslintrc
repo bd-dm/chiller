@@ -1,8 +1,9 @@
 {
 	"parser": "@typescript-eslint/parser",
-	"plugins": ["solid", "jsx-a11y", "prettier"],
+	"plugins": ["solid", "jsx-a11y", "@typescript-eslint", "prettier"],
 	"extends": [
 		"eslint:recommended",
+		"plugin:@typescript-eslint/recommended",
 		"plugin:solid/typescript",
 		// prettier should be the last
 		"plugin:prettier/recommended"
@@ -11,7 +12,8 @@
 		"chrome": true
 	},
 	"rules": {
-		"no-unused-vars": "warn"
+		"no-unused-vars": "off",
+		"@typescript-eslint/no-unused-vars": ["warn"]
 	},
 	"overrides": [
 		{

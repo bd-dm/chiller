@@ -9,6 +9,11 @@ interface Config {
 	entries?: string[];
 }
 
+interface Manifest {
+	scripts: string[];
+	assets: string[];
+}
+
 const assetsManifestPlugin = ({ entries }: Config): Plugin => {
 	return {
 		name: "assetsManifest",
@@ -32,12 +37,18 @@ const assetsManifestPlugin = ({ entries }: Config): Plugin => {
 
 					if ((bundleData as OutputChunk).isEntry) {
 						const { imports } = bundleData as OutputChunk;
-						return [...prev, ...imports, bundleKey];
+						return {
+							...prev,
+							scripts: [...prev.scripts, ...imports, bundleKey],
+						};
 					} else {
-						return [...prev, bundleKey];
+						return {
+							...prev,
+							assets: [...prev.assets, bundleKey],
+						};
 					}
 				},
-				[] as string[]
+				{ scripts: [], assets: [] } as Manifest
 			);
 
 			const manifest = JSON.stringify(assetPaths);

@@ -10,10 +10,10 @@
 		"service_worker": "worker/index.js",
 		"type": "module"
 	},
-	"permissions": ["storage", "tabs", "activeTab", "scripting"],
+	"permissions": ["storage", "tabs", "activeTab", "scripting", "debugger"],
 	"host_permissions": ["<all_urls>"],
 	"web_accessible_resources": [{
-		"matches": ["*://*/*"],
-		"resources": ["content/*", "assets-manifest.json", "assets/*"]
+		"matches": ["<all_urls>"],
+		"resources": ["content/*", "assets-manifest.json", "styles/*", "chunks/*"]
 	}]
 }

@@ -1,4 +1,4 @@
-import { OverlayWindow } from "./overlay-window";
+import { App } from "./App";
 import { injectApp } from "./utils";
 
-injectApp(OverlayWindow);
+injectApp(App);

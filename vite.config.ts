@@ -30,8 +30,10 @@ export default defineConfig({
 				"content/index": path.resolve(__dirname, "./src/content/index.tsx"),
 			},
 			output: {
-				preserveModules: false,
+				assetFileNames: "styles/[name]-[hash].[extname]",
+				chunkFileNames: "chunks/[name]-[hash].js",
 				entryFileNames: "[name].js",
+				preserveModules: false,
 			},
 		},
 	},
@@ -39,6 +41,6 @@ export default defineConfig({
 		solidPlugin(),
 		eslintPluginBuild,
 		eslintPluginDev,
-		assetsManifestPlugin({ entries: ["content/*", "assets/*.css"] }),
+		assetsManifestPlugin({ entries: ["content/*", "styles/*.css"] }),
 	],
 });
