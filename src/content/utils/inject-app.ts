@@ -10,6 +10,7 @@ const injectApp = (Component: SolidComponent): void => {
 
 	const rootElement = document.createElement("div");
 	rootElement.id = rootId;
+	document.body.append(rootElement);
 
 	createAppInElement(Component, rootId);
 };

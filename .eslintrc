@@ -10,6 +10,9 @@
 	"globals": {
 		"chrome": true
 	},
+	"rules": {
+		"no-unused-vars": "warn"
+	},
 	"overrides": [
 		{
 			"files": ["vite.config.ts"],

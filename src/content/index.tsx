@@ -1,9 +1,4 @@
 import { OverlayWindow } from "./overlay-window";
-import { injectApp, injectAssets } from "./utils";
+import { injectApp } from "./utils";
 
-const inject = async () => {
-	await injectAssets();
-	injectApp(OverlayWindow);
-};
-
-inject();
+injectApp(OverlayWindow);

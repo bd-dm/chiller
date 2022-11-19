@@ -6,14 +6,14 @@
 	"action": {
 		"default_popup": "popup/index.html"
 	},
-	"content_scripts": [
-		{
-			"matches": ["*://*/*"],
-			"js": ["content/index.js"]
-		}
-	],
+	"background": {
+		"service_worker": "worker/index.js",
+		"type": "module"
+	},
+	"permissions": ["storage", "tabs", "activeTab", "scripting"],
+	"host_permissions": ["<all_urls>"],
 	"web_accessible_resources": [{
 		"matches": ["*://*/*"],
-		"resources": ["assets-manifest.json", "assets/*"]
+		"resources": ["content/*", "assets-manifest.json", "assets/*"]
 	}]
 }

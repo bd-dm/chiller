@@ -26,6 +26,7 @@ export default defineConfig({
 		rollupOptions: {
 			input: {
 				"popup/index": path.resolve(__dirname, "./src/popup/index.html"),
+				"worker/index": path.resolve(__dirname, "./src/worker/index.ts"),
 				"content/index": path.resolve(__dirname, "./src/content/index.tsx"),
 			},
 			output: {
