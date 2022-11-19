@@ -1,0 +1,10 @@
+{
+	"parser": "@typescript-eslint/parser",
+	"plugins": ["solid", "jsx-a11y", "prettier"],
+	"extends": [
+		"eslint:recommended",
+		"plugin:solid/typescript",
+		// prettier should be the last
+		"plugin:prettier/recommended"
+	]
+}
