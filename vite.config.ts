@@ -1,6 +1,7 @@
 import { defineConfig, PluginOption } from "vite";
 import solidPlugin from "vite-plugin-solid";
 import eslintPlugin from "vite-plugin-eslint";
+import { viteStaticCopy } from "vite-plugin-static-copy";
 
 const eslintPluginBuild: PluginOption = {
 	...eslintPlugin(),
@@ -17,5 +18,17 @@ const eslintPluginDev: PluginOption = {
 };
 
 export default defineConfig({
-	plugins: [solidPlugin(), eslintPluginBuild, eslintPluginDev],
+	plugins: [
+		solidPlugin(),
+		eslintPluginBuild,
+		eslintPluginDev,
+		viteStaticCopy({
+			targets: [
+				{
+					src: "static/*",
+					dest: ".",
+				},
+			],
+		}),
+	],
 });

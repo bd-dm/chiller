@@ -1,0 +1,9 @@
+{
+	"manifest_version": 3,
+	"name": "Chiller",
+	"description": "A Chrome extension that helps you fill anything with chill",
+	"version": "0.0.1",
+	"action": {
+		"default_popup": "index.html"
+	}
+}
