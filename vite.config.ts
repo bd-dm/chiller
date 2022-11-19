@@ -1,7 +1,7 @@
 import { defineConfig, PluginOption } from "vite";
 import solidPlugin from "vite-plugin-solid";
 import eslintPlugin from "vite-plugin-eslint";
-import { viteStaticCopy } from "vite-plugin-static-copy";
+import path from "node:path";
 
 const eslintPluginBuild: PluginOption = {
 	...eslintPlugin(),
@@ -18,17 +18,20 @@ const eslintPluginDev: PluginOption = {
 };
 
 export default defineConfig({
-	plugins: [
-		solidPlugin(),
-		eslintPluginBuild,
-		eslintPluginDev,
-		viteStaticCopy({
-			targets: [
-				{
-					src: "static/*",
-					dest: ".",
-				},
-			],
-		}),
-	],
+	root: "./src",
+	build: {
+		emptyOutDir: true,
+		outDir: "../dist",
+		rollupOptions: {
+			input: {
+				"popup/index": path.resolve(__dirname, "./src/popup/index.html"),
+				"content/index": path.resolve(__dirname, "./src/content/index.ts"),
+			},
+			output: {
+				preserveModules: false,
+				entryFileNames: "[name].js",
+			},
+		},
+	},
+	plugins: [solidPlugin(), eslintPluginBuild, eslintPluginDev],
 });

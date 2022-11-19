@@ -1,5 +1,5 @@
 import { render } from "solid-js/web";
-import { App } from "./src";
+import { App } from "./home";
 import { isNull } from "lodash-es";
 
 const root = document.getElementById("root");

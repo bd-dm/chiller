@@ -6,5 +6,13 @@
 		"plugin:solid/typescript",
 		// prettier should be the last
 		"plugin:prettier/recommended"
+	],
+	"overrides": [
+		{
+			"files": ["vite.config.ts"],
+			"env": {
+				"node": true
+			}
+		}
 	]
 }

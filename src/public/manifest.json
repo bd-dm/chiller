@@ -4,6 +4,12 @@
 	"description": "A Chrome extension that helps you fill anything with chill",
 	"version": "0.0.1",
 	"action": {
-		"default_popup": "index.html"
-	}
+		"default_popup": "./popup/index.html"
+	},
+	"content_scripts": [
+		{
+			"js": ["./content/index.js"],
+			"matches": ["*://*/*"]
+		}
+	]
 }
