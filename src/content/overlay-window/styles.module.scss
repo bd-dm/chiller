@@ -9,11 +9,12 @@
 	bottom: 8px;
 	right: 8px;
 	padding: 8px;
-	color: #1d1d1d;
+	color: #fff;
+	font-size: 16px;
 
 	/* From https://css.glass */
-	background: rgb(255 255 255 / 69%);
-	border-radius: 4px;
+	background: rgb(0 0 0 / 64%);
+	border-radius: 8px;
 	box-shadow: 0 4px 30px rgb(0 0 0 / 10%);
-	backdrop-filter: blur(16.1px);
+	backdrop-filter: blur(20px);
 }
