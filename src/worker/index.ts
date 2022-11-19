@@ -1,20 +1,36 @@
-const injectScripts = (scriptPaths: string[]): void => {
-	scriptPaths.forEach((scriptPath) => {
-		const element = document.createElement("script");
-		element.type = "module";
-		element.src = chrome.runtime.getURL(scriptPath);
-		document.head.append(element);
+const injectAssets = (assetPaths: string[]): void => {
+	assetPaths.forEach((assetPath) => {
+		const extension = assetPath.split(".").pop();
+		const assetUrl = chrome.runtime.getURL(assetPath);
+
+		switch (extension) {
+			case "css": {
+				const element = document.createElement("link");
+				element.href = assetUrl;
+				element.type = "text/css";
+				element.rel = "stylesheet";
+				document.head.append(element);
+				break;
+			}
+			case "js": {
+				const element = document.createElement("script");
+				element.type = "module";
+				element.src = assetUrl;
+				document.head.append(element);
+				break;
+			}
+		}
 	});
 };
 
-const executeScriptsInjection = async (
+const executeAssetsInjection = async (
 	tabId: NonNullable<chrome.tabs.Tab["id"]>,
-	scriptPaths: string[]
+	assetPaths: string[]
 ) =>
 	chrome.scripting.executeScript({
 		target: { tabId },
-		func: injectScripts,
-		args: [scriptPaths],
+		func: injectAssets,
+		args: [assetPaths],
 	});
 
 const getAssetPaths = async (): Promise<string[]> => {
@@ -24,16 +40,19 @@ const getAssetPaths = async (): Promise<string[]> => {
 
 const injectContent = async (
 	tabId: number,
-	changeInfo: chrome.tabs.TabChangeInfo
+	changeInfo: chrome.tabs.TabChangeInfo,
+	tab: chrome.tabs.Tab
 ): Promise<void> => {
 	if (changeInfo.status !== "complete") {
 		return;
 	}
 
-	const assetsPaths = await getAssetPaths();
-	const scriptsPaths = [...assetsPaths, "content/index.js"];
+	if (tab.url?.startsWith("chrome://")) {
+		return;
+	}
 
-	await executeScriptsInjection(tabId, scriptsPaths);
+	const assetPaths = await getAssetPaths();
+	await executeAssetsInjection(tabId, assetPaths);
 };
 
 chrome.tabs.onUpdated.addListener(injectContent);

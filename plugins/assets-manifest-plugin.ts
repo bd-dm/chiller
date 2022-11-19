@@ -3,6 +3,7 @@ import { Plugin } from "vite";
 import { OutputChunk } from "rollup";
 import path from "node:path";
 import fs from "node:fs";
+import minimatch from "minimatch";
 
 interface Config {
 	entries?: string[];
@@ -12,37 +13,38 @@ const assetsManifestPlugin = ({ entries }: Config): Plugin => {
 	return {
 		name: "assetsManifest",
 		enforce: "post",
-		writeBundle: ({ dir }, bundle) => {
+		writeBundle: async ({ dir }, bundle) => {
 			if (!dir) {
 				return;
 			}
 
-			Object.entries(bundle).forEach(async ([bundleKey, bundleData]) => {
-				// If we have entries config, parse only bundles mentioned there
-				if (entries) {
-					const shouldParseEntry = entries.some((entry) =>
-						bundleKey.startsWith(entry)
-					);
-					if (!shouldParseEntry) {
-						return;
+			const assetPaths = Object.entries(bundle).reduce(
+				(prev, [bundleKey, bundleData]) => {
+					// If we have entries config, parse only bundles mentioned there
+					if (entries) {
+						const shouldParseEntry = entries.some((entryGlob) =>
+							minimatch(bundleKey, entryGlob)
+						);
+						if (!shouldParseEntry) {
+							return prev;
+						}
 					}
-				}
 
-				const chunk = bundleData as OutputChunk;
+					if ((bundleData as OutputChunk).isEntry) {
+						const { imports } = bundleData as OutputChunk;
+						return [...prev, ...imports, bundleKey];
+					} else {
+						return [...prev, bundleKey];
+					}
+				},
+				[] as string[]
+			);
 
-				// if not an entry bundle, skip it
-				const { isEntry } = chunk;
-				if (!isEntry) {
-					return;
-				}
-
-				const { imports } = chunk;
-				const manifest = JSON.stringify(imports);
-				await fs.promises.writeFile(
-					path.resolve(dir, "assets-manifest.json"),
-					manifest
-				);
-			});
+			const manifest = JSON.stringify(assetPaths);
+			await fs.promises.writeFile(
+				path.resolve(dir, "assets-manifest.json"),
+				manifest
+			);
 		},
 	};
 };

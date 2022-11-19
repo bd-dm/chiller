@@ -39,6 +39,6 @@ export default defineConfig({
 		solidPlugin(),
 		eslintPluginBuild,
 		eslintPluginDev,
-		assetsManifestPlugin({ entries: ["content/index"] }),
+		assetsManifestPlugin({ entries: ["content/*", "assets/*.css"] }),
 	],
 });
