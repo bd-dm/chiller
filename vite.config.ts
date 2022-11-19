@@ -2,6 +2,7 @@ import { defineConfig, PluginOption } from "vite";
 import solidPlugin from "vite-plugin-solid";
 import eslintPlugin from "vite-plugin-eslint";
 import path from "node:path";
+import { assetsManifestPlugin } from "./plugins";
 
 const eslintPluginBuild: PluginOption = {
 	...eslintPlugin(),
@@ -25,7 +26,7 @@ export default defineConfig({
 		rollupOptions: {
 			input: {
 				"popup/index": path.resolve(__dirname, "./src/popup/index.html"),
-				"content/index": path.resolve(__dirname, "./src/content/index.ts"),
+				"content/index": path.resolve(__dirname, "./src/content/index.tsx"),
 			},
 			output: {
 				preserveModules: false,
@@ -33,5 +34,10 @@ export default defineConfig({
 			},
 		},
 	},
-	plugins: [solidPlugin(), eslintPluginBuild, eslintPluginDev],
+	plugins: [
+		solidPlugin(),
+		eslintPluginBuild,
+		eslintPluginDev,
+		assetsManifestPlugin({ entries: ["content/index"] }),
+	],
 });

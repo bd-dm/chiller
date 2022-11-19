@@ -1,11 +1,4 @@
-import { render } from "solid-js/web";
-import { App } from "./home";
-import { isNull } from "lodash-es";
+import { Home } from "./home";
+import { createAppInElement } from "../common";
 
-const root = document.getElementById("root");
-
-if (!isNull(root)) {
-	render(() => <App />, root);
-} else {
-	throw new Error("No root found on page");
-}
+createAppInElement(Home, "root");

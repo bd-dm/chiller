@@ -7,6 +7,9 @@
 		// prettier should be the last
 		"plugin:prettier/recommended"
 	],
+	"globals": {
+		"chrome": true
+	},
 	"overrides": [
 		{
 			"files": ["vite.config.ts"],
