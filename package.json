@@ -6,9 +6,11 @@
   "scripts": {
     "dev": "turbo vite:dev",
     "build": "turbo vite:build",
+    "build:live": "turbo vite:build:live",
     "preview": "turbo vite:preview",
     "vite:dev": "vite",
     "vite:build": "vite build",
+    "vite:build:live": "vite build --watch",
     "vite:preview": "vite preview",
     "test": "jest",
     "lint:code": "eslint . --ext .js,.ts,.tsx",
