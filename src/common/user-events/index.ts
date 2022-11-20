@@ -19,4 +19,12 @@ const userEvents = {
 	type: wrap(type),
 };
 
+type UserEvents = Omit<typeof userEvents, "start">;
+type UserEventAction = keyof UserEvents;
+type UserEventParams<Type extends UserEventAction> = Parameters<
+	UserEvents[Type]
+>[0];
+
 export { userEvents };
+
+export type { UserEventParams, UserEventAction };

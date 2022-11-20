@@ -1,5 +1,5 @@
-import { sendMessage } from "../../../common";
-import { MessageType } from "../../../common/message-carrier/enums";
+import { sendMessage } from "../../message-carrier";
+import { MessageType } from "../../message-carrier/enums";
 import { UserEvent } from "../types";
 
 enum PressKeyType {
