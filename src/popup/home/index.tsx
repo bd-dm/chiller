@@ -1,6 +1,9 @@
 import { Component } from "solid-js";
 import { sendMessage } from "../../common";
 import { MessageType } from "../../common/message-carrier/enums";
+import { Scripts } from "./components";
+import { HomeContext } from "./context";
+import styles from "./index.module.scss";
 
 const Home: Component = () => {
 	const openChiller = async () => {
@@ -8,18 +11,14 @@ const Home: Component = () => {
 	};
 
 	return (
-		<div>
-			<div>
-				<h3>Scripts</h3>
-				<ul>
-					<li>script1</li>
-					<li>script2</li>
-				</ul>
+		<HomeContext.Provider>
+			<div class={styles.popup}>
+				<button type={"button"} onClick={openChiller}>
+					Toggle scripts window
+				</button>
+				<Scripts />
 			</div>
-			<button type={"button"} onClick={openChiller}>
-				Open Chiller
-			</button>
-		</div>
+		</HomeContext.Provider>
 	);
 };
 

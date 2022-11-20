@@ -20,6 +20,11 @@ const eslintPluginDev: PluginOption = {
 
 export default defineConfig({
 	root: "./src",
+	css: {
+		modules: {
+			localsConvention: "camelCaseOnly",
+		},
+	},
 	build: {
 		sourcemap: true,
 		emptyOutDir: true,

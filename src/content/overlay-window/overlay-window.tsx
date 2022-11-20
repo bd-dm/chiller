@@ -1,5 +1,5 @@
 import { Component, createSignal } from "solid-js";
-import styles from "./styles.module.scss";
+import styles from "./index.module.scss";
 import { isUndefined } from "lodash-es";
 import { useCoreContext } from "../contexts";
 import { userEvents } from "../user-events";

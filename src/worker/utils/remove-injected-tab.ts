@@ -1,4 +1,5 @@
 import { getSavedInjectedTabs } from "./get-saved-injected-tabs";
+import { StorageKeys } from "../../common";
 
 const removeInjectedTab = async (
 	tabId: chrome.tabs.Tab["id"]
@@ -6,7 +7,7 @@ const removeInjectedTab = async (
 	const prevInjectedTabs = await getSavedInjectedTabs();
 
 	await chrome.storage.local.set({
-		"@chiller/contentInjectedTabs": prevInjectedTabs.filter(
+		[StorageKeys.InjectedTabs]: prevInjectedTabs.filter(
 			(prevTabId) => prevTabId !== tabId
 		),
 	});
