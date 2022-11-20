@@ -22,9 +22,6 @@ const CoreContextProvider: ParentComponent = (props) => {
 	createEffect(() => {
 		(async () => {
 			const tab = await sendMessage(MessageType.GetCurrentTab);
-			await sendMessage(MessageType.AttachDebugger, {
-				target: { tabId: tab.id },
-			});
 			setCurrentTab(tab);
 		})();
 	});

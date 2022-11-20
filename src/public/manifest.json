@@ -6,10 +6,6 @@
 	"action": {
 		"default_popup": "popup/index.html"
 	},
-	"content_scripts": [{
-		"matches": ["<all_urls>"],
-		"js": ["inject-content.js"]
-	}],
 	"background": {
 		"service_worker": "worker/index.js",
 		"type": "module"

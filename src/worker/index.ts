@@ -1,14 +1,14 @@
 import { onMessage } from "../common";
 import { MessageType } from "../common/message-carrier/enums";
-import { injectContent } from "./utils";
+import { onPageReady } from "./utils";
 import {
-	onAttachDebugger,
 	onGetCurrentTab,
+	onInjectContent,
 	onSendDebuggerCommand,
 } from "./listeners";
 
-chrome.tabs.onUpdated.addListener(injectContent);
+chrome.tabs.onUpdated.addListener(onPageReady);
 
+onMessage(MessageType.InjectContent, onInjectContent);
 onMessage(MessageType.GetCurrentTab, onGetCurrentTab);
-onMessage(MessageType.AttachDebugger, onAttachDebugger);
 onMessage(MessageType.SendDebuggerCommand, onSendDebuggerCommand);

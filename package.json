@@ -3,9 +3,9 @@
   "version": "0.0.1",
   "description": "A Chrome extension that helps you fill anything with chill",
   "scripts": {
-    "dev": "turbo vite:dev",
-    "build": "turbo vite:build",
-    "build:live": "turbo vite:build:live",
+    "dev": "npm run vite:dev",
+    "build": "npm run vite:build",
+    "build:live": "npm run vite:build:live",
     "preview": "turbo vite:preview",
     "vite:dev": "vite",
     "vite:build": "vite build",

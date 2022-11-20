@@ -1,21 +1,38 @@
-import { executeAssetsInjection } from "./execute-assets-injection";
-import { getContentPaths } from "./get-content-paths";
+import { attachDebugger } from "./attach-debugger";
+import { saveInjectedTab } from "./save-injected-tab";
+import { getSavedInjectedTabs } from "./get-saved-injected-tabs";
+import { detachDebugger } from "./detach-debugger";
+import { removeInjectedTab } from "./remove-injected-tab";
 
 const injectContent = async (
-	tabId: number,
-	changeInfo: chrome.tabs.TabChangeInfo,
-	tab: chrome.tabs.Tab
+	tabId: NonNullable<chrome.tabs.Tab["id"]>,
+	isFromPopup = false
 ): Promise<void> => {
-	if (changeInfo.status !== "complete") {
-		return;
+	if (isFromPopup) {
+		const prevInjectedTabs = await getSavedInjectedTabs();
+
+		if (prevInjectedTabs.includes(tabId)) {
+			// injected -> removing
+			await removeInjectedTab(tabId);
+			await chrome.scripting.executeScript({
+				target: { tabId: tabId },
+				files: ["clean-content.js"],
+			});
+			await detachDebugger({ tabId });
+			return;
+		}
 	}
 
-	if (tab.url?.startsWith("chrome://")) {
-		return;
+	await chrome.scripting.executeScript({
+		target: { tabId: tabId },
+		files: ["inject-content.js"],
+	});
+	await saveInjectedTab(tabId);
+	try {
+		await attachDebugger({ tabId: tabId });
+	} catch (error) {
+		console.warn(error);
 	}
-
-	const paths = await getContentPaths();
-	await executeAssetsInjection(tabId, paths.assets);
 };
 
 export { injectContent };

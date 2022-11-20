@@ -1,7 +1,7 @@
 enum MessageType {
+	InjectContent,
 	GetCurrentTab,
 	SendDebuggerCommand,
-	AttachDebugger,
 }
 
 export { MessageType };

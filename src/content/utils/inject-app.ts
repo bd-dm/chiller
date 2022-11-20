@@ -10,6 +10,7 @@ const injectApp = (Component: SolidComponent): void => {
 
 	const rootElement = document.createElement("div");
 	rootElement.id = rootId;
+	rootElement.dataset.chillerOverlay = "true";
 	document.body.append(rootElement);
 
 	createAppInElement(Component, rootId);
