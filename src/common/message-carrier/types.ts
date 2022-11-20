@@ -1,12 +1,31 @@
 import { MessageType } from "./enums";
 
-interface Message<Type extends MessageType> {
+interface MessageBase<Type extends MessageType> {
 	type: Type;
 }
 
+type MessageContent<Type extends MessageType> =
+	Type extends MessageType.GetCurrentTab
+		? void
+		: Type extends MessageType.SendDebuggerCommand
+		? {
+				target: chrome.debugger.Debuggee;
+				method: string;
+				// eslint-disable-next-line @typescript-eslint/ban-types
+				commandParams?: Object;
+		  }
+		: never;
+
+type Message<Type extends MessageType> = MessageBase<Type> &
+	MessageContent<Type>;
+
 type MessageGetCurrentTabResult = chrome.tabs.Tab;
 type MessageResult<Type extends MessageType> =
-	Type extends MessageType.GetCurrentTab ? MessageGetCurrentTabResult : never;
+	Type extends MessageType.GetCurrentTab
+		? MessageGetCurrentTabResult
+		: Type extends MessageType.SendDebuggerCommand
+		? void
+		: never;
 
 // Worker side
 
@@ -24,7 +43,8 @@ type onMessageFn = <Type extends MessageType>(
 // Client side
 
 type MessageSender = <Type extends MessageType>(
-	message: Type
+	message: Type,
+	content?: MessageContent<Type>
 ) => Promise<MessageResult<Type>>;
 
 export type { Message, MessageListener, MessageSender, onMessageFn };

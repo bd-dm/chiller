@@ -21,6 +21,7 @@ const eslintPluginDev: PluginOption = {
 export default defineConfig({
 	root: "./src",
 	build: {
+		sourcemap: true,
 		emptyOutDir: true,
 		outDir: "../dist",
 		rollupOptions: {

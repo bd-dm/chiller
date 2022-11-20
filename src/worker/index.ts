@@ -75,5 +75,16 @@ onMessage(MessageType.GetCurrentTab, (message, sender, sendResponse) => {
 	});
 	return true;
 });
+onMessage(
+	MessageType.SendDebuggerCommand,
+	({ target, method, commandParams }, sender, sendResponse) => {
+		chrome.debugger.attach(target, "1.3", () => {
+			chrome.debugger.sendCommand(target, method, commandParams).then(() => {
+				sendResponse();
+			});
+		});
+		return true;
+	}
+);
 
 export {};

@@ -2,14 +2,20 @@ import {
 	createContext,
 	createEffect,
 	createSignal,
+	Accessor,
 	useContext,
+	Show,
 } from "solid-js";
 import { ParentComponent } from "solid-js/types/render/component";
 import { sendMessage } from "../../../common";
 import { MessageType } from "../../../common/message-carrier/enums";
 import { ContextType } from "../types";
 
-const Context = createContext();
+interface CoreContextValue {
+	currentTab: Accessor<chrome.tabs.Tab>;
+}
+
+const Context = createContext<CoreContextValue>();
 
 const CoreContextProvider: ParentComponent = (props) => {
 	const [currentTab, setCurrentTab] = createSignal<chrome.tabs.Tab>();
@@ -21,7 +27,13 @@ const CoreContextProvider: ParentComponent = (props) => {
 	});
 
 	return (
-		<Context.Provider value={{ currentTab }}>{props.children}</Context.Provider>
+		<Show keyed when={currentTab()}>
+			<Context.Provider
+				value={{ currentTab: currentTab as Accessor<chrome.tabs.Tab> }}
+			>
+				{props.children}
+			</Context.Provider>
+		</Show>
 	);
 };
 
@@ -29,6 +41,6 @@ const CoreContext: ContextType = {
 	Provider: CoreContextProvider,
 };
 
-const useCoreContext = () => useContext(Context);
+const useCoreContext = (): CoreContextValue => useContext(Context)!;
 
 export { CoreContext, useCoreContext };

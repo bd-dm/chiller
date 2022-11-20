@@ -1,27 +1,37 @@
 import { Component, createSignal } from "solid-js";
 import styles from "./styles.module.scss";
 import { isNull, isUndefined } from "lodash-es";
+import { useCoreContext } from "../contexts";
+import { sendMessage } from "../../common";
+import { MessageType } from "../../common/message-carrier/enums";
 
 const OverlayWindow: Component = () => {
 	const [query, setQuery] = createSignal("");
+	const { currentTab } = useCoreContext();
 
 	const onClick = async () => {
-		const { id: tabId } = (await chrome.tabs.getCurrent()) ?? {};
+		if (!query()) {
+			console.log("No such element: ", query());
+			return;
+		}
+
 		const element = document.querySelector(query());
+		const tabId = currentTab().id;
 
 		if (isNull(element) || isUndefined(tabId)) {
 			return;
 		}
 
-		const debuggee = { tabId: tabId };
-		console.log("clicking", debuggee);
+		const debuggee = { tabId };
 
-		chrome.debugger.attach(debuggee, "1.2", function () {
-			chrome.debugger.sendCommand(debuggee, "Input.dispatchMouseEvent", {
+		await sendMessage(MessageType.SendDebuggerCommand, {
+			target: debuggee,
+			method: "Input.dispatchMouseEvent",
+			commandParams: {
 				type: "mousePressed",
 				x: 20,
 				y: 20,
-			});
+			},
 		});
 	};
 
