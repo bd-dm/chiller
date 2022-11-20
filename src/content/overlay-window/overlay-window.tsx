@@ -6,12 +6,12 @@ import { sendMessage } from "../../common";
 import { MessageType } from "../../common/message-carrier/enums";
 
 const OverlayWindow: Component = () => {
-	const [query, setQuery] = createSignal("");
+	const [query, setQuery] = createSignal("body");
 	const { currentTab } = useCoreContext();
 
 	const onClick = async () => {
 		if (!query()) {
-			console.log("No such element: ", query());
+			console.error("No such element: ", query());
 			return;
 		}
 

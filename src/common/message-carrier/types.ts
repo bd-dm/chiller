@@ -14,6 +14,8 @@ type MessageContent<Type extends MessageType> =
 				// eslint-disable-next-line @typescript-eslint/ban-types
 				commandParams?: Object;
 		  }
+		: Type extends MessageType.AttachDebugger
+		? { target: chrome.debugger.Debuggee }
 		: never;
 
 type Message<Type extends MessageType> = MessageBase<Type> &
@@ -24,6 +26,8 @@ type MessageResult<Type extends MessageType> =
 	Type extends MessageType.GetCurrentTab
 		? MessageGetCurrentTabResult
 		: Type extends MessageType.SendDebuggerCommand
+		? void
+		: Type extends MessageType.AttachDebugger
 		? void
 		: never;
 
