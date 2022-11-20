@@ -1,4 +1,5 @@
 import { detachDebugger } from "./detach-debugger";
+import { getSavedInjectedTabs } from "./get-saved-injected-tabs";
 
 const attachDebugger = async (
 	target: chrome.debugger.Debuggee
@@ -7,10 +8,19 @@ const attachDebugger = async (
 
 	// Listen for tab change and detach debugger if user left needed tab
 	chrome.tabs.onActivated.addListener(async ({ tabId }) => {
-		if (tabId === target.tabId) {
-			await attach();
-		} else {
-			await detachDebugger(target);
+		const prevInjectedTabs = await getSavedInjectedTabs();
+		if (!prevInjectedTabs.includes(tabId)) {
+			return;
+		}
+
+		try {
+			if (tabId === target.tabId) {
+				await attach();
+			} else {
+				await detachDebugger(target);
+			}
+		} catch (error) {
+			console.warn(error);
 		}
 	});
 

@@ -18,7 +18,11 @@ const injectContent = async (
 				target: { tabId: tabId },
 				files: ["clean-content.js"],
 			});
-			await detachDebugger({ tabId });
+			try {
+				await detachDebugger({ tabId });
+			} catch (error) {
+				console.warn(error);
+			}
 			return;
 		}
 	}
