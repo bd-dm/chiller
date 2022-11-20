@@ -21,7 +21,8 @@ const OverlayWindow: Component = () => {
 		}
 
 		userEvents.start(tabId);
-		userEvents.click({ selector: selector() });
+		await userEvents.click({ selector: selector() });
+		await userEvents.type({ text: "Пук пук пук)))" });
 	};
 
 	return (

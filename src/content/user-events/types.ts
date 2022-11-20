@@ -1,6 +1,6 @@
 type UserEvent<ParamsType> = (
 	tabId: chrome.tabs.Tab["id"],
 	params: ParamsType
-) => void;
+) => Promise<void>;
 
 export type { UserEvent };
