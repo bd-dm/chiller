@@ -1,7 +1,7 @@
 import { ParentComponent } from "solid-js/types/render/component";
 
-interface CoreContextType {
+interface ContextType {
 	Provider: ParentComponent;
 }
 
-export type { CoreContextType };
+export type { ContextType };

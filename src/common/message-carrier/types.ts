@@ -10,15 +10,15 @@ type MessageResult<Type extends MessageType> =
 
 // Worker side
 
-type MessageListener = <Type extends MessageType>(
+type MessageListener<Type extends MessageType> = (
 	message: Message<Type>,
 	sender: chrome.runtime.MessageSender,
 	sendResponse: (result: MessageResult<Type>) => void
-) => void;
+) => boolean | undefined;
 
-type onMessageFn = (
-	messageType: MessageType,
-	callback: MessageListener
+type onMessageFn = <Type extends MessageType>(
+	messageType: Type,
+	callback: MessageListener<Type>
 ) => void;
 
 // Client side

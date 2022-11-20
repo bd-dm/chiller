@@ -1,3 +1,6 @@
+import { onMessage } from "../common";
+import { MessageType } from "../common/message-carrier/enums";
+
 interface AssetsManifest {
 	scripts: string[];
 	assets: string[];
@@ -38,15 +41,6 @@ const executeAssetsInjection = async (
 		args: [assetPaths],
 	});
 
-const executeScriptsInjection = async (
-	tabId: NonNullable<chrome.tabs.Tab["id"]>,
-	scriptPaths: string[]
-) =>
-	chrome.scripting.executeScript({
-		target: { tabId },
-		files: scriptPaths,
-	});
-
 const getPaths = async (): Promise<AssetsManifest> => {
 	const assetsManifestUrl = chrome.runtime.getURL("assets-manifest.json");
 	return fetch(assetsManifestUrl).then((response) => response.json());
@@ -67,9 +61,19 @@ const injectContent = async (
 
 	const paths = await getPaths();
 	await executeAssetsInjection(tabId, paths.assets);
-	// await executeScriptsInjection(tabId, paths.scripts);
 };
 
 chrome.tabs.onUpdated.addListener(injectContent);
+onMessage(MessageType.GetCurrentTab, (message, sender, sendResponse) => {
+	const queryOptions = { active: true, currentWindow: true };
+	chrome.tabs.query(queryOptions, ([tab]) => {
+		if (!tab) {
+			return;
+		}
+
+		sendResponse(tab);
+	});
+	return true;
+});
 
 export {};
