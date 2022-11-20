@@ -1,5 +1,6 @@
-import { click, enterChar, pressKey, type } from "./events";
+import { clearInput, click, enterChar, pressKey, type } from "./events";
 import { UserEvent } from "./types";
+import { typeRandom } from "./complex-events";
 
 let _tabId: chrome.tabs.Tab["id"] = undefined;
 
@@ -17,6 +18,9 @@ const userEvents = {
 	pressKey: wrap(pressKey),
 	enterChar: wrap(enterChar),
 	type: wrap(type),
+	cleanInput: wrap(clearInput),
+
+	typeRandom: wrap(typeRandom),
 };
 
 type UserEvents = Omit<typeof userEvents, "start">;
