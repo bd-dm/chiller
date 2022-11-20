@@ -1,38 +1,27 @@
 import { Component, createSignal } from "solid-js";
 import styles from "./styles.module.scss";
-import { isNull, isUndefined } from "lodash-es";
+import { isUndefined } from "lodash-es";
 import { useCoreContext } from "../contexts";
-import { sendMessage } from "../../common";
-import { MessageType } from "../../common/message-carrier/enums";
+import { userEvents } from "../user-events";
 
 const OverlayWindow: Component = () => {
-	const [query, setQuery] = createSignal("body");
+	const [selector, setSelector] = createSignal("body");
 	const { currentTab } = useCoreContext();
 
 	const onClick = async () => {
-		if (!query()) {
-			console.error("No such element: ", query());
+		if (!selector()) {
+			console.error("No such element: ", selector());
 			return;
 		}
 
-		const element = document.querySelector(query());
 		const tabId = currentTab().id;
 
-		if (isNull(element) || isUndefined(tabId)) {
+		if (isUndefined(tabId)) {
 			return;
 		}
 
-		const debuggee = { tabId };
-
-		await sendMessage(MessageType.SendDebuggerCommand, {
-			target: debuggee,
-			method: "Input.dispatchMouseEvent",
-			commandParams: {
-				type: "mousePressed",
-				x: 20,
-				y: 20,
-			},
-		});
+		userEvents.start(tabId);
+		userEvents.click({ selector: selector() });
 	};
 
 	return (
@@ -41,7 +30,7 @@ const OverlayWindow: Component = () => {
 			<div>
 				<input
 					type="text"
-					onInput={({ currentTarget: { value } }) => setQuery(value)}
+					onInput={({ currentTarget: { value } }) => setSelector(value)}
 				/>
 				<button type={"button"} onClick={onClick}>
 					Click
