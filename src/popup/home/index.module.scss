@@ -1,7 +1,15 @@
+@use '../../common/styles/variables';
+
+* {
+	margin: 0;
+	padding: 0;
+}
+
 .popup {
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
 	min-width: 200px;
 	min-height: 100px;
+	background-color: variables.$background
 }

@@ -22,7 +22,7 @@ export default defineConfig({
 	root: "./src",
 	css: {
 		modules: {
-			localsConvention: "camelCaseOnly",
+			localsConvention: "dashes",
 		},
 	},
 	build: {

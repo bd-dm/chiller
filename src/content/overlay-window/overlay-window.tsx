@@ -3,6 +3,7 @@ import styles from "./index.module.scss";
 import { isUndefined } from "lodash-es";
 import { useCoreContext } from "../contexts";
 import { userEvents } from "../user-events";
+import commonStyles from "../../common/styles/index.module.scss";
 
 const OverlayWindow: Component = () => {
 	const [selector, setSelector] = createSignal("body");
@@ -26,7 +27,7 @@ const OverlayWindow: Component = () => {
 	};
 
 	return (
-		<div class={styles.overlay}>
+		<div classList={{ [styles.overlay]: true, [commonStyles.chiller]: true }}>
 			<div>Overlay Window</div>
 			<div>
 				<input

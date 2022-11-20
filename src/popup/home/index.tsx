@@ -4,6 +4,7 @@ import { MessageType } from "../../common/message-carrier/enums";
 import { Scripts } from "./components";
 import { HomeContext } from "./context";
 import styles from "./index.module.scss";
+import commonStyles from "../../common/styles/index.module.scss";
 
 const Home: Component = () => {
 	const openChiller = async () => {
@@ -12,7 +13,7 @@ const Home: Component = () => {
 
 	return (
 		<HomeContext.Provider>
-			<div class={styles.popup}>
+			<div classList={{ [styles.popup]: true, [commonStyles.chiller]: true }}>
 				<button type={"button"} onClick={openChiller}>
 					Toggle scripts window
 				</button>

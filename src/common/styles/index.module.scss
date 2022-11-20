@@ -1,0 +1,18 @@
+@use 'variables';
+
+.chiller {
+	color: variables.$text;
+
+	* {
+		margin: 0;
+		padding: 0;
+		font-family: arial, serif;
+	}
+
+	button {
+		border: none;
+		background-color: transparent;
+		padding: 4px 8px;
+		color: #fff;
+	}
+}

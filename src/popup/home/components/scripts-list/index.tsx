@@ -1,5 +1,5 @@
 import { Component, For } from "solid-js";
-import styles from "../scripts/index.module.scss";
+import styles from "./index.module.scss";
 import { useHomeContext } from "../../context";
 
 const ScriptsList: Component = () => {
@@ -7,7 +7,9 @@ const ScriptsList: Component = () => {
 
 	return (
 		<ul class={styles.list}>
-			<For each={scripts()}>{({ name }) => <li>{name}</li>}</For>
+			<For each={scripts()}>
+				{({ name }) => <li class={styles.item}>{name}</li>}
+			</For>
 		</ul>
 	);
 };

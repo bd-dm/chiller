@@ -1,5 +1,5 @@
 import { Component, createSignal, Show } from "solid-js";
-import styles from "../scripts/index.module.scss";
+import styles from "./index.module.scss";
 import { addScript } from "../../../../common/scripts";
 import { nanoid } from "nanoid";
 import { useHomeContext } from "../../context";
