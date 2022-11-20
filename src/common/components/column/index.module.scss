@@ -1,9 +1,9 @@
-.row {
+.column {
 	display: flex;
-	flex-direction: row;
+	flex-direction: column;
 	gap: 8px;
 
-	&.horizontal {
+	&.vertical {
 		&-flex-start {
 			justify-content: flex-start;
 		}
@@ -21,7 +21,7 @@
 		}
 	}
 
-	&.vertical {
+	&.horizontal {
 		&-flex-start {
 			align-items: flex-start;
 		}

@@ -1,4 +1,13 @@
-.add-script-block {
-	display: flex;
-	flex-direction: column;
+@use '../../../../common/styles/variables';
+
+.block {
+	background-color: variables.$background-light;
+	margin-left: -8px;
+	margin-right: -8px;
+	padding: 12px 8px;
+}
+
+.script-input {
+	min-height: 150px;
+	min-width: 350px;
 }

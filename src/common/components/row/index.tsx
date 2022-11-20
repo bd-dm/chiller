@@ -5,6 +5,7 @@ enum RowVerticalAlignment {
 	FlexStart = "FlexStart",
 	Center = "Center",
 	FlexEnd = "FlexEnd",
+	Stretch = "Stretch",
 }
 
 enum RowHorizontalAlignment {

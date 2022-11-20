@@ -1,16 +1,15 @@
 import { Component, createSignal, Show } from "solid-js";
-import styles from "./index.module.scss";
 import { addScript } from "../../../../common/scripts";
 import { nanoid } from "nanoid";
 import { useHomeContext } from "../../context";
+import { Column } from "../../../../common/components";
+import styles from "./index.module.scss";
 
 const AddScript: Component = () => {
-	const [isOpened, setIsOpened] = createSignal(false);
 	const [name, setName] = createSignal("");
 	const [json, setJson] = createSignal("");
-	const { updateScripts } = useHomeContext();
-
-	const toggleAddScript = () => setIsOpened(!isOpened());
+	const { updateScripts, isAddScriptOpened, setIsAddScriptOpened } =
+		useHomeContext();
 
 	const addScriptHandler = async () => {
 		await addScript({
@@ -19,31 +18,31 @@ const AddScript: Component = () => {
 			json: json(),
 			addedTimestamp: new Date().getTime(),
 		});
-		setIsOpened(false);
+		setIsAddScriptOpened(false);
 		updateScripts();
 	};
 
 	return (
-		<div class={styles["add-script-block"]}>
-			<Show keyed when={isOpened()}>
+		<Show keyed when={isAddScriptOpened()}>
+			<Column
+				classList={{ [styles.block]: true }}
+				horizontalAlignment={Column.Alignment.Horizontal.Stretch}
+			>
 				<input
 					type="text"
 					placeholder={"Name"}
 					onInput={({ currentTarget: { value } }) => setName(value)}
 				/>
-				<input
-					type="text"
+				<textarea
+					class={styles.scriptInput}
 					placeholder={"Script JSON"}
 					onInput={({ currentTarget: { value } }) => setJson(value)}
 				/>
 				<button type={"button"} onClick={addScriptHandler}>
-					Add
+					Save
 				</button>
-			</Show>
-			<button type={"button"} onClick={toggleAddScript}>
-				{isOpened() ? "Cancel" : "Add script"}
-			</button>
-		</div>
+			</Column>
+		</Show>
 	);
 };
 
