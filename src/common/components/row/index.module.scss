@@ -1,0 +1,36 @@
+.row {
+	display: flex;
+	gap: 8px;
+
+	&.horizontal {
+		&-flex-start {
+			justify-content: flex-start;
+		}
+
+		&-center {
+			justify-content: center;
+		}
+
+		&-flex-end {
+			justify-content: flex-end;
+		}
+
+		&-space-between {
+			justify-content: space-between;
+		}
+	}
+
+	&.vertical {
+		&-flex-start {
+			align-items: flex-start;
+		}
+
+		&-center {
+			align-items: center;
+		}
+
+		&-flex-end {
+			align-items: flex-end;
+		}
+	}
+}

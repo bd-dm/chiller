@@ -7,6 +7,9 @@
 	padding: 8px;
 	color: #fff;
 	font-size: 16px;
+	z-index: 2147483647;
+	min-width: 200px;
+	max-width: 400px;
 
 	/* From https://css.glass */
 	background: rgb(0 0 0 / 64%);

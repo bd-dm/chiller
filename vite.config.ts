@@ -36,7 +36,7 @@ export default defineConfig({
 				"content/index": path.resolve(__dirname, "./src/content/index.ts"),
 			},
 			output: {
-				assetFileNames: "styles/[name]-[hash].[extname]",
+				assetFileNames: "styles/[name]-[hash][extname]",
 				chunkFileNames: "chunks/[name]-[hash].js",
 				entryFileNames: "[name].js",
 				preserveModules: false,
