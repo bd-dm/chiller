@@ -8,8 +8,9 @@ import {
 	useContext,
 } from "solid-js";
 import { ParentComponent } from "solid-js/types/render/component";
-import { getScripts } from "../../common/scripts";
+import { getScripts, sendMessage } from "../../common";
 import { Script } from "../../common/scripts/types";
+import { MessageType } from "../../common/message-carrier/enums";
 
 interface ContextValue {
 	scripts: Resource<Script[]>;
@@ -24,9 +25,19 @@ const HomeContextProvider: ParentComponent = (props) => {
 	const [isAddScriptOpened, setIsAddScriptOpened] = createSignal(false);
 	const [scripts, { refetch }] = createResource(getScripts);
 
+	const reloadOverlay = async () => {
+		await sendMessage(MessageType.InjectContent);
+		await sendMessage(MessageType.InjectContent);
+	};
+
+	const updateScripts = async () => {
+		refetch();
+		await reloadOverlay();
+	};
+
 	const value = {
 		scripts,
-		updateScripts: refetch,
+		updateScripts,
 		isAddScriptOpened,
 		setIsAddScriptOpened,
 	};

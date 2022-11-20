@@ -9,10 +9,9 @@ import {
 	Resource,
 } from "solid-js";
 import { ParentComponent } from "solid-js/types/render/component";
-import { sendMessage } from "../../../common";
+import { sendMessage, getScripts } from "../../../common";
 import { MessageType } from "../../../common/message-carrier/enums";
 import { ContextType } from "../types";
-import { getScripts } from "../../../common/scripts";
 import { Script } from "../../../common/scripts/types";
 
 interface CoreContextValue {
