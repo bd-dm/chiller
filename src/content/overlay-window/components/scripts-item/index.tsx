@@ -1,9 +1,9 @@
 import { Component } from "solid-js";
 import { Script } from "../../../../common/scripts/types";
-import { Row } from "../../../../common/components";
 import styles from "./index.module.scss";
 import { scriptRunner } from "../../../../common";
 import { useCoreContext } from "../../../contexts";
+import { Row } from "../../../../common/components";
 
 interface ScriptsItemProps {
 	script: Script;
