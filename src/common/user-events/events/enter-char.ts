@@ -7,9 +7,9 @@ interface EnterCharParams {
 
 const enterChar: UserEvent<EnterCharParams> = async (
 	tabId,
-	{ char }
+	{ params: { char } }
 ): Promise<void> => {
-	return pressKey(tabId, { type: PressKeyType.Char, text: char });
+	return pressKey(tabId, { params: { type: PressKeyType.Char, text: char } });
 };
 
 export { enterChar };

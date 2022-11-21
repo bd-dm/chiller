@@ -2,17 +2,25 @@
 
 ```json
 {
+	"variables": {
+		"searchInput": "input[placeholder=\"Искать на Ozon\"]",
+		"searchButton": "form[action=\"/search\"] button[type=submit]"
+	},
 	"steps": [
 		{
-			"action": "cleanInput",
+			"action": "clearInput",
 			"params": {
-				"selector": "input[placeholder=\"Искать на Ozon\"]"
+				"target": {
+					"use": "searchInput"
+				}
 			}
 		},
 		{
 			"action": "click",
 			"params": {
-				"selector": "input[placeholder=\"Искать на Ozon\"]"
+				"target": {
+					"use": "searchInput"
+				}
 			}
 		},
 		{
@@ -30,7 +38,9 @@
 		{
 			"action": "click",
 			"params": {
-				"selector": "form[action=\"/search\"] button[type=submit]"
+				"target": {
+					"use": "searchButton"
+				}
 			}
 		}
 	]

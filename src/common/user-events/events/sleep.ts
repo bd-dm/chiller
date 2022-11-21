@@ -1,13 +1,13 @@
 import { UserEvent } from "../types";
 import { sleep as sleepFn } from "../../utils";
 
-interface EnterCharParams {
+interface SleepParams {
 	ms: number;
 }
 
-const sleep: UserEvent<EnterCharParams> = async (
+const sleep: UserEvent<SleepParams> = async (
 	_tabId,
-	{ ms }
+	{ params: { ms } }
 ): Promise<void> => {
 	return await sleepFn(ms);
 };

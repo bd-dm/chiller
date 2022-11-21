@@ -32,15 +32,17 @@ interface PressKeyParams {
 const pressKey: UserEvent<PressKeyParams> = async (
 	tabId,
 	{
-		type,
-		modifiers: modifiersList = [],
-		text,
-		code,
-		keyIdentifier,
-		key,
-		commands,
-		windowsVirtualKeyCode,
-		nativeVirtualKeyCode,
+		params: {
+			type,
+			modifiers: modifiersList = [],
+			text,
+			code,
+			keyIdentifier,
+			key,
+			commands,
+			windowsVirtualKeyCode,
+			nativeVirtualKeyCode,
+		},
 	}
 ): Promise<void> => {
 	const modifiers = modifiersList?.reduce((acc, curr) => acc + curr, 0);

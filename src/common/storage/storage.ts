@@ -1,13 +1,30 @@
 import { StorageMethods } from "./types";
-import { isObject, isUndefined } from "lodash-es";
+import { isNull, isObject, isUndefined } from "lodash-es";
 
-const get: StorageMethods["get"] = async (key) =>
-	(await chrome.storage.sync.get(key))[key];
+const get: StorageMethods["get"] = async (key) => {
+	const data = await chrome.storage.sync.get(key);
+	if (!data) {
+		return null;
+	}
+
+	const value = data[key];
+	if (!value) {
+		return null;
+	}
+
+	return value;
+};
 
 const set: StorageMethods["set"] = async (key, value) =>
 	await chrome.storage.sync.set({
 		[key]: value,
 	});
+
+const addItem: StorageMethods["addItem"] = async (key, item) => {
+	const items = (await get(key)) ?? [];
+
+	return await set(key, [...items, item]);
+};
 
 const updateItem: StorageMethods["updateItem"] = async (
 	key,
@@ -15,7 +32,7 @@ const updateItem: StorageMethods["updateItem"] = async (
 	updateData
 ) => {
 	const items = await get(key);
-	if (!items) {
+	if (isNull(items)) {
 		return;
 	}
 
@@ -39,18 +56,18 @@ const updateItem: StorageMethods["updateItem"] = async (
 
 const removeItem: StorageMethods["removeItem"] = async (key, findFn) => {
 	const items = await get(key);
-	if (!items) {
+	if (isNull(items)) {
 		return;
 	}
 
 	const itemIndex = items.findIndex(findFn);
-	if (isUndefined(itemIndex) && itemIndex !== -1) {
+	if (isUndefined(itemIndex) || itemIndex === -1) {
 		return;
 	}
 
 	items.splice(itemIndex, 1);
 
-	return items;
+	return await set(key, items);
 };
 
 const removeKey: StorageMethods["removeKey"] = async (key) => {
@@ -60,6 +77,7 @@ const removeKey: StorageMethods["removeKey"] = async (key) => {
 const storage: StorageMethods = {
 	get,
 	set,
+	addItem,
 	updateItem,
 	removeItem,
 	removeKey,

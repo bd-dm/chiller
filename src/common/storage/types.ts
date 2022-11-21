@@ -1,32 +1,44 @@
 import { StorageKeys } from "./enums";
 import { Script } from "../scripts/types";
 
-type ArrayStorageType<Key extends StorageKeys> = Key extends StorageKeys.Scripts
-	? Script[]
-	: Key extends StorageKeys.InjectedTabs
-	? chrome.tabs.Tab["id"][]
-	: never[];
+type ArrayStorageKeys = StorageKeys.Scripts | StorageKeys.InjectedTabs;
 
-type StorageType<Key extends StorageKeys> = ArrayStorageType<Key>;
+type ArrayStorageItemType<Key extends ArrayStorageKeys> =
+	Key extends StorageKeys.Scripts
+		? Script
+		: Key extends StorageKeys.InjectedTabs
+		? chrome.tabs.Tab["id"]
+		: never;
+
+type StorageType<Key extends StorageKeys> = ArrayStorageItemType<Key>[];
+
+type ArrayStorageItemUpdateData<Key extends ArrayStorageKeys> =
+	ArrayStorageItemType<Key> extends Record<string, unknown>
+		? Partial<ArrayStorageItemType<Key>>
+		: ArrayStorageItemType<Key>;
 
 interface StorageMethods {
-	get: <Key extends StorageKeys>(key: Key) => Promise<StorageType<Key>>;
+	get: <Key extends StorageKeys>(key: Key) => Promise<StorageType<Key> | null>;
+
 	set: <Key extends StorageKeys>(
 		key: Key,
 		value: StorageType<Key>
 	) => Promise<void>;
 
-	updateItem: <Key extends StorageKeys>(
+	addItem: <Key extends ArrayStorageKeys>(
 		key: Key,
-		findFn: (item: ArrayStorageType<Key>[number]) => boolean,
-		updateData: ArrayStorageType<Key>[number] extends Record<string, unknown>
-			? Partial<ArrayStorageType<Key>[number]>
-			: ArrayStorageType<Key>[number]
+		item: ArrayStorageItemType<Key>
+	) => Promise<void>;
+
+	updateItem: <Key extends ArrayStorageKeys>(
+		key: Key,
+		findFn: (item: ArrayStorageItemType<Key>) => boolean,
+		updateData: ArrayStorageItemUpdateData<Key>
 	) => void;
 
-	removeItem: <Key extends StorageKeys>(
+	removeItem: <Key extends ArrayStorageKeys>(
 		key: Key,
-		findFn: (item: ArrayStorageType<Key>[number]) => boolean
+		findFn: (item: ArrayStorageItemType<Key>) => boolean
 	) => void;
 
 	removeKey: <Key extends StorageKeys>(key: Key) => Promise<void>;

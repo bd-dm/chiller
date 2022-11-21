@@ -5,9 +5,12 @@ interface TypeParams {
 	text: string;
 }
 
-const type: UserEvent<TypeParams> = async (tabId, { text }): Promise<void> => {
+const type: UserEvent<TypeParams> = async (
+	tabId,
+	{ params: { text } }
+): Promise<void> => {
 	for (let i = 0; i < text.length; i++) {
-		await enterChar(tabId, { char: text[i] });
+		await enterChar(tabId, { params: { char: text[i] } });
 	}
 };
 

@@ -1,9 +1,8 @@
 import { Script } from "./types";
-import { StorageKeys } from "../enums";
+import { storage, StorageKeys } from "../storage";
 
 const getScripts = async (): Promise<Script[]> => {
-	const storage = await chrome.storage.local.get(StorageKeys.Scripts);
-	return storage[StorageKeys.Scripts] ?? [];
+	return (await storage.get(StorageKeys.Scripts)) ?? [];
 };
 
 export { getScripts };

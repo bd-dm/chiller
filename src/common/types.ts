@@ -7,8 +7,11 @@ interface ScriptStep<
 	params: UserEventParams<UserEventActionType>;
 }
 
+type ScriptVariables = Record<string, string> | undefined;
+
 interface ScriptBody {
+	variables?: ScriptVariables;
 	steps: ScriptStep[];
 }
 
-export type { ScriptBody };
+export type { ScriptBody, ScriptVariables };

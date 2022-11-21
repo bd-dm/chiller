@@ -1,13 +1,22 @@
-import { clearInput, click, enterChar, pressKey, sleep, type } from "./events";
+import {
+	clearInput,
+	click,
+	enterChar,
+	pressKey,
+	sleep,
+	type,
+	waitForElement,
+} from "./events";
 import { UserEvent } from "./types";
 import { typeRandom } from "./complex-events";
+import { ScriptVariables } from "../types";
 
 let _tabId: chrome.tabs.Tab["id"] = undefined;
 
 const wrap =
 	<ParamsType>(fn: UserEvent<ParamsType>) =>
-	(params: ParamsType) =>
-		fn(_tabId, params);
+	(params: ParamsType, variables: ScriptVariables) =>
+		fn(_tabId, { params, variables });
 
 const userEvents = {
 	start: (tabId: chrome.tabs.Tab["id"]) => {
@@ -18,10 +27,11 @@ const userEvents = {
 	pressKey: wrap(pressKey),
 	enterChar: wrap(enterChar),
 	type: wrap(type),
-	cleanInput: wrap(clearInput),
+	clearInput: wrap(clearInput),
 
 	typeRandom: wrap(typeRandom),
 	sleep: wrap(sleep),
+	waitForElement: wrap(waitForElement),
 };
 
 type UserEvents = Omit<typeof userEvents, "start">;

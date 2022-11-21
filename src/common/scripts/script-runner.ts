@@ -8,7 +8,7 @@ const scriptRunner = async (
 	scriptId: Script["id"]
 ) => {
 	const script = await getScript(scriptId);
-	const { steps } = JSON.parse(script.json) as ScriptBody;
+	const { steps, variables } = JSON.parse(script.json) as ScriptBody;
 
 	userEvents.start(tabId);
 
@@ -16,7 +16,7 @@ const scriptRunner = async (
 		const step = steps[i];
 		const { action, params } = step;
 
-		await userEvents[action](params as never);
+		await userEvents[action](params as never, variables);
 	}
 };
 
