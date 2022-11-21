@@ -4,7 +4,8 @@
 {
 	"variables": {
 		"searchInput": "[aria-label=\"Введите запрос\"]",
-		"searchButton": "[id=\"search-icon-legacy\"]"
+		"searchButton": "[id=\"search-icon-legacy\"]",
+		"video": "a[href=\"/watch?v=gSLZGm9MO8c\"]"
 	},
 	"steps": [
 		{
@@ -40,6 +41,22 @@
 			"params": {
 				"target": {
 					"use": "searchButton"
+				}
+			}
+		},
+		{
+			"action": "waitForElement",
+			"params": {
+				"target": {
+					"use": "video"
+				}
+			}
+		},
+		{
+			"action": "click",
+			"params": {
+				"target": {
+					"use": "video"
 				}
 			}
 		}

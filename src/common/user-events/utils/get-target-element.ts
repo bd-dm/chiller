@@ -35,7 +35,6 @@ const getTargetElement = <ElementType extends HTMLElement>(
 			const variable = target.use;
 			const selector = variables[variable];
 
-			console.log("click", variable, selector);
 			element = document.querySelector(selector);
 			break;
 		}
