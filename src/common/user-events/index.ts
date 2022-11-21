@@ -1,4 +1,4 @@
-import { clearInput, click, enterChar, pressKey, type } from "./events";
+import { clearInput, click, enterChar, pressKey, sleep, type } from "./events";
 import { UserEvent } from "./types";
 import { typeRandom } from "./complex-events";
 
@@ -21,6 +21,7 @@ const userEvents = {
 	cleanInput: wrap(clearInput),
 
 	typeRandom: wrap(typeRandom),
+	sleep: wrap(sleep),
 };
 
 type UserEvents = Omit<typeof userEvents, "start">;

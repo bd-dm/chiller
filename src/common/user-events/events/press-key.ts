@@ -75,8 +75,6 @@ const pressKey: UserEvent<PressKeyParams> = async (
 		commandParams.modifiers = modifiers;
 	}
 
-	console.log("press key", tabId, commandParams);
-
 	await sendMessage(MessageType.SendDebuggerCommand, {
 		target: debuggee,
 		method: "Input.dispatchKeyEvent",
