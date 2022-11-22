@@ -1,0 +1,34 @@
+name: Merge to master
+
+on:
+  push:
+    branches: [ master ]
+
+env:
+  node_version: 18
+
+concurrency: # prevent concurrent releases
+  group: npm-bump
+  cancel-in-progress: true
+
+jobs:
+  bump-version:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - name: Use Node.js ${{ env.node_version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ env.node_version }}
+          registry-url: 'https://registry.npmjs.org'
+      - name: Bump version
+        uses: bcomnes/npm-bump@v2
+        with:
+          git_email: brd.dmitry@gmail.com
+          git_username: ${{ github.actor }}
+          newversion: 'patch'
+          push_version_commit: true
+          publish_cmd: ''

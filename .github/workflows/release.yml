@@ -2,101 +2,66 @@ name: Release
 
 on:
   push:
-    branches: [ master ]
-    inputs:
-      new-version:
-        description: 'minor'
-        required: true
+    tags:
+      - "**"
+  workflow_run:
+    workflows: [ "Merge to master" ]
+    types:
+      - completed
 
-concurrency: # prevent concurrent releases
-  group: npm-bump
-  cancel-in-progress: true
+env:
+  node_version: 18
 
 jobs:
-  install:
-    runs-on: ubuntu-latest
-
-    strategy:
-      matrix:
-        node-version: [18.x]
-
-    steps:
-    - name: Checkout
-      uses: actions/checkout@v3
-      with:
-        # fetch full history so things like auto-changelog work properly
-        fetch-depth: 0
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v3
-      with:
-        node-version: ${{ matrix.node-version }}
-    - name: Install
-      run: npm ci
-    - uses: actions/upload-artifact@v3
-      with:
-        name: install
-        path: ./**
-        retention-days: 1
-
   build:
-
     runs-on: ubuntu-latest
-
-    strategy:
-      matrix:
-        node-version: [18.x]
-
     steps:
-      - uses: actions/download-artifact@v3
+      - name: Checkout
+        uses: actions/checkout@v3
         with:
-          name: install
+          fetch-depth: 0
+      - name: Use Node.js ${{ env.node_version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ env.node_version }}
+      - name: Install
+        run: npm ci
       - name: Build
         run: npm run build
-      - name: Archive
+      - name: Get latest version
+        id: get_version
+        run: |
+          echo "LATEST_TAG=$(git describe --tags --abbrev=0)" >> $GITHUB_ENV
+      - name: Install zip
         uses: montudor/action-zip@v1
+      - name: Archive
+        run: zip -r ../Chiller-${{ env.LATEST_TAG }}.zip *
+        working-directory: dist
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v3
         with:
-          args: zip -qq -r Chiller.zip dist
-
-    needs: install
-
-  bump-version:
-
-    runs-on: ubuntu-latest
-
-    strategy:
-      matrix:
-        node-version: [18.x]
-
-    steps:
-      - uses: actions/download-artifact@v3
-        with:
-          name: install
-      - name: Version bump
-        uses: bcomnes/npm-bump@v2
-        with:
-          git_email: brd.dmitry@gmail.com
-          git_username: ${{ github.actor }}
-          newversion: ${{ github.event.inputs.new-version }}
-          push_version_commit: true
-
-    needs: install
+          name: build
+          path: Chiller-${{ env.LATEST_TAG }}.zip
+          retention-days: 1
 
   release:
-
     runs-on: ubuntu-latest
-
-    strategy:
-      matrix:
-        node-version: [18.x]
-
     needs: build
-
     steps:
-      - uses: actions/download-artifact@v3
+      - name: Checkout
+        uses: actions/checkout@v3
         with:
-          name: install
+          fetch-depth: 0
+      - name: Get latest version
+        id: get_version
+        run: |
+          echo "LATEST_TAG=$(git describe --tags --abbrev=0)" >> $GITHUB_ENV
+      - name: Download build artifacts
+        uses: actions/download-artifact@v3
+        with:
+          name: build
       - name: Release
         uses: softprops/action-gh-release@v1
         with:
-          files: Chiller.zip
-
+          files: Chiller-${{ env.LATEST_TAG }}.zip
+          tag_name: ${{ env.LATEST_TAG }}
