@@ -35,7 +35,8 @@ jobs:
     - uses: actions/upload-artifact@v3
       with:
         name: install
-        path: /**
+        path: ./**
+        retention-days: 1
 
   build:
 
