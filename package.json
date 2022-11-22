@@ -1,6 +1,6 @@
 {
   "name": "chiller",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "A Chrome extension that helps you fill anything with chill",
   "scripts": {
     "dev": "npm run vite:dev",
@@ -16,7 +16,7 @@
     "lint:code": "eslint . --ext .js,.ts,.tsx",
     "lint:types": "tsc --noEmit",
     "lint": "npm run lint:code && npm run lint:types && npm run lint:styles",
-		"postinstall": "git config core.hooksPath '.git-hooks'"
+    "postinstall": "git config core.hooksPath '.git-hooks'"
   },
   "repository": {
     "type": "git",
