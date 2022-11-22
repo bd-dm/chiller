@@ -15,7 +15,8 @@
     "lint:styles": "stylelint \"**/*.scss\"",
     "lint:code": "eslint . --ext .js,.ts,.tsx",
     "lint:types": "tsc --noEmit",
-    "lint": "npm run lint:code && npm run lint:types && npm run lint:styles"
+    "lint": "npm run lint:code && npm run lint:types && npm run lint:styles",
+		"postinstall": "git config core.hooksPath '.git-hooks'"
   },
   "repository": {
     "type": "git",
