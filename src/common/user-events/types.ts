@@ -1,5 +1,5 @@
-import { ActionTargetType } from "./enums";
 import { ScriptVariables } from "../types";
+import { ActionTarget } from "./action-target";
 
 // eslint-disable-next-line @typescript-eslint/ban-types
 type DefaultParamsType = {};
@@ -29,32 +29,7 @@ interface UseVariable {
 }
 
 /**
- * Action target
- */
-
-interface ActionTargetBase {
-	type?: ActionTargetType;
-}
-
-interface SelectorActionTarget extends ActionTargetBase {
-	type?: ActionTargetType.Selector;
-	selector: string;
-}
-
-interface VariableActionTarget extends ActionTargetBase, UseVariable {
-	type?: ActionTargetType.Variable;
-}
-
-type ActionTarget = SelectorActionTarget | VariableActionTarget;
-
-/**
  * Exports
  */
 
-export type {
-	UserEvent,
-	ActionTarget,
-	SelectorActionTarget,
-	VariableActionTarget,
-	UserEventWithTarget,
-};
+export type { UserEvent, UseVariable, UserEventWithTarget };

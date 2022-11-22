@@ -1,0 +1,102 @@
+name: Release
+
+on:
+  push:
+    branches: [ master ]
+    inputs:
+      new-version:
+        description: 'minor'
+        required: true
+
+concurrency: # prevent concurrent releases
+  group: npm-bump
+  cancel-in-progress: true
+
+jobs:
+  install:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [18.x]
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+      with:
+        # fetch full history so things like auto-changelog work properly
+        fetch-depth: 0
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v3
+      with:
+        node-version: ${{ matrix.node-version }}
+    - name: Install
+      run: npm ci
+    - uses: actions/upload-artifact@v3
+      with:
+        name: install
+        path: ./**
+        retention-days: 1
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [18.x]
+
+    steps:
+      - uses: actions/download-artifact@v3
+        with:
+          name: install
+      - name: Build
+        run: npm run build
+      - name: Archive
+        uses: montudor/action-zip@v1
+        with:
+          args: zip -qq -r Chiller.zip dist
+
+    needs: install
+
+  bump-version:
+
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [18.x]
+
+    steps:
+      - uses: actions/download-artifact@v3
+        with:
+          name: install
+      - name: Version bump
+        uses: bcomnes/npm-bump@v2
+        with:
+          git_email: brd.dmitry@gmail.com
+          git_username: ${{ github.actor }}
+          newversion: ${{ github.event.inputs.new-version }}
+          push_version_commit: true
+
+    needs: install
+
+  release:
+
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [18.x]
+
+    needs: build
+
+    steps:
+      - uses: actions/download-artifact@v3
+        with:
+          name: install
+      - name: Release
+        uses: softprops/action-gh-release@v1
+        with:
+          files: Chiller.zip
+

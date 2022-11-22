@@ -1,16 +1,18 @@
+import { isNull, isUndefined } from "lodash-es";
+import { ScriptVariables } from "../../../types";
 import {
 	ActionTarget,
+	ElementData,
 	SelectorActionTarget,
 	VariableActionTarget,
 } from "../types";
 import { ActionTargetType } from "../enums";
-import { ScriptVariables } from "../../types";
-import { isNull, isUndefined } from "lodash-es";
+import { getElementBySelector } from "./get-element-by-selector";
 
 const getTargetElement = <ElementType extends HTMLElement>(
 	target: ActionTarget,
 	variables?: ScriptVariables
-): ElementType => {
+): ElementData<ElementType> => {
 	if (isUndefined(target.type)) {
 		if (!isUndefined((target as SelectorActionTarget).selector)) {
 			target.type = ActionTargetType.Selector;
@@ -19,35 +21,35 @@ const getTargetElement = <ElementType extends HTMLElement>(
 		}
 	}
 
-	let element: ElementType | null;
+	let elementData: ElementData<ElementType> | null;
 
 	switch (target.type) {
 		case ActionTargetType.Selector: {
-			element = document.querySelector(target.selector);
+			elementData = getElementBySelector(target.selector);
 			break;
 		}
 		case ActionTargetType.Variable: {
 			if (isUndefined(variables)) {
-				element = null;
+				elementData = null;
 				break;
 			}
 
 			const variable = target.use;
 			const selector = variables[variable];
 
-			element = document.querySelector(selector);
+			elementData = getElementBySelector(selector);
 			break;
 		}
 		default: {
-			element = null;
+			elementData = null;
 		}
 	}
 
-	if (isNull(element)) {
+	if (isNull(elementData)) {
 		throw new Error("No target found with options: " + JSON.stringify(target));
 	}
 
-	return element;
+	return elementData;
 };
 
 export { getTargetElement };

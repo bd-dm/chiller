@@ -1,2 +1,2 @@
 export * from "./pick-random-from-array";
-export * from "./get-target-element";
+export * from "./get-ctrl-or-cmd-modifier";
