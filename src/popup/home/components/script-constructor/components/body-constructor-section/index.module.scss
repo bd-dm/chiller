@@ -1,0 +1,6 @@
+@use '../../../../../../common/styles/variables';
+
+.section {
+	background-color: variables.$background;
+	padding: 12px 8px;
+}

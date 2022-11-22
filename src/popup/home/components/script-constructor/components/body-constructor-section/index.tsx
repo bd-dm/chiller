@@ -3,7 +3,7 @@ import { Column } from "../../../../../../common/components";
 
 const BodyConstructorSection: ParentComponent = (props) => {
 	return (
-		<Column>
+		<Column horizontalAlignment={Column.Alignment.Horizontal.Stretch}>
 			<div>section</div>
 			<div>{props.children}</div>
 		</Column>

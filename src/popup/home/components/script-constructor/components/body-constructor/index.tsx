@@ -6,7 +6,7 @@ import { SectionSteps } from "../section-steps";
 
 const BodyConstructor: Component = () => {
 	return (
-		<Column>
+		<Column horizontalAlignment={Column.Alignment.Horizontal.Stretch}>
 			<BodyConstructorSection>
 				<SectionVariables />
 			</BodyConstructorSection>
