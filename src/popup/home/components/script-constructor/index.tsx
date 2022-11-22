@@ -1,8 +1,9 @@
-import { Component, createSignal } from "solid-js";
+import { Component, createSignal, onMount } from "solid-js";
 import { nanoid } from "nanoid";
 import { Column } from "../../../../common/components";
 import styles from "./index.module.scss";
 import { Script } from "../../../../common/scripts/types";
+import { isUndefined } from "lodash-es";
 
 interface ScriptConstructorProps {
 	values?: {
@@ -14,10 +15,20 @@ interface ScriptConstructorProps {
 }
 
 const ScriptConstructor: Component<ScriptConstructorProps> = (props) => {
-	// eslint-disable-next-line solid/reactivity
-	const [name, setName] = createSignal(props.values?.name ?? "");
-	// eslint-disable-next-line solid/reactivity
-	const [json, setJson] = createSignal(props.values?.json ?? "");
+	const [name, setName] = createSignal("");
+	const [json, setJson] = createSignal("");
+
+	onMount(() => {
+		const initName = props.values?.name;
+		const initJson = props.values?.json;
+
+		if (!isUndefined(initName)) {
+			setName(initName);
+		}
+		if (!isUndefined(initJson)) {
+			setJson(initJson);
+		}
+	});
 
 	const addScriptHandler = async () => {
 		if (!props.onResult) {
