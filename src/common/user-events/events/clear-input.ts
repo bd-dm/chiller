@@ -1,8 +1,8 @@
 import { UserEventWithTarget } from "../types";
 import { pressKey, PressKeyType } from "./press-key";
 import { click } from "./click";
-import { getCtrlOrCmdModifier } from "../utils/get-ctrl-or-cmd-modifier";
-import { getTargetElement } from "../utils";
+import { getCtrlOrCmdModifier } from "../utils";
+import { getTargetElement } from "../action-target";
 
 interface ClearInputParams {
 	selector: string;
@@ -12,7 +12,7 @@ const clearInput: UserEventWithTarget<ClearInputParams> = async (
 	tabId,
 	{ params: { target }, variables }
 ) => {
-	const element = getTargetElement<HTMLInputElement>(target, variables);
+	const { element } = getTargetElement<HTMLInputElement>(target, variables);
 	if (!element) {
 		return;
 	}
