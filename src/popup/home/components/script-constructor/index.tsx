@@ -4,7 +4,7 @@ import { Column } from "../../../../common/components";
 import styles from "./index.module.scss";
 import { Script } from "../../../../common/scripts/types";
 
-interface ScriptInput {
+interface ScriptConstructorProps {
 	values?: {
 		name?: string;
 		json?: string;
@@ -13,7 +13,7 @@ interface ScriptInput {
 	onResult?: (result: Script) => void;
 }
 
-const ScriptInput: Component<ScriptInput> = (props) => {
+const ScriptConstructor: Component<ScriptConstructorProps> = (props) => {
 	// eslint-disable-next-line solid/reactivity
 	const [name, setName] = createSignal(props.values?.name ?? "");
 	// eslint-disable-next-line solid/reactivity
@@ -56,4 +56,4 @@ const ScriptInput: Component<ScriptInput> = (props) => {
 	);
 };
 
-export { ScriptInput };
+export { ScriptConstructor };

@@ -1,7 +1,7 @@
 import { Component, Show } from "solid-js";
 import { addScript } from "../../../../common";
 import { useHomeContext } from "../../context";
-import { ScriptInput } from "../script-input";
+import { ScriptConstructor } from "../script-constructor";
 import { Script } from "../../../../common/scripts/types";
 
 const AddScript: Component = () => {
@@ -16,7 +16,7 @@ const AddScript: Component = () => {
 
 	return (
 		<Show keyed when={isAddScriptOpened()}>
-			<ScriptInput onResult={addScriptHandler} />
+			<ScriptConstructor onResult={addScriptHandler} />
 		</Show>
 	);
 };

@@ -4,7 +4,7 @@ import commonStyles from "../../../../common/styles/index.module.scss";
 import { Script } from "../../../../common/scripts/types";
 import { removeScript, updateScript } from "../../../../common";
 import { useHomeContext } from "../../context";
-import { ScriptInput } from "../script-input";
+import { ScriptConstructor } from "../script-constructor";
 import { Column, Row } from "../../../../common/components";
 
 interface ScriptsItemProps {
@@ -53,7 +53,7 @@ const ScriptsItem: Component<ScriptsItemProps> = (props) => {
 					</Row>
 				</Row>
 				<Show keyed when={isEdit()}>
-					<ScriptInput values={props.script} onResult={saveHandler} />
+					<ScriptConstructor values={props.script} onResult={saveHandler} />
 				</Show>
 			</Column>
 		</li>
