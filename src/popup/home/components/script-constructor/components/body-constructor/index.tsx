@@ -7,10 +7,10 @@ import { SectionSteps } from "../section-steps";
 const BodyConstructor: Component = () => {
 	return (
 		<Column horizontalAlignment={Column.Alignment.Horizontal.Stretch}>
-			<BodyConstructorSection>
+			<BodyConstructorSection title={"Variables"}>
 				<SectionVariables />
 			</BodyConstructorSection>
-			<BodyConstructorSection>
+			<BodyConstructorSection title={"Steps"}>
 				<SectionSteps />
 			</BodyConstructorSection>
 		</Column>

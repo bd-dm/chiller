@@ -22,7 +22,7 @@ interface ContextValue {
 const Context = createContext<ContextValue>();
 
 const HomeContextProvider: ParentComponent = (props) => {
-	const [isAddScriptOpened, setIsAddScriptOpened] = createSignal(false);
+	const [isAddScriptOpened, setIsAddScriptOpened] = createSignal(true);
 	const [scripts, { refetch }] = createResource(getScripts);
 
 	const reloadOverlay = async () => {

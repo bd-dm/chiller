@@ -1,6 +1,17 @@
 @use '../../../../../../common/styles/variables';
 
-.section {
-	background-color: variables.$background;
+.section:not(:first-of-type) {
+	border-top: 1px solid variables.$background;
+}
+
+.title {
+	font-weight: 600;
+	font-size: 1.6em;
+	color: #fff;
+	padding: 12px 8px 0;
+}
+
+.body {
+	border-radius: 4px;
 	padding: 12px 8px;
 }

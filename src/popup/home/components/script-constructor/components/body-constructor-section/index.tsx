@@ -1,11 +1,22 @@
 import { ParentComponent } from "solid-js/types/render/component";
 import { Column } from "../../../../../../common/components";
+import styles from "./index.module.scss";
 
-const BodyConstructorSection: ParentComponent = (props) => {
+interface BodyConstructorSectionProps {
+	title: string;
+}
+
+const BodyConstructorSection: ParentComponent<BodyConstructorSectionProps> = (
+	props
+) => {
 	return (
-		<Column horizontalAlignment={Column.Alignment.Horizontal.Stretch}>
-			<div>section</div>
-			<div>{props.children}</div>
+		<Column
+			horizontalAlignment={Column.Alignment.Horizontal.Stretch}
+			classList={{ [styles.section]: true }}
+			gapLess={true}
+		>
+			<div class={styles.title}>{props.title}</div>
+			<div class={styles.body}>{props.children}</div>
 		</Column>
 	);
 };
