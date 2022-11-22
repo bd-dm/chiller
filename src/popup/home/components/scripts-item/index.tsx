@@ -53,7 +53,10 @@ const ScriptsItem: Component<ScriptsItemProps> = (props) => {
 					</Row>
 				</Row>
 				<Show keyed when={isEdit()}>
-					<ScriptConstructor values={props.script} onResult={saveHandler} />
+					<ScriptConstructor
+						scriptId={props.script.id}
+						onResult={saveHandler}
+					/>
 				</Show>
 			</Column>
 		</li>
