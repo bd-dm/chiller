@@ -23,7 +23,7 @@ interface ContextValue {
 const Context = createContext<ContextValue>();
 
 const HomeContextProvider: ParentComponent = (props) => {
-	const [page, setPage] = createSignal(Page.ScriptList);
+	const [page, setPage] = createSignal(Page.AddScript);
 	const [scripts, { refetch }] = createResource(getScripts);
 
 	const reloadOverlay = async () => {

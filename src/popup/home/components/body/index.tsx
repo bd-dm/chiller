@@ -7,10 +7,7 @@ import { sendMessage } from "../../../../common";
 import { MessageType } from "../../../../common/message-carrier/enums";
 
 const fetchBackgroundScreenshot = async () => {
-	const imageUrl = await sendMessage(MessageType.GetTabScreenshot);
-	console.log(imageUrl);
-
-	return imageUrl;
+	return sendMessage(MessageType.GetTabScreenshot);
 };
 
 const Body: Component = () => {
