@@ -1,10 +1,11 @@
 import { Component } from "solid-js";
 import { Column } from "../../../../../../common/components";
+import { VariablesItem } from "./components";
 
 const SectionVariables: Component = () => {
 	return (
 		<Column horizontalAlignment={Column.Alignment.Horizontal.Stretch}>
-			variables
+			<VariablesItem />
 		</Column>
 	);
 };

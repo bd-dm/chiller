@@ -10,7 +10,11 @@ import {
 import { ParentComponent } from "solid-js/types/render/component";
 import { Script } from "../../../../common/scripts/types";
 import { ContextType } from "../../../../content/contexts/types";
-import { ScriptBody } from "../../../../common/types";
+import {
+	ScriptBody,
+	ScriptStep,
+	ScriptVariables,
+} from "../../../../common/types";
 import { isUndefined } from "lodash-es";
 import { getScript } from "../../../../common/scripts/get-script";
 import { nanoid } from "nanoid";
@@ -19,7 +23,8 @@ import { ScriptConstructorProps } from "./types";
 interface ScriptConstructorContextValue {
 	id: Accessor<string>;
 	name: Accessor<string>;
-	body: Accessor<ScriptBody>;
+	variables: Accessor<ScriptVariables>;
+	steps: Accessor<ScriptStep[]>;
 	setName: Setter<string>;
 	save?: () => void;
 }
@@ -31,10 +36,8 @@ const ScriptConstructorContextProvider: ParentComponent<
 > = (props) => {
 	const [id, setId] = createSignal("");
 	const [name, setName] = createSignal("");
-	const [body, setBody] = createSignal<ScriptBody>({
-		variables: {},
-		steps: [],
-	});
+	const [variables, setVariables] = createSignal<ScriptVariables>({});
+	const [steps, setSteps] = createSignal<ScriptStep[]>([]);
 
 	onMount(async () => {
 		const scriptId = props.scriptId;
@@ -50,7 +53,10 @@ const ScriptConstructorContextProvider: ParentComponent<
 	const restoreScript = (script: Script): void => {
 		setId(script.id);
 		setName(script.name);
-		setBody(JSON.parse(script.json) as ScriptBody);
+
+		const { variables, steps } = JSON.parse(script.json) as ScriptBody;
+		setVariables(variables);
+		setSteps(steps);
 	};
 
 	const saveHandler = () => {
@@ -61,14 +67,16 @@ const ScriptConstructorContextProvider: ParentComponent<
 		props.onResult({
 			id: id(),
 			name: name(),
-			json: JSON.stringify(body()),
+			json: JSON.stringify({ variables: variables(), steps: steps() }),
 			addedTimestamp: new Date().getTime(),
 		});
 	};
 
 	return (
 		<Show keyed when={id()}>
-			<Context.Provider value={{ id, body, name, setName, save: saveHandler }}>
+			<Context.Provider
+				value={{ id, variables, steps, name, setName, save: saveHandler }}
+			>
 				{props.children}
 			</Context.Provider>
 		</Show>
