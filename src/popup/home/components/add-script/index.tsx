@@ -1,24 +1,20 @@
-import { Component, Show } from "solid-js";
+import { Component } from "solid-js";
 import { addScript } from "../../../../common";
 import { useHomeContext } from "../../context";
 import { ScriptConstructor } from "../script-constructor";
 import { Script } from "../../../../common/scripts/types";
+import { Page } from "../../enums";
 
 const AddScript: Component = () => {
-	const { updateScripts, isAddScriptOpened, setIsAddScriptOpened } =
-		useHomeContext();
+	const { updateScripts, setPage } = useHomeContext();
 
 	const addScriptHandler = async (script: Script) => {
 		await addScript(script);
-		setIsAddScriptOpened(false);
+		setPage(Page.ScriptList);
 		updateScripts();
 	};
 
-	return (
-		<Show keyed when={isAddScriptOpened()}>
-			<ScriptConstructor onResult={addScriptHandler} />
-		</Show>
-	);
+	return <ScriptConstructor onResult={addScriptHandler} />;
 };
 
 export { AddScript };

@@ -1,13 +1,13 @@
 @use '../../../../../../common/styles/variables';
 
 .section:not(:first-of-type) {
-	border-top: 1px solid variables.$background;
+	border-top: 1px solid variables.$border;
 }
 
 .title {
 	font-weight: 600;
 	font-size: 1.6em;
-	color: #fff;
+	color: variables.$text;
 	padding: 12px 8px 0;
 }
 

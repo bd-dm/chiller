@@ -1,4 +1,14 @@
-$text: #fff;
-$background: rgb(60 64 67);
-$block-header: #202020;
-$background-2: rgb(39 40 42);
+$text: rgb(255,255,255);
+$text-disabled: rgba(255,255,255,0.8);
+$text-inverted: rgba(0,0,0,0.8);
+$primary: rgb(255, 221, 45);
+$button: $primary;
+$button-hovered: rgb(252, 197, 33);
+$border: rgb(18, 18, 18, 0.6);
+
+$background: rgba(18, 18, 18, 0.7);
+
+$background-2: rgb(255,255,255,0.06);
+$shadow: rgba(0,0,0,0.1);
+$input: rgb(255,255,255,0.06);
+$block-header: rgb(32, 32, 32);

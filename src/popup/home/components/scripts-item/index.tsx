@@ -6,6 +6,7 @@ import { removeScript, updateScript } from "../../../../common";
 import { useHomeContext } from "../../context";
 import { ScriptConstructor } from "../script-constructor";
 import { Column, Row } from "../../../../common/components";
+import { Page } from "../../enums";
 
 interface ScriptsItemProps {
 	script: Script;
@@ -13,7 +14,7 @@ interface ScriptsItemProps {
 
 const ScriptsItem: Component<ScriptsItemProps> = (props) => {
 	const [isEdit, setIsEdit] = createSignal(false);
-	const { updateScripts, setIsAddScriptOpened } = useHomeContext();
+	const { updateScripts, setPage } = useHomeContext();
 
 	const removeHandler = async () => {
 		await removeScript(props.script.id);
@@ -26,7 +27,7 @@ const ScriptsItem: Component<ScriptsItemProps> = (props) => {
 
 	const saveHandler = async (script: Script) => {
 		await updateScript(script);
-		setIsAddScriptOpened(false);
+		setPage(Page.ScriptList);
 		updateScripts();
 	};
 
