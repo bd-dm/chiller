@@ -1,5 +1,5 @@
 import { Component } from "solid-js";
-import { Column, Row } from "../../../../common/components";
+import { Button, Column, Row } from "../../../../common/components";
 import { sendMessage } from "../../../../common";
 import { MessageType } from "../../../../common/message-carrier/enums";
 import { useHomeContext } from "../../context";
@@ -16,11 +16,15 @@ const ButtonsRow: Component = () => {
 
 	return (
 		<Column horizontalAlignment={Column.Alignment.Horizontal.Stretch}>
-			<button class={styles.button} type={"button"} onClick={openChiller}>
+			<Button
+				classList={{ [styles.button]: true }}
+				type={"button"}
+				onClick={openChiller}
+			>
 				Toggle overlay
-			</button>
+			</Button>
 			<Row verticalAlignment={Row.Alignment.Vertical.Stretch}>
-				<button
+				<Button
 					classList={{
 						[styles.button]: true,
 						[commonStyles.active]: page() === Page.ScriptList,
@@ -29,8 +33,8 @@ const ButtonsRow: Component = () => {
 					onClick={() => setPage(Page.ScriptList)}
 				>
 					Scripts
-				</button>
-				<button
+				</Button>
+				<Button
 					classList={{
 						[styles.button]: true,
 						[commonStyles.active]: page() === Page.AddScript,
@@ -39,7 +43,7 @@ const ButtonsRow: Component = () => {
 					onClick={() => setPage(Page.AddScript)}
 				>
 					Add script
-				</button>
+				</Button>
 			</Row>
 		</Column>
 	);

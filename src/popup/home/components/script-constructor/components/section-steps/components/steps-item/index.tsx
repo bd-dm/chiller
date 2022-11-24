@@ -1,5 +1,5 @@
 import { Component } from "solid-js";
-import { Column, Row } from "../../../../../../../../common/components";
+import { Column, Select } from "../../../../../../../../common/components";
 import styles from "./index.module.scss";
 import { useScriptConstructor } from "../../../../context";
 import { StepInputItem } from "../../../../types";
@@ -29,12 +29,15 @@ const StepsItem: Component<StepsItemProps> = (props) => {
 			classList={{ [styles.item]: true }}
 		>
 			<h4 class={styles.title}>Step {props.index + 1}</h4>
-			<select class={styles.input}>
-				<option disabled hidden selected value="">
-					Select action...
-				</option>
-				<option value="sleep">Sleep</option>
-			</select>
+			<Select
+				placeholder={"Select action..."}
+				onChange={(value) => console.log("changed", value)}
+				options={[
+					{ value: "sleep", name: "Sleep" },
+					{ value: "click", name: "Click" },
+					{ value: "waitForElement", name: "Wait for element" },
+				]}
+			/>
 		</Column>
 	);
 };

@@ -1,0 +1,37 @@
+@use '../../styles/variables';
+
+.suggestions {
+	position: absolute;
+	top: -4px;
+	background-color: variables.$background-solid;
+	width: 100%;
+
+	&-wrapper {
+		position: relative;
+	}
+
+	&-list {
+		display: none;
+		width: 100%;
+		list-style: none;
+		transition: height 300ms;
+		max-height: 500px;
+		overflow-y: auto;
+	}
+}
+
+.select:focus-within .suggestions-list {
+	display: block;
+}
+
+.item {
+	&:hover {
+		background-color: variables.$background-solid-light;
+	}
+
+	&-button {
+		width: 100%;
+		padding: 12px;
+		text-align: left;
+	}
+}

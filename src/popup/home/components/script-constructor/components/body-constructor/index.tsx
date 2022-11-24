@@ -1,5 +1,5 @@
 import { Component } from "solid-js";
-import { Column } from "../../../../../../common/components";
+import { Button, Column } from "../../../../../../common/components";
 import { BodyConstructorSection } from "../body-constructor-section";
 import { SectionVariables } from "../section-variables";
 import { SectionSteps } from "../section-steps";
@@ -12,13 +12,13 @@ const BodyConstructor: Component = () => {
 		<Column horizontalAlignment={Column.Alignment.Horizontal.Stretch}>
 			<BodyConstructorSection
 				title={"Variables"}
-				headerContent={<button onClick={addVariable}>+</button>}
+				headerContent={<Button onClick={addVariable}>+</Button>}
 			>
 				<SectionVariables />
 			</BodyConstructorSection>
 			<BodyConstructorSection
 				title={"Steps"}
-				headerContent={<button onClick={addStep}>+</button>}
+				headerContent={<Button onClick={addStep}>+</Button>}
 			>
 				<SectionSteps />
 			</BodyConstructorSection>

@@ -1,13 +1,14 @@
 import { Component } from "solid-js";
 import { useScriptConstructor } from "../../context";
+import { Button } from "../../../../../../common/components";
 
 const SaveButton: Component = () => {
 	const { save } = useScriptConstructor();
 
 	return (
-		<button type={"button"} onClick={save}>
+		<Button type={"button"} onClick={save}>
 			Save
-		</button>
+		</Button>
 	);
 };
 

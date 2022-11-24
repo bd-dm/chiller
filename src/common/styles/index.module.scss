@@ -5,6 +5,20 @@
 
 	button {
 		cursor: pointer;
+		display: block;
+		border: none;
+		background: transparent;
+		color: variables.$text;
+
+		&:focus {
+			border: none;
+			outline: 1px solid variables.$primary;
+			outline-offset: -1px;
+		}
+	}
+
+	.button {
+		cursor: pointer;
 		border: none;
 		background-color: variables.$button;
 		padding: 4px 8px;
@@ -21,7 +35,12 @@
 		}
 	}
 
-	input, textarea, select {
+	select {
+		cursor: pointer;
+	}
+
+	input, textarea, select, .input-like {
+		cursor: text;
 		background-color: variables.$input;
 		padding: 12px;
 		border: none;
@@ -42,8 +61,13 @@
 		}
 	}
 
-	select {
-		cursor: pointer;
+	div[data-placeholder]:empty::before {
+		content: attr(data-placeholder);
+		color: variables.$text-disabled;
+	}
+
+	div[data-placeholder]:empty:focus::before {
+		content: "";
 	}
 }
 

@@ -5,7 +5,7 @@ import { Script } from "../../../../common/scripts/types";
 import { removeScript, updateScript } from "../../../../common";
 import { useHomeContext } from "../../context";
 import { ScriptConstructor } from "../script-constructor";
-import { Column, Row } from "../../../../common/components";
+import { Button, Column, Row } from "../../../../common/components";
 import { Page } from "../../enums";
 
 interface ScriptsItemProps {
@@ -41,16 +41,16 @@ const ScriptsItem: Component<ScriptsItemProps> = (props) => {
 				>
 					<div>{props.script.name}</div>
 					<Row>
-						<button
+						<Button
 							type={"button"}
 							classList={{ [commonStyles.active]: isEdit() }}
 							onClick={editHandler}
 						>
 							Edit
-						</button>
-						<button type={"button"} onClick={removeHandler}>
+						</Button>
+						<Button type={"button"} onClick={removeHandler}>
 							&times;
-						</button>
+						</Button>
 					</Row>
 				</Row>
 				<Show keyed when={isEdit()}>
