@@ -2,26 +2,12 @@ import { Component } from "solid-js";
 import { Column, Select } from "../../../../../../../../common/components";
 import styles from "./index.module.scss";
 import { useScriptConstructor } from "../../../../context";
-import { StepInputItem } from "../../../../types";
+import { ActionOption, StepInputItem } from "../../../../types";
+import { actionOptions } from "../../../../constants";
 
 interface StepsItemProps {
 	index: number;
 }
-
-interface ActionOption {
-	value: NonNullable<StepInputItem["action"]>;
-	name: string;
-}
-
-const options: ActionOption[] = [
-	{ value: "click", name: "Click" },
-	{ value: "pressKey", name: "Press Key" },
-	{ value: "type", name: "Type string" },
-	{ value: "enterChar", name: "Enter char" },
-	{ value: "waitForElement", name: "Wait for element" },
-	{ value: "clearInput", name: "Clear input" },
-	{ value: "sleep", name: "Sleep" },
-];
 
 const StepsItem: Component<StepsItemProps> = (props) => {
 	const { steps, setStep } = useScriptConstructor();
@@ -48,7 +34,7 @@ const StepsItem: Component<StepsItemProps> = (props) => {
 				placeholder={"Select action..."}
 				onChange={changeHandler("action")}
 				initialValue={action()}
-				options={options}
+				options={actionOptions}
 			/>
 		</Column>
 	);

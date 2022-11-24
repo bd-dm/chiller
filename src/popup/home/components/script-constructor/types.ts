@@ -15,4 +15,14 @@ interface VariableInputItem {
 type StepInputItem<ActionType extends UserEventAction = UserEventAction> =
 	Partial<ScriptStep<ActionType>>;
 
-export type { ScriptConstructorProps, VariableInputItem, StepInputItem };
+interface ActionOption {
+	value: NonNullable<StepInputItem["action"]>;
+	name: string;
+}
+
+export type {
+	ActionOption,
+	ScriptConstructorProps,
+	VariableInputItem,
+	StepInputItem,
+};
