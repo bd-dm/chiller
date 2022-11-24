@@ -14,6 +14,21 @@
 	right: 0;
 	left: 0;
 	bottom: 0;
+	z-index: -2;
+}
+
+.backdrop {
+	position: fixed;
+	top: 0;
+	right: 0;
+	left: 0;
+	bottom: 0;
+	background: variables.$background;
+	z-index: -1;
+
+	/* From https://css.glass */
+	box-shadow: 0 4px 30px variables.$shadow;
+	backdrop-filter: blur(20px);
 }
 
 .popup {
@@ -23,9 +38,4 @@
 	min-width: 500px;
 	padding: 8px 16px;
 	gap: 8px;
-
-	/* From https://css.glass */
-	background: variables.$background;
-	box-shadow: 0 4px 30px variables.$shadow;
-	backdrop-filter: blur(20px);
 }
