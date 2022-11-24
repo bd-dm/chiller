@@ -1,4 +1,4 @@
-import { Component, createEffect, createSignal, For, onMount } from "solid-js";
+import { createEffect, createSignal, For, onMount } from "solid-js";
 import { Column } from "../column";
 import styles from "./index.module.scss";
 import commonStyles from "../../styles/index.module.scss";
@@ -10,24 +10,24 @@ interface SelectOption {
 	name: string;
 }
 
-interface SelectProps {
+interface SelectProps<OptionType extends SelectOption = SelectOption> {
 	placeholder?: string;
-	options: SelectOption[];
-	initialValue?: SelectOption["value"];
-	onChange?: (value: SelectOption["value"] | null) => void;
+	options: OptionType[];
+	initialValue?: OptionType["value"];
+	onChange?: (value: OptionType["value"] | null) => void;
 }
 
 const KEY_DOWN_ARROW = 40;
 const KEY_UP_ARROW = 38;
 
-const Select: Component<SelectProps> = (props) => {
-	const getOption = (
-		value: SelectOption["value"] | null
-	): SelectOption | null => {
+const Select = <OptionType extends SelectOption = SelectOption>(
+	props: SelectProps<OptionType>
+) => {
+	const getOption = (value: OptionType["value"] | null): OptionType | null => {
 		return props.options.find((option) => option.value === value) ?? null;
 	};
 
-	const [value, setValue] = createSignal<SelectOption["value"] | null>(
+	const [value, setValue] = createSignal<OptionType["value"] | null>(
 		getOption(props.initialValue ?? null)?.value ?? null
 	);
 	const [manualInput, setManualInput] = createSignal("");
@@ -46,18 +46,7 @@ const Select: Component<SelectProps> = (props) => {
 			contentElement.textContent = deferredManualInput().trim();
 		}
 	};
-
-	onMount(updateContent);
-	createEffect(updateContent);
-
-	createEffect(() => {
-		if (manualInput().trim() === "") {
-			selectHandler(null, false);
-			updateContent();
-		}
-	});
-
-	createEffect(() => {
+	const updateInputs = () => {
 		const option = currentOption();
 
 		if (!isNull(option)) {
@@ -67,12 +56,30 @@ const Select: Component<SelectProps> = (props) => {
 			setManualInput("");
 			setDeferredManualInput("");
 		}
+	};
+
+	onMount(updateContent);
+	onMount(updateInputs);
+	createEffect(updateContent);
+	createEffect(updateInputs);
+
+	createEffect(() => {
+		if (manualInput().trim() === "") {
+			selectHandler(null, false);
+			updateContent();
+		}
+	});
+
+	createEffect(() => {
+		console.log(11, value(), getOption(props.initialValue ?? null));
 	});
 
 	const selectHandler = (
-		newValue: SelectOption["value"] | null,
+		newValue: OptionType["value"] | null,
 		shouldBlur = true
 	): void => {
+		// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+		// @ts-ignore Expects fn, but we pass value
 		setValue(newValue);
 		if (!isUndefined(props.onChange)) {
 			props.onChange(newValue);

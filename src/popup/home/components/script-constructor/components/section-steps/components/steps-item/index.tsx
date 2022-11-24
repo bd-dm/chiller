@@ -8,6 +8,21 @@ interface StepsItemProps {
 	index: number;
 }
 
+interface ActionOption {
+	value: NonNullable<StepInputItem["action"]>;
+	name: string;
+}
+
+const options: ActionOption[] = [
+	{ value: "click", name: "Click" },
+	{ value: "pressKey", name: "Press Key" },
+	{ value: "type", name: "Type string" },
+	{ value: "enterChar", name: "Enter char" },
+	{ value: "waitForElement", name: "Wait for element" },
+	{ value: "clearInput", name: "Clear input" },
+	{ value: "sleep", name: "Sleep" },
+];
+
 const StepsItem: Component<StepsItemProps> = (props) => {
 	const { steps, setStep } = useScriptConstructor();
 	const step = () => steps()[props.index];
@@ -15,7 +30,7 @@ const StepsItem: Component<StepsItemProps> = (props) => {
 	const params = () => step().params;
 
 	const changeHandler =
-		(key: keyof StepInputItem) => (data: StepInputItem[typeof key]) => {
+		(key: keyof StepInputItem) => (data: StepInputItem[typeof key] | null) => {
 			setStep(props.index, {
 				action: action(),
 				params: params(),
@@ -29,14 +44,11 @@ const StepsItem: Component<StepsItemProps> = (props) => {
 			classList={{ [styles.item]: true }}
 		>
 			<h4 class={styles.title}>Step {props.index + 1}</h4>
-			<Select
+			<Select<ActionOption>
 				placeholder={"Select action..."}
-				onChange={(value) => console.log("changed", value)}
-				options={[
-					{ value: "sleep", name: "Sleep" },
-					{ value: "click", name: "Click" },
-					{ value: "waitForElement", name: "Wait for element" },
-				]}
+				onChange={changeHandler("action")}
+				initialValue={action()}
+				options={options}
 			/>
 		</Column>
 	);
