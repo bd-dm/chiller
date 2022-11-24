@@ -21,7 +21,7 @@
 		}
 	}
 
-	input, textarea {
+	input, textarea, select {
 		background-color: variables.$input;
 		padding: 12px;
 		border: none;
@@ -36,6 +36,14 @@
 		&:focus {
 			outline: 1px solid variables.$primary
 		}
+
+		&:hover {
+			background-color: variables.$input-hover;
+		}
+	}
+
+	select {
+		cursor: pointer;
 	}
 }
 

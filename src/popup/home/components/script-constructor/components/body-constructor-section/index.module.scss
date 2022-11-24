@@ -1,9 +1,5 @@
 @use '../../../../../../common/styles/variables';
 
-.section:not(:first-of-type) {
-	border-top: 1px solid variables.$border;
-}
-
 .title {
 	font-weight: 600;
 	font-size: 1.6em;
@@ -13,5 +9,5 @@
 
 .body {
 	border-radius: 4px;
-	padding: 12px 8px;
+	padding: 12px 0;
 }

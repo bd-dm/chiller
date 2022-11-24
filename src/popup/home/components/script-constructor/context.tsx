@@ -10,21 +10,26 @@ import {
 import { ParentComponent } from "solid-js/types/render/component";
 import { Script } from "../../../../common/scripts/types";
 import { ContextType } from "../../../../content/contexts/types";
-import {
-	ScriptBody,
-	ScriptStep,
-	ScriptVariables,
-} from "../../../../common/types";
+import { ScriptBody } from "../../../../common/types";
 import { isUndefined } from "lodash-es";
 import { getScript } from "../../../../common/scripts/get-script";
 import { nanoid } from "nanoid";
-import { ScriptConstructorProps } from "./types";
+import {
+	ScriptConstructorProps,
+	StepInputItem,
+	VariableInputItem,
+} from "./types";
+import { variablesToArray, variablesToObject } from "./utils";
 
 interface ScriptConstructorContextValue {
 	id: Accessor<string>;
 	name: Accessor<string>;
-	variables: Accessor<ScriptVariables>;
-	steps: Accessor<ScriptStep[]>;
+	variables: Accessor<VariableInputItem[]>;
+	setVariable: (index: number, item: VariableInputItem) => void;
+	addVariable: () => void;
+	steps: Accessor<StepInputItem[]>;
+	setStep: (index: number, item: StepInputItem) => void;
+	addStep: () => void;
 	setName: Setter<string>;
 	save?: () => void;
 }
@@ -36,8 +41,8 @@ const ScriptConstructorContextProvider: ParentComponent<
 > = (props) => {
 	const [id, setId] = createSignal("");
 	const [name, setName] = createSignal("");
-	const [variables, setVariables] = createSignal<ScriptVariables>({});
-	const [steps, setSteps] = createSignal<ScriptStep[]>([]);
+	const [variables, setVariables] = createSignal<VariableInputItem[]>([]);
+	const [steps, setSteps] = createSignal<StepInputItem[]>([]);
 
 	onMount(async () => {
 		const scriptId = props.scriptId;
@@ -47,6 +52,8 @@ const ScriptConstructorContextProvider: ParentComponent<
 			restoreScript(initialScript);
 		} else {
 			setId(nanoid());
+			addVariable();
+			addStep();
 		}
 	});
 
@@ -55,8 +62,18 @@ const ScriptConstructorContextProvider: ParentComponent<
 		setName(script.name);
 
 		const { variables, steps } = JSON.parse(script.json) as ScriptBody;
-		setVariables(variables);
-		setSteps(steps);
+
+		if (variables) {
+			setVariables(variablesToArray(variables));
+		} else {
+			addVariable();
+		}
+
+		if (steps) {
+			setSteps(steps);
+		} else {
+			addStep();
+		}
 	};
 
 	const saveHandler = () => {
@@ -67,15 +84,54 @@ const ScriptConstructorContextProvider: ParentComponent<
 		props.onResult({
 			id: id(),
 			name: name(),
-			json: JSON.stringify({ variables: variables(), steps: steps() }),
+			json: JSON.stringify({
+				variables: variablesToObject(variables()),
+				steps: steps(),
+			}),
 			addedTimestamp: new Date().getTime(),
 		});
+	};
+
+	const setVariable = (index: number, item: VariableInputItem): void => {
+		setVariables((prevVariables) => {
+			prevVariables[index] = item;
+			return prevVariables;
+		});
+	};
+
+	const addVariable = (): void => {
+		setVariables((prevVariables) => [
+			...prevVariables,
+			{ name: "", value: "" },
+		]);
+	};
+
+	const setStep = (index: number, item: StepInputItem): void => {
+		setSteps((prevSteps) => {
+			prevSteps[index] = item;
+			return prevSteps;
+		});
+	};
+
+	const addStep = (): void => {
+		setSteps((prevSteps) => [...prevSteps, {}]);
 	};
 
 	return (
 		<Show keyed when={id()}>
 			<Context.Provider
-				value={{ id, variables, steps, name, setName, save: saveHandler }}
+				value={{
+					id,
+					variables,
+					setVariable,
+					addVariable,
+					steps,
+					setStep,
+					addStep,
+					name,
+					setName,
+					save: saveHandler,
+				}}
 			>
 				{props.children}
 			</Context.Provider>

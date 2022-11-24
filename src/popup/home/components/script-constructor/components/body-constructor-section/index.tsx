@@ -1,9 +1,11 @@
 import { ParentComponent } from "solid-js/types/render/component";
-import { Column } from "../../../../../../common/components";
+import { Column, Row } from "../../../../../../common/components";
 import styles from "./index.module.scss";
+import { JSXElement } from "solid-js";
 
 interface BodyConstructorSectionProps {
 	title: string;
+	headerContent?: JSXElement;
 }
 
 const BodyConstructorSection: ParentComponent<BodyConstructorSectionProps> = (
@@ -15,7 +17,13 @@ const BodyConstructorSection: ParentComponent<BodyConstructorSectionProps> = (
 			classList={{ [styles.section]: true }}
 			gapLess={true}
 		>
-			<div class={styles.title}>{props.title}</div>
+			<Row
+				horizontalAlignment={Row.Alignment.Horizontal.SpaceBetween}
+				verticalAlignment={Row.Alignment.Vertical.Center}
+			>
+				<div class={styles.title}>{props.title}</div>
+				{props.headerContent}
+			</Row>
 			<div class={styles.body}>{props.children}</div>
 		</Column>
 	);
