@@ -14,7 +14,7 @@ interface SelectProps {
 	placeholder?: string;
 	options: SelectOption[];
 	initialValue?: SelectOption["value"];
-	onChange?: (value: SelectOption["value"]) => void;
+	onChange?: (value: SelectOption["value"] | null) => void;
 }
 
 const KEY_DOWN_ARROW = 40;
@@ -22,12 +22,14 @@ const KEY_UP_ARROW = 38;
 
 const Select: Component<SelectProps> = (props) => {
 	const getOption = (
-		value: SelectOption["value"] | undefined
+		value: SelectOption["value"] | null
 	): SelectOption | null => {
 		return props.options.find((option) => option.value === value) ?? null;
 	};
 
-	const [value, setValue] = createSignal(getOption(props.initialValue)?.value);
+	const [value, setValue] = createSignal<SelectOption["value"] | null>(
+		getOption(props.initialValue ?? null)?.value ?? null
+	);
 	const [manualInput, setManualInput] = createSignal("");
 	const [deferredManualInput, setDeferredManualInput] = createSignal("");
 	const [contentRef, setContentRef] = createSignal<HTMLDivElement>();
@@ -41,7 +43,7 @@ const Select: Component<SelectProps> = (props) => {
 	const updateContent = () => {
 		const contentElement = contentRef();
 		if (contentElement) {
-			contentElement.textContent = deferredManualInput();
+			contentElement.textContent = deferredManualInput().trim();
 		}
 	};
 
@@ -49,20 +51,35 @@ const Select: Component<SelectProps> = (props) => {
 	createEffect(updateContent);
 
 	createEffect(() => {
+		if (manualInput().trim() === "") {
+			selectHandler(null, false);
+			updateContent();
+		}
+	});
+
+	createEffect(() => {
 		const option = currentOption();
 
 		if (!isNull(option)) {
 			setManualInput(option.name);
 			setDeferredManualInput(option.name);
+		} else {
+			setManualInput("");
+			setDeferredManualInput("");
 		}
 	});
 
-	const selectHandler = (newValue: SelectOption["value"]): void => {
+	const selectHandler = (
+		newValue: SelectOption["value"] | null,
+		shouldBlur = true
+	): void => {
 		setValue(newValue);
 		if (!isUndefined(props.onChange)) {
 			props.onChange(newValue);
 		}
-		(document.activeElement as HTMLElement).blur();
+		if (shouldBlur) {
+			(document.activeElement as HTMLElement).blur();
+		}
 	};
 
 	const focusNext = (node?: HTMLElement) => {
@@ -113,9 +130,7 @@ const Select: Component<SelectProps> = (props) => {
 					onInput={({ currentTarget: { textContent } }) =>
 						setManualInput(textContent ?? "")
 					}
-					onBlur={() => {
-						setDeferredManualInput(getOption(value())?.name ?? "");
-					}}
+					onBlur={updateContent}
 					data-placeholder={props.placeholder ?? " "}
 					contentEditable
 				/>
