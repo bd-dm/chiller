@@ -18,11 +18,10 @@ const Body: Component = () => {
 			<div
 				classList={{ [styles.background]: true }}
 				style={{ "background-image": "url(" + imageUrl() + ")" }}
-			>
-				<div classList={{ [styles.popup]: true, [commonStyles.chiller]: true }}>
-					<ButtonsRow />
-					<Scripts />
-				</div>
+			/>
+			<div classList={{ [styles.popup]: true, [commonStyles.chiller]: true }}>
+				<ButtonsRow />
+				<Scripts />
 			</div>
 		</Show>
 	);

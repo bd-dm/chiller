@@ -95,7 +95,7 @@ const ScriptConstructorContextProvider: ParentComponent<
 	const setVariable = (index: number, item: VariableInputItem): void => {
 		setVariables((prevVariables) => {
 			prevVariables[index] = item;
-			return prevVariables;
+			return [...prevVariables];
 		});
 	};
 
@@ -109,7 +109,7 @@ const ScriptConstructorContextProvider: ParentComponent<
 	const setStep = (index: number, item: StepInputItem): void => {
 		setSteps((prevSteps) => {
 			prevSteps[index] = item;
-			return prevSteps;
+			return [...prevSteps];
 		});
 	};
 

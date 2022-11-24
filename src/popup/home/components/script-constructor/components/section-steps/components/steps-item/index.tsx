@@ -1,25 +1,24 @@
-import { Component } from "solid-js";
+import { Component, Show } from "solid-js";
 import { Column, Select } from "../../../../../../../../common/components";
 import styles from "./index.module.scss";
-import { useScriptConstructor } from "../../../../context";
 import { ActionOption, StepInputItem } from "../../../../types";
 import { actionOptions } from "../../../../constants";
+import { ParamsInput } from "../params-input";
+import { useScriptConstructor } from "../../../../context";
 
 interface StepsItemProps {
 	index: number;
+	step: StepInputItem;
 }
 
 const StepsItem: Component<StepsItemProps> = (props) => {
-	const { steps, setStep } = useScriptConstructor();
-	const step = () => steps()[props.index];
-	const action = () => step().action;
-	const params = () => step().params;
+	const { setStep } = useScriptConstructor();
 
 	const changeHandler =
 		(key: keyof StepInputItem) => (data: StepInputItem[typeof key] | null) => {
 			setStep(props.index, {
-				action: action(),
-				params: params(),
+				action: props.step.action,
+				params: props.step.params,
 				...{ [key]: data },
 			});
 		};
@@ -33,9 +32,12 @@ const StepsItem: Component<StepsItemProps> = (props) => {
 			<Select<ActionOption>
 				placeholder={"Select action..."}
 				onChange={changeHandler("action")}
-				initialValue={action()}
+				initialValue={props.step.action}
 				options={actionOptions}
 			/>
+			<Show when={props.step.action} keyed>
+				<ParamsInput action={props.step.action} />
+			</Show>
 		</Column>
 	);
 };

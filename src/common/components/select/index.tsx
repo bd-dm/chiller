@@ -63,17 +63,6 @@ const Select = <OptionType extends SelectOption = SelectOption>(
 	createEffect(updateContent);
 	createEffect(updateInputs);
 
-	createEffect(() => {
-		if (manualInput().trim() === "") {
-			selectHandler(null, false);
-			updateContent();
-		}
-	});
-
-	createEffect(() => {
-		console.log(11, value(), getOption(props.initialValue ?? null));
-	});
-
 	const selectHandler = (
 		newValue: OptionType["value"] | null,
 		shouldBlur = true
@@ -134,9 +123,13 @@ const Select = <OptionType extends SelectOption = SelectOption>(
 							);
 						}
 					}}
-					onInput={({ currentTarget: { textContent } }) =>
-						setManualInput(textContent ?? "")
-					}
+					onInput={({ currentTarget: { textContent } }) => {
+						setManualInput(textContent ?? "");
+
+						if (textContent?.trim() === "") {
+							selectHandler(null, false);
+						}
+					}}
 					onBlur={updateContent}
 					data-placeholder={props.placeholder ?? " "}
 					contentEditable

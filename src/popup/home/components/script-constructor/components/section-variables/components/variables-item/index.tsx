@@ -6,18 +6,16 @@ import { VariableInputItem } from "../../../../types";
 
 interface VariablesItemProps {
 	index: number;
+	variable: VariableInputItem;
 }
 
 const VariablesItem: Component<VariablesItemProps> = (props) => {
-	const { variables, setVariable } = useScriptConstructor();
-	const variable = () => variables()[props.index];
-	const name = () => variable().name ?? "";
-	const value = () => variable().value ?? "";
+	const { setVariable } = useScriptConstructor();
 
 	const changeHandler = (key: keyof VariableInputItem) => (data: string) => {
 		setVariable(props.index, {
-			name: name(),
-			value: value(),
+			name: props.variable.name,
+			value: props.variable.value,
 			...{ [key]: data },
 		});
 	};
@@ -28,7 +26,7 @@ const VariablesItem: Component<VariablesItemProps> = (props) => {
 				class={styles.input}
 				type="text"
 				name={"name"}
-				value={name()}
+				value={props.variable.name}
 				placeholder={"Variable name"}
 				onInput={({ currentTarget: { value: newName } }) =>
 					changeHandler("name")(newName)
@@ -38,7 +36,7 @@ const VariablesItem: Component<VariablesItemProps> = (props) => {
 				class={styles.input}
 				type="text"
 				name={"Value"}
-				value={value()}
+				value={props.variable.value}
 				placeholder={"value"}
 				onInput={({ currentTarget: { value: newValue } }) =>
 					changeHandler("value")(newValue)

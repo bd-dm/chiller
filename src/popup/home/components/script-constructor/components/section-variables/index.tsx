@@ -1,4 +1,4 @@
-import { Component, For } from "solid-js";
+import { Component, Index } from "solid-js";
 import { Column } from "../../../../../../common/components";
 import { VariablesItem } from "./components";
 import { useScriptConstructor } from "../../context";
@@ -8,9 +8,11 @@ const SectionVariables: Component = () => {
 
 	return (
 		<Column horizontalAlignment={Column.Alignment.Horizontal.Stretch}>
-			<For each={variables()}>
-				{(variable, index) => <VariablesItem index={index()} />}
-			</For>
+			<Index each={variables()}>
+				{(variable, index) => (
+					<VariablesItem variable={variable()} index={index} />
+				)}
+			</Index>
 		</Column>
 	);
 };

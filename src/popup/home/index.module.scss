@@ -9,13 +9,17 @@
 	height: 100%;
 	background-position: top right -150px;
 	background-attachment: fixed;
+	position: fixed;
+	top: 0;
+	right: 0;
+	left: 0;
+	bottom: 0;
 }
 
 .popup {
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
-	overflow-y: auto;
 	min-width: 500px;
 	padding: 8px 16px;
 	gap: 8px;
