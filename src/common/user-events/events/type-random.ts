@@ -1,6 +1,6 @@
 import { UserEvent } from "../types";
 import { pickRandomFromArray } from "../utils";
-import { type } from "../events";
+import { type } from "./type";
 
 interface TypeRandomParams {
 	variants: string[];

@@ -1,10 +1,10 @@
-import { UserEventAction, UserEventParams } from "./user-events";
+import { UserEventAction, UserEventOptions } from "./user-events";
 
 interface ScriptStep<
 	UserEventActionType extends UserEventAction = UserEventAction
 > {
 	action: UserEventActionType;
-	params: UserEventParams<UserEventActionType>;
+	params: UserEventOptions<UserEventActionType>;
 }
 
 type ScriptVariables = Record<string, string>;

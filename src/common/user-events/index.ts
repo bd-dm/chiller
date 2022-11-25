@@ -6,9 +6,9 @@ import {
 	sleep,
 	type,
 	waitForElement,
+	typeRandom,
 } from "./events";
 import { UserEvent } from "./types";
-import { typeRandom } from "./complex-events";
 import { ScriptVariables } from "../types";
 
 let _tabId: chrome.tabs.Tab["id"] = undefined;
@@ -36,10 +36,10 @@ const userEvents = {
 
 type UserEvents = Omit<typeof userEvents, "start">;
 type UserEventAction = keyof UserEvents;
-type UserEventParams<Type extends UserEventAction> = Parameters<
+type UserEventOptions<Type extends UserEventAction> = Parameters<
 	UserEvents[Type]
->[0];
+>[1];
 
 export { userEvents };
 
-export type { UserEventParams, UserEventAction };
+export type { UserEventOptions, UserEventAction };

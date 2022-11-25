@@ -2,9 +2,10 @@ import { Component, Show } from "solid-js";
 import { Column, Select } from "../../../../../../../../common/components";
 import styles from "./index.module.scss";
 import { ActionOption, StepInputItem } from "../../../../types";
-import { actionOptions } from "../../../../constants";
+import { actionOptions } from "../../../../action-variants";
 import { ParamsInput } from "../params-input";
 import { useScriptConstructor } from "../../../../context";
+import { UserEventAction } from "../../../../../../../../common/user-events";
 
 interface StepsItemProps {
 	index: number;
@@ -36,7 +37,11 @@ const StepsItem: Component<StepsItemProps> = (props) => {
 				options={actionOptions}
 			/>
 			<Show when={props.step.action} keyed>
-				<ParamsInput action={props.step.action} />
+				<ParamsInput
+					action={props.step.action as UserEventAction}
+					initialValue={props.step.params}
+					onChange={changeHandler("params")}
+				/>
 			</Show>
 		</Column>
 	);

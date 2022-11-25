@@ -12,11 +12,7 @@ const BodyConstructorSection: ParentComponent<BodyConstructorSectionProps> = (
 	props
 ) => {
 	return (
-		<Column
-			horizontalAlignment={Column.Alignment.Horizontal.Stretch}
-			classList={{ [styles.section]: true }}
-			gapLess={true}
-		>
+		<Column horizontalAlignment={Column.Alignment.Horizontal.Stretch} gapLess>
 			<Row
 				horizontalAlignment={Row.Alignment.Horizontal.SpaceBetween}
 				verticalAlignment={Row.Alignment.Vertical.Center}

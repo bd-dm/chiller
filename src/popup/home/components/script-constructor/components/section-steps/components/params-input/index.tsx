@@ -1,13 +1,27 @@
-import { Component } from "solid-js";
-import { StepInputItem } from "../../../../types";
+import { Component, Match, Show, Switch } from "solid-js";
+import { ActionParamsChangeHandler, StepInputItem } from "../../../../types";
+import { Dynamic } from "solid-js/web";
+import { getActionParamsComponents } from "../../../../action-variants";
 
 interface ParamsInputProps {
-	action: StepInputItem["action"];
+	action: NonNullable<StepInputItem["action"]>;
 	initialValue?: StepInputItem["params"];
+	onChange: (params: StepInputItem["params"]) => void;
 }
 
 const ParamsInput: Component<ParamsInputProps> = (props) => {
-	return <p>params for {props.action}</p>;
+	const changeHandler: ActionParamsChangeHandler = (params) => {
+		props.onChange(params);
+	};
+
+	return (
+		<Dynamic
+			component={getActionParamsComponents(props.action)}
+			onChange={changeHandler}
+			action={props.action}
+			params={props.initialValue}
+		/>
+	);
 };
 
 export { ParamsInput };

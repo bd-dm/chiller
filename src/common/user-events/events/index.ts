@@ -5,3 +5,4 @@ export * from "./type";
 export * from "./clear-input";
 export * from "./sleep";
 export * from "./wait-for-element";
+export * from "./type-random";

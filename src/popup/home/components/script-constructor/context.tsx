@@ -1,11 +1,11 @@
 import {
+	Accessor,
 	createContext,
 	createSignal,
-	useContext,
-	Show,
 	onMount,
 	Setter,
-	Accessor,
+	Show,
+	useContext,
 } from "solid-js";
 import { ParentComponent } from "solid-js/types/render/component";
 import { Script } from "../../../../common/scripts/types";
@@ -20,6 +20,8 @@ import {
 	VariableInputItem,
 } from "./types";
 import { variablesToArray, variablesToObject } from "./utils";
+import { ActionTargetType } from "../../../../common/user-events/action-target";
+import { ActionParamType } from "../../../../common/user-events/types";
 
 interface ScriptConstructorContextValue {
 	id: Accessor<string>;
@@ -41,8 +43,19 @@ const ScriptConstructorContextProvider: ParentComponent<
 > = (props) => {
 	const [id, setId] = createSignal("");
 	const [name, setName] = createSignal("");
-	const [variables, setVariables] = createSignal<VariableInputItem[]>([]);
-	const [steps, setSteps] = createSignal<StepInputItem[]>([]);
+	const [variables, setVariables] = createSignal<VariableInputItem[]>([
+		{ name: "test", value: "test val" },
+	]);
+	const [steps, setSteps] = createSignal<StepInputItem[]>([
+		{
+			action: "click",
+			params: { target: { type: ActionTargetType.Variable, use: "test" } },
+		},
+		{
+			action: "type",
+			params: { text: { type: ActionParamType.Variable, use: "test text" } },
+		},
+	]);
 
 	onMount(async () => {
 		const scriptId = props.scriptId;

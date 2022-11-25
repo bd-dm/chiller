@@ -12,6 +12,7 @@ interface SelectOption {
 
 interface SelectProps<OptionType extends SelectOption = SelectOption> {
 	placeholder?: string;
+	disabled?: boolean;
 	options: OptionType[];
 	initialValue?: OptionType["value"];
 	onChange?: (value: OptionType["value"] | null) => void;
@@ -132,7 +133,7 @@ const Select = <OptionType extends SelectOption = SelectOption>(
 					}}
 					onBlur={updateContent}
 					data-placeholder={props.placeholder ?? " "}
-					contentEditable
+					contentEditable={!props.disabled}
 				/>
 
 				<div class={styles.suggestionsWrapper}>
