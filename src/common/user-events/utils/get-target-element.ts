@@ -1,12 +1,14 @@
 import { isNull, isUndefined } from "lodash-es";
-import { getTargetElementBySelector } from "./get-target-element-by-selector";
+
+import { ScriptVariables } from "@/common/scripts";
+
 import {
 	ActionDynamicParam,
 	ActionDynamicParamType,
 	GetTargetElementFn,
 	TargetElementData,
 } from "../types";
-import { ScriptVariables } from "../../scripts";
+import { getTargetElementBySelector } from "./get-target-element-by-selector";
 
 const getTargetElement: GetTargetElementFn = <ElementType extends HTMLElement>(
 	target: ActionDynamicParam,

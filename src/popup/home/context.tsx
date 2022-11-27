@@ -3,12 +3,14 @@ import {
 	createContext,
 	createResource,
 	createSignal,
+	ParentComponent,
 	Resource,
 	Setter,
 	useContext,
 } from "solid-js";
-import { ParentComponent } from "solid-js/types/render/component";
-import { getScripts, sendMessage, ScriptData, MessageType } from "../../common";
+
+import { getScripts, MessageType, ScriptData, sendMessage } from "@/common";
+
 import { Page } from "./enums";
 
 interface ContextValue {

@@ -1,9 +1,9 @@
-import { createEffect, createSignal, For, onMount } from "solid-js";
-import { Column } from "../column";
-import styles from "./index.module.scss";
-import commonStyles from "../../styles/index.module.scss";
-import { Button } from "../button";
 import { isNull, isUndefined } from "lodash-es";
+import { createEffect, createSignal, For, onMount } from "solid-js";
+
+import { Button, Column, commonStyles } from "@/common";
+
+import styles from "./index.module.scss";
 
 interface SelectOption {
 	value: string;

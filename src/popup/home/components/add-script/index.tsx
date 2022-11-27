@@ -1,8 +1,10 @@
 import { Component } from "solid-js";
-import { addScript, ScriptData } from "../../../../common";
+
+import { addScript, ScriptData } from "@/common";
+
 import { useHomeContext } from "../../context";
-import { ScriptConstructor } from "../script-constructor";
 import { Page } from "../../enums";
+import { ScriptConstructor } from "../script-constructor";
 
 const AddScript: Component = () => {
 	const { updateScripts, setPage } = useHomeContext();

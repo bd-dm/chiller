@@ -1,8 +1,10 @@
 import { Component } from "solid-js";
-import { Row } from "../../../../../../../../common";
-import styles from "./index.module.scss";
+
+import { Row } from "@/common";
+
 import { useScriptConstructor } from "../../../../context";
 import { ConstructorVariableItem } from "../../../../types";
+import styles from "./index.module.scss";
 
 interface VariablesItemProps {
 	index: number;

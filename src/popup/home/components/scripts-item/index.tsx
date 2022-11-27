@@ -1,12 +1,19 @@
 import { Component, createSignal, Show } from "solid-js";
-import styles from "./index.module.scss";
-import commonStyles from "../../../../common/styles/index.module.scss";
-import { ScriptData } from "../../../../common";
-import { removeScript, updateScript } from "../../../../common";
+
+import {
+	Button,
+	Column,
+	commonStyles,
+	removeScript,
+	Row,
+	ScriptData,
+	updateScript,
+} from "@/common";
+
 import { useHomeContext } from "../../context";
-import { ScriptConstructor } from "../script-constructor";
-import { Button, Column, Row } from "../../../../common";
 import { Page } from "../../enums";
+import { ScriptConstructor } from "../script-constructor";
+import styles from "./index.module.scss";
 
 interface ScriptsItemProps {
 	script: ScriptData;

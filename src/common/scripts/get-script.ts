@@ -1,6 +1,7 @@
-import { ScriptData } from "./types";
-import { getScripts } from "./get-scripts";
 import { isUndefined } from "lodash-es";
+
+import { getScripts } from "./get-scripts";
+import { ScriptData } from "./types";
 
 const getScript = async (scriptId: ScriptData["id"]): Promise<ScriptData> => {
 	const scripts = await getScripts();

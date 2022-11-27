@@ -1,9 +1,11 @@
 import { Component } from "solid-js";
-import { Button, Column } from "../../../../../../common";
-import { BodyConstructorSection } from "../body-constructor-section";
-import { SectionVariables } from "../section-variables";
-import { SectionSteps } from "../section-steps";
+
+import { Button, Column } from "@/common";
+
 import { useScriptConstructor } from "../../context";
+import { BodyConstructorSection } from "../body-constructor-section";
+import { SectionSteps } from "../section-steps";
+import { SectionVariables } from "../section-variables";
 
 const BodyConstructor: Component = () => {
 	const { addVariable, addStep } = useScriptConstructor();

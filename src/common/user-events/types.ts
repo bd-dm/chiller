@@ -76,13 +76,13 @@ type ActionDynamicParam =
  */
 
 export type {
-	UserEvent,
+	ActionDynamicParam,
+	ActionDynamicParamWithSelector,
+	ActionDynamicParamWithText,
+	ActionDynamicParamWithVariable,
 	GetTargetElementFn,
 	TargetElementData,
-	ActionDynamicParamWithVariable,
-	ActionDynamicParamWithText,
-	ActionDynamicParamWithSelector,
-	ActionDynamicParam,
+	UserEvent,
 	UserEventVariables,
 	UserEventWithTarget,
 };

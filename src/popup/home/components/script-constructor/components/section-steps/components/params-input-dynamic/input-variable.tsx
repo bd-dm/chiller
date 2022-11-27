@@ -1,8 +1,7 @@
 import { Component } from "solid-js";
-import {
-	Select,
-	ActionDynamicParamWithVariable,
-} from "../../../../../../../../common";
+
+import { ActionDynamicParamWithVariable, Select } from "@/common";
+
 import { useScriptConstructor } from "../../../../context";
 import { InputExactTypeProps } from "./types";
 

@@ -1,7 +1,8 @@
-import { ParentComponent } from "solid-js/types/render/component";
-import { Column, Row } from "../../../../../../common";
+import { JSXElement, ParentComponent } from "solid-js";
+
+import { Column, Row } from "@/common";
+
 import styles from "./index.module.scss";
-import { JSXElement } from "solid-js";
 
 interface BodyConstructorSectionProps {
 	title: string;

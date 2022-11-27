@@ -1,6 +1,7 @@
 import { Component } from "solid-js";
-import { OverlayWindow } from "./overlay-window";
+
 import { CoreContext } from "./context";
+import { OverlayWindow } from "./overlay-window";
 
 const App: Component = () => {
 	return (

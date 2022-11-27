@@ -1,5 +1,6 @@
+import { ScriptData } from "@/common/scripts";
+
 import { StorageKeys } from "./enums";
-import { ScriptData } from "../scripts";
 
 type ArrayStorageKeys = StorageKeys.Scripts | StorageKeys.InjectedTabs;
 
@@ -44,4 +45,4 @@ interface StorageMethods {
 	removeKey: <Key extends StorageKeys>(key: Key) => Promise<void>;
 }
 
-export type { StorageType, StorageMethods };
+export type { StorageMethods, StorageType };

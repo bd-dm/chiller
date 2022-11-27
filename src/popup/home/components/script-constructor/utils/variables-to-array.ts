@@ -1,5 +1,6 @@
+import { ScriptVariables } from "@/common";
+
 import { ConstructorVariableItem } from "../types";
-import { ScriptVariables } from "../../../../../common";
 
 const variablesToArray = (
 	variables: ScriptVariables

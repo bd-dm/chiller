@@ -1,4 +1,4 @@
-import { ParentComponent } from "solid-js/types/render/component";
+import { ParentComponent } from "solid-js";
 
 // eslint-disable-next-line @typescript-eslint/ban-types
 interface ContextType<ContextProps = {}> {

@@ -1,15 +1,24 @@
+import { isUndefined } from "lodash-es";
+import { nanoid } from "nanoid";
 import {
 	Accessor,
 	createContext,
 	createSignal,
 	onMount,
+	ParentComponent,
 	Setter,
 	Show,
 	useContext,
 } from "solid-js";
-import { ParentComponent } from "solid-js/types/render/component";
-import { isUndefined } from "lodash-es";
-import { nanoid } from "nanoid";
+
+import {
+	ActionDynamicParamType,
+	ContextType,
+	getScript,
+	ScriptBody,
+	ScriptData,
+} from "@/common";
+
 import {
 	ConstructorStepItem,
 	ConstructorStepItems,
@@ -18,13 +27,6 @@ import {
 	ScriptConstructorProps,
 } from "./types";
 import { variablesToArray, variablesToObject } from "./utils";
-import {
-	ActionDynamicParamType,
-	ContextType,
-	ScriptBody,
-	ScriptData,
-	getScript,
-} from "../../../../common";
 
 interface ScriptConstructorContextValue {
 	id: Accessor<string>;

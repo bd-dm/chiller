@@ -1,10 +1,17 @@
 import { Component } from "solid-js";
-import { Button, Column, Row } from "../../../../common";
-import { sendMessage, MessageType } from "../../../../common";
+
+import {
+	Button,
+	Column,
+	commonStyles,
+	MessageType,
+	Row,
+	sendMessage,
+} from "@/common";
+
 import { useHomeContext } from "../../context";
-import styles from "./index.module.scss";
-import commonStyles from "../../../../common/styles/index.module.scss";
 import { Page } from "../../enums";
+import styles from "./index.module.scss";
 
 const ButtonsRow: Component = () => {
 	const { page, setPage } = useHomeContext();

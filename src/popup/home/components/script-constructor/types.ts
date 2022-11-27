@@ -3,7 +3,7 @@ import {
 	ScriptData,
 	ScriptStep,
 	UserEventAction,
-} from "../../../../common";
+} from "@/common";
 
 interface ScriptConstructorProps {
 	scriptId?: ScriptData["id"];
@@ -50,15 +50,15 @@ interface ConstructorParamsInputProps<
 }
 
 export type {
-	ScriptConstructorProps,
+	ConstructorParamsInputProps,
 	ConstructorStepActionOption,
-	ConstructorVariableItem,
-	ConstructorVariableItems,
-	ConstructorStepParamChangeHandler,
 	ConstructorStepItem,
 	ConstructorStepItemAction,
 	ConstructorStepItemParams,
 	ConstructorStepItems,
-	ConstructorParamsInputProps,
+	ConstructorStepParamChangeHandler,
 	ConstructorStepParamsChangeHandler,
+	ConstructorVariableItem,
+	ConstructorVariableItems,
+	ScriptConstructorProps,
 };

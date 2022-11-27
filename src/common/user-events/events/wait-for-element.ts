@@ -34,4 +34,4 @@ const waitForElement: UserEventWithTarget<WaitForElementParams> = async (
 	});
 };
 
-export { waitForElement, WAIT_FOR_ELEMENT_TIMEOUT };
+export { WAIT_FOR_ELEMENT_TIMEOUT, waitForElement };

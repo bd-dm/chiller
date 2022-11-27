@@ -5,8 +5,8 @@ import {
 	pressKey,
 	sleep,
 	type,
-	waitForElement,
 	typeRandom,
+	waitForElement,
 } from "./events";
 import { UserEvent, UserEventVariables } from "./types";
 
@@ -41,4 +41,4 @@ type UserEventParams<Type extends UserEventAction> = Parameters<
 
 export { userEvents };
 
-export type { UserEventParams, UserEventAction };
+export type { UserEventAction, UserEventParams };

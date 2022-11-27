@@ -1,6 +1,7 @@
-import { ScriptBody, ScriptData } from "./types";
+import { userEvents } from "@/common/user-events";
+
 import { getScript } from "./get-script";
-import { userEvents } from "../user-events";
+import { ScriptBody, ScriptData } from "./types";
 
 const scriptRunner = async (
 	tabId: chrome.tabs.Tab["id"],

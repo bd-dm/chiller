@@ -1,11 +1,13 @@
 import { Component, JSXElement } from "solid-js";
+
+import { ActionDynamicParamType, Column } from "@/common";
+import { WAIT_FOR_ELEMENT_TIMEOUT } from "@/common/user-events/events";
+
 import {
-	ConstructorStepParamChangeHandler,
 	ConstructorParamsInputProps,
+	ConstructorStepParamChangeHandler,
 } from "../../../../types";
 import { ParamsInputDynamic } from "../params-input-dynamic";
-import { ActionDynamicParamType, Column } from "../../../../../../../../common";
-import { WAIT_FOR_ELEMENT_TIMEOUT } from "../../../../../../../../common/user-events/events";
 
 const ParamsInputWaitForElement: Component<
 	ConstructorParamsInputProps<"waitForElement">

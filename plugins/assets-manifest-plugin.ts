@@ -1,9 +1,10 @@
 // eslint-disable-next-line no-redeclare
-import { Plugin } from "vite";
-import { OutputChunk } from "rollup";
-import path from "node:path";
 import fs from "node:fs";
+import path from "node:path";
+
 import minimatch from "minimatch";
+import { OutputChunk } from "rollup";
+import { Plugin } from "vite";
 
 interface Config {
 	entries?: string[];

@@ -1,4 +1,5 @@
 import { isNull } from "lodash-es";
+
 import { TargetElementData } from "../types";
 
 const getTargetElementBySelector = <ElementType extends HTMLElement>(

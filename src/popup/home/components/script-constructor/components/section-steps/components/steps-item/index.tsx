@@ -1,13 +1,15 @@
 import { Component, Show } from "solid-js";
-import { Column, Select } from "../../../../../../../../common";
-import styles from "./index.module.scss";
+
+import { Column, Select } from "@/common";
+
+import { actionOptions } from "../../../../action-variants";
+import { useScriptConstructor } from "../../../../context";
 import {
 	ConstructorStepActionOption,
 	ConstructorStepItem,
 } from "../../../../types";
-import { actionOptions } from "../../../../action-variants";
 import { ParamsInput } from "../params-input";
-import { useScriptConstructor } from "../../../../context";
+import styles from "./index.module.scss";
 
 interface StepsItemProps {
 	index: number;

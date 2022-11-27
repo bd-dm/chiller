@@ -1,9 +1,10 @@
 import { Component, Match, Switch } from "solid-js";
-import styles from "./index.module.scss";
-import { ScriptsList } from "../scripts-list";
-import { AddScript } from "../add-script";
+
 import { useHomeContext } from "../../context";
 import { Page } from "../../enums";
+import { AddScript } from "../add-script";
+import { ScriptsList } from "../scripts-list";
+import styles from "./index.module.scss";
 
 const Scripts: Component = () => {
 	const { page } = useHomeContext();

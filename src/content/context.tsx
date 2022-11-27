@@ -1,21 +1,22 @@
 import {
+	Accessor,
 	createContext,
 	createEffect,
-	createSignal,
-	Accessor,
-	useContext,
-	Show,
 	createResource,
+	createSignal,
+	ParentComponent,
 	Resource,
+	Show,
+	useContext,
 } from "solid-js";
-import { ParentComponent } from "solid-js/types/render/component";
+
 import {
-	sendMessage,
-	getScripts,
-	ScriptData,
 	ContextType,
+	getScripts,
 	MessageType,
-} from "../common";
+	ScriptData,
+	sendMessage,
+} from "@/common";
 
 interface CoreContextValue {
 	currentTab: Accessor<chrome.tabs.Tab>;

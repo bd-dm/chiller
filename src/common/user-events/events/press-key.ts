@@ -1,6 +1,8 @@
-import { sendMessage, MessageType } from "../../message-carrier";
-import { UserEvent } from "../types";
 import { isUndefined } from "lodash-es";
+
+import { MessageType, sendMessage } from "@/common/message-carrier";
+
+import { UserEvent } from "../types";
 
 enum PressKeyType {
 	KeyDown = "keyDown",
@@ -92,4 +94,4 @@ const pressKey: UserEvent<PressKeyParams> = async (
 	});
 };
 
-export { pressKey, PressKeyType, PressKeyModifier };
+export { pressKey, PressKeyModifier, PressKeyType };

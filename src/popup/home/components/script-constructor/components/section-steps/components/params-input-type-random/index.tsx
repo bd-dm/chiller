@@ -1,4 +1,5 @@
 import { Component } from "solid-js";
+
 import { ConstructorParamsInputProps } from "../../../../types";
 
 const variantsToString = (variants: string[] | undefined = []): string =>

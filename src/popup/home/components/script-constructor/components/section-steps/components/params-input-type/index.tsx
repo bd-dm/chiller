@@ -1,10 +1,12 @@
 import { Component } from "solid-js";
+
+import { ActionDynamicParamType } from "@/common";
+
 import {
-	ConstructorStepParamChangeHandler,
 	ConstructorParamsInputProps,
+	ConstructorStepParamChangeHandler,
 } from "../../../../types";
 import { ParamsInputDynamic } from "../params-input-dynamic";
-import { ActionDynamicParamType } from "../../../../../../../../common";
 
 const ParamsInputType: Component<ConstructorParamsInputProps<"type">> = (
 	props

@@ -1,5 +1,6 @@
+import { ScriptVariables } from "@/common/scripts";
+
 import { ActionDynamicParam, ActionDynamicParamType } from "../types";
-import { ScriptVariables } from "../../scripts";
 
 const getActionParamValue = (
 	param: ActionDynamicParam,

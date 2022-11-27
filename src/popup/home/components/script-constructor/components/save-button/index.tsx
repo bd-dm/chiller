@@ -1,6 +1,8 @@
 import { Component } from "solid-js";
+
+import { Button } from "@/common";
+
 import { useScriptConstructor } from "../../context";
-import { Button } from "../../../../../../common";
 
 const SaveButton: Component = () => {
 	const { save } = useScriptConstructor();

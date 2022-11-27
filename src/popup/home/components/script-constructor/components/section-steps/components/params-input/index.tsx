@@ -1,11 +1,12 @@
 import { JSXElement } from "solid-js";
+import { Dynamic } from "solid-js/web";
+
+import { getActionParamsComponents } from "../../../../action-variants";
 import {
-	ConstructorStepParamsChangeHandler,
 	ConstructorStepItemAction,
 	ConstructorStepItemParams,
+	ConstructorStepParamsChangeHandler,
 } from "../../../../types";
-import { Dynamic } from "solid-js/web";
-import { getActionParamsComponents } from "../../../../action-variants";
 
 interface ConstructorParamsInputSwitchProps<
 	ActionType extends ConstructorStepItemAction

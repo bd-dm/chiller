@@ -3,8 +3,8 @@ import {
 	ActionDynamicParamWithVariable,
 	UserEvent,
 } from "../types";
-import { enterChar } from "./enter-char";
 import { getActionParamValue } from "../utils";
+import { enterChar } from "./enter-char";
 
 interface TypeParams {
 	text: ActionDynamicParamWithVariable | ActionDynamicParamWithText;

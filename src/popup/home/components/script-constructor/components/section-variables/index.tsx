@@ -1,7 +1,9 @@
 import { Component, Index } from "solid-js";
-import { Column } from "../../../../../../common";
-import { VariablesItem } from "./components";
+
+import { Column } from "@/common";
+
 import { useScriptConstructor } from "../../context";
+import { VariablesItem } from "./components";
 
 const SectionVariables: Component = () => {
 	const { variables } = useScriptConstructor();

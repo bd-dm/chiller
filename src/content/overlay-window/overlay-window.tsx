@@ -1,7 +1,9 @@
 import { Component } from "solid-js";
-import styles from "./index.module.scss";
-import commonStyles from "../../common/styles/index.module.scss";
+
+import { commonStyles } from "@/common";
+
 import { ScriptsList } from "./components";
+import styles from "./index.module.scss";
 
 const OverlayWindow: Component = () => {
 	return (

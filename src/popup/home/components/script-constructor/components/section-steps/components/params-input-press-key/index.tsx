@@ -1,7 +1,9 @@
 import { Component } from "solid-js";
+
+import { Row, Select, SelectOption } from "@/common";
+import { PressKeyType } from "@/common/user-events/events";
+
 import { ConstructorParamsInputProps } from "../../../../types";
-import { Row, Select, SelectOption } from "../../../../../../../../common";
-import { PressKeyType } from "../../../../../../../../common/user-events/events";
 
 interface TypeOption extends SelectOption {
 	name: string;

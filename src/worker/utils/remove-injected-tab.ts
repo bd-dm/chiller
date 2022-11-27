@@ -1,4 +1,4 @@
-import { storage, StorageKeys } from "../../common";
+import { storage, StorageKeys } from "@/common";
 
 const removeInjectedTab = async (
 	tabId: chrome.tabs.Tab["id"]

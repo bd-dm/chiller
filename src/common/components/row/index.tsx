@@ -1,4 +1,5 @@
 import { ParentComponent } from "solid-js";
+
 import styles from "./index.module.scss";
 
 enum RowVerticalAlignment {

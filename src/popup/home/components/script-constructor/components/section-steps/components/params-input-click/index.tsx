@@ -1,10 +1,12 @@
 import { Component, JSXElement } from "solid-js";
+
+import { ActionDynamicParamType } from "@/common";
+
 import {
-	ConstructorStepParamChangeHandler,
 	ConstructorParamsInputProps,
+	ConstructorStepParamChangeHandler,
 } from "../../../../types";
 import { ParamsInputDynamic } from "../params-input-dynamic";
-import { ActionDynamicParamType } from "../../../../../../../../common";
 
 const ParamsInputClick: Component<ConstructorParamsInputProps<"click">> = (
 	props

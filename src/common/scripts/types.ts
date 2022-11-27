@@ -2,7 +2,7 @@ import {
 	UserEventAction,
 	UserEventParams,
 	UserEventVariables,
-} from "../user-events";
+} from "@/common/user-events";
 
 interface ScriptData {
 	id: string;
@@ -26,4 +26,4 @@ type ScriptSteps = ScriptStep[];
 
 type ScriptVariables = UserEventVariables;
 
-export type { ScriptData, ScriptBody, ScriptStep, ScriptVariables };
+export type { ScriptBody, ScriptData, ScriptStep, ScriptVariables };

@@ -1,8 +1,5 @@
-import {
-	ConstructorStepActionOption,
-	ConstructorParamsInputProps,
-	ConstructorStepItemAction,
-} from "./types";
+import { Component } from "solid-js";
+
 import {
 	ParamsInputClearInput,
 	ParamsInputClick,
@@ -13,7 +10,11 @@ import {
 	ParamsInputTypeRandom,
 	ParamsInputWaitForElement,
 } from "./components";
-import { Component } from "solid-js";
+import {
+	ConstructorParamsInputProps,
+	ConstructorStepActionOption,
+	ConstructorStepItemAction,
+} from "./types";
 
 type GetActionParamsComponentsMap<
 	ActionType extends ConstructorStepItemAction = ConstructorStepItemAction

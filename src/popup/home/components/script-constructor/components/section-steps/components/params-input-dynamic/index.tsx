@@ -1,19 +1,21 @@
 import { Component, Match, Switch } from "solid-js";
-import styles from "./index.module.scss";
+
 import {
-	Row,
-	Select,
 	ActionDynamicParam,
 	ActionDynamicParamType,
 	ActionDynamicParamWithSelector,
 	ActionDynamicParamWithText,
 	ActionDynamicParamWithVariable,
-} from "../../../../../../../../common";
-import { InputVariable } from "./input-variable";
-import { ChangeHandler } from "./types";
+	Row,
+	Select,
+} from "@/common";
+
+import { ConstructorStepParamChangeHandler } from "../../../../types";
+import styles from "./index.module.scss";
 import { InputSelector } from "./input-selector";
 import { InputText } from "./input-text";
-import { ConstructorStepParamChangeHandler } from "../../../../types";
+import { InputVariable } from "./input-variable";
+import { ChangeHandler } from "./types";
 
 interface ParamsInputCommonProps {
 	param?: ActionDynamicParam;

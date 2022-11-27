@@ -1,7 +1,10 @@
-import { defineConfig, PluginOption } from "vite";
-import solidPlugin from "vite-plugin-solid";
-import eslintPlugin from "vite-plugin-eslint";
 import path from "node:path";
+
+import { defineConfig, PluginOption } from "vite";
+import eslintPlugin from "vite-plugin-eslint";
+import solidPlugin from "vite-plugin-solid";
+import tsconfigPaths from "vite-tsconfig-paths";
+
 import { assetsManifestPlugin } from "./plugins";
 
 const eslintPluginBuild: PluginOption = {
@@ -46,6 +49,7 @@ export default defineConfig({
 	},
 	plugins: [
 		solidPlugin(),
+		tsconfigPaths({ root: "../" }),
 		eslintPluginBuild,
 		eslintPluginDev,
 		assetsManifestPlugin({ entries: ["styles/*.css"] }),

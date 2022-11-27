@@ -1,4 +1,5 @@
-import { sendMessage, MessageType } from "../../message-carrier";
+import { MessageType, sendMessage } from "@/common/message-carrier";
+
 import { UserEventWithTarget } from "../types";
 import { getTargetElement } from "../utils";
 

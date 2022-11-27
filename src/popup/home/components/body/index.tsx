@@ -1,10 +1,10 @@
 import { Component, createResource, Show } from "solid-js";
+
+import { commonStyles, MessageType, sendMessage } from "@/common";
+
 import styles from "../../index.module.scss";
-import commonStyles from "../../../../common/styles/index.module.scss";
 import { ButtonsRow } from "../buttons-row";
 import { Scripts } from "../scripts";
-import { sendMessage } from "../../../../common";
-import { MessageType } from "../../../../common/message-carrier/enums";
 
 const fetchBackgroundScreenshot = async () => {
 	return sendMessage(MessageType.GetTabScreenshot);

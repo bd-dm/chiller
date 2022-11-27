@@ -1,8 +1,9 @@
 import { Component } from "solid-js";
-import styles from "./index.module.scss";
-import { ScriptData, scriptRunner } from "../../../../common";
-import { Button, Row } from "../../../../common";
+
+import { Button, Row, ScriptData, scriptRunner } from "@/common";
+
 import { useCoreContext } from "../../../context";
+import styles from "./index.module.scss";
 
 interface ScriptsItemProps {
 	script: ScriptData;

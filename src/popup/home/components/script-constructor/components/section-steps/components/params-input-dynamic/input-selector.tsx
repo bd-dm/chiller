@@ -1,5 +1,7 @@
 import { Component } from "solid-js";
-import { ActionDynamicParamWithSelector } from "../../../../../../../../common";
+
+import { ActionDynamicParamWithSelector } from "@/common";
+
 import { InputExactTypeProps } from "./types";
 
 const InputSelector: Component<
