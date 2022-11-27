@@ -1,5 +1,6 @@
+import { storage, StorageKeys } from "@/common";
+
 import { getSavedInjectedTabs } from "./get-saved-injected-tabs";
-import { storage, StorageKeys } from "../../common";
 
 const saveInjectedTab = async (tabId: chrome.tabs.Tab["id"]): Promise<void> => {
 	const prevInjectedTabs = await getSavedInjectedTabs();

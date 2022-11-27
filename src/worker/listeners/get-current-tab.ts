@@ -1,5 +1,4 @@
-import { MessageListener } from "../../common/message-carrier/types";
-import { MessageType } from "../../common/message-carrier/enums";
+import { MessageListener, MessageType } from "@/common";
 
 const onGetCurrentTab: MessageListener<MessageType.GetCurrentTab> = (
 	message,

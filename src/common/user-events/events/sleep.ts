@@ -1,5 +1,5 @@
-import { UserEvent } from "../types";
 import { sleep as sleepFn } from "../../utils";
+import { UserEvent } from "../types";
 
 interface SleepParams {
 	ms: number;

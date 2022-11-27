@@ -1,8 +1,9 @@
-import { MessageListener } from "../../common/message-carrier/types";
-import { MessageType } from "../../common/message-carrier/enums";
+import { isUndefined } from "lodash-es";
+
+import { MessageListener, MessageType } from "@/common";
+
 import { injectContent } from "../utils";
 import { getCurrentTab } from "../utils/get-current-tab";
-import { isUndefined } from "lodash-es";
 
 const onInjectContent: MessageListener<MessageType.InjectContent> = (
 	message,

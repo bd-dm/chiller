@@ -1,7 +1,8 @@
-import { sendMessage } from "../../message-carrier";
-import { MessageType } from "../../message-carrier/enums";
-import { UserEvent } from "../types";
 import { isUndefined } from "lodash-es";
+
+import { MessageType, sendMessage } from "@/common/message-carrier";
+
+import { UserEvent } from "../types";
 
 enum PressKeyType {
 	KeyDown = "keyDown",
@@ -27,6 +28,8 @@ interface PressKeyParams {
 	commands?: string;
 	windowsVirtualKeyCode?: number;
 	nativeVirtualKeyCode?: number;
+	/** Used to press key only by code */
+	keyCode?: number;
 }
 
 const pressKey: UserEvent<PressKeyParams> = async (
@@ -42,6 +45,7 @@ const pressKey: UserEvent<PressKeyParams> = async (
 			commands,
 			windowsVirtualKeyCode,
 			nativeVirtualKeyCode,
+			keyCode,
 		},
 	}
 ): Promise<void> => {
@@ -77,6 +81,12 @@ const pressKey: UserEvent<PressKeyParams> = async (
 		commandParams.modifiers = modifiers;
 	}
 
+	if (!isUndefined(keyCode)) {
+		commandParams.windowsVirtualKeyCode = keyCode;
+		commandParams.nativeVirtualKeyCode = keyCode;
+		commandParams.code = keyCode;
+	}
+
 	await sendMessage(MessageType.SendDebuggerCommand, {
 		target: debuggee,
 		method: "Input.dispatchKeyEvent",
@@ -84,4 +94,4 @@ const pressKey: UserEvent<PressKeyParams> = async (
 	});
 };
 
-export { pressKey, PressKeyType, PressKeyModifier };
+export { pressKey, PressKeyModifier, PressKeyType };

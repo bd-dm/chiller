@@ -1,7 +1,8 @@
-import { Script } from "./types";
-import { storage, StorageKeys } from "../storage";
+import { storage, StorageKeys } from "@/common/storage";
 
-const getScripts = async (): Promise<Script[]> => {
+import { ScriptData } from "./types";
+
+const getScripts = async (): Promise<ScriptData[]> => {
 	return (await storage.get(StorageKeys.Scripts)) ?? [];
 };
 

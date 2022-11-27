@@ -1,0 +1,13 @@
+@use '../../../../../../common/styles/variables';
+
+.title {
+	font-weight: 600;
+	font-size: 1.6em;
+	color: variables.$text;
+	padding: 12px 8px 0;
+}
+
+.body {
+	border-radius: 4px;
+	padding: 12px 0;
+}

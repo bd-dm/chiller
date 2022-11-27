@@ -1,4 +1,5 @@
 import { ParentComponent } from "solid-js";
+
 import styles from "./index.module.scss";
 
 enum ColumnVerticalAlignment {
@@ -19,6 +20,7 @@ interface ColumnProps {
 	classList?: Record<string, boolean | undefined>;
 	verticalAlignment?: ColumnVerticalAlignment;
 	horizontalAlignment?: ColumnHorizontalAlignment;
+	gapLess?: boolean;
 }
 
 interface ColumnInterface extends ParentComponent<ColumnProps> {
@@ -33,6 +35,7 @@ const Column: ColumnInterface = (props) => {
 		<div
 			classList={{
 				[styles.column]: true,
+				[styles.gapLess]: props.gapLess,
 				[styles[
 					`horizontal${
 						props.horizontalAlignment ?? ColumnHorizontalAlignment.FlexStart

@@ -1,6 +1,3 @@
-import { ScriptVariables } from "../types";
-import { ActionTarget } from "./action-target";
-
 // eslint-disable-next-line @typescript-eslint/ban-types
 type DefaultParamsType = {};
 
@@ -8,28 +5,86 @@ type DefaultParamsType = {};
  * User event types
  */
 
+type UserEventVariable = string;
+type UserEventVariables = Record<string, UserEventVariable>;
+
 type UserEvent<ParamsType = DefaultParamsType> = (
 	tabId: chrome.tabs.Tab["id"],
 	options: {
 		params: ParamsType;
-		variables?: ScriptVariables;
+		variables?: UserEventVariables;
 	}
 ) => Promise<void>;
 
-type UserEventWithTarget<ParamsType = DefaultParamsType> = UserEvent<
-	ParamsType & { target: ActionTarget }
->;
-
 /**
- * Common config types
+ * Target element types
  */
 
-interface UseVariable {
+type UserEventWithTarget<ParamsType = DefaultParamsType> = UserEvent<
+	ParamsType & {
+		target: ActionDynamicParamWithSelector | ActionDynamicParamWithVariable;
+	}
+>;
+
+interface TargetElementData<ElementType extends HTMLElement> {
+	element: ElementType;
+	iframe?: HTMLIFrameElement;
+}
+
+type GetTargetElementFn = <ElementType extends HTMLElement>(
+	target: ActionDynamicParam,
+	variables?: UserEventVariables
+) => TargetElementData<ElementType>;
+
+/**
+ * Action params
+ */
+
+enum ActionDynamicParamType {
+	Variable = "variable",
+	Text = "text",
+	Selector = "selector",
+}
+
+interface ActionDynamicParamEmpty {
+	type: null;
+}
+
+interface ActionDynamicParamWithVariable {
+	type: ActionDynamicParamType.Variable;
 	use: string;
 }
+
+interface ActionDynamicParamWithText {
+	type: ActionDynamicParamType.Text;
+	text: string;
+}
+
+interface ActionDynamicParamWithSelector {
+	type: ActionDynamicParamType.Selector;
+	selector: string;
+}
+
+type ActionDynamicParam =
+	| ActionDynamicParamEmpty
+	| ActionDynamicParamWithVariable
+	| ActionDynamicParamWithText
+	| ActionDynamicParamWithSelector;
 
 /**
  * Exports
  */
 
-export type { UserEvent, UseVariable, UserEventWithTarget };
+export type {
+	ActionDynamicParam,
+	ActionDynamicParamWithSelector,
+	ActionDynamicParamWithText,
+	ActionDynamicParamWithVariable,
+	GetTargetElementFn,
+	TargetElementData,
+	UserEvent,
+	UserEventVariables,
+	UserEventWithTarget,
+};
+
+export { ActionDynamicParamType };

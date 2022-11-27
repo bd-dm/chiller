@@ -1,3 +1,4 @@
 export * from "./get-current-tab";
-export * from "./send-debugger-command";
+export * from "./get-tab-screenshot";
 export * from "./inject-content";
+export * from "./send-debugger-command";

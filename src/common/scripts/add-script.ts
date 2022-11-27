@@ -1,7 +1,8 @@
-import { Script } from "./types";
-import { storage, StorageKeys } from "../storage";
+import { storage, StorageKeys } from "@/common/storage";
 
-const addScript = async (script: Script): Promise<void> => {
+import { ScriptData } from "./types";
+
+const addScript = async (script: ScriptData): Promise<void> => {
 	await storage.addItem(StorageKeys.Scripts, script);
 };
 

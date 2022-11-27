@@ -1,7 +1,8 @@
-import { Script } from "./types";
-import { storage, StorageKeys } from "../storage";
+import { storage, StorageKeys } from "@/common/storage";
 
-const removeScript = async (scriptId: Script["id"]): Promise<void> => {
+import { ScriptData } from "./types";
+
+const removeScript = async (scriptId: ScriptData["id"]): Promise<void> => {
 	await storage.removeItem(StorageKeys.Scripts, ({ id }) => id === scriptId);
 };
 

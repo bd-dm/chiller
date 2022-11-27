@@ -1,8 +1,8 @@
 import { attachDebugger } from "./attach-debugger";
-import { saveInjectedTab } from "./save-injected-tab";
-import { getSavedInjectedTabs } from "./get-saved-injected-tabs";
 import { detachDebugger } from "./detach-debugger";
+import { getSavedInjectedTabs } from "./get-saved-injected-tabs";
 import { removeInjectedTab } from "./remove-injected-tab";
+import { saveInjectedTab } from "./save-injected-tab";
 
 const injectContent = async (
 	tabId: NonNullable<chrome.tabs.Tab["id"]>,

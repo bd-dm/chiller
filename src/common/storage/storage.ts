@@ -1,5 +1,6 @@
-import { StorageMethods } from "./types";
 import { isNull, isObject, isUndefined } from "lodash-es";
+
+import { StorageMethods } from "./types";
 
 const get: StorageMethods["get"] = async (key) => {
 	const data = await chrome.storage.sync.get(key);

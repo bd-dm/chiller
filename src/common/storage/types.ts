@@ -1,11 +1,12 @@
+import { ScriptData } from "@/common/scripts";
+
 import { StorageKeys } from "./enums";
-import { Script } from "../scripts/types";
 
 type ArrayStorageKeys = StorageKeys.Scripts | StorageKeys.InjectedTabs;
 
 type ArrayStorageItemType<Key extends ArrayStorageKeys> =
 	Key extends StorageKeys.Scripts
-		? Script
+		? ScriptData
 		: Key extends StorageKeys.InjectedTabs
 		? chrome.tabs.Tab["id"]
 		: never;
@@ -44,4 +45,4 @@ interface StorageMethods {
 	removeKey: <Key extends StorageKeys>(key: Key) => Promise<void>;
 }
 
-export type { StorageType, StorageMethods };
+export type { StorageMethods, StorageType };

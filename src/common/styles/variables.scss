@@ -1,3 +1,15 @@
-$text: #fff;
-$background: rgb(60 64 67);
-$background-light: rgb(83 87 91);
+$text: rgb(255 255 255);
+$text-disabled: rgb(255 255 255 / 80%);
+$text-inverted: rgb(0 0 0 / 80%);
+$primary: rgb(255 221 45);
+$button: $primary;
+$button-hovered: rgb(252 197 33);
+$border: rgb(18 18 18 / 60%);
+$background-solid: rgb(50 50 50);
+$background-solid-light: rgb(52 52 52);
+$background: rgb(18 18 18 / 70%);
+$background-2: rgb(255 255 255 / 6%);
+$shadow: rgb(0 0 0 / 10%);
+$input: rgb(255 255 255 / 6%);
+$input-hover: rgb(255 255 255 / 7%);
+$block-header: rgb(32 32 32);

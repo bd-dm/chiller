@@ -3,26 +3,27 @@ import {
 	createContext,
 	createResource,
 	createSignal,
+	ParentComponent,
 	Resource,
 	Setter,
 	useContext,
 } from "solid-js";
-import { ParentComponent } from "solid-js/types/render/component";
-import { getScripts, sendMessage } from "../../common";
-import { Script } from "../../common/scripts/types";
-import { MessageType } from "../../common/message-carrier/enums";
+
+import { getScripts, MessageType, ScriptData, sendMessage } from "@/common";
+
+import { Page } from "./enums";
 
 interface ContextValue {
-	scripts: Resource<Script[]>;
+	page: Accessor<Page>;
+	setPage: Setter<Page>;
+	scripts: Resource<ScriptData[]>;
 	updateScripts: VoidFunction;
-	isAddScriptOpened: Accessor<boolean>;
-	setIsAddScriptOpened: Setter<boolean>;
 }
 
 const Context = createContext<ContextValue>();
 
 const HomeContextProvider: ParentComponent = (props) => {
-	const [isAddScriptOpened, setIsAddScriptOpened] = createSignal(false);
+	const [page, setPage] = createSignal(Page.ScriptList);
 	const [scripts, { refetch }] = createResource(getScripts);
 
 	const reloadOverlay = async () => {
@@ -38,8 +39,8 @@ const HomeContextProvider: ParentComponent = (props) => {
 	const value = {
 		scripts,
 		updateScripts,
-		isAddScriptOpened,
-		setIsAddScriptOpened,
+		page,
+		setPage,
 	};
 
 	return <Context.Provider value={value}>{props.children}</Context.Provider>;

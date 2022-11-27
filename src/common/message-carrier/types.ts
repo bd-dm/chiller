@@ -16,6 +16,8 @@ type MessageContent<Type extends MessageType> =
 		  }
 		: Type extends MessageType.InjectContent
 		? void
+		: Type extends MessageType.GetTabScreenshot
+		? void
 		: never;
 
 type Message<Type extends MessageType> = MessageBase<Type> &
@@ -29,6 +31,8 @@ type MessageResult<Type extends MessageType> =
 		? void
 		: Type extends MessageType.InjectContent
 		? void
+		: Type extends MessageType.GetTabScreenshot
+		? string | null
 		: never;
 
 // Worker side

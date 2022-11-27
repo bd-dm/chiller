@@ -1,8 +1,8 @@
-import { Script } from "./types";
-import { StorageKeys } from "../storage";
-import { storage } from "../storage";
+import { storage, StorageKeys } from "@/common/storage";
 
-const updateScript = async (script: Script): Promise<void> => {
+import { ScriptData } from "./types";
+
+const updateScript = async (script: ScriptData): Promise<void> => {
 	await storage.updateItem(
 		StorageKeys.Scripts,
 		({ id }) => id === script.id,

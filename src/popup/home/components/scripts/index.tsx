@@ -1,13 +1,24 @@
-import { Component } from "solid-js";
-import styles from "./index.module.scss";
-import { ScriptsList } from "../scripts-list";
+import { Component, Match, Switch } from "solid-js";
+
+import { useHomeContext } from "../../context";
+import { Page } from "../../enums";
 import { AddScript } from "../add-script";
+import { ScriptsList } from "../scripts-list";
+import styles from "./index.module.scss";
 
 const Scripts: Component = () => {
+	const { page } = useHomeContext();
+
 	return (
 		<div class={styles.scripts}>
-			<AddScript />
-			<ScriptsList />
+			<Switch>
+				<Match keyed when={page() === Page.AddScript}>
+					<AddScript />
+				</Match>
+				<Match keyed when={page() === Page.ScriptList}>
+					<ScriptsList />
+				</Match>
+			</Switch>
 		</div>
 	);
 };

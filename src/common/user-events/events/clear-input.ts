@@ -1,8 +1,7 @@
 import { UserEventWithTarget } from "../types";
-import { pressKey, PressKeyType } from "./press-key";
+import { getCtrlOrCmdModifier, getTargetElement } from "../utils";
 import { click } from "./click";
-import { getCtrlOrCmdModifier } from "../utils";
-import { getTargetElement } from "../action-target";
+import { pressKey, PressKeyType } from "./press-key";
 
 interface ClearInputParams {
 	selector: string;

@@ -1,6 +1,7 @@
-import { getSavedInjectedTabs } from "./get-saved-injected-tabs";
-import { getCurrentTab } from "./get-current-tab";
 import { isUndefined } from "lodash-es";
+
+import { getCurrentTab } from "./get-current-tab";
+import { getSavedInjectedTabs } from "./get-saved-injected-tabs";
 import { injectContent } from "./inject-content";
 
 const restoreContentInjection = async () => {

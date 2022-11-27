@@ -1,36 +1,57 @@
 import { Component } from "solid-js";
-import { Row } from "../../../../common/components";
-import { sendMessage } from "../../../../common";
-import { MessageType } from "../../../../common/message-carrier/enums";
+
+import {
+	Button,
+	Column,
+	commonStyles,
+	MessageType,
+	Row,
+	sendMessage,
+} from "@/common";
+
 import { useHomeContext } from "../../context";
+import { Page } from "../../enums";
 import styles from "./index.module.scss";
-import commonStyles from "../../../../common/styles/index.module.scss";
 
 const ButtonsRow: Component = () => {
-	const { isAddScriptOpened, setIsAddScriptOpened } = useHomeContext();
-
-	const toggleAddScript = () => setIsAddScriptOpened(!isAddScriptOpened());
+	const { page, setPage } = useHomeContext();
 
 	const openChiller = async () => {
 		await sendMessage(MessageType.InjectContent);
 	};
 
 	return (
-		<Row verticalAlignment={Row.Alignment.Vertical.Stretch}>
-			<button class={styles.button} type={"button"} onClick={openChiller}>
-				Toggle overlay
-			</button>
-			<button
-				classList={{
-					[styles.button]: true,
-					[commonStyles.active]: isAddScriptOpened(),
-				}}
+		<Column horizontalAlignment={Column.Alignment.Horizontal.Stretch}>
+			<Button
+				classList={{ [styles.button]: true }}
 				type={"button"}
-				onClick={toggleAddScript}
+				onClick={openChiller}
 			>
-				New script
-			</button>
-		</Row>
+				Toggle overlay
+			</Button>
+			<Row verticalAlignment={Row.Alignment.Vertical.Stretch}>
+				<Button
+					classList={{
+						[styles.button]: true,
+						[commonStyles.active]: page() === Page.ScriptList,
+					}}
+					type={"button"}
+					onClick={() => setPage(Page.ScriptList)}
+				>
+					Scripts
+				</Button>
+				<Button
+					classList={{
+						[styles.button]: true,
+						[commonStyles.active]: page() === Page.AddScript,
+					}}
+					type={"button"}
+					onClick={() => setPage(Page.AddScript)}
+				>
+					Add script
+				</Button>
+			</Row>
+		</Column>
 	);
 };
 

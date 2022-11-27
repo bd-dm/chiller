@@ -1,12 +1,12 @@
 import { Component } from "solid-js";
-import { Script } from "../../../../common/scripts/types";
+
+import { Button, Row, ScriptData, scriptRunner } from "@/common";
+
+import { useCoreContext } from "../../../context";
 import styles from "./index.module.scss";
-import { scriptRunner } from "../../../../common";
-import { useCoreContext } from "../../../contexts";
-import { Row } from "../../../../common/components";
 
 interface ScriptsItemProps {
-	script: Script;
+	script: ScriptData;
 }
 
 const ScriptsItem: Component<ScriptsItemProps> = (props) => {
@@ -23,9 +23,9 @@ const ScriptsItem: Component<ScriptsItemProps> = (props) => {
 				verticalAlignment={Row.Alignment.Vertical.Center}
 			>
 				<div class={styles.name}>{props.script.name}</div>
-				<button type={"button"} onClick={runScriptHandler}>
+				<Button type={"button"} onClick={runScriptHandler}>
 					Run
-				</button>
+				</Button>
 			</Row>
 		</li>
 	);

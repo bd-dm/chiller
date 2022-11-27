@@ -1,19 +1,27 @@
 import { Component, createSignal, Show } from "solid-js";
-import styles from "./index.module.scss";
-import commonStyles from "../../../../common/styles/index.module.scss";
-import { Script } from "../../../../common/scripts/types";
-import { removeScript, updateScript } from "../../../../common";
+
+import {
+	Button,
+	Column,
+	commonStyles,
+	removeScript,
+	Row,
+	ScriptData,
+	updateScript,
+} from "@/common";
+
 import { useHomeContext } from "../../context";
-import { ScriptInput } from "../script-input";
-import { Column, Row } from "../../../../common/components";
+import { Page } from "../../enums";
+import { ScriptConstructor } from "../script-constructor";
+import styles from "./index.module.scss";
 
 interface ScriptsItemProps {
-	script: Script;
+	script: ScriptData;
 }
 
 const ScriptsItem: Component<ScriptsItemProps> = (props) => {
 	const [isEdit, setIsEdit] = createSignal(false);
-	const { updateScripts, setIsAddScriptOpened } = useHomeContext();
+	const { updateScripts, setPage } = useHomeContext();
 
 	const removeHandler = async () => {
 		await removeScript(props.script.id);
@@ -24,9 +32,9 @@ const ScriptsItem: Component<ScriptsItemProps> = (props) => {
 		setIsEdit(!isEdit());
 	};
 
-	const saveHandler = async (script: Script) => {
+	const saveHandler = async (script: ScriptData) => {
 		await updateScript(script);
-		setIsAddScriptOpened(false);
+		setPage(Page.ScriptList);
 		updateScripts();
 	};
 
@@ -40,20 +48,23 @@ const ScriptsItem: Component<ScriptsItemProps> = (props) => {
 				>
 					<div>{props.script.name}</div>
 					<Row>
-						<button
+						<Button
 							type={"button"}
 							classList={{ [commonStyles.active]: isEdit() }}
 							onClick={editHandler}
 						>
 							Edit
-						</button>
-						<button type={"button"} onClick={removeHandler}>
+						</Button>
+						<Button type={"button"} onClick={removeHandler}>
 							&times;
-						</button>
+						</Button>
 					</Row>
 				</Row>
 				<Show keyed when={isEdit()}>
-					<ScriptInput values={props.script} onResult={saveHandler} />
+					<ScriptConstructor
+						scriptId={props.script.id}
+						onResult={saveHandler}
+					/>
 				</Show>
 			</Column>
 		</li>

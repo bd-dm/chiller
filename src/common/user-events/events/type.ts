@@ -1,17 +1,25 @@
-import { UserEvent } from "../types";
+import {
+	ActionDynamicParamWithText,
+	ActionDynamicParamWithVariable,
+	UserEvent,
+} from "../types";
+import { getActionParamValue } from "../utils";
 import { enterChar } from "./enter-char";
 
 interface TypeParams {
-	text: string;
+	text: ActionDynamicParamWithVariable | ActionDynamicParamWithText;
 }
 
 const type: UserEvent<TypeParams> = async (
 	tabId,
-	{ params: { text } }
+	{ params: { text }, variables }
 ): Promise<void> => {
-	for (let i = 0; i < text.length; i++) {
-		await enterChar(tabId, { params: { char: text[i] } });
+	const textValue = getActionParamValue(text, variables);
+
+	for (let i = 0; i < textValue.length; i++) {
+		await enterChar(tabId, { params: { char: textValue[i] } });
 	}
 };
 
 export { type };
+export type { TypeParams };
