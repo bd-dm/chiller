@@ -11,13 +11,7 @@ import {
 	useContext,
 } from "solid-js";
 
-import {
-	ActionDynamicParamType,
-	ContextType,
-	getScript,
-	ScriptBody,
-	ScriptData,
-} from "@/common";
+import { ContextType, getScript, ScriptBody, ScriptData } from "@/common";
 
 import {
 	ConstructorStepItem,
@@ -48,23 +42,8 @@ const ScriptConstructorContextProvider: ParentComponent<
 > = (props) => {
 	const [id, setId] = createSignal("");
 	const [name, setName] = createSignal("");
-	const [variables, setVariables] = createSignal<ConstructorVariableItems>([
-		{ name: "test", value: "test val" },
-	]);
-	const [steps, setSteps] = createSignal<ConstructorStepItems>([
-		{
-			action: "click",
-			params: {
-				target: { type: ActionDynamicParamType.Variable, use: "test" },
-			},
-		},
-		{
-			action: "type",
-			params: {
-				text: { type: ActionDynamicParamType.Text, text: "test text" },
-			},
-		},
-	]);
+	const [variables, setVariables] = createSignal<ConstructorVariableItems>([]);
+	const [steps, setSteps] = createSignal<ConstructorStepItems>([]);
 
 	onMount(async () => {
 		const scriptId = props.scriptId;
