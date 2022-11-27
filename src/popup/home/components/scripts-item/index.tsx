@@ -1,6 +1,5 @@
 import { Button, Column, Row } from "common/components";
 import { removeScript, ScriptData, updateScript } from "common/scripts";
-import commonStyles from "common/styles/index.module.scss";
 import { Component, createSignal, Show } from "solid-js";
 
 import { useHomeContext } from "../../context";
@@ -41,11 +40,7 @@ const ScriptsItem: Component<ScriptsItemProps> = (props) => {
 				>
 					<div>{props.script.name}</div>
 					<Row>
-						<Button
-							type={"button"}
-							classList={{ [commonStyles.active]: isEdit() }}
-							onClick={editHandler}
-						>
+						<Button type={"button"} active={isEdit()} onClick={editHandler}>
 							Edit
 						</Button>
 						<Button type={"button"} onClick={removeHandler}>

@@ -6,6 +6,7 @@ interface ButtonProps
 	extends Omit<JSX.ButtonHTMLAttributes<HTMLButtonElement>, "class"> {
 	notStyled?: boolean;
 	light?: boolean;
+	active?: boolean;
 }
 
 const Button: ParentComponent<ButtonProps> = (props) => {
@@ -13,6 +14,7 @@ const Button: ParentComponent<ButtonProps> = (props) => {
 		...(props.classList ?? {}),
 		[styles.button]: !props.notStyled,
 		[styles.light]: props.light,
+		[styles.active]: props.active,
 	});
 
 	return (

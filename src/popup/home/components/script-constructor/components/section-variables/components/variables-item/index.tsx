@@ -26,10 +26,13 @@ const VariablesItem: Component<VariablesItemProps> = (props) => {
 		removeVariable(props.index);
 	};
 
-	const isRemovable = () => props.index < variables().length - 1;
+	const isLast = () => props.index === variables().length - 1;
 
 	return (
-		<Row verticalAlignment={Row.Alignment.Vertical.Center}>
+		<Row
+			verticalAlignment={Row.Alignment.Vertical.Center}
+			classList={{ [styles.last]: isLast() }}
+		>
 			<Input
 				class={styles.input}
 				type="text"
@@ -50,12 +53,12 @@ const VariablesItem: Component<VariablesItemProps> = (props) => {
 					changeHandler("value")(newValue)
 				}
 			/>
-			<Show when={isRemovable()} keyed>
+			<Show when={!isLast()} keyed>
 				<Button light onClick={removeHandler}>
 					&times;
 				</Button>
 			</Show>
-			<Show when={!isRemovable()} keyed>
+			<Show when={isLast()} keyed>
 				<Button disabled classList={{ [styles.buttonPlaceholder]: true }}>
 					&times;
 				</Button>
