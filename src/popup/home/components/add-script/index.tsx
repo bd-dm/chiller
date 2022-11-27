@@ -1,4 +1,5 @@
 import { addScript, ScriptData } from "common/scripts";
+import { nanoid } from "nanoid";
 import { Component } from "solid-js";
 
 import { useHomeContext } from "../../context";
@@ -14,7 +15,7 @@ const AddScript: Component = () => {
 		updateScripts();
 	};
 
-	return <ScriptConstructor onResult={addScriptHandler} />;
+	return <ScriptConstructor onSave={addScriptHandler} scriptId={nanoid()} />;
 };
 
 export { AddScript };

@@ -10,15 +10,15 @@ import { ScriptConstructorProps } from "./types";
 
 const ScriptConstructor: Component<ScriptConstructorProps> = (props) => {
 	const saveHandler = (result: ScriptData) => {
-		if (!isUndefined(props.onResult)) {
-			props.onResult(result);
+		if (!isUndefined(props.onSave)) {
+			props.onSave(result);
 		}
 	};
 
 	return (
 		<ScriptConstructorContext.Provider
 			scriptId={props.scriptId}
-			onResult={saveHandler}
+			onSave={saveHandler}
 		>
 			<Column
 				classList={{ [styles.block]: true }}

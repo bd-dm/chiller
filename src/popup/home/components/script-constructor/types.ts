@@ -2,8 +2,9 @@ import { ScriptData, ScriptStep } from "common/scripts";
 import { ActionDynamicParam, UserEventAction } from "common/user-events";
 
 interface ScriptConstructorProps {
-	scriptId?: ScriptData["id"];
-	onResult?: (result: ScriptData) => void;
+	scriptId: ScriptData["id"];
+	onSave?: (result: ScriptData) => void;
+	onCancel?: () => void;
 }
 
 interface ConstructorVariableItem {

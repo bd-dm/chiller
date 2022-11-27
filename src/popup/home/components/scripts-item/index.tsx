@@ -26,8 +26,12 @@ const ScriptsItem: Component<ScriptsItemProps> = (props) => {
 
 	const saveHandler = async (script: ScriptData) => {
 		await updateScript(script);
-		setPage(Page.ScriptList);
 		updateScripts();
+		onFinish();
+	};
+
+	const onFinish = () => {
+		setPage(Page.ScriptList);
 	};
 
 	return (
@@ -51,7 +55,8 @@ const ScriptsItem: Component<ScriptsItemProps> = (props) => {
 				<Show keyed when={isEdit()}>
 					<ScriptConstructor
 						scriptId={props.script.id}
-						onResult={saveHandler}
+						onSave={saveHandler}
+						onCancel={onFinish}
 					/>
 				</Show>
 			</Column>

@@ -21,6 +21,11 @@ const set: StorageMethods["set"] = async (key, value) =>
 		[key]: value,
 	});
 
+const getItem: StorageMethods["getItem"] = async (key, findFn) => {
+	const items = (await get(key)) ?? [];
+	return items.find(findFn) ?? null;
+};
+
 const addItem: StorageMethods["addItem"] = async (key, item) => {
 	const items = (await get(key)) ?? [];
 
@@ -78,6 +83,7 @@ const removeKey: StorageMethods["removeKey"] = async (key) => {
 const storage: StorageMethods = {
 	get,
 	set,
+	getItem,
 	addItem,
 	updateItem,
 	removeItem,

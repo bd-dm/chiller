@@ -1,6 +1,6 @@
 enum Page {
-	ScriptList,
-	AddScript,
+	ScriptList = "ScriptList",
+	AddScript = "AddScript",
 }
 
 export { Page };

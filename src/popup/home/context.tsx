@@ -3,8 +3,10 @@ import { getScripts, ScriptData } from "common/scripts";
 import {
 	Accessor,
 	createContext,
+	createEffect,
 	createResource,
 	createSignal,
+	onMount,
 	ParentComponent,
 	Resource,
 	Setter,
@@ -12,6 +14,7 @@ import {
 } from "solid-js";
 
 import { Page } from "./enums";
+import { getPage, savePage } from "./utils";
 
 interface ContextValue {
 	page: Accessor<Page>;
@@ -25,6 +28,14 @@ const Context = createContext<ContextValue>();
 const HomeContextProvider: ParentComponent = (props) => {
 	const [page, setPage] = createSignal(Page.ScriptList);
 	const [scripts, { refetch }] = createResource(getScripts);
+
+	onMount(async () => {
+		setPage(await getPage());
+	});
+
+	createEffect(() => {
+		savePage(page());
+	});
 
 	const reloadOverlay = async () => {
 		await sendMessage(MessageType.InjectContent);
