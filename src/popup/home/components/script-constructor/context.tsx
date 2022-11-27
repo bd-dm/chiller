@@ -1,7 +1,12 @@
-import { getScript, ScriptBody, ScriptData } from "common/scripts";
+import {
+	getScriptOrDraft,
+	removeScriptDraft,
+	saveScriptDraft,
+	ScriptBody,
+	ScriptData,
+} from "common/scripts";
 import { ContextType } from "common/types";
-import { isUndefined } from "lodash-es";
-import { nanoid } from "nanoid";
+import { isNull } from "lodash-es";
 import {
 	Accessor,
 	createContext,
@@ -40,6 +45,7 @@ interface ScriptConstructorContextValue {
 	removeStep: (index: number) => void;
 	addStep: () => void;
 	setName: Setter<string>;
+	cancel?: () => void;
 	save?: () => void;
 }
 
@@ -53,16 +59,24 @@ const ScriptConstructorContextProvider: ParentComponent<
 	const [variables, setVariables] = createSignal<ConstructorVariableItems>([]);
 	const [steps, setSteps] = createSignal<ConstructorStepItems>([]);
 
+	const scriptData = () => ({
+		id: id(),
+		name: name(),
+		json: JSON.stringify({
+			variables: variablesToObject(getFilledVariables(variables())),
+			steps: getFilledSteps(steps()),
+		}),
+		addedTimestamp: new Date().getTime(),
+	});
+
 	onMount(async () => {
 		const scriptId = props.scriptId;
+		const initialScript = await getScriptOrDraft(scriptId);
 
-		if (!isUndefined(scriptId)) {
-			const initialScript = await getScript(scriptId);
+		if (!isNull(initialScript)) {
 			restoreScript(initialScript);
 		} else {
-			setId(nanoid());
-			addVariable();
-			addStep();
+			setId(scriptId);
 		}
 	});
 
@@ -76,6 +90,10 @@ const ScriptConstructorContextProvider: ParentComponent<
 		if (getFilledSteps(steps()).length === steps().length) {
 			addStep();
 		}
+	});
+
+	createEffect(() => {
+		saveDraft();
 	});
 
 	const restoreScript = (script: ScriptData): void => {
@@ -97,20 +115,29 @@ const ScriptConstructorContextProvider: ParentComponent<
 		}
 	};
 
-	const saveHandler = () => {
-		if (!props.onResult) {
+	const saveDraft = async () => {
+		await saveScriptDraft(scriptData());
+	};
+
+	const removeDraft = async () => {
+		await removeScriptDraft(id());
+	};
+
+	const saveHandler = async () => {
+		if (!props.onSave) {
 			return;
 		}
 
-		props.onResult({
-			id: id(),
-			name: name(),
-			json: JSON.stringify({
-				variables: variablesToObject(getFilledVariables(variables())),
-				steps: getFilledSteps(steps()),
-			}),
-			addedTimestamp: new Date().getTime(),
-		});
+		await removeDraft();
+		props.onSave(scriptData());
+	};
+
+	const cancelHandler = async () => {
+		await removeDraft();
+
+		if (props.onCancel) {
+			props.onCancel();
+		}
 	};
 
 	const setVariable = (index: number, item: ConstructorVariableItem): void => {
@@ -165,6 +192,7 @@ const ScriptConstructorContextProvider: ParentComponent<
 					addStep,
 					name,
 					setName,
+					cancel: cancelHandler,
 					save: saveHandler,
 				}}
 			>

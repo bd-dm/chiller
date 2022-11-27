@@ -20,6 +20,7 @@ interface SelectProps<OptionType extends SelectOption = SelectOption> {
 
 const KEY_DOWN_ARROW = 40;
 const KEY_UP_ARROW = 38;
+const KEY_ESCAPE = 27;
 
 const Select = <OptionType extends SelectOption = SelectOption>(
 	props: SelectProps<OptionType>
@@ -117,6 +118,10 @@ const Select = <OptionType extends SelectOption = SelectOption>(
 		}
 	};
 
+	const closeSuggestions = () => {
+		(document.activeElement as HTMLElement).blur();
+	};
+
 	return (
 		<Column gapLess horizontalAlignment={Column.Alignment.Horizontal.Stretch}>
 			<div class={styles.select}>
@@ -128,6 +133,9 @@ const Select = <OptionType extends SelectOption = SelectOption>(
 							focusNext(
 								(listRef()?.firstChild?.firstChild as HTMLElement) ?? undefined
 							);
+						} else if (e.keyCode === KEY_ESCAPE) {
+							e.preventDefault();
+							closeSuggestions();
 						}
 					}}
 					onInput={({ currentTarget: { textContent } }) => {
@@ -145,7 +153,13 @@ const Select = <OptionType extends SelectOption = SelectOption>(
 				<div class={styles.suggestionsWrapper}>
 					<div class={styles.suggestions}>
 						<ul class={styles.suggestionsList} ref={setListRef}>
-							<For each={filteredOptions()}>
+							<For
+								each={
+									manualInput() === deferredManualInput()
+										? props.options
+										: filteredOptions()
+								}
+							>
 								{({ value: itemValue, name }, index) => (
 									<li class={styles.item}>
 										<Button
@@ -159,6 +173,9 @@ const Select = <OptionType extends SelectOption = SelectOption>(
 													focusPrevious(
 														index() === 0 ? contentRef() : undefined
 													);
+												} else if (e.keyCode === KEY_ESCAPE) {
+													e.preventDefault();
+													closeSuggestions();
 												}
 											}}
 											onClick={() => selectHandler(itemValue)}

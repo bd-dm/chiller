@@ -12,7 +12,7 @@ const Input: Component<JSX.InputHTMLAttributes<HTMLInputElement>> = (props) => {
 			data-placeholder={props.placeholder}
 			classList={{
 				[styles.input]: true,
-				[styles.filled]: !isEmpty(props.value),
+				[styles.filled]: !isEmpty(`${props.value ?? ""}`),
 			}}
 		>
 			<input

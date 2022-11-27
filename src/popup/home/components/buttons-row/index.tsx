@@ -1,6 +1,5 @@
 import { Button, Column, Row } from "common/components";
 import { MessageType, sendMessage } from "common/message-carrier";
-import commonStyles from "common/styles/index.module.scss";
 import { Component } from "solid-js";
 
 import { useHomeContext } from "../../context";
@@ -27,8 +26,8 @@ const ButtonsRow: Component = () => {
 				<Button
 					classList={{
 						[styles.button]: true,
-						[commonStyles.active]: page() === Page.ScriptList,
 					}}
+					active={page() === Page.ScriptList}
 					type={"button"}
 					onClick={() => setPage(Page.ScriptList)}
 				>
@@ -37,8 +36,8 @@ const ButtonsRow: Component = () => {
 				<Button
 					classList={{
 						[styles.button]: true,
-						[commonStyles.active]: page() === Page.AddScript,
 					}}
+					active={page() === Page.AddScript}
 					type={"button"}
 					onClick={() => setPage(Page.AddScript)}
 				>

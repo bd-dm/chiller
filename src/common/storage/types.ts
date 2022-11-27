@@ -2,16 +2,29 @@ import { ScriptData } from "common/scripts";
 
 import { StorageKeys } from "./enums";
 
-type ArrayStorageKeys = StorageKeys.Scripts | StorageKeys.InjectedTabs;
+type ArrayStorageKeys =
+	| StorageKeys.Scripts
+	| StorageKeys.InjectedTabs
+	| StorageKeys.ScriptDrafts;
 
 type ArrayStorageItemType<Key extends ArrayStorageKeys> =
 	Key extends StorageKeys.Scripts
 		? ScriptData
 		: Key extends StorageKeys.InjectedTabs
 		? chrome.tabs.Tab["id"]
+		: Key extends StorageKeys.ScriptDrafts
+		? ScriptData
 		: never;
 
-type StorageType<Key extends StorageKeys> = ArrayStorageItemType<Key>[];
+type PlainStorageKeys = StorageKeys.Page;
+type PlainStorageItemType<Key extends PlainStorageKeys> =
+	Key extends StorageKeys.Page ? string : never;
+
+type StorageType<Key extends StorageKeys> = Key extends ArrayStorageKeys
+	? ArrayStorageItemType<Key>[]
+	: Key extends PlainStorageKeys
+	? PlainStorageItemType<Key>
+	: never;
 
 type ArrayStorageItemUpdateData<Key extends ArrayStorageKeys> =
 	ArrayStorageItemType<Key> extends Record<string, unknown>
@@ -25,6 +38,11 @@ interface StorageMethods {
 		key: Key,
 		value: StorageType<Key>
 	) => Promise<void>;
+
+	getItem: <Key extends ArrayStorageKeys>(
+		key: Key,
+		findFn: (item: ArrayStorageItemType<Key>) => boolean
+	) => Promise<ArrayStorageItemType<Key> | null>;
 
 	addItem: <Key extends ArrayStorageKeys>(
 		key: Key,

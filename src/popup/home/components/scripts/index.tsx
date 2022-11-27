@@ -1,4 +1,4 @@
-import { Component, Match, Switch } from "solid-js";
+import { Component, Match, onMount, Switch } from "solid-js";
 
 import { useHomeContext } from "../../context";
 import { Page } from "../../enums";
@@ -8,6 +8,8 @@ import styles from "./index.module.scss";
 
 const Scripts: Component = () => {
 	const { page } = useHomeContext();
+
+	onMount(() => {});
 
 	return (
 		<div class={styles.scripts}>

@@ -1,6 +1,8 @@
 enum StorageKeys {
-	InjectedTabs = "@chiller/contentInjectedTabs",
+	InjectedTabs = "@chiller/content-injected-tabs",
 	Scripts = "@chiller/scripts",
+	ScriptDrafts = "@chiller/script-drafts",
+	Page = "@chiller/page",
 }
 
 export { StorageKeys };

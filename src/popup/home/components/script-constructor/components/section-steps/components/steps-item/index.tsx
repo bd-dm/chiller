@@ -18,7 +18,7 @@ interface StepsItemProps {
 const StepsItem: Component<StepsItemProps> = (props) => {
 	const { setStep, removeStep, steps } = useScriptConstructor();
 
-	const isRemovable = () => props.index < steps().length - 1;
+	const isLast = () => props.index === steps().length - 1;
 
 	const changeHandler =
 		(key: keyof ConstructorStepItem) =>
@@ -37,12 +37,14 @@ const StepsItem: Component<StepsItemProps> = (props) => {
 	return (
 		<Column
 			horizontalAlignment={Column.Alignment.Horizontal.Stretch}
-			classList={{ [styles.item]: true }}
+			classList={{ [styles.item]: true, [styles.last]: isLast() }}
 		>
 			<Row horizontalAlignment={Row.Alignment.Horizontal.SpaceBetween}>
 				<h4 class={styles.title}>Step {props.index + 1}</h4>
-				<Show when={isRemovable()} keyed>
-					<Button onClick={removeHandler}>&times;</Button>
+				<Show when={!isLast()} keyed>
+					<Button light onClick={removeHandler}>
+						&times;
+					</Button>
 				</Show>
 			</Row>
 			<Select<ConstructorStepActionOption>

@@ -14,6 +14,7 @@ enum RowHorizontalAlignment {
 	Center = "Center",
 	FlexEnd = "FlexEnd",
 	SpaceBetween = "SpaceBetween",
+	Stretch = "Stretch",
 }
 
 interface RowProps {

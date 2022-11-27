@@ -12,6 +12,8 @@ import { ParamsInputDynamic } from "../params-input-dynamic";
 const ParamsInputWaitForElement: Component<
 	ConstructorParamsInputProps<"waitForElement">
 > = (props): JSXElement => {
+	const timeout = () => props.params?.timeout ?? WAIT_FOR_ELEMENT_TIMEOUT;
+
 	const targetChangeHandler: ConstructorStepParamChangeHandler = (newParam) => {
 		props.onChange({
 			...props.params,
@@ -20,9 +22,15 @@ const ParamsInputWaitForElement: Component<
 	};
 
 	const timeoutChangeHandler = (value: string) => {
+		let newTimeout = parseInt(value, 10);
+
+		if (isNaN(newTimeout)) {
+			newTimeout = 0;
+		}
+
 		props.onChange({
 			...props.params,
-			target: parseInt(value, 10),
+			timeout: newTimeout,
 		});
 	};
 
@@ -38,8 +46,8 @@ const ParamsInputWaitForElement: Component<
 			/>
 			<Input
 				type="text"
-				placeholder={"Variants separated by comma (,)"}
-				value={props.params?.timeout ?? WAIT_FOR_ELEMENT_TIMEOUT}
+				placeholder={"Timeout (milliseconds)"}
+				value={timeout()}
 				onInput={({ currentTarget: { value } }) => timeoutChangeHandler(value)}
 			/>
 		</Column>

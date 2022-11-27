@@ -19,6 +19,12 @@
 		&-space-between {
 			justify-content: space-between;
 		}
+
+		&-stretch {
+			> * {
+				flex: 1;
+			}
+		}
 	}
 
 	&.vertical {

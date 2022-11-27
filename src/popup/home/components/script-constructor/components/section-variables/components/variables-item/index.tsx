@@ -1,5 +1,5 @@
 import { Button, Input, Row } from "common/components";
-import { Component } from "solid-js";
+import { Component, Show } from "solid-js";
 
 import { useScriptConstructor } from "../../../../context";
 import { ConstructorVariableItem } from "../../../../types";
@@ -11,7 +11,7 @@ interface VariablesItemProps {
 }
 
 const VariablesItem: Component<VariablesItemProps> = (props) => {
-	const { setVariable, removeVariable } = useScriptConstructor();
+	const { setVariable, removeVariable, variables } = useScriptConstructor();
 
 	const changeHandler =
 		(key: keyof ConstructorVariableItem) => (data: string) => {
@@ -26,8 +26,13 @@ const VariablesItem: Component<VariablesItemProps> = (props) => {
 		removeVariable(props.index);
 	};
 
+	const isLast = () => props.index === variables().length - 1;
+
 	return (
-		<Row verticalAlignment={Row.Alignment.Vertical.Center}>
+		<Row
+			verticalAlignment={Row.Alignment.Vertical.Center}
+			classList={{ [styles.last]: isLast() }}
+		>
 			<Input
 				class={styles.input}
 				type="text"
@@ -48,7 +53,16 @@ const VariablesItem: Component<VariablesItemProps> = (props) => {
 					changeHandler("value")(newValue)
 				}
 			/>
-			<Button onClick={removeHandler}>&times;</Button>
+			<Show when={!isLast()} keyed>
+				<Button light onClick={removeHandler}>
+					&times;
+				</Button>
+			</Show>
+			<Show when={isLast()} keyed>
+				<Button disabled classList={{ [styles.buttonPlaceholder]: true }}>
+					&times;
+				</Button>
+			</Show>
 		</Row>
 	);
 };
