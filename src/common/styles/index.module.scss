@@ -1,6 +1,7 @@
 @use 'variables';
+@use 'mixins';
 
-.chiller {
+@include mixins.chiller {
 	color: variables.$text;
 
 	button {
@@ -17,88 +18,34 @@
 		}
 	}
 
-	.button {
-		cursor: pointer;
+	input {
 		border: none;
-		background-color: variables.$button;
-		padding: 4px 8px;
-		color: variables.$text-inverted;
-		border-radius: 4px;
-
-		&:focus {
-			border: none;
-			outline: 2px solid variables.$button-outline;
-			outline-offset: -4px;
-		}
-
-		&:hover:not(.active) {
-			background-color: variables.$button-hovered
-		}
-
-		&.active {
-			cursor: not-allowed;
-			opacity: 0.56;
-		}
+		background: transparent;
 	}
 
 	select {
 		cursor: pointer;
 	}
-
-	@mixin with-placeholder($in-data: false) {
-		position: relative;
-
-		@if $in-data {
-			&::before {
-				color: variables.$text-placeholder;
-				content: attr(data-placeholder);
-			}
-		} @else {
-			&::placeholder {
-				color: variables.$text-placeholder;
-				content: attr(placeholder);
-			}
-		}
-
-		&:focus {
-			&::before, &::placeholder {
-				position: absolute;
-				top: 0;
-			}
-		}
-	}
-
-	input, textarea, select, .input-like {
-		cursor: text;
-		background-color: variables.$input;
-		padding: 12px;
-		border: none;
-		border-radius: 4px;
-		color: variables.$text;
-		resize: none;
-
-		&:focus {
-			outline: 1px solid variables.$primary
-		}
-
-		&:hover {
-			background-color: variables.$input-hover;
-		}
-
-		&[disabled] {
-			opacity: 0.5;
-		}
-
-		@include with-placeholder
-	}
-
-	div[data-placeholder] {
-		@include with-placeholder(true)
-	}
 }
 
-.form-row {
-	display: flex;
-	flex-direction: row;
-	gap: 8px;
+.input-like {
+	cursor: text;
+	background-color: variables.$input;
+	padding: 12px;
+	border: none;
+	border-radius: 4px;
+	color: variables.$text;
+	resize: none;
+
+	&:focus {
+		outline: 1px solid variables.$primary
+	}
+
+	&:hover {
+		background-color: variables.$input-hover;
+	}
+
+	&[disabled] {
+		opacity: 0.5;
+	}
 }

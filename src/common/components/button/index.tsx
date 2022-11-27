@@ -1,5 +1,6 @@
-import commonStyles from "common/styles/index.module.scss";
 import { JSX, ParentComponent } from "solid-js";
+
+import styles from "./index.module.scss";
 
 interface ButtonProps
 	extends Omit<JSX.ButtonHTMLAttributes<HTMLButtonElement>, "class"> {
@@ -9,7 +10,7 @@ interface ButtonProps
 const Button: ParentComponent<ButtonProps> = (props) => {
 	const classList = () => ({
 		...(props.classList ?? {}),
-		[commonStyles.button]: !props.notStyled,
+		[styles.button]: !props.notStyled,
 	});
 
 	return (

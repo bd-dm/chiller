@@ -1,4 +1,4 @@
-import { ParentComponent } from "solid-js";
+import { JSX, ParentComponent } from "solid-js";
 
 import styles from "./index.module.scss";
 
@@ -16,7 +16,7 @@ enum ColumnHorizontalAlignment {
 	Stretch = "Stretch",
 }
 
-interface ColumnProps {
+interface ColumnProps extends JSX.HTMLAttributes<HTMLDivElement> {
 	classList?: Record<string, boolean | undefined>;
 	verticalAlignment?: ColumnVerticalAlignment;
 	horizontalAlignment?: ColumnHorizontalAlignment;
@@ -33,6 +33,7 @@ interface ColumnInterface extends ParentComponent<ColumnProps> {
 const Column: ColumnInterface = (props) => {
 	return (
 		<div
+			{...props}
 			classList={{
 				[styles.column]: true,
 				[styles.gapLess]: props.gapLess,

@@ -1,3 +1,4 @@
+import { Input } from "common/components";
 import { Component } from "solid-js";
 
 import { ConstructorParamsInputProps } from "../../../../types";
@@ -6,7 +7,7 @@ const ParamsInputEnterChar: Component<
 	ConstructorParamsInputProps<"enterChar">
 > = (props) => {
 	return (
-		<input
+		<Input
 			type="text"
 			placeholder={"Character"}
 			maxLength={1}

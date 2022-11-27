@@ -122,7 +122,7 @@ const Select = <OptionType extends SelectOption = SelectOption>(
 			<div class={styles.select}>
 				<div
 					ref={setContentRef}
-					class={commonStyles.inputLike}
+					classList={{ [commonStyles.inputLike]: true, [styles.input]: true }}
 					onKeyDown={(e) => {
 						if (e.keyCode === KEY_DOWN_ARROW) {
 							focusNext(

@@ -1,3 +1,4 @@
+import { Input } from "common/components";
 import { ActionDynamicParamWithText } from "common/user-events";
 import { Component } from "solid-js";
 
@@ -7,7 +8,7 @@ const InputText: Component<InputExactTypeProps<ActionDynamicParamWithText>> = (
 	props
 ) => {
 	return (
-		<input
+		<Input
 			type="text"
 			placeholder={"Text"}
 			value={props.param.text ?? ""}

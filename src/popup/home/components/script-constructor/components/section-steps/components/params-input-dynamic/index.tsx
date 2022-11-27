@@ -1,4 +1,4 @@
-import { Row, Select } from "common/components";
+import { Input, Row, Select } from "common/components";
 import {
 	ActionDynamicParam,
 	ActionDynamicParamType,
@@ -54,7 +54,7 @@ const ParamsInputDynamic: Component<ParamsInputCommonProps> = (props) => {
 				/>
 			</div>
 			<div class={styles.input}>
-				<Switch fallback={<input type="text" disabled />}>
+				<Switch fallback={<Input type="text" disabled />}>
 					<Match
 						when={props.param?.type === ActionDynamicParamType.Variable}
 						keyed

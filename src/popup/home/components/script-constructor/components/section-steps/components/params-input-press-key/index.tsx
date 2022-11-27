@@ -1,4 +1,4 @@
-import { Row, Select, SelectOption } from "common/components";
+import { Input, Row, Select, SelectOption } from "common/components";
 import { PressKeyType } from "common/user-events/events";
 import { Component } from "solid-js";
 
@@ -25,7 +25,7 @@ const ParamsInputPressKey: Component<
 				initialValue={props.params?.type}
 				onChange={(value) => props.onChange({ ...props.params, type: value })}
 			/>
-			<input
+			<Input
 				type="text"
 				placeholder={"Key code"}
 				maxLength={3}
