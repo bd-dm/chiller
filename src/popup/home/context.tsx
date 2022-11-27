@@ -8,15 +8,13 @@ import {
 	useContext,
 } from "solid-js";
 import { ParentComponent } from "solid-js/types/render/component";
-import { getScripts, sendMessage } from "../../common";
-import { Script } from "../../common/scripts/types";
-import { MessageType } from "../../common/message-carrier/enums";
+import { getScripts, sendMessage, ScriptData, MessageType } from "../../common";
 import { Page } from "./enums";
 
 interface ContextValue {
 	page: Accessor<Page>;
 	setPage: Setter<Page>;
-	scripts: Resource<Script[]>;
+	scripts: Resource<ScriptData[]>;
 	updateScripts: VoidFunction;
 }
 

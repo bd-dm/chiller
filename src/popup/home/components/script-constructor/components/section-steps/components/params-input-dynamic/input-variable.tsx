@@ -1,12 +1,14 @@
 import { Component } from "solid-js";
-import { Select } from "../../../../../../../../common/components";
-import { ActionParamWithVariable } from "../../../../../../../../common/user-events/types";
+import {
+	Select,
+	ActionDynamicParamWithVariable,
+} from "../../../../../../../../common";
 import { useScriptConstructor } from "../../../../context";
 import { InputExactTypeProps } from "./types";
 
-const InputVariable: Component<InputExactTypeProps<ActionParamWithVariable>> = (
-	props
-) => {
+const InputVariable: Component<
+	InputExactTypeProps<ActionDynamicParamWithVariable>
+> = (props) => {
 	const { variables } = useScriptConstructor();
 
 	const variablesOptions = () =>

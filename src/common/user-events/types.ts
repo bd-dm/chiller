@@ -1,6 +1,3 @@
-import { ScriptVariables } from "../types";
-import { ActionTarget } from "./action-target";
-
 // eslint-disable-next-line @typescript-eslint/ban-types
 type DefaultParamsType = {};
 
@@ -8,57 +5,71 @@ type DefaultParamsType = {};
  * User event types
  */
 
+type UserEventVariable = string;
+type UserEventVariables = Record<string, UserEventVariable>;
+
 type UserEvent<ParamsType = DefaultParamsType> = (
 	tabId: chrome.tabs.Tab["id"],
 	options: {
 		params: ParamsType;
-		variables?: ScriptVariables;
+		variables?: UserEventVariables;
 	}
 ) => Promise<void>;
 
-type UserEventTargetParams = { target: ActionTarget };
-
-type UserEventWithTarget<ParamsType = DefaultParamsType> = UserEvent<
-	ParamsType & UserEventTargetParams
->;
-
 /**
- * Common config types
+ * Target element types
  */
 
-enum ActionParamType {
+type UserEventWithTarget<ParamsType = DefaultParamsType> = UserEvent<
+	ParamsType & {
+		target: ActionDynamicParamWithSelector | ActionDynamicParamWithVariable;
+	}
+>;
+
+interface TargetElementData<ElementType extends HTMLElement> {
+	element: ElementType;
+	iframe?: HTMLIFrameElement;
+}
+
+type GetTargetElementFn = <ElementType extends HTMLElement>(
+	target: ActionDynamicParam,
+	variables?: UserEventVariables
+) => TargetElementData<ElementType>;
+
+/**
+ * Action params
+ */
+
+enum ActionDynamicParamType {
 	Variable = "variable",
 	Text = "text",
 	Selector = "selector",
 }
 
-interface UseVariable {
-	use: string;
-}
-
-interface ActionParamEmpty {
+interface ActionDynamicParamEmpty {
 	type: null;
 }
 
-interface ActionParamWithVariable extends UseVariable {
-	type: ActionParamType.Variable;
+interface ActionDynamicParamWithVariable {
+	type: ActionDynamicParamType.Variable;
+	use: string;
 }
 
-interface ActionParamWithText {
-	type: ActionParamType.Text;
+interface ActionDynamicParamWithText {
+	type: ActionDynamicParamType.Text;
 	text: string;
 }
 
-interface ActionParamWithSelector {
-	type: ActionParamType.Selector;
+interface ActionDynamicParamWithSelector {
+	type: ActionDynamicParamType.Selector;
 	selector: string;
 }
 
-type ActionParam =
-	| ActionParamEmpty
-	| ActionParamWithVariable
-	| ActionParamWithText
-	| ActionParamWithSelector;
+type ActionDynamicParam =
+	| ActionDynamicParamEmpty
+	| ActionDynamicParamWithVariable
+	| ActionDynamicParamWithText
+	| ActionDynamicParamWithSelector;
 
 /**
  * Exports
@@ -66,13 +77,14 @@ type ActionParam =
 
 export type {
 	UserEvent,
-	UseVariable,
-	ActionParamWithVariable,
-	ActionParamWithText,
-	ActionParamWithSelector,
-	ActionParam,
-	UserEventTargetParams,
+	GetTargetElementFn,
+	TargetElementData,
+	ActionDynamicParamWithVariable,
+	ActionDynamicParamWithText,
+	ActionDynamicParamWithSelector,
+	ActionDynamicParam,
+	UserEventVariables,
 	UserEventWithTarget,
 };
 
-export { ActionParamType };
+export { ActionDynamicParamType };

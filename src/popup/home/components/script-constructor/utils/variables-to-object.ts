@@ -1,7 +1,9 @@
-import { ScriptVariables } from "../../../../../common/types";
-import { VariableInputItem } from "../types";
+import { ScriptVariables } from "../../../../../common";
+import { ConstructorVariableItem } from "../types";
 
-const variablesToObject = (variables: VariableInputItem[]): ScriptVariables => {
+const variablesToObject = (
+	variables: ConstructorVariableItem[]
+): ScriptVariables => {
 	const object: ScriptVariables = {};
 	variables.forEach(({ name, value }) => {
 		object[name] = value;

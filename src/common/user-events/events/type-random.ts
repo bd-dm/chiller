@@ -1,4 +1,4 @@
-import { UserEvent } from "../types";
+import { ActionDynamicParamType, UserEvent } from "../types";
 import { pickRandomFromArray } from "../utils";
 import { type } from "./type";
 
@@ -12,7 +12,9 @@ const typeRandom: UserEvent<TypeRandomParams> = (
 ) => {
 	const text = pickRandomFromArray(variants);
 
-	return type(tabId, { params: { text } });
+	return type(tabId, {
+		params: { text: { type: ActionDynamicParamType.Text, text } },
+	});
 };
 
 export { typeRandom };

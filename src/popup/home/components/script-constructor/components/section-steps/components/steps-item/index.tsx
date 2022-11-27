@@ -1,22 +1,25 @@
 import { Component, Show } from "solid-js";
-import { Column, Select } from "../../../../../../../../common/components";
+import { Column, Select } from "../../../../../../../../common";
 import styles from "./index.module.scss";
-import { ActionOption, StepInputItem } from "../../../../types";
+import {
+	ConstructorStepActionOption,
+	ConstructorStepItem,
+} from "../../../../types";
 import { actionOptions } from "../../../../action-variants";
 import { ParamsInput } from "../params-input";
 import { useScriptConstructor } from "../../../../context";
-import { UserEventAction } from "../../../../../../../../common/user-events";
 
 interface StepsItemProps {
 	index: number;
-	step: StepInputItem;
+	step: ConstructorStepItem;
 }
 
 const StepsItem: Component<StepsItemProps> = (props) => {
 	const { setStep } = useScriptConstructor();
 
 	const changeHandler =
-		(key: keyof StepInputItem) => (data: StepInputItem[typeof key] | null) => {
+		(key: keyof ConstructorStepItem) =>
+		(data: ConstructorStepItem[typeof key] | null) => {
 			setStep(props.index, {
 				action: props.step.action,
 				params: props.step.params,
@@ -30,7 +33,7 @@ const StepsItem: Component<StepsItemProps> = (props) => {
 			classList={{ [styles.item]: true }}
 		>
 			<h4 class={styles.title}>Step {props.index + 1}</h4>
-			<Select<ActionOption>
+			<Select<ConstructorStepActionOption>
 				placeholder={"Select action..."}
 				onChange={changeHandler("action")}
 				initialValue={props.step.action}
@@ -38,7 +41,7 @@ const StepsItem: Component<StepsItemProps> = (props) => {
 			/>
 			<Show when={props.step.action} keyed>
 				<ParamsInput
-					action={props.step.action as UserEventAction}
+					action={props.step.action!}
 					initialValue={props.step.params}
 					onChange={changeHandler("params")}
 				/>

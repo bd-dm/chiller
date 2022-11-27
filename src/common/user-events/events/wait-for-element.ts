@@ -1,5 +1,5 @@
 import { UserEventWithTarget } from "../types";
-import { getTargetElement } from "../action-target";
+import { getTargetElement } from "../utils";
 
 interface WaitForElementParams {
 	timeout?: number;

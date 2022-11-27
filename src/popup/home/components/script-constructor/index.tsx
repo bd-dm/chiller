@@ -1,8 +1,8 @@
 import { Component } from "solid-js";
-import { Column } from "../../../../common/components";
 import styles from "./index.module.scss";
 import { BodyConstructor, NameInput, SaveButton } from "./components";
 import { ScriptConstructorContext } from "./context";
+import { Column } from "../../../../common";
 import { ScriptConstructorProps } from "./types";
 
 const ScriptConstructor: Component<ScriptConstructorProps> = (props) => {

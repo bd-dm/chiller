@@ -1,10 +1,10 @@
 import { Component } from "solid-js";
-import { ActionParamWithSelector } from "../../../../../../../../common/user-events/types";
+import { ActionDynamicParamWithSelector } from "../../../../../../../../common";
 import { InputExactTypeProps } from "./types";
 
-const InputSelector: Component<InputExactTypeProps<ActionParamWithSelector>> = (
-	props
-) => {
+const InputSelector: Component<
+	InputExactTypeProps<ActionDynamicParamWithSelector>
+> = (props) => {
 	return (
 		<input
 			type="text"

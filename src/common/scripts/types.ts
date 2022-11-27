@@ -1,8 +1,29 @@
-interface Script {
+import {
+	UserEventAction,
+	UserEventParams,
+	UserEventVariables,
+} from "../user-events";
+
+interface ScriptData {
 	id: string;
 	name: string;
 	json: string;
 	addedTimestamp: number;
 }
 
-export type { Script };
+interface ScriptBody {
+	variables: ScriptVariables;
+	steps: ScriptSteps;
+}
+
+interface ScriptStep<
+	UserEventActionType extends UserEventAction = UserEventAction
+> {
+	action: UserEventActionType;
+	params: UserEventParams<UserEventActionType>;
+}
+type ScriptSteps = ScriptStep[];
+
+type ScriptVariables = UserEventVariables;
+
+export type { ScriptData, ScriptBody, ScriptStep, ScriptVariables };

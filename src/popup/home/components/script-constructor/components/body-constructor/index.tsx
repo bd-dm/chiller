@@ -1,5 +1,5 @@
 import { Component } from "solid-js";
-import { Button, Column } from "../../../../../../common/components";
+import { Button, Column } from "../../../../../../common";
 import { BodyConstructorSection } from "../body-constructor-section";
 import { SectionVariables } from "../section-variables";
 import { SectionSteps } from "../section-steps";

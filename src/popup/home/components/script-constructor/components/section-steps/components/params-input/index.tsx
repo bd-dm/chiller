@@ -1,17 +1,31 @@
-import { Component } from "solid-js";
-import { ActionParamsChangeHandler, StepInputItem } from "../../../../types";
+import { JSXElement } from "solid-js";
+import {
+	ConstructorStepParamsChangeHandler,
+	ConstructorStepItemAction,
+	ConstructorStepItemParams,
+} from "../../../../types";
 import { Dynamic } from "solid-js/web";
 import { getActionParamsComponents } from "../../../../action-variants";
 
-interface ParamsInputProps {
-	action: NonNullable<StepInputItem["action"]>;
-	initialValue?: StepInputItem["params"];
-	onChange: (params: StepInputItem["params"]) => void;
+interface ConstructorParamsInputSwitchProps<
+	ActionType extends ConstructorStepItemAction
+> {
+	action: NonNullable<ActionType>;
+	initialValue?: ConstructorStepItemParams<NonNullable<ActionType>>;
+	onChange: (
+		params: ConstructorStepItemParams<NonNullable<ActionType>>
+	) => void;
 }
 
-const ParamsInput: Component<ParamsInputProps> = (props) => {
-	const changeHandler: ActionParamsChangeHandler = (params) => {
-		props.onChange(params);
+const ParamsInput = <ActionType extends ConstructorStepItemAction>(
+	props: ConstructorParamsInputSwitchProps<ActionType>
+): JSXElement => {
+	const changeHandler: ConstructorStepParamsChangeHandler<
+		NonNullable<ActionType>
+	> = (params) => {
+		props.onChange(
+			params as ConstructorStepItemParams<NonNullable<ActionType>>
+		);
 	};
 
 	return (

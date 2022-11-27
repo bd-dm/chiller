@@ -1,12 +1,11 @@
 import { Component } from "solid-js";
-import { Script } from "../../../../common/scripts/types";
 import styles from "./index.module.scss";
-import { scriptRunner } from "../../../../common";
-import { useCoreContext } from "../../../contexts";
-import { Button, Row } from "../../../../common/components";
+import { ScriptData, scriptRunner } from "../../../../common";
+import { Button, Row } from "../../../../common";
+import { useCoreContext } from "../../../context";
 
 interface ScriptsItemProps {
-	script: Script;
+	script: ScriptData;
 }
 
 const ScriptsItem: Component<ScriptsItemProps> = (props) => {

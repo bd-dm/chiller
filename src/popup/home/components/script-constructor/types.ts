@@ -1,58 +1,64 @@
-import { Script } from "../../../../common/scripts/types";
-import { ScriptStep } from "../../../../common/types";
-import { UserEventAction } from "../../../../common/user-events";
-import { Component } from "solid-js";
-import { ActionParam } from "../../../../common/user-events/types";
+import {
+	ActionDynamicParam,
+	ScriptData,
+	ScriptStep,
+	UserEventAction,
+} from "../../../../common";
 
 interface ScriptConstructorProps {
-	scriptId?: Script["id"];
-	onResult?: (result: Script) => void;
+	scriptId?: ScriptData["id"];
+	onResult?: (result: ScriptData) => void;
 }
 
-interface VariableInputItem {
+interface ConstructorVariableItem {
 	name: string;
 	value: string;
 }
+type ConstructorVariableItems = ConstructorVariableItem[];
 
-type StepInputItem<ActionType extends UserEventAction = UserEventAction> =
+type ConstructorStepItem<ActionType extends UserEventAction = UserEventAction> =
 	Partial<ScriptStep<ActionType>>;
+type ConstructorStepItemAction<
+	ActionType extends UserEventAction = UserEventAction
+> = ConstructorStepItem<ActionType>["action"];
+type ConstructorStepItemParams<
+	ActionType extends UserEventAction = UserEventAction
+> = ConstructorStepItem<ActionType>["params"];
+type ConstructorStepItems = ConstructorStepItem[];
 
-interface ActionOption {
-	value: NonNullable<StepInputItem["action"]>;
+interface ConstructorStepActionOption {
+	value: NonNullable<ConstructorStepItemAction>;
 	name: string;
 }
 
-type ActionParamsChangeHandler = (
-	params: Record<keyof StepInputItem["params"], ActionParam>
+type ConstructorStepParamsChangeHandler<
+	ActionType extends UserEventAction = UserEventAction
+> = (
+	params: Record<
+		keyof ConstructorStepItemParams<ActionType>,
+		ConstructorStepItemParams<ActionType>
+	>
 ) => void;
-type ActionParamChangeHandler = (param: ActionParam) => void;
+type ConstructorStepParamChangeHandler = (param: ActionDynamicParam) => void;
 
-interface ActionParamsComponentProps<
-	ParamsType extends StepInputItem["params"] = StepInputItem["params"]
+interface ConstructorParamsInputProps<
+	ActionType extends UserEventAction = UserEventAction
 > {
-	action: NonNullable<StepInputItem["action"]>;
-	params?: ParamsType;
-	onChange: ActionParamsChangeHandler;
+	action: NonNullable<ConstructorStepItemAction>;
+	params?: ConstructorStepItemParams<ActionType>;
+	onChange: ConstructorStepParamsChangeHandler<ActionType>;
 }
-
-interface ActionParamCommonProps<ParamType extends ActionParam = ActionParam> {
-	action: NonNullable<StepInputItem["action"]>;
-	param?: ParamType;
-	onChange: ActionParamChangeHandler;
-}
-
-type GetActionParamsComponentsMap = (
-	action: NonNullable<StepInputItem["action"]>
-) => Component<ActionParamsComponentProps> | undefined;
 
 export type {
-	ActionOption,
 	ScriptConstructorProps,
-	VariableInputItem,
-	GetActionParamsComponentsMap,
-	ActionParamChangeHandler,
-	ActionParamCommonProps,
-	StepInputItem,
-	ActionParamsComponentProps,
-	ActionParamsChangeHandler,
+	ConstructorStepActionOption,
+	ConstructorVariableItem,
+	ConstructorVariableItems,
+	ConstructorStepParamChangeHandler,
+	ConstructorStepItem,
+	ConstructorStepItemAction,
+	ConstructorStepItemParams,
+	ConstructorStepItems,
+	ConstructorParamsInputProps,
+	ConstructorStepParamsChangeHandler,
 };

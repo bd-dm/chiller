@@ -1,7 +1,6 @@
 import { Component } from "solid-js";
-import { Button, Column, Row } from "../../../../common/components";
-import { sendMessage } from "../../../../common";
-import { MessageType } from "../../../../common/message-carrier/enums";
+import { Button, Column, Row } from "../../../../common";
+import { sendMessage, MessageType } from "../../../../common";
 import { useHomeContext } from "../../context";
 import styles from "./index.module.scss";
 import commonStyles from "../../../../common/styles/index.module.scss";

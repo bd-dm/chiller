@@ -1,5 +1,5 @@
 import { Component, Index } from "solid-js";
-import { Column } from "../../../../../../common/components";
+import { Column } from "../../../../../../common";
 import { useScriptConstructor } from "../../context";
 import { StepsItem } from "./components";
 

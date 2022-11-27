@@ -1,11 +1,11 @@
 import { StorageKeys } from "./enums";
-import { Script } from "../scripts/types";
+import { ScriptData } from "../scripts";
 
 type ArrayStorageKeys = StorageKeys.Scripts | StorageKeys.InjectedTabs;
 
 type ArrayStorageItemType<Key extends ArrayStorageKeys> =
 	Key extends StorageKeys.Scripts
-		? Script
+		? ScriptData
 		: Key extends StorageKeys.InjectedTabs
 		? chrome.tabs.Tab["id"]
 		: never;

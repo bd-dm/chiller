@@ -1,5 +1,5 @@
 import { ParentComponent } from "solid-js/types/render/component";
-import { Column, Row } from "../../../../../../common/components";
+import { Column, Row } from "../../../../../../common";
 import styles from "./index.module.scss";
 import { JSXElement } from "solid-js";
 

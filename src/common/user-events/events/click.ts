@@ -1,7 +1,6 @@
-import { sendMessage } from "../../message-carrier";
-import { MessageType } from "../../message-carrier/enums";
+import { sendMessage, MessageType } from "../../message-carrier";
 import { UserEventWithTarget } from "../types";
-import { getTargetElement } from "../action-target";
+import { getTargetElement } from "../utils";
 
 const click: UserEventWithTarget = async (
 	tabId,

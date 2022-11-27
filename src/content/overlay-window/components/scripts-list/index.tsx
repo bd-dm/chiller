@@ -1,8 +1,8 @@
 import { Component, For } from "solid-js";
-import { useCoreContext } from "../../../contexts";
 import styles from "./index.module.scss";
 import { ScriptsItem } from "../scripts-item";
-import { EmptyScripts } from "../../../../common/components";
+import { EmptyScripts } from "../../../../common";
+import { useCoreContext } from "../../../context";
 
 const ScriptsList: Component = () => {
 	const { scripts } = useCoreContext();

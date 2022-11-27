@@ -9,14 +9,17 @@ import {
 	Resource,
 } from "solid-js";
 import { ParentComponent } from "solid-js/types/render/component";
-import { sendMessage, getScripts } from "../../../common";
-import { MessageType } from "../../../common/message-carrier/enums";
-import { ContextType } from "../types";
-import { Script } from "../../../common/scripts/types";
+import {
+	sendMessage,
+	getScripts,
+	ScriptData,
+	ContextType,
+	MessageType,
+} from "../common";
 
 interface CoreContextValue {
 	currentTab: Accessor<chrome.tabs.Tab>;
-	scripts: Resource<Script[]>;
+	scripts: Resource<ScriptData[]>;
 }
 
 const Context = createContext<CoreContextValue>();

@@ -1,9 +1,9 @@
 import { isNull } from "lodash-es";
-import { ElementData } from "../types";
+import { TargetElementData } from "../types";
 
-const getElementBySelector = <ElementType extends HTMLElement>(
+const getTargetElementBySelector = <ElementType extends HTMLElement>(
 	selector: string
-): ElementData<ElementType> | null => {
+): TargetElementData<ElementType> | null => {
 	const element = document.querySelector<ElementType>(selector);
 
 	if (isNull(element)) {
@@ -33,4 +33,4 @@ const getElementBySelector = <ElementType extends HTMLElement>(
 	return { element };
 };
 
-export { getElementBySelector };
+export { getTargetElementBySelector };

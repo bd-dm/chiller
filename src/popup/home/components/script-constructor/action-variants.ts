@@ -1,10 +1,19 @@
-import { GetActionParamsComponentsMap, ActionOption } from "./types";
+import {
+	ConstructorStepActionOption,
+	ConstructorParamsInputProps,
+	ConstructorStepItemAction,
+} from "./types";
 import {
 	ParamsInputClick,
 	ParamsInputType,
 } from "./components/section-steps/components";
+import { Component } from "solid-js";
 
-const actionOptions: ActionOption[] = [
+type GetActionParamsComponentsMap = (
+	action: NonNullable<ConstructorStepItemAction>
+) => Component<ConstructorParamsInputProps> | undefined;
+
+const actionOptions: ConstructorStepActionOption[] = [
 	{ value: "click", name: "Click" },
 	// { value: "pressKey", name: "Press Key" }, TODO implement press key params input
 	{ value: "type", name: "Type string" },

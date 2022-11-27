@@ -1,16 +1,15 @@
-import { Component } from "solid-js";
+import { Component, JSXElement } from "solid-js";
 import {
-	ActionParamChangeHandler,
-	ActionParamsComponentProps,
+	ConstructorStepParamChangeHandler,
+	ConstructorParamsInputProps,
 } from "../../../../types";
-import { ParamsInputCommon } from "../params-input-common";
-import {
-	ActionParam,
-	ActionParamType,
-} from "../../../../../../../../common/user-events/types";
+import { ParamsInputDynamic } from "../params-input-dynamic";
+import { ActionDynamicParamType } from "../../../../../../../../common";
 
-const ParamsInputClick: Component<ActionParamsComponentProps> = (props) => {
-	const changeHandler: ActionParamChangeHandler = (newParam) => {
+const ParamsInputClick: Component<ConstructorParamsInputProps<"click">> = (
+	props
+): JSXElement => {
+	const changeHandler: ConstructorStepParamChangeHandler = (newParam) => {
 		props.onChange({
 			...props.params,
 			target: newParam,
@@ -19,9 +18,12 @@ const ParamsInputClick: Component<ActionParamsComponentProps> = (props) => {
 
 	return (
 		<>
-			<ParamsInputCommon
-				availableOptions={[ActionParamType.Variable, ActionParamType.Selector]}
-				param={props.params?.target as ActionParam | undefined}
+			<ParamsInputDynamic
+				availableOptions={[
+					ActionDynamicParamType.Variable,
+					ActionDynamicParamType.Selector,
+				]}
+				param={props.params?.target}
 				onChange={changeHandler}
 			/>
 		</>

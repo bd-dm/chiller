@@ -1,5 +1,5 @@
 import { Component, Index } from "solid-js";
-import { Column } from "../../../../../../common/components";
+import { Column } from "../../../../../../common";
 import { VariablesItem } from "./components";
 import { useScriptConstructor } from "../../context";
 

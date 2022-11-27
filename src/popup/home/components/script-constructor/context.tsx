@@ -8,29 +8,32 @@ import {
 	useContext,
 } from "solid-js";
 import { ParentComponent } from "solid-js/types/render/component";
-import { Script } from "../../../../common/scripts/types";
-import { ContextType } from "../../../../content/contexts/types";
-import { ScriptBody } from "../../../../common/types";
 import { isUndefined } from "lodash-es";
-import { getScript } from "../../../../common/scripts/get-script";
 import { nanoid } from "nanoid";
 import {
+	ConstructorStepItem,
+	ConstructorStepItems,
+	ConstructorVariableItem,
+	ConstructorVariableItems,
 	ScriptConstructorProps,
-	StepInputItem,
-	VariableInputItem,
 } from "./types";
 import { variablesToArray, variablesToObject } from "./utils";
-import { ActionTargetType } from "../../../../common/user-events/action-target";
-import { ActionParamType } from "../../../../common/user-events/types";
+import {
+	ActionDynamicParamType,
+	ContextType,
+	ScriptBody,
+	ScriptData,
+	getScript,
+} from "../../../../common";
 
 interface ScriptConstructorContextValue {
 	id: Accessor<string>;
 	name: Accessor<string>;
-	variables: Accessor<VariableInputItem[]>;
-	setVariable: (index: number, item: VariableInputItem) => void;
+	variables: Accessor<ConstructorVariableItems>;
+	setVariable: (index: number, item: ConstructorVariableItem) => void;
 	addVariable: () => void;
-	steps: Accessor<StepInputItem[]>;
-	setStep: (index: number, item: StepInputItem) => void;
+	steps: Accessor<ConstructorStepItems>;
+	setStep: (index: number, item: ConstructorStepItem) => void;
 	addStep: () => void;
 	setName: Setter<string>;
 	save?: () => void;
@@ -43,17 +46,21 @@ const ScriptConstructorContextProvider: ParentComponent<
 > = (props) => {
 	const [id, setId] = createSignal("");
 	const [name, setName] = createSignal("");
-	const [variables, setVariables] = createSignal<VariableInputItem[]>([
+	const [variables, setVariables] = createSignal<ConstructorVariableItems>([
 		{ name: "test", value: "test val" },
 	]);
-	const [steps, setSteps] = createSignal<StepInputItem[]>([
+	const [steps, setSteps] = createSignal<ConstructorStepItems>([
 		{
 			action: "click",
-			params: { target: { type: ActionTargetType.Variable, use: "test" } },
+			params: {
+				target: { type: ActionDynamicParamType.Variable, use: "test" },
+			},
 		},
 		{
 			action: "type",
-			params: { text: { type: ActionParamType.Variable, use: "test text" } },
+			params: {
+				text: { type: ActionDynamicParamType.Text, text: "test text" },
+			},
 		},
 	]);
 
@@ -70,7 +77,7 @@ const ScriptConstructorContextProvider: ParentComponent<
 		}
 	});
 
-	const restoreScript = (script: Script): void => {
+	const restoreScript = (script: ScriptData): void => {
 		setId(script.id);
 		setName(script.name);
 
@@ -105,7 +112,7 @@ const ScriptConstructorContextProvider: ParentComponent<
 		});
 	};
 
-	const setVariable = (index: number, item: VariableInputItem): void => {
+	const setVariable = (index: number, item: ConstructorVariableItem): void => {
 		setVariables((prevVariables) => {
 			prevVariables[index] = item;
 			return [...prevVariables];
@@ -119,7 +126,7 @@ const ScriptConstructorContextProvider: ParentComponent<
 		]);
 	};
 
-	const setStep = (index: number, item: StepInputItem): void => {
+	const setStep = (index: number, item: ConstructorStepItem): void => {
 		setSteps((prevSteps) => {
 			prevSteps[index] = item;
 			return [...prevSteps];

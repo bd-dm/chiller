@@ -1,11 +1,10 @@
-import { Script } from "./types";
+import { ScriptBody, ScriptData } from "./types";
 import { getScript } from "./get-script";
-import { ScriptBody } from "../types";
 import { userEvents } from "../user-events";
 
 const scriptRunner = async (
 	tabId: chrome.tabs.Tab["id"],
-	scriptId: Script["id"]
+	scriptId: ScriptData["id"]
 ) => {
 	const script = await getScript(scriptId);
 	const { steps, variables } = JSON.parse(script.json) as ScriptBody;

@@ -1,16 +1,15 @@
 import { Component } from "solid-js";
 import {
-	ActionParamChangeHandler,
-	ActionParamsComponentProps,
+	ConstructorStepParamChangeHandler,
+	ConstructorParamsInputProps,
 } from "../../../../types";
-import { ParamsInputCommon } from "../params-input-common";
-import {
-	ActionParam,
-	ActionParamType,
-} from "../../../../../../../../common/user-events/types";
+import { ParamsInputDynamic } from "../params-input-dynamic";
+import { ActionDynamicParamType } from "../../../../../../../../common";
 
-const ParamsInputType: Component<ActionParamsComponentProps> = (props) => {
-	const changeHandler: ActionParamChangeHandler = (newParam) => {
+const ParamsInputType: Component<ConstructorParamsInputProps<"type">> = (
+	props
+) => {
+	const changeHandler: ConstructorStepParamChangeHandler = (newParam) => {
 		props.onChange({
 			...props.params,
 			text: newParam,
@@ -19,9 +18,12 @@ const ParamsInputType: Component<ActionParamsComponentProps> = (props) => {
 
 	return (
 		<>
-			<ParamsInputCommon
-				availableOptions={[ActionParamType.Variable, ActionParamType.Text]}
-				param={props.params?.text as ActionParam | undefined}
+			<ParamsInputDynamic
+				availableOptions={[
+					ActionDynamicParamType.Variable,
+					ActionDynamicParamType.Text,
+				]}
+				param={props.params?.text}
 				onChange={changeHandler}
 			/>
 		</>

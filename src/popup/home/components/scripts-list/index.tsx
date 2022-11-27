@@ -2,7 +2,7 @@ import { Component, For } from "solid-js";
 import styles from "./index.module.scss";
 import { useHomeContext } from "../../context";
 import { ScriptsItem } from "../scripts-item";
-import { EmptyScripts } from "../../../../common/components";
+import { EmptyScripts } from "../../../../common";
 
 const ScriptsList: Component = () => {
 	const { scripts } = useHomeContext();

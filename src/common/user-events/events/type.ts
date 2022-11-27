@@ -1,9 +1,13 @@
-import { ActionParam, UserEvent } from "../types";
+import {
+	ActionDynamicParamWithText,
+	ActionDynamicParamWithVariable,
+	UserEvent,
+} from "../types";
 import { enterChar } from "./enter-char";
 import { getActionParamValue } from "../utils";
 
 interface TypeParams {
-	text: ActionParam;
+	text: ActionDynamicParamWithVariable | ActionDynamicParamWithText;
 }
 
 const type: UserEvent<TypeParams> = async (

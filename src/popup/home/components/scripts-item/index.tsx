@@ -1,15 +1,15 @@
 import { Component, createSignal, Show } from "solid-js";
 import styles from "./index.module.scss";
 import commonStyles from "../../../../common/styles/index.module.scss";
-import { Script } from "../../../../common/scripts/types";
+import { ScriptData } from "../../../../common";
 import { removeScript, updateScript } from "../../../../common";
 import { useHomeContext } from "../../context";
 import { ScriptConstructor } from "../script-constructor";
-import { Button, Column, Row } from "../../../../common/components";
+import { Button, Column, Row } from "../../../../common";
 import { Page } from "../../enums";
 
 interface ScriptsItemProps {
-	script: Script;
+	script: ScriptData;
 }
 
 const ScriptsItem: Component<ScriptsItemProps> = (props) => {
@@ -25,7 +25,7 @@ const ScriptsItem: Component<ScriptsItemProps> = (props) => {
 		setIsEdit(!isEdit());
 	};
 
-	const saveHandler = async (script: Script) => {
+	const saveHandler = async (script: ScriptData) => {
 		await updateScript(script);
 		setPage(Page.ScriptList);
 		updateScripts();
