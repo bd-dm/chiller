@@ -1,5 +1,5 @@
 import { Button, Input, Row } from "common/components";
-import { Component } from "solid-js";
+import { Component, Show } from "solid-js";
 
 import { useScriptConstructor } from "../../../../context";
 import { ConstructorVariableItem } from "../../../../types";
@@ -11,7 +11,7 @@ interface VariablesItemProps {
 }
 
 const VariablesItem: Component<VariablesItemProps> = (props) => {
-	const { setVariable, removeVariable } = useScriptConstructor();
+	const { setVariable, removeVariable, variables } = useScriptConstructor();
 
 	const changeHandler =
 		(key: keyof ConstructorVariableItem) => (data: string) => {
@@ -25,6 +25,8 @@ const VariablesItem: Component<VariablesItemProps> = (props) => {
 	const removeHandler = () => {
 		removeVariable(props.index);
 	};
+
+	const isRemovable = () => props.index < variables().length - 1;
 
 	return (
 		<Row verticalAlignment={Row.Alignment.Vertical.Center}>
@@ -48,7 +50,16 @@ const VariablesItem: Component<VariablesItemProps> = (props) => {
 					changeHandler("value")(newValue)
 				}
 			/>
-			<Button onClick={removeHandler}>&times;</Button>
+			<Show when={isRemovable()} keyed>
+				<Button light onClick={removeHandler}>
+					&times;
+				</Button>
+			</Show>
+			<Show when={!isRemovable()} keyed>
+				<Button disabled classList={{ [styles.buttonPlaceholder]: true }}>
+					&times;
+				</Button>
+			</Show>
 		</Row>
 	);
 };

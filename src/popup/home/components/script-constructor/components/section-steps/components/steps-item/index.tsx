@@ -42,7 +42,9 @@ const StepsItem: Component<StepsItemProps> = (props) => {
 			<Row horizontalAlignment={Row.Alignment.Horizontal.SpaceBetween}>
 				<h4 class={styles.title}>Step {props.index + 1}</h4>
 				<Show when={isRemovable()} keyed>
-					<Button onClick={removeHandler}>&times;</Button>
+					<Button light onClick={removeHandler}>
+						&times;
+					</Button>
 				</Show>
 			</Row>
 			<Select<ConstructorStepActionOption>

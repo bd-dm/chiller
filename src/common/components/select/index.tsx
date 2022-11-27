@@ -145,7 +145,13 @@ const Select = <OptionType extends SelectOption = SelectOption>(
 				<div class={styles.suggestionsWrapper}>
 					<div class={styles.suggestions}>
 						<ul class={styles.suggestionsList} ref={setListRef}>
-							<For each={filteredOptions()}>
+							<For
+								each={
+									manualInput() === deferredManualInput()
+										? props.options
+										: filteredOptions()
+								}
+							>
 								{({ value: itemValue, name }, index) => (
 									<li class={styles.item}>
 										<Button
