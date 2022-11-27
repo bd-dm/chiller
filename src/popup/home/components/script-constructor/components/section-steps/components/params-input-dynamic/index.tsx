@@ -56,11 +56,7 @@ const ParamsInputDynamic: Component<ParamsInputCommonProps> = (props) => {
 				/>
 			</div>
 			<div class={styles.input}>
-				<Switch
-					fallback={
-						<input type="text" disabled placeholder={"[Not available]"} />
-					}
-				>
+				<Switch fallback={<input type="text" disabled />}>
 					<Match
 						when={props.param?.type === ActionDynamicParamType.Variable}
 						keyed

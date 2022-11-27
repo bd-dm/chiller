@@ -27,14 +27,20 @@ const Select = <OptionType extends SelectOption = SelectOption>(
 	const getOption = (value: OptionType["value"] | null): OptionType | null => {
 		return props.options.find((option) => option.value === value) ?? null;
 	};
+	const getValueWithFallback = () =>
+		getOption(props.initialValue ?? null)?.value ?? null;
 
 	const [value, setValue] = createSignal<OptionType["value"] | null>(
-		getOption(props.initialValue ?? null)?.value ?? null
+		getValueWithFallback()
 	);
 	const [manualInput, setManualInput] = createSignal("");
 	const [deferredManualInput, setDeferredManualInput] = createSignal("");
 	const [contentRef, setContentRef] = createSignal<HTMLDivElement>();
 	const [listRef, setListRef] = createSignal<HTMLUListElement>();
+
+	createEffect(() => {
+		setValue(getValueWithFallback());
+	});
 
 	const currentOption = () => getOption(value());
 	const filteredOptions = () =>
