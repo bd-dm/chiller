@@ -17,16 +17,14 @@ const ParamsInputType: Component<ConstructorParamsInputProps<"type">> = (
 	};
 
 	return (
-		<>
-			<ParamsInputDynamic
-				availableOptions={[
-					ActionDynamicParamType.Variable,
-					ActionDynamicParamType.Text,
-				]}
-				param={props.params?.text}
-				onChange={changeHandler}
-			/>
-		</>
+		<ParamsInputDynamic
+			availableOptions={[
+				ActionDynamicParamType.Variable,
+				ActionDynamicParamType.Text,
+			]}
+			param={props.params?.text}
+			onChange={changeHandler}
+		/>
 	);
 };
 

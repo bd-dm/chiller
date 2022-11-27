@@ -6,13 +6,13 @@ interface WaitForElementParams {
 }
 
 const POLL_INTERVAL = 100;
-const TIMEOUT = 10000;
+const WAIT_FOR_ELEMENT_TIMEOUT = 10000;
 
 const waitForElement: UserEventWithTarget<WaitForElementParams> = async (
 	_tabId,
 	{ params: { target, timeout: timeoutParam }, variables }
 ): Promise<void> => {
-	const timeout = timeoutParam ?? TIMEOUT;
+	const timeout = timeoutParam ?? WAIT_FOR_ELEMENT_TIMEOUT;
 
 	return new Promise((resolve, reject) => {
 		const startTime = new Date().getTime();
@@ -34,4 +34,4 @@ const waitForElement: UserEventWithTarget<WaitForElementParams> = async (
 	});
 };
 
-export { waitForElement };
+export { waitForElement, WAIT_FOR_ELEMENT_TIMEOUT };

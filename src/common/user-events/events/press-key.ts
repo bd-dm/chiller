@@ -1,5 +1,4 @@
-import { sendMessage } from "../../message-carrier";
-import { MessageType } from "../../message-carrier/enums";
+import { sendMessage, MessageType } from "../../message-carrier";
 import { UserEvent } from "../types";
 import { isUndefined } from "lodash-es";
 
@@ -27,6 +26,8 @@ interface PressKeyParams {
 	commands?: string;
 	windowsVirtualKeyCode?: number;
 	nativeVirtualKeyCode?: number;
+	/** Used to press key only by code */
+	keyCode?: number;
 }
 
 const pressKey: UserEvent<PressKeyParams> = async (
@@ -42,6 +43,7 @@ const pressKey: UserEvent<PressKeyParams> = async (
 			commands,
 			windowsVirtualKeyCode,
 			nativeVirtualKeyCode,
+			keyCode,
 		},
 	}
 ): Promise<void> => {
@@ -75,6 +77,12 @@ const pressKey: UserEvent<PressKeyParams> = async (
 	}
 	if (modifiers !== 0) {
 		commandParams.modifiers = modifiers;
+	}
+
+	if (!isUndefined(keyCode)) {
+		commandParams.windowsVirtualKeyCode = keyCode;
+		commandParams.nativeVirtualKeyCode = keyCode;
+		commandParams.code = keyCode;
 	}
 
 	await sendMessage(MessageType.SendDebuggerCommand, {

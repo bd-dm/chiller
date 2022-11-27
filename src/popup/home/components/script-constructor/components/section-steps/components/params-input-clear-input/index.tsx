@@ -6,9 +6,9 @@ import {
 import { ParamsInputDynamic } from "../params-input-dynamic";
 import { ActionDynamicParamType } from "../../../../../../../../common";
 
-const ParamsInputClick: Component<ConstructorParamsInputProps<"click">> = (
-	props
-): JSXElement => {
+const ParamsInputClearInput: Component<
+	ConstructorParamsInputProps<"clearInput">
+> = (props): JSXElement => {
 	const changeHandler: ConstructorStepParamChangeHandler = (newParam) => {
 		props.onChange({
 			...props.params,
@@ -28,4 +28,4 @@ const ParamsInputClick: Component<ConstructorParamsInputProps<"click">> = (
 	);
 };
 
-export { ParamsInputClick };
+export { ParamsInputClearInput };

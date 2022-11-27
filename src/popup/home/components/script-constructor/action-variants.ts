@@ -4,21 +4,29 @@ import {
 	ConstructorStepItemAction,
 } from "./types";
 import {
+	ParamsInputClearInput,
 	ParamsInputClick,
+	ParamsInputEnterChar,
+	ParamsInputPressKey,
+	ParamsInputSleep,
 	ParamsInputType,
-} from "./components/section-steps/components";
+	ParamsInputTypeRandom,
+	ParamsInputWaitForElement,
+} from "./components";
 import { Component } from "solid-js";
 
-type GetActionParamsComponentsMap = (
-	action: NonNullable<ConstructorStepItemAction>
-) => Component<ConstructorParamsInputProps> | undefined;
+type GetActionParamsComponentsMap<
+	ActionType extends ConstructorStepItemAction = ConstructorStepItemAction
+> = (
+	action: NonNullable<ActionType>
+) => Component<ConstructorParamsInputProps<NonNullable<ActionType>>>;
 
 const actionOptions: ConstructorStepActionOption[] = [
 	{ value: "click", name: "Click" },
 	// { value: "pressKey", name: "Press Key" }, TODO implement press key params input
 	{ value: "type", name: "Type string" },
 	{ value: "typeRandom", name: "Type random string from list" },
-	{ value: "enterChar", name: "Enter char" },
+	{ value: "enterChar", name: "Enter character" },
 	{ value: "waitForElement", name: "Wait for element" },
 	{ value: "clearInput", name: "Clear input" },
 	{ value: "sleep", name: "Sleep" },
@@ -26,14 +34,29 @@ const actionOptions: ConstructorStepActionOption[] = [
 
 const getActionParamsComponents: GetActionParamsComponentsMap = (action) => {
 	switch (action) {
+		case "clearInput": {
+			return ParamsInputClearInput;
+		}
 		case "click": {
 			return ParamsInputClick;
+		}
+		case "enterChar": {
+			return ParamsInputEnterChar;
+		}
+		case "pressKey": {
+			return ParamsInputPressKey;
+		}
+		case "sleep": {
+			return ParamsInputSleep;
 		}
 		case "type": {
 			return ParamsInputType;
 		}
-		default: {
-			return undefined;
+		case "typeRandom": {
+			return ParamsInputTypeRandom;
+		}
+		case "waitForElement": {
+			return ParamsInputWaitForElement;
 		}
 	}
 };

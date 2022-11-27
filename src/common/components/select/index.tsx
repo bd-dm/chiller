@@ -171,3 +171,4 @@ const Select = <OptionType extends SelectOption = SelectOption>(
 };
 
 export { Select };
+export type { SelectOption };
