@@ -1,6 +1,6 @@
+import { Button, Row } from "common/components";
+import { ScriptData, scriptRunner } from "common/scripts";
 import { Component } from "solid-js";
-
-import { Button, Row, ScriptData, scriptRunner } from "@/common";
 
 import { useCoreContext } from "../../../context";
 import styles from "./index.module.scss";

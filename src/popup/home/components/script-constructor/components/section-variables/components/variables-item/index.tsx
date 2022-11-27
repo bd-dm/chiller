@@ -1,6 +1,5 @@
+import { Button, Row } from "common/components";
 import { Component } from "solid-js";
-
-import { Button, Row } from "@/common";
 
 import { useScriptConstructor } from "../../../../context";
 import { ConstructorVariableItem } from "../../../../types";

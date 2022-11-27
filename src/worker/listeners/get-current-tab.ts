@@ -1,4 +1,4 @@
-import { MessageListener, MessageType } from "@/common";
+import { MessageListener, MessageType } from "common/message-carrier";
 
 const onGetCurrentTab: MessageListener<MessageType.GetCurrentTab> = (
 	message,

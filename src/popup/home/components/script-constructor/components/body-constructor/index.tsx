@@ -1,6 +1,5 @@
+import { Button, Column } from "common/components";
 import { Component } from "solid-js";
-
-import { Button, Column } from "@/common";
 
 import { useScriptConstructor } from "../../context";
 import { BodyConstructorSection } from "../body-constructor-section";

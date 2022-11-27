@@ -1,7 +1,7 @@
+import { Button, Column } from "common/components";
+import commonStyles from "common/styles/index.module.scss";
 import { isNull, isUndefined } from "lodash-es";
 import { createEffect, createSignal, For, onMount } from "solid-js";
-
-import { Button, Column, commonStyles } from "@/common";
 
 import styles from "./index.module.scss";
 

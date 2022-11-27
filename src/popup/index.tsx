@@ -1,4 +1,4 @@
-import { createAppInElement } from "@/common";
+import { createAppInElement } from "common/utils";
 
 import { Home } from "./home";
 

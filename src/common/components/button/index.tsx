@@ -1,6 +1,5 @@
+import commonStyles from "common/styles/index.module.scss";
 import { JSX, ParentComponent } from "solid-js";
-
-import { commonStyles } from "@/common";
 
 interface ButtonProps
 	extends Omit<JSX.ButtonHTMLAttributes<HTMLButtonElement>, "class"> {

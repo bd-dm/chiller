@@ -1,7 +1,6 @@
+import { Row, Select, SelectOption } from "common/components";
+import { PressKeyType } from "common/user-events/events";
 import { Component } from "solid-js";
-
-import { Row, Select, SelectOption } from "@/common";
-import { PressKeyType } from "@/common/user-events/events";
 
 import { ConstructorParamsInputProps } from "../../../../types";
 

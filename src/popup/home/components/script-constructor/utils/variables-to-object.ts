@@ -1,4 +1,4 @@
-import { ScriptVariables } from "@/common";
+import { ScriptVariables } from "common/scripts";
 
 import { ConstructorVariableItem } from "../types";
 

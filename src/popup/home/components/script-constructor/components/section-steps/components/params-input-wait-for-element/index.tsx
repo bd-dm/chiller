@@ -1,7 +1,7 @@
+import { Column } from "common/components";
+import { ActionDynamicParamType } from "common/user-events";
+import { WAIT_FOR_ELEMENT_TIMEOUT } from "common/user-events/events";
 import { Component, JSXElement } from "solid-js";
-
-import { ActionDynamicParamType, Column } from "@/common";
-import { WAIT_FOR_ELEMENT_TIMEOUT } from "@/common/user-events/events";
 
 import {
 	ConstructorParamsInputProps,

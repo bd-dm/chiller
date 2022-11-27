@@ -1,6 +1,6 @@
+import { MessageType, sendMessage } from "common/message-carrier";
+import commonStyles from "common/styles/index.module.scss";
 import { Component, createResource, Show } from "solid-js";
-
-import { commonStyles, MessageType, sendMessage } from "@/common";
 
 import styles from "../../index.module.scss";
 import { ButtonsRow } from "../buttons-row";

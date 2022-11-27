@@ -1,13 +1,7 @@
+import { Button, Column, Row } from "common/components";
+import { MessageType, sendMessage } from "common/message-carrier";
+import commonStyles from "common/styles/index.module.scss";
 import { Component } from "solid-js";
-
-import {
-	Button,
-	Column,
-	commonStyles,
-	MessageType,
-	Row,
-	sendMessage,
-} from "@/common";
 
 import { useHomeContext } from "../../context";
 import { Page } from "../../enums";

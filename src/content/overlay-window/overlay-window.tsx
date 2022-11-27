@@ -1,6 +1,5 @@
+import commonStyles from "common/styles/index.module.scss";
 import { Component } from "solid-js";
-
-import { commonStyles } from "@/common";
 
 import { ScriptsList } from "./components";
 import styles from "./index.module.scss";

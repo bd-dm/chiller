@@ -1,6 +1,6 @@
+import { Select } from "common/components";
+import { ActionDynamicParamWithVariable } from "common/user-events";
 import { Component } from "solid-js";
-
-import { ActionDynamicParamWithVariable, Select } from "@/common";
 
 import { useScriptConstructor } from "../../../../context";
 import { InputExactTypeProps } from "./types";

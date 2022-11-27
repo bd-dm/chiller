@@ -1,4 +1,4 @@
-import { storage, StorageKeys } from "@/common";
+import { storage, StorageKeys } from "common/storage";
 
 import { getSavedInjectedTabs } from "./get-saved-injected-tabs";
 

@@ -1,6 +1,5 @@
+import { Button, Column, Row, Select } from "common/components";
 import { Component, Show } from "solid-js";
-
-import { Button, Column, Row, Select } from "@/common";
 
 import { actionOptions } from "../../../../action-variants";
 import { useScriptConstructor } from "../../../../context";

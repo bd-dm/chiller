@@ -1,6 +1,5 @@
+import { ActionDynamicParamWithText } from "common/user-events";
 import { Component } from "solid-js";
-
-import { ActionDynamicParamWithText } from "@/common";
 
 import { InputExactTypeProps } from "./types";
 

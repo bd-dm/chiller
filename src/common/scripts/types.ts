@@ -2,7 +2,7 @@ import {
 	UserEventAction,
 	UserEventParams,
 	UserEventVariables,
-} from "@/common/user-events";
+} from "common/user-events";
 
 interface ScriptData {
 	id: string;

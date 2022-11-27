@@ -1,4 +1,4 @@
-import { ScriptData } from "@/common/scripts";
+import { ScriptData } from "common/scripts";
 
 import { StorageKeys } from "./enums";
 

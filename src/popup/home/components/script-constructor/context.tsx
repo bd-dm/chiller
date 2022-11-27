@@ -1,3 +1,5 @@
+import { getScript, ScriptBody, ScriptData } from "common/scripts";
+import { ContextType } from "common/types";
 import { isUndefined } from "lodash-es";
 import { nanoid } from "nanoid";
 import {
@@ -10,8 +12,6 @@ import {
 	Show,
 	useContext,
 } from "solid-js";
-
-import { ContextType, getScript, ScriptBody, ScriptData } from "@/common";
 
 import {
 	ConstructorStepItem,

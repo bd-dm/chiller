@@ -1,6 +1,5 @@
+import { EmptyScripts } from "common/components";
 import { Component, For } from "solid-js";
-
-import { EmptyScripts } from "@/common";
 
 import { useHomeContext } from "../../context";
 import { ScriptsItem } from "../scripts-item";

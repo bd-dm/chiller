@@ -1,14 +1,12 @@
-import { Component, Match, Switch } from "solid-js";
-
+import { Row, Select } from "common/components";
 import {
 	ActionDynamicParam,
 	ActionDynamicParamType,
 	ActionDynamicParamWithSelector,
 	ActionDynamicParamWithText,
 	ActionDynamicParamWithVariable,
-	Row,
-	Select,
-} from "@/common";
+} from "common/user-events";
+import { Component, Match, Switch } from "solid-js";
 
 import { ConstructorStepParamChangeHandler } from "../../../../types";
 import styles from "./index.module.scss";

@@ -1,6 +1,5 @@
+import { createAppInElement } from "common/utils";
 import { Component as SolidComponent } from "solid-js";
-
-import { createAppInElement } from "@/common";
 
 import { DEFAULT_ROOT_ID } from "../constants";
 

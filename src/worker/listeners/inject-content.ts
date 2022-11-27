@@ -1,6 +1,5 @@
+import { MessageListener, MessageType } from "common/message-carrier";
 import { isUndefined } from "lodash-es";
-
-import { MessageListener, MessageType } from "@/common";
 
 import { injectContent } from "../utils";
 import { getCurrentTab } from "../utils/get-current-tab";
