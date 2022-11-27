@@ -1,12 +1,12 @@
 import { storage, StorageKeys } from "common/storage";
 
-const removeInjectedTab = async (
+const removeSavedInjectedTab = async (
 	tabId: chrome.tabs.Tab["id"]
 ): Promise<void> => {
 	await storage.removeItem(
 		StorageKeys.InjectedTabs,
-		(prevTabId) => prevTabId !== tabId
+		(prevTabId) => prevTabId === tabId
 	);
 };
 
-export { removeInjectedTab };
+export { removeSavedInjectedTab };

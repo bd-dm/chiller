@@ -1,7 +1,7 @@
 import { attachDebugger } from "./attach-debugger";
 import { detachDebugger } from "./detach-debugger";
 import { getSavedInjectedTabs } from "./get-saved-injected-tabs";
-import { removeInjectedTab } from "./remove-injected-tab";
+import { removeSavedInjectedTab } from "./remove-saved-injected-tab";
 import { saveInjectedTab } from "./save-injected-tab";
 
 const injectContent = async (
@@ -13,7 +13,7 @@ const injectContent = async (
 
 		if (prevInjectedTabs.includes(tabId)) {
 			// injected -> removing
-			await removeInjectedTab(tabId);
+			await removeSavedInjectedTab(tabId);
 			await chrome.scripting.executeScript({
 				target: { tabId: tabId },
 				files: ["clean-content.js"],

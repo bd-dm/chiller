@@ -1,12 +1,11 @@
 import commonStyles from "common/styles/index.module.scss";
 import { isEmpty } from "lodash-es";
-import { Component, createEffect, JSX } from "solid-js";
+import { Component, JSX } from "solid-js";
 
 import { Column } from "../column";
 import styles from "./index.module.scss";
 
 const Input: Component<JSX.InputHTMLAttributes<HTMLInputElement>> = (props) => {
-	createEffect(() => console.log(props.value, !!props.value));
 	return (
 		<Column
 			horizontalAlignment={Column.Alignment.Horizontal.Stretch}
