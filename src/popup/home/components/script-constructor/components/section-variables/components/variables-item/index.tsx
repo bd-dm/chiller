@@ -1,6 +1,6 @@
 import { Component } from "solid-js";
 
-import { Row } from "@/common";
+import { Button, Row } from "@/common";
 
 import { useScriptConstructor } from "../../../../context";
 import { ConstructorVariableItem } from "../../../../types";
@@ -12,7 +12,7 @@ interface VariablesItemProps {
 }
 
 const VariablesItem: Component<VariablesItemProps> = (props) => {
-	const { setVariable } = useScriptConstructor();
+	const { setVariable, removeVariable } = useScriptConstructor();
 
 	const changeHandler =
 		(key: keyof ConstructorVariableItem) => (data: string) => {
@@ -23,8 +23,12 @@ const VariablesItem: Component<VariablesItemProps> = (props) => {
 			});
 		};
 
+	const removeHandler = () => {
+		removeVariable(props.index);
+	};
+
 	return (
-		<Row>
+		<Row verticalAlignment={Row.Alignment.Vertical.Center}>
 			<input
 				class={styles.input}
 				type="text"
@@ -45,6 +49,7 @@ const VariablesItem: Component<VariablesItemProps> = (props) => {
 					changeHandler("value")(newValue)
 				}
 			/>
+			<Button onClick={removeHandler}>&times;</Button>
 		</Row>
 	);
 };

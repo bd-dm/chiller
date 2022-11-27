@@ -65,6 +65,10 @@
 		&:hover {
 			background-color: variables.$input-hover;
 		}
+
+		&[disabled] {
+			opacity: 0.5;
+		}
 	}
 
 	div[data-placeholder]:empty::before {

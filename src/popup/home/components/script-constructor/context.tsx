@@ -27,9 +27,11 @@ interface ScriptConstructorContextValue {
 	name: Accessor<string>;
 	variables: Accessor<ConstructorVariableItems>;
 	setVariable: (index: number, item: ConstructorVariableItem) => void;
+	removeVariable: (index: number) => void;
 	addVariable: () => void;
 	steps: Accessor<ConstructorStepItems>;
 	setStep: (index: number, item: ConstructorStepItem) => void;
+	removeStep: (index: number) => void;
 	addStep: () => void;
 	setName: Setter<string>;
 	save?: () => void;
@@ -100,6 +102,12 @@ const ScriptConstructorContextProvider: ParentComponent<
 		});
 	};
 
+	const removeVariable = (index: number): void => {
+		setVariables((prevVariables) =>
+			prevVariables.filter((_, prevIndex) => prevIndex !== index)
+		);
+	};
+
 	const addVariable = (): void => {
 		setVariables((prevVariables) => [
 			...prevVariables,
@@ -114,6 +122,12 @@ const ScriptConstructorContextProvider: ParentComponent<
 		});
 	};
 
+	const removeStep = (index: number): void => {
+		setSteps((prevSteps) =>
+			prevSteps.filter((_, prevIndex) => prevIndex !== index)
+		);
+	};
+
 	const addStep = (): void => {
 		setSteps((prevSteps) => [...prevSteps, {}]);
 	};
@@ -125,9 +139,11 @@ const ScriptConstructorContextProvider: ParentComponent<
 					id,
 					variables,
 					setVariable,
+					removeVariable,
 					addVariable,
 					steps,
 					setStep,
+					removeStep,
 					addStep,
 					name,
 					setName,

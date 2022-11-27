@@ -1,6 +1,6 @@
 import { Component, Show } from "solid-js";
 
-import { Column, Select } from "@/common";
+import { Button, Column, Row, Select } from "@/common";
 
 import { actionOptions } from "../../../../action-variants";
 import { useScriptConstructor } from "../../../../context";
@@ -17,7 +17,7 @@ interface StepsItemProps {
 }
 
 const StepsItem: Component<StepsItemProps> = (props) => {
-	const { setStep } = useScriptConstructor();
+	const { setStep, removeStep } = useScriptConstructor();
 
 	const changeHandler =
 		(key: keyof ConstructorStepItem) =>
@@ -29,12 +29,19 @@ const StepsItem: Component<StepsItemProps> = (props) => {
 			});
 		};
 
+	const removeHandler = () => {
+		removeStep(props.index);
+	};
+
 	return (
 		<Column
 			horizontalAlignment={Column.Alignment.Horizontal.Stretch}
 			classList={{ [styles.item]: true }}
 		>
-			<h4 class={styles.title}>Step {props.index + 1}</h4>
+			<Row horizontalAlignment={Row.Alignment.Horizontal.SpaceBetween}>
+				<h4 class={styles.title}>Step {props.index + 1}</h4>
+				<Button onClick={removeHandler}>&times;</Button>
+			</Row>
 			<Select<ConstructorStepActionOption>
 				placeholder={"Select action..."}
 				onChange={changeHandler("action")}
