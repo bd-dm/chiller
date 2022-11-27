@@ -40,7 +40,7 @@ const VariablesItem: Component<VariablesItemProps> = (props) => {
 				type="text"
 				name={"Value"}
 				value={props.variable.value}
-				placeholder={"value"}
+				placeholder={"Value"}
 				onInput={({ currentTarget: { value: newValue } }) =>
 					changeHandler("value")(newValue)
 				}
