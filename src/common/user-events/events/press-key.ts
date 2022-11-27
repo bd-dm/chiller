@@ -1,6 +1,5 @@
+import { MessageType, sendMessage } from "common/message-carrier";
 import { isUndefined } from "lodash-es";
-
-import { MessageType, sendMessage } from "@/common/message-carrier";
 
 import { UserEvent } from "../types";
 

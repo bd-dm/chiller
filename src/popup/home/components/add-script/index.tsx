@@ -1,6 +1,5 @@
+import { addScript, ScriptData } from "common/scripts";
 import { Component } from "solid-js";
-
-import { addScript, ScriptData } from "@/common";
 
 import { useHomeContext } from "../../context";
 import { Page } from "../../enums";

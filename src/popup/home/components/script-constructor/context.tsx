@@ -1,8 +1,11 @@
+import { getScript, ScriptBody, ScriptData } from "common/scripts";
+import { ContextType } from "common/types";
 import { isUndefined } from "lodash-es";
 import { nanoid } from "nanoid";
 import {
 	Accessor,
 	createContext,
+	createEffect,
 	createSignal,
 	onMount,
 	ParentComponent,
@@ -11,8 +14,6 @@ import {
 	useContext,
 } from "solid-js";
 
-import { ContextType, getScript, ScriptBody, ScriptData } from "@/common";
-
 import {
 	ConstructorStepItem,
 	ConstructorStepItems,
@@ -20,7 +21,12 @@ import {
 	ConstructorVariableItems,
 	ScriptConstructorProps,
 } from "./types";
-import { variablesToArray, variablesToObject } from "./utils";
+import {
+	getFilledSteps,
+	getFilledVariables,
+	variablesToArray,
+	variablesToObject,
+} from "./utils";
 
 interface ScriptConstructorContextValue {
 	id: Accessor<string>;
@@ -60,6 +66,18 @@ const ScriptConstructorContextProvider: ParentComponent<
 		}
 	});
 
+	createEffect(() => {
+		if (getFilledVariables(variables()).length === variables().length) {
+			addVariable();
+		}
+	});
+
+	createEffect(() => {
+		if (getFilledSteps(steps()).length === steps().length) {
+			addStep();
+		}
+	});
+
 	const restoreScript = (script: ScriptData): void => {
 		setId(script.id);
 		setName(script.name);
@@ -88,8 +106,8 @@ const ScriptConstructorContextProvider: ParentComponent<
 			id: id(),
 			name: name(),
 			json: JSON.stringify({
-				variables: variablesToObject(variables()),
-				steps: steps(),
+				variables: variablesToObject(getFilledVariables(variables())),
+				steps: getFilledSteps(steps()),
 			}),
 			addedTimestamp: new Date().getTime(),
 		});

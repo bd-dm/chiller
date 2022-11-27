@@ -1,4 +1,4 @@
-import { userEvents } from "@/common/user-events";
+import { userEvents } from "common/user-events";
 
 import { getScript } from "./get-script";
 import { ScriptBody, ScriptData } from "./types";

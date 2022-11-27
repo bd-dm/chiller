@@ -1,4 +1,4 @@
-import { ScriptVariables } from "@/common/scripts";
+import { ScriptVariables } from "common/scripts";
 
 import { ActionDynamicParam, ActionDynamicParamType } from "../types";
 

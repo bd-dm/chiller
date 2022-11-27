@@ -1,7 +1,7 @@
+import { Column, Input } from "common/components";
+import { ActionDynamicParamType } from "common/user-events";
+import { WAIT_FOR_ELEMENT_TIMEOUT } from "common/user-events/events";
 import { Component, JSXElement } from "solid-js";
-
-import { ActionDynamicParamType, Column } from "@/common";
-import { WAIT_FOR_ELEMENT_TIMEOUT } from "@/common/user-events/events";
 
 import {
 	ConstructorParamsInputProps,
@@ -36,7 +36,7 @@ const ParamsInputWaitForElement: Component<
 				param={props.params?.target}
 				onChange={targetChangeHandler}
 			/>
-			<input
+			<Input
 				type="text"
 				placeholder={"Variants separated by comma (,)"}
 				value={props.params?.timeout ?? WAIT_FOR_ELEMENT_TIMEOUT}

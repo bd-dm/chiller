@@ -21,37 +21,42 @@ const eslintPluginDev: PluginOption = {
 	enforce: "post",
 };
 
-export default defineConfig({
-	root: "./src",
-	css: {
-		modules: {
-			localsConvention: "dashes",
-		},
-	},
-	build: {
-		minify: true,
-		sourcemap: true,
-		emptyOutDir: true,
-		outDir: "../dist",
-		rollupOptions: {
-			input: {
-				"popup/index": path.resolve(__dirname, "./src/popup/index.html"),
-				"worker/index": path.resolve(__dirname, "./src/worker/index.ts"),
-				"content/index": path.resolve(__dirname, "./src/content/index.ts"),
-			},
-			output: {
-				assetFileNames: "styles/[name]-[hash][extname]",
-				chunkFileNames: "chunks/[name]-[hash].js",
-				entryFileNames: "[name].js",
-				preserveModules: false,
+export default defineConfig(({ mode }) => {
+	const isDev = mode === "development";
+
+	return {
+		css: {
+			modules: {
+				localsConvention: "dashes",
 			},
 		},
-	},
-	plugins: [
-		solidPlugin(),
-		tsconfigPaths({ root: "../" }),
-		eslintPluginBuild,
-		eslintPluginDev,
-		assetsManifestPlugin({ entries: ["styles/*.css"] }),
-	],
+		build: {
+			minify: !isDev,
+			sourcemap: isDev,
+			emptyOutDir: true,
+			outDir: "dist",
+			rollupOptions: {
+				input: [
+					path.resolve(__dirname, "./src/popup/popup.html"),
+					path.resolve(__dirname, "./src/worker/index.ts"),
+					path.resolve(__dirname, "./src/content/index.ts"),
+				],
+				output: {
+					preserveModules: true,
+					entryFileNames: "[name].js",
+					assetFileNames: "styles/[name]-[hash][extname]",
+					chunkFileNames: "chunks/[name]-[hash].js",
+				},
+				preserveEntrySignatures: "exports-only",
+			},
+			modulePreload: false,
+		},
+		plugins: [
+			solidPlugin(),
+			tsconfigPaths(),
+			eslintPluginBuild,
+			eslintPluginDev,
+			assetsManifestPlugin({ entries: ["styles/*.css"] }),
+		],
+	};
 });

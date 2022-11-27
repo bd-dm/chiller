@@ -1,0 +1,25 @@
+@use '../../styles/variables';
+
+.button {
+	cursor: pointer;
+	border: none;
+	background-color: variables.$button;
+	padding: 4px 8px;
+	color: variables.$text-inverted;
+	border-radius: 4px;
+
+	&:focus {
+		border: none;
+		outline: 2px solid variables.$button-outline;
+		outline-offset: -4px;
+	}
+
+	&:hover:not(.active) {
+		background-color: variables.$button-hovered
+	}
+
+	&.active {
+		cursor: not-allowed;
+		opacity: 0.56;
+	}
+}

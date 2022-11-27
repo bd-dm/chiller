@@ -1,6 +1,5 @@
+import { MessageType, sendMessage } from "common/message-carrier";
 import { Component, createResource, Show } from "solid-js";
-
-import { commonStyles, MessageType, sendMessage } from "@/common";
 
 import styles from "../../index.module.scss";
 import { ButtonsRow } from "../buttons-row";
@@ -20,7 +19,7 @@ const Body: Component = () => {
 				style={{ "background-image": "url(" + imageUrl() + ")" }}
 			/>
 			<div classList={{ [styles.backdrop]: true }} />
-			<div classList={{ [styles.popup]: true, [commonStyles.chiller]: true }}>
+			<div classList={{ [styles.popup]: true, ["chiller"]: true }}>
 				<ButtonsRow />
 				<Scripts />
 			</div>

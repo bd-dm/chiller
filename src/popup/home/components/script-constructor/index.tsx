@@ -1,7 +1,7 @@
+import { Column } from "common/components";
+import { ScriptData } from "common/scripts";
 import { isUndefined } from "lodash-es";
 import { Component } from "solid-js";
-
-import { Column, ScriptData } from "@/common";
 
 import { BodyConstructor, NameInput, SaveButton } from "./components";
 import { ScriptConstructorContext } from "./context";

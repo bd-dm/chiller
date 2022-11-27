@@ -1,4 +1,4 @@
-import { ActionDynamicParam } from "@/common";
+import { ActionDynamicParam } from "common/user-events";
 
 type ChangeHandler<ParamType extends ActionDynamicParam = ActionDynamicParam> =
 	<Key extends keyof ParamType>(

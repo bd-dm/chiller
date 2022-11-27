@@ -1,6 +1,5 @@
+import { ScriptVariables } from "common/scripts";
 import { isNull, isUndefined } from "lodash-es";
-
-import { ScriptVariables } from "@/common/scripts";
 
 import {
 	ActionDynamicParam,

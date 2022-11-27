@@ -1,4 +1,4 @@
-import { MessageType, onMessage } from "@/common";
+import { MessageType, onMessage } from "common/message-carrier";
 
 import {
 	onGetCurrentTab,

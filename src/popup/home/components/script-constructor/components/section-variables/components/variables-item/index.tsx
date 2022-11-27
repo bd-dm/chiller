@@ -1,6 +1,5 @@
+import { Button, Input, Row } from "common/components";
 import { Component } from "solid-js";
-
-import { Button, Row } from "@/common";
 
 import { useScriptConstructor } from "../../../../context";
 import { ConstructorVariableItem } from "../../../../types";
@@ -29,7 +28,7 @@ const VariablesItem: Component<VariablesItemProps> = (props) => {
 
 	return (
 		<Row verticalAlignment={Row.Alignment.Vertical.Center}>
-			<input
+			<Input
 				class={styles.input}
 				type="text"
 				name={"name"}
@@ -39,7 +38,7 @@ const VariablesItem: Component<VariablesItemProps> = (props) => {
 					changeHandler("name")(newName)
 				}
 			/>
-			<input
+			<Input
 				class={styles.input}
 				type="text"
 				name={"Value"}

@@ -1,14 +1,12 @@
-import { Component, Match, Switch } from "solid-js";
-
+import { Input, Row, Select } from "common/components";
 import {
 	ActionDynamicParam,
 	ActionDynamicParamType,
 	ActionDynamicParamWithSelector,
 	ActionDynamicParamWithText,
 	ActionDynamicParamWithVariable,
-	Row,
-	Select,
-} from "@/common";
+} from "common/user-events";
+import { Component, Match, Switch } from "solid-js";
 
 import { ConstructorStepParamChangeHandler } from "../../../../types";
 import styles from "./index.module.scss";
@@ -56,7 +54,7 @@ const ParamsInputDynamic: Component<ParamsInputCommonProps> = (props) => {
 				/>
 			</div>
 			<div class={styles.input}>
-				<Switch fallback={<input type="text" disabled />}>
+				<Switch fallback={<Input type="text" disabled />}>
 					<Match
 						when={props.param?.type === ActionDynamicParamType.Variable}
 						keyed

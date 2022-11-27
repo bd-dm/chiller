@@ -1,0 +1,13 @@
+@use '../../styles/mixins';
+
+.input {
+	@include mixins.with-placeholder;
+
+	&.filled {
+		@include mixins.with-placeholder(true);
+	}
+
+	input {
+		@include mixins.with-placeholder-target;
+	}
+}

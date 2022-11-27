@@ -1,6 +1,5 @@
+import { ActionDynamicParamType } from "common/user-events";
 import { Component, JSXElement } from "solid-js";
-
-import { ActionDynamicParamType } from "@/common";
 
 import {
 	ConstructorParamsInputProps,

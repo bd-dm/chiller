@@ -1,6 +1,5 @@
+import { Column, Row } from "common/components";
 import { JSXElement, ParentComponent } from "solid-js";
-
-import { Column, Row } from "@/common";
 
 import styles from "./index.module.scss";
 

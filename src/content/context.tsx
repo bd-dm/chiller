@@ -1,3 +1,6 @@
+import { MessageType, sendMessage } from "common/message-carrier";
+import { getScripts, ScriptData } from "common/scripts";
+import { ContextType } from "common/types";
 import {
 	Accessor,
 	createContext,
@@ -9,14 +12,6 @@ import {
 	Show,
 	useContext,
 } from "solid-js";
-
-import {
-	ContextType,
-	getScripts,
-	MessageType,
-	ScriptData,
-	sendMessage,
-} from "@/common";
 
 interface CoreContextValue {
 	currentTab: Accessor<chrome.tabs.Tab>;

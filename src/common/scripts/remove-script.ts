@@ -1,4 +1,4 @@
-import { storage, StorageKeys } from "@/common/storage";
+import { storage, StorageKeys } from "common/storage";
 
 import { ScriptData } from "./types";
 

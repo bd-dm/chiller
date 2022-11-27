@@ -1,3 +1,4 @@
+import { Input } from "common/components";
 import { Component } from "solid-js";
 
 import { ConstructorParamsInputProps } from "../../../../types";
@@ -18,7 +19,7 @@ const ParamsInputTypeRandom: Component<
 	};
 
 	return (
-		<input
+		<Input
 			type="text"
 			placeholder={"Variants separated by comma (,)"}
 			value={variantsToString(props.params?.variants)}

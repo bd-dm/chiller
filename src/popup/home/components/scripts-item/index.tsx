@@ -1,14 +1,7 @@
+import { Button, Column, Row } from "common/components";
+import { removeScript, ScriptData, updateScript } from "common/scripts";
+import commonStyles from "common/styles/index.module.scss";
 import { Component, createSignal, Show } from "solid-js";
-
-import {
-	Button,
-	Column,
-	commonStyles,
-	removeScript,
-	Row,
-	ScriptData,
-	updateScript,
-} from "@/common";
 
 import { useHomeContext } from "../../context";
 import { Page } from "../../enums";

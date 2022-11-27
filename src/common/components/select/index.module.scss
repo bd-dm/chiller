@@ -1,10 +1,23 @@
 @use '../../styles/variables';
+@use '../../styles/mixins';
+
+.input {
+	@include mixins.with-placeholder;
+	@include mixins.with-placeholder-target;
+
+	&:not(:empty) {
+		@include mixins.with-placeholder(true);
+	}
+
+	cursor: pointer;
+}
 
 .suggestions {
 	position: absolute;
 	top: -4px;
 	background-color: variables.$background-solid;
 	width: 100%;
+	z-index: 1;
 
 	&-wrapper {
 		position: relative;
@@ -17,6 +30,7 @@
 		transition: height 300ms;
 		max-height: 500px;
 		overflow-y: auto;
+		box-shadow: 0 10px 5px 0 variables.$shadow-primary;
 	}
 }
 

@@ -1,5 +1,5 @@
 (async () => {
-	const src = chrome.runtime.getURL("content/index.js");
+	const src = chrome.runtime.getURL("src/content/index.js");
 	await import(src);
 
 	window.injectChillerOverlay();

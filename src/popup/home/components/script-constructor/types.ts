@@ -1,9 +1,5 @@
-import {
-	ActionDynamicParam,
-	ScriptData,
-	ScriptStep,
-	UserEventAction,
-} from "@/common";
+import { ScriptData, ScriptStep } from "common/scripts";
+import { ActionDynamicParam, UserEventAction } from "common/user-events";
 
 interface ScriptConstructorProps {
 	scriptId?: ScriptData["id"];

@@ -1,3 +1,5 @@
+import { MessageType, sendMessage } from "common/message-carrier";
+import { getScripts, ScriptData } from "common/scripts";
 import {
 	Accessor,
 	createContext,
@@ -8,8 +10,6 @@ import {
 	Setter,
 	useContext,
 } from "solid-js";
-
-import { getScripts, MessageType, ScriptData, sendMessage } from "@/common";
 
 import { Page } from "./enums";
 
