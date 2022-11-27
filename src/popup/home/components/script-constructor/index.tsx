@@ -1,6 +1,7 @@
+import { isUndefined } from "lodash-es";
 import { Component } from "solid-js";
 
-import { Column } from "@/common";
+import { Column, ScriptData } from "@/common";
 
 import { BodyConstructor, NameInput, SaveButton } from "./components";
 import { ScriptConstructorContext } from "./context";
@@ -8,10 +9,16 @@ import styles from "./index.module.scss";
 import { ScriptConstructorProps } from "./types";
 
 const ScriptConstructor: Component<ScriptConstructorProps> = (props) => {
+	const saveHandler = (result: ScriptData) => {
+		if (!isUndefined(props.onResult)) {
+			props.onResult(result);
+		}
+	};
+
 	return (
 		<ScriptConstructorContext.Provider
 			scriptId={props.scriptId}
-			onResult={() => props.onResult}
+			onResult={saveHandler}
 		>
 			<Column
 				classList={{ [styles.block]: true }}

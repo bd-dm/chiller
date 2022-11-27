@@ -25,6 +25,12 @@
 		color: variables.$text-inverted;
 		border-radius: 4px;
 
+		&:focus {
+			border: none;
+			outline: 2px solid variables.$button-outline;
+			outline-offset: -4px;
+		}
+
 		&:hover:not(.active) {
 			background-color: variables.$button-hovered
 		}
