@@ -124,7 +124,11 @@ const Select = <OptionType extends SelectOption = SelectOption>(
 
 	return (
 		<Column gapLess horizontalAlignment={Column.Alignment.Horizontal.Stretch}>
-			<div class={styles.select}>
+			<div
+				class={styles.select}
+				role={"listbox"}
+				aria-label={props.placeholder}
+			>
 				<div
 					ref={setContentRef}
 					classList={{ [commonStyles.inputLike]: true, [styles.input]: true }}

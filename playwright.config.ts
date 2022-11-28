@@ -4,7 +4,7 @@ import { devices } from "@playwright/test";
 /** See https://playwright.dev/docs/test-configuration */
 
 const config: PlaywrightTestConfig = {
-	testDir: "./tests",
+	testDir: "tests",
 	timeout: 30 * 1000,
 	expect: {
 		timeout: 5000,
@@ -15,7 +15,7 @@ const config: PlaywrightTestConfig = {
 	workers: process.env.CI ? 1 : undefined,
 	reporter: [process.env.CI ? ["dot"] : ["list"], ["html"]],
 	use: {
-		actionTimeout: 30 * 1000,
+		actionTimeout: 3 * 1000,
 		trace: "on-first-retry",
 	},
 	projects: [

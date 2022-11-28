@@ -30,6 +30,7 @@ const VariablesItem: Component<VariablesItemProps> = (props) => {
 
 	return (
 		<Row
+			aria-label={`Variable ${props.index + 1}`}
 			verticalAlignment={Row.Alignment.Vertical.Center}
 			classList={{ [styles.last]: isLast() }}
 		>
