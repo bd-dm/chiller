@@ -37,14 +37,17 @@ const test = base.extend<{
 	ui: UIFixture;
 }>({
 	// eslint-disable-next-line no-empty-pattern
-	context: async ({}, use) => {
+	context: async ({ browserName }, use) => {
+		const browserTypes: { chromium: typeof chromium } = { chromium };
+
 		const pathToExtension = path.join(__dirname, "../dist");
-		const context = await chromium.launchPersistentContext("", {
+
+		const context = await browserTypes[
+			browserName as keyof typeof browserTypes
+		].launchPersistentContext("", {
 			headless: false,
-			args: [
-				`--disable-extensions-except=${pathToExtension}`,
-				`--load-extension=${pathToExtension}`,
-			],
+			ignoreDefaultArgs: ["--disable-extensions"],
+			args: [`--load-extension=${pathToExtension}`],
 		});
 		await use(context);
 		await context.close();
