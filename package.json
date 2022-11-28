@@ -3,19 +3,20 @@
   "version": "0.0.9",
   "description": "A Chrome extension that helps you fill anything with chill",
   "scripts": {
-    "dev": "npm run vite:dev",
-    "build": "npm run vite:build",
-    "build:live": "npm run vite:build:live",
+    "dev": "turbo vite:dev",
+    "build": "turbo vite:build",
+    "build:live": "turbo vite:build:live",
     "preview": "turbo vite:preview",
+		"test:e2e": "playwright test",
+		"test:unit": "jest",
     "vite:dev": "vite",
     "vite:build": "vite build --mode production",
     "vite:build:live": "vite build --watch --mode development",
     "vite:preview": "vite preview",
-    "test": "jest",
     "lint:styles": "stylelint \"**/*.scss\"",
     "lint:code": "eslint . --ext .js,.ts,.tsx",
     "lint:types": "tsc --noEmit",
-    "lint": "npm run lint:code && npm run lint:types && npm run lint:styles",
+    "lint": "turbo lint:code lint:types lint:styles",
     "postinstall": "git config core.hooksPath '.git-hooks'"
   },
   "repository": {
@@ -34,9 +35,11 @@
     "solid-js": "^1.6.2"
   },
   "devDependencies": {
+    "@playwright/test": "^1.28.1",
     "@types/chrome": "^0.0.202",
     "@types/lodash-es": "^4.17.6",
     "@types/minimatch": "^5.1.2",
+    "@types/node": "^18.11.9",
     "@typescript-eslint/eslint-plugin": "^5.43.0",
     "@typescript-eslint/parser": "^5.43.0",
     "babel": "^6.23.0",

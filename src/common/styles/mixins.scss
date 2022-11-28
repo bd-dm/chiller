@@ -46,7 +46,6 @@
 }
 
 @mixin chiller {
-	// noinspection Stylelint
 	:where(:global(.chiller)) {
 		@content;
 	}
