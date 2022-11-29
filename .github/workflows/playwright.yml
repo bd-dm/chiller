@@ -25,16 +25,6 @@ jobs:
       run: npm run build
     - name: Test
       run: xvfb-run npm run test:e2e
-    - name: Report - deploy
+    - name: Deploy report
       if: always()
-      uses: Sauloxd/review-apps@v2.0.0
-      with:
-        branch: "deployments"
-        GITHUB_TOKEN: ${{ secrets.CHILLER_TOKEN }}
-        apps: |
-          {
-            "test-report": {
-              "build": "npm -v",
-              "dist": "playwright-report"
-            }
-          }
+      run: sh ./scripts/deploy-report.sh
