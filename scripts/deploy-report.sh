@@ -1,3 +1,4 @@
+#!/bin/bash
 git fetch origin deployments
 
 BRANCH=$(git rev-parse --abbrev-ref HEAD)
@@ -12,5 +13,6 @@ cp -a playwright-report/. "${REPORT_PATH}"
 git add "./${REPORT_PATH}/."
 git commit -m "[skip ci] Deployments for ${BRANCH}"
 git push origin deployments
+git checkout "${BRANCH}"
 
 echo url="${URL}" >> $GITHUB_OUTPUT
