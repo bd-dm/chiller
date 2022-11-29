@@ -1,5 +1,5 @@
 #!/bin/bash
-git fetch origin deployments
+git fetch --all
 
 PR_NUMBER=$(echo $GITHUB_REF | awk 'BEGIN { FS = "/" } ; { print $3 }')
 REPORT_PATH="pull-requests/${PR_NUMBER}/test-report"
