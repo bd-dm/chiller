@@ -9,8 +9,8 @@ git config --global user.name "GitHub Action"
 git checkout origin/deployments
 mkdir -p "${REPORT_PATH}"
 cp -a playwright-report/. "${REPORT_PATH}"
-git add .
+git add "./${REPORT_PATH}/."
 git commit -m "[skip ci] Deployments for ${BRANCH}"
 git push origin deployments
 
-echo ::set-output name=url::"${URL}"
+echo url="${URL}" >> $GITHUB_OUTPUT
