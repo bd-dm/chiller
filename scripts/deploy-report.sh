@@ -1,8 +1,8 @@
 #!/bin/bash
 git fetch origin deployments
 
-BRANCH=$(git rev-parse --abbrev-ref HEAD)
-REPORT_PATH="pull-requests/${BRANCH}/test-report"
+PR_NUMBER=$(echo $GITHUB_REF | awk 'BEGIN { FS = "/" } ; { print $3 }')
+REPORT_PATH="pull-requests/${PR_NUMBER}/test-report"
 URL="https://bd-dm.github.io/chiller/${REPORT_PATH}"
 
 git config --global user.email "action@github.com"
@@ -11,8 +11,7 @@ git checkout origin/deployments
 mkdir -p "${REPORT_PATH}"
 cp -a playwright-report/. "${REPORT_PATH}"
 git add "./${REPORT_PATH}/."
-git commit -m "[skip ci] Deployments for ${BRANCH}"
+git commit -m "[skip ci] Deployments for ${PR_NUMBER}"
 git push origin deployments
-git checkout "${BRANCH}"
 
 echo url="${URL}" >> $GITHUB_OUTPUT
