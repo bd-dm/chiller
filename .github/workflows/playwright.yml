@@ -9,7 +9,7 @@ jobs:
   test:
     environment:
       name: Test report
-      url: https://bd-dm.github.io/chiller/test-report/${{ github.ref_name }}/${{ github.sha }}
+      url: ${{ steps.deploy.outputs.url }}
     timeout-minutes: 60
     runs-on: ubuntu-latest
     steps:
@@ -26,5 +26,6 @@ jobs:
     - name: Test
       run: xvfb-run npm run test:e2e
     - name: Deploy report
+      id: deploy
       if: always()
       run: sh ./scripts/deploy-report.sh

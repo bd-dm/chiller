@@ -1,3 +1,5 @@
+git fetch origin deployments
+
 BRANCH=$(git rev-parse --abbrev-ref HEAD)
 REPORT_PATH="pull-requests/${BRANCH}/test-report"
 URL="https://bd-dm.github.io/chiller/${REPORT_PATH}"
