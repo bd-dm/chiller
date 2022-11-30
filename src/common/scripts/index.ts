@@ -1,4 +1,5 @@
 export * from "./add-script";
+export * from "./export-script";
 export * from "./get-script";
 export * from "./get-script-draft";
 export * from "./get-script-or-draft";

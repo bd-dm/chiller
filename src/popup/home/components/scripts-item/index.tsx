@@ -1,5 +1,10 @@
 import { Button, Column, Row } from "common/components";
-import { removeScript, ScriptData, updateScript } from "common/scripts";
+import {
+	exportScript,
+	removeScript,
+	ScriptData,
+	updateScript,
+} from "common/scripts";
 import { Component, createSignal, Show } from "solid-js";
 
 import { useHomeContext } from "../../context";
@@ -24,6 +29,10 @@ const ScriptsItem: Component<ScriptsItemProps> = (props) => {
 		setIsEdit(!isEdit());
 	};
 
+	const exportHandler = async () => {
+		await exportScript(props.script.id);
+	};
+
 	const saveHandler = async (script: ScriptData) => {
 		await updateScript(script);
 		updateScripts();
@@ -45,7 +54,20 @@ const ScriptsItem: Component<ScriptsItemProps> = (props) => {
 				>
 					<div>{props.script.name}</div>
 					<Row>
-						<Button type={"button"} active={isEdit()} onClick={editHandler}>
+						<Button
+							type={"button"}
+							light
+							active={isEdit()}
+							onClick={exportHandler}
+						>
+							Export
+						</Button>
+						<Button
+							type={"button"}
+							light
+							active={isEdit()}
+							onClick={editHandler}
+						>
 							Edit
 						</Button>
 						<Button type={"button"} onClick={removeHandler}>
