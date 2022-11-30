@@ -1,9 +1,53 @@
 @use '../../common/styles/variables';
+@use '../../common/styles/mixins';
 
-* {
-	margin: 0;
-	padding: 0;
+@include mixins.chiller {
+	* {
+		margin: 0;
+		padding: 0;
+	}
+
+	:global(#root) {
+		max-height: 500px;
+		overflow-y: scroll;
+		scrollbar-gutter: stable;
+
+		&::-webkit-scrollbar {
+			width: 4px;
+			height: 4px;
+		}
+
+		&::-webkit-scrollbar-button {
+			width: 0;
+			height: 0;
+		}
+
+		&::-webkit-scrollbar-thumb {
+			background: variables.$background-2;
+			border: none;
+			border-radius: 50px;
+		}
+
+		&::-webkit-scrollbar-track {
+			background: transparent;
+			border:none;
+			border-radius: 50px;
+		}
+
+		&::-webkit-scrollbar-track:hover {
+			background: transparent;
+		}
+
+		&::-webkit-scrollbar-track:active {
+			background: #333;
+		}
+
+		&::-webkit-scrollbar-corner {
+			background: transparent;
+		}
+	}
 }
+
 
 .background {
 	height: 100%;

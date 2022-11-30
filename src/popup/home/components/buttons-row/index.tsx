@@ -16,7 +16,7 @@ const ButtonsRow: Component = () => {
 	return (
 		<Column horizontalAlignment={Column.Alignment.Horizontal.Stretch}>
 			<Button
-				classList={{ [styles.button]: true }}
+				classList={{ [styles.flex]: true }}
 				type={"button"}
 				onClick={openChiller}
 			>
@@ -25,7 +25,7 @@ const ButtonsRow: Component = () => {
 			<Row verticalAlignment={Row.Alignment.Vertical.Stretch}>
 				<Button
 					classList={{
-						[styles.button]: true,
+						[styles.flex]: true,
 					}}
 					active={page() === Page.ScriptList}
 					type={"button"}
@@ -33,16 +33,31 @@ const ButtonsRow: Component = () => {
 				>
 					Scripts
 				</Button>
-				<Button
+				<Row
 					classList={{
-						[styles.button]: true,
+						[styles.flex]: true,
 					}}
-					active={page() === Page.AddScript}
-					type={"button"}
-					onClick={() => setPage(Page.AddScript)}
+					verticalAlignment={Row.Alignment.Vertical.Stretch}
 				>
-					Add script
-				</Button>
+					<Button
+						type={"button"}
+						classList={{
+							[styles.flex]: true,
+						}}
+					>
+						Import
+					</Button>
+					<Button
+						active={page() === Page.AddScript}
+						type={"button"}
+						classList={{
+							[styles.flex]: true,
+						}}
+						onClick={() => setPage(Page.AddScript)}
+					>
+						Create new
+					</Button>
+				</Row>
 			</Row>
 		</Column>
 	);
