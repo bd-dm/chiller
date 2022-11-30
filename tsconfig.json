@@ -17,14 +17,13 @@
 		"moduleResolution":"node",
 		"jsx": "preserve",
 		"jsxImportSource": "solid-js",
-		"types": ["vite/client"],
+		"types": ["node", "jest","vite/client"],
 		"noEmit": true,
 		"isolatedModules": true,
 		"baseUrl": "src",
 		"paths": {
 			"*": ["*"]
 		},
-
 	},
 	"include": ["src"]
 }

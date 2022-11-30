@@ -1,5 +1,10 @@
+.bun
 .idea
 .vscode
 .turbo
 node_modules
 dist
+/test-results/
+/playwright-report/
+/playwright/.cache/
+/browser-context/

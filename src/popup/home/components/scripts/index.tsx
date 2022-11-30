@@ -1,4 +1,4 @@
-import { Component, Match, onMount, Switch } from "solid-js";
+import { Component, Match, Switch } from "solid-js";
 
 import { useHomeContext } from "../../context";
 import { Page } from "../../enums";
@@ -9,10 +9,8 @@ import styles from "./index.module.scss";
 const Scripts: Component = () => {
 	const { page } = useHomeContext();
 
-	onMount(() => {});
-
 	return (
-		<div class={styles.scripts}>
+		<section role={"main"} class={styles.scripts}>
 			<Switch>
 				<Match keyed when={page() === Page.AddScript}>
 					<AddScript />
@@ -21,7 +19,7 @@ const Scripts: Component = () => {
 					<ScriptsList />
 				</Match>
 			</Switch>
-		</div>
+		</section>
 	);
 };
 

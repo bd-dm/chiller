@@ -1,6 +1,6 @@
 import { isNull, isObject, isUndefined } from "lodash-es";
 
-import { StorageMethods } from "./types";
+import { StorageMethods, StorageType } from "./types";
 
 const get: StorageMethods["get"] = async (key) => {
 	const data = await chrome.storage.sync.get(key);
@@ -22,14 +22,21 @@ const set: StorageMethods["set"] = async (key, value) =>
 	});
 
 const getItem: StorageMethods["getItem"] = async (key, findFn) => {
-	const items = (await get(key)) ?? [];
-	return items.find(findFn) ?? null;
+	const items = await get<typeof key>(key);
+
+	if (isNull(items)) {
+		return null;
+	}
+
+	// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+	// @ts-ignore https://github.com/microsoft/TypeScript/issues/44373
+	return items.find(findFn);
 };
 
 const addItem: StorageMethods["addItem"] = async (key, item) => {
 	const items = (await get(key)) ?? [];
 
-	return await set(key, [...items, item]);
+	return await set(key, [...items, item] as StorageType<typeof key>);
 };
 
 const updateItem: StorageMethods["updateItem"] = async (
@@ -37,11 +44,13 @@ const updateItem: StorageMethods["updateItem"] = async (
 	findFn,
 	updateData
 ) => {
-	const items = await get(key);
+	const items = await get<typeof key>(key);
 	if (isNull(items)) {
 		return;
 	}
 
+	// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+	// @ts-ignore https://github.com/microsoft/TypeScript/issues/44373
 	const itemIndex = items.findIndex(findFn);
 	if (isUndefined(itemIndex) && itemIndex !== -1) {
 		return;
@@ -66,6 +75,8 @@ const removeItem: StorageMethods["removeItem"] = async (key, findFn) => {
 		return;
 	}
 
+	// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+	// @ts-ignore https://github.com/microsoft/TypeScript/issues/44373
 	const itemIndex = items.findIndex(findFn);
 	if (isUndefined(itemIndex) || itemIndex === -1) {
 		return;

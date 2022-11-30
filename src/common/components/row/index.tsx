@@ -1,4 +1,4 @@
-import { ParentComponent } from "solid-js";
+import { JSX, ParentComponent } from "solid-js";
 
 import styles from "./index.module.scss";
 
@@ -17,7 +17,7 @@ enum RowHorizontalAlignment {
 	Stretch = "Stretch",
 }
 
-interface RowProps {
+interface RowProps extends JSX.HTMLAttributes<HTMLDivElement> {
 	classList?: Record<string, boolean | undefined>;
 	verticalAlignment?: RowVerticalAlignment;
 	horizontalAlignment?: RowHorizontalAlignment;
@@ -33,6 +33,8 @@ interface RowInterface extends ParentComponent<RowProps> {
 const Row: RowInterface = (props) => {
 	return (
 		<div
+			{...props}
+			role={"row"}
 			classList={{
 				[styles.row]: true,
 				[styles[
