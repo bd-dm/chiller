@@ -10,7 +10,7 @@ const Scripts: Component = () => {
 	const { page } = useHomeContext();
 
 	return (
-		<section role={"main"} class={styles.scripts}>
+		<section role={"main"} aria-label={page()} class={styles.scripts}>
 			<Switch>
 				<Match keyed when={page() === Page.AddScript}>
 					<AddScript />

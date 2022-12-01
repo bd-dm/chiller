@@ -3,7 +3,7 @@ import { ScriptData } from "common/scripts";
 import { isUndefined } from "lodash-es";
 import { Component } from "solid-js";
 
-import { BodyConstructor, NameInput, SaveButton } from "./components";
+import { BodyConstructor, FinishButtons, NameInput } from "./components";
 import { ScriptConstructorContext } from "./context";
 import styles from "./index.module.scss";
 import { ScriptConstructorProps } from "./types";
@@ -27,7 +27,7 @@ const ScriptConstructor: Component<ScriptConstructorProps> = (props) => {
 				<h1 class={styles.title}>Add script</h1>
 				<NameInput />
 				<BodyConstructor />
-				<SaveButton />
+				<FinishButtons />
 			</Column>
 		</ScriptConstructorContext.Provider>
 	);
