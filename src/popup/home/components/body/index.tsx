@@ -23,6 +23,15 @@ const Body: Component = () => {
 				<ButtonsRow />
 				<Navigation />
 			</div>
+			<div class={styles.beta}>
+				Beta{" "}
+				<div class={styles.betaLink}>
+					Welcome to contribute on{" "}
+					<a target={"_blank"} href="https://github.com/bd-dm/chiller">
+						Github
+					</a>
+				</div>
+			</div>
 		</Show>
 	);
 };
