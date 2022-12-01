@@ -40,10 +40,12 @@ const ButtonsRow: Component = () => {
 					verticalAlignment={Row.Alignment.Vertical.Stretch}
 				>
 					<Button
+						active={page() === Page.ImportScript}
 						type={"button"}
 						classList={{
 							[styles.flex]: true,
 						}}
+						onClick={() => setPage(Page.ImportScript)}
 					>
 						Import
 					</Button>

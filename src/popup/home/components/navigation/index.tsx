@@ -3,10 +3,11 @@ import { Component, Match, Switch } from "solid-js";
 import { useHomeContext } from "../../context";
 import { Page } from "../../enums";
 import { AddScript } from "../add-script";
+import { ScriptImport } from "../script-import";
 import { ScriptsList } from "../scripts-list";
 import styles from "./index.module.scss";
 
-const Scripts: Component = () => {
+const Navigation: Component = () => {
 	const { page } = useHomeContext();
 
 	return (
@@ -18,9 +19,12 @@ const Scripts: Component = () => {
 				<Match keyed when={page() === Page.ScriptList}>
 					<ScriptsList />
 				</Match>
+				<Match keyed when={page() === Page.ImportScript}>
+					<ScriptImport />
+				</Match>
 			</Switch>
 		</section>
 	);
 };
 
-export { Scripts };
+export { Navigation };

@@ -24,7 +24,9 @@ const ScriptConstructor: Component<ScriptConstructorProps> = (props) => {
 				classList={{ [styles.block]: true }}
 				horizontalAlignment={Column.Alignment.Horizontal.Stretch}
 			>
-				<h1 class={styles.title}>Add script</h1>
+				<h1 class={styles.title}>
+					{props.isEdit ? "Edit" : "Create new"} script
+				</h1>
 				<NameInput />
 				<BodyConstructor />
 				<FinishButtons />

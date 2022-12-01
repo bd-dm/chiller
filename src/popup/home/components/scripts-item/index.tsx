@@ -54,12 +54,7 @@ const ScriptsItem: Component<ScriptsItemProps> = (props) => {
 				>
 					<div>{props.script.name}</div>
 					<Row>
-						<Button
-							type={"button"}
-							light
-							active={isEdit()}
-							onClick={exportHandler}
-						>
+						<Button type={"button"} light onClick={exportHandler}>
 							Export
 						</Button>
 						<Button
@@ -77,6 +72,7 @@ const ScriptsItem: Component<ScriptsItemProps> = (props) => {
 				</Row>
 				<Show keyed when={isEdit()}>
 					<ScriptConstructor
+						isEdit={true}
 						scriptId={props.script.id}
 						onSave={saveHandler}
 						onCancel={onFinish}
