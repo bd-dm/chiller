@@ -1,4 +1,4 @@
-import { Button, Column, Row, Select } from "common/components";
+import { Button, Column, InputLight, Row, Select } from "common/components";
 import { nanoid } from "nanoid";
 import { Component, Show } from "solid-js";
 
@@ -51,9 +51,19 @@ const StepsItem: Component<StepsItemProps> = (props) => {
 					horizontalAlignment={Row.Alignment.Horizontal.SpaceBetween}
 					verticalAlignment={Row.Alignment.Vertical.Center}
 				>
-					<h4 id={titleId} class={styles.title}>
-						Step {props.index + 1}
-					</h4>
+					<Row verticalAlignment={Row.Alignment.Vertical.Center}>
+						<h4 id={titleId} class={styles.title}>
+							Step {props.index + 1}
+						</h4>
+						<InputLight
+							classList={{ [styles.name]: true }}
+							onInput={({ currentTarget: { value } }) =>
+								changeHandler("name")(value)
+							}
+							value={props.step.name ?? ""}
+							placeholder={"Step name [optional]"}
+						/>
+					</Row>
 					<Show when={!isLast()} keyed>
 						<Row verticalAlignment={Row.Alignment.Vertical.Center}>
 							<Column gapLess classList={{ [styles.mover]: true }}>

@@ -5,7 +5,14 @@
 }
 
 .title {
-	margin-left: 8px;
+	margin: 0 8px;
+}
+
+.name {
+	color: variables.$primary;
+	margin-top: 2px;
+	font-size: 12px;
+	font-weight: 700;
 }
 
 .input {

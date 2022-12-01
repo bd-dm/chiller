@@ -1,0 +1,17 @@
+@use '../../styles/variables';
+
+.input {
+	background-color: transparent;
+	padding: 4px 8px;
+	color: variables.$text;
+
+	&:focus {
+		border: none;
+		outline: 1px solid variables.$primary;
+		border-radius: 4px;
+	}
+
+	&::placeholder {
+		color: variables.$text-placeholder;
+	}
+}
