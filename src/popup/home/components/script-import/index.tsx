@@ -75,7 +75,11 @@ const ScriptImport: Component = () => {
 			<ul class={styles.list}>
 				<Index
 					each={items()}
-					fallback={<li class={styles.noItems}>No files selected</li>}
+					fallback={
+						<li class={styles.noItems}>
+							Add *.json files here to import scripts
+						</li>
+					}
 				>
 					{(item, index) => (
 						<FileItem

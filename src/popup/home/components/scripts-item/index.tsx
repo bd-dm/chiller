@@ -40,6 +40,7 @@ const ScriptsItem: Component<ScriptsItemProps> = (props) => {
 	};
 
 	const onFinish = () => {
+		setIsEdit(false);
 		setPage(Page.ScriptList);
 	};
 
