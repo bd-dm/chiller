@@ -34,6 +34,10 @@
 	}
 }
 
+.select {
+	flex: 1;
+}
+
 .select:focus-within .suggestions-list {
 	display: block;
 }

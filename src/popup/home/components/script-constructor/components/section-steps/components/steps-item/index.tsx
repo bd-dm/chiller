@@ -45,6 +45,7 @@ const StepsItem: Component<StepsItemProps> = (props) => {
 				<Row
 					aria-hidden
 					horizontalAlignment={Row.Alignment.Horizontal.SpaceBetween}
+					verticalAlignment={Row.Alignment.Vertical.Center}
 				>
 					<h4 id={titleId} class={styles.title}>
 						Step {props.index + 1}
