@@ -27,13 +27,15 @@
 	list-style: none;
 }
 
+.no-items {
+	text-align: center;
+	padding: 24px 0;
+}
+
 .item {
 	cursor: default;
 	flex: 1;
-	padding: 8px 8px 8px 16px;
 	margin-bottom: 8px;
-	background-color: variables.$background-2;
-	border-radius: 8px;
 
 	&-name {
 		flex: 1;
