@@ -80,6 +80,29 @@
 	flex-direction: column;
 	justify-content: space-between;
 	min-width: 500px;
-	padding: 8px 10px;
+	padding: 8px 10px 32px;
 	gap: 8px;
+}
+
+.beta {
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	text-align: center;
+	background-color: #c72146;
+	border-radius: 4px;
+	color: #fff;
+	padding: 4px;
+	font-weight: 700;
+
+	&-link {
+		display: inline-block;
+		font-weight: 400;
+		padding-left: 16px;
+
+		a, a:visited, a:active {
+			color: #fff;
+		}
+	}
 }
