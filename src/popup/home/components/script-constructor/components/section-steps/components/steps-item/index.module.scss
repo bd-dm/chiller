@@ -1,3 +1,5 @@
+@use '../../../../../../../../common/styles/variables';
+
 .item:not(:last-of-type) {
 	margin-bottom: 8px;
 }
@@ -16,5 +18,13 @@
 
 	&:focus-within {
 		opacity: 1;
+	}
+}
+
+.mover {
+	.arrow {
+		color: variables.$primary;
+		padding: 4px;
+		font-size: 0.85em;
 	}
 }

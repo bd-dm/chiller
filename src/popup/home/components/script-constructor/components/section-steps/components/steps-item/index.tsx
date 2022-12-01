@@ -17,10 +17,14 @@ interface StepsItemProps {
 }
 
 const StepsItem: Component<StepsItemProps> = (props) => {
-	const { setStep, removeStep, steps } = useScriptConstructor();
+	const { setStep, removeStep, steps, moveStepUp, moveStepDown } =
+		useScriptConstructor();
 	const titleId = nanoid();
 
 	const isLast = () => props.index === steps().length - 1;
+
+	const isMovableDown = () => props.index < steps().length - 2;
+	const isMovableUp = () => props.index > 0;
 
 	const changeHandler =
 		(key: keyof ConstructorStepItem) =>
@@ -51,9 +55,31 @@ const StepsItem: Component<StepsItemProps> = (props) => {
 						Step {props.index + 1}
 					</h4>
 					<Show when={!isLast()} keyed>
-						<Button light onClick={removeHandler}>
-							&times;
-						</Button>
+						<Row verticalAlignment={Row.Alignment.Vertical.Center}>
+							<Column gapLess classList={{ [styles.mover]: true }}>
+								<Show when={isMovableUp()} keyed fallback={<div />}>
+									<button
+										onClick={() => moveStepUp(props.index)}
+										class={styles.arrow}
+										type={"button"}
+									>
+										▲
+									</button>
+								</Show>
+								<Show when={isMovableDown()} keyed fallback={<div />}>
+									<button
+										onClick={() => moveStepDown(props.index)}
+										class={styles.arrow}
+										type={"button"}
+									>
+										▼
+									</button>
+								</Show>
+							</Column>
+							<Button light onClick={removeHandler}>
+								&times;
+							</Button>
+						</Row>
 					</Show>
 				</Row>
 				<Select<ConstructorStepActionOption>
