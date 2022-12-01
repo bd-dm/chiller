@@ -62,7 +62,7 @@ const ScriptConstructorContextProvider: ParentComponent<
 	const scriptData = () => ({
 		id: id(),
 		name: name(),
-		json: JSON.stringify({
+		body: JSON.stringify({
 			variables: variablesToObject(getFilledVariables(variables())),
 			steps: getFilledSteps(steps()),
 		}),
@@ -100,7 +100,7 @@ const ScriptConstructorContextProvider: ParentComponent<
 		setId(script.id);
 		setName(script.name);
 
-		const { variables, steps } = JSON.parse(script.json) as ScriptBody;
+		const { variables, steps } = JSON.parse(script.body) as ScriptBody;
 
 		if (variables) {
 			setVariables(variablesToArray(variables));

@@ -44,7 +44,7 @@ const ParamsInputDynamic: Component<ParamsInputCommonProps> = (props) => {
 	const initialType = () => props.param?.type ?? undefined;
 
 	return (
-		<Row>
+		<Row verticalAlignment={Row.Alignment.Vertical.Stretch}>
 			<div class={styles.input}>
 				<Select
 					placeholder={"Select input type..."}

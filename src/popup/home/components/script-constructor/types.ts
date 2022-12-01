@@ -3,6 +3,7 @@ import { ActionDynamicParam, UserEventAction } from "common/user-events";
 
 interface ScriptConstructorProps {
 	scriptId: ScriptData["id"];
+	isEdit?: boolean;
 	onSave?: (result: ScriptData) => void;
 	onCancel?: () => void;
 }

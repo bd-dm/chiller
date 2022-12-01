@@ -7,6 +7,7 @@
 	padding: 8px;
 	color: variables.$text-inverted;
 	border-radius: 4px;
+	transition: background-color .3s;
 
 	&:focus {
 		border: none;
@@ -19,7 +20,13 @@
 	}
 
 	&.active {
-		opacity: 0.56;
+		cursor: default;
+		background-color: transparent;
+		color: variables.$button;
+		border-radius: 0;
+		outline: none;
+		border: 2px none;
+		border-bottom-style: solid;
 	}
 
 	&.light {

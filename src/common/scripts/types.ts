@@ -7,7 +7,7 @@ import {
 interface ScriptData {
 	id: string;
 	name: string;
-	json: string;
+	body: string;
 	addedTimestamp: number;
 }
 

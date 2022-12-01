@@ -19,12 +19,15 @@ const ScriptConstructor: Component<ScriptConstructorProps> = (props) => {
 		<ScriptConstructorContext.Provider
 			scriptId={props.scriptId}
 			onSave={saveHandler}
+			onCancel={() => props.onCancel && props.onCancel()}
 		>
 			<Column
 				classList={{ [styles.block]: true }}
 				horizontalAlignment={Column.Alignment.Horizontal.Stretch}
 			>
-				<h1 class={styles.title}>Add script</h1>
+				<h1 class={styles.title}>
+					{props.isEdit ? "Edit" : "Create new"} script
+				</h1>
 				<NameInput />
 				<BodyConstructor />
 				<FinishButtons />
