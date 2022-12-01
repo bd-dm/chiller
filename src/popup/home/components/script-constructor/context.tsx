@@ -44,6 +44,8 @@ interface ScriptConstructorContextValue {
 	setStep: (index: number, item: ConstructorStepItem) => void;
 	removeStep: (index: number) => void;
 	addStep: () => void;
+	moveStepUp: (index: number) => void;
+	moveStepDown: (index: number) => void;
 	setName: Setter<string>;
 	cancel?: () => void;
 	save?: () => void;
@@ -177,6 +179,24 @@ const ScriptConstructorContextProvider: ParentComponent<
 		setSteps((prevSteps) => [...prevSteps, {}]);
 	};
 
+	const moveStepUp = (index: number): void => {
+		setSteps((prevSteps) => {
+			const upperStep = prevSteps[index - 1];
+			prevSteps[index - 1] = prevSteps[index];
+			prevSteps[index] = upperStep;
+			return [...prevSteps];
+		});
+	};
+
+	const moveStepDown = (index: number): void => {
+		setSteps((prevSteps) => {
+			const bottomStep = prevSteps[index + 1];
+			prevSteps[index + 1] = prevSteps[index];
+			prevSteps[index] = bottomStep;
+			return [...prevSteps];
+		});
+	};
+
 	return (
 		<Show keyed when={id()}>
 			<Context.Provider
@@ -190,6 +210,8 @@ const ScriptConstructorContextProvider: ParentComponent<
 					setStep,
 					removeStep,
 					addStep,
+					moveStepUp,
+					moveStepDown,
 					name,
 					setName,
 					cancel: cancelHandler,

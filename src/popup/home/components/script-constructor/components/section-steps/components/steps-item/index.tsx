@@ -1,4 +1,4 @@
-import { Button, Column, Row, Select } from "common/components";
+import { Button, Column, InputLight, Row, Select } from "common/components";
 import { nanoid } from "nanoid";
 import { Component, Show } from "solid-js";
 
@@ -17,10 +17,14 @@ interface StepsItemProps {
 }
 
 const StepsItem: Component<StepsItemProps> = (props) => {
-	const { setStep, removeStep, steps } = useScriptConstructor();
+	const { setStep, removeStep, steps, moveStepUp, moveStepDown } =
+		useScriptConstructor();
 	const titleId = nanoid();
 
 	const isLast = () => props.index === steps().length - 1;
+
+	const isMovableDown = () => props.index < steps().length - 2;
+	const isMovableUp = () => props.index > 0;
 
 	const changeHandler =
 		(key: keyof ConstructorStepItem) =>
@@ -47,13 +51,45 @@ const StepsItem: Component<StepsItemProps> = (props) => {
 					horizontalAlignment={Row.Alignment.Horizontal.SpaceBetween}
 					verticalAlignment={Row.Alignment.Vertical.Center}
 				>
-					<h4 id={titleId} class={styles.title}>
-						Step {props.index + 1}
-					</h4>
+					<Row verticalAlignment={Row.Alignment.Vertical.Center}>
+						<h4 id={titleId} class={styles.title}>
+							Step {props.index + 1}
+						</h4>
+						<InputLight
+							classList={{ [styles.name]: true }}
+							onInput={({ currentTarget: { value } }) =>
+								changeHandler("name")(value)
+							}
+							value={props.step.name ?? ""}
+							placeholder={"Step name [optional]"}
+						/>
+					</Row>
 					<Show when={!isLast()} keyed>
-						<Button light onClick={removeHandler}>
-							&times;
-						</Button>
+						<Row verticalAlignment={Row.Alignment.Vertical.Center}>
+							<Column gapLess classList={{ [styles.mover]: true }}>
+								<Show when={isMovableUp()} keyed fallback={<div />}>
+									<button
+										onClick={() => moveStepUp(props.index)}
+										class={styles.arrow}
+										type={"button"}
+									>
+										▲
+									</button>
+								</Show>
+								<Show when={isMovableDown()} keyed fallback={<div />}>
+									<button
+										onClick={() => moveStepDown(props.index)}
+										class={styles.arrow}
+										type={"button"}
+									>
+										▼
+									</button>
+								</Show>
+							</Column>
+							<Button light onClick={removeHandler}>
+								&times;
+							</Button>
+						</Row>
 					</Show>
 				</Row>
 				<Select<ConstructorStepActionOption>

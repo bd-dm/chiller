@@ -19,6 +19,7 @@ interface ScriptBody {
 interface ScriptStep<
 	UserEventActionType extends UserEventAction = UserEventAction
 > {
+	name?: string;
 	action: UserEventActionType;
 	params: UserEventParams<UserEventActionType>;
 }

@@ -1,9 +1,18 @@
+@use '../../../../../../../../common/styles/variables';
+
 .item:not(:last-of-type) {
 	margin-bottom: 8px;
 }
 
 .title {
-	margin-left: 8px;
+	margin: 0 8px;
+}
+
+.name {
+	color: variables.$primary;
+	margin-top: 2px;
+	font-size: 12px;
+	font-weight: 700;
 }
 
 .input {
@@ -16,5 +25,13 @@
 
 	&:focus-within {
 		opacity: 1;
+	}
+}
+
+.mover {
+	.arrow {
+		color: variables.$primary;
+		padding: 4px;
+		font-size: 0.85em;
 	}
 }
