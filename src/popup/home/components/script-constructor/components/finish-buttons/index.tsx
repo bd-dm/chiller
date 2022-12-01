@@ -3,7 +3,7 @@ import { Component } from "solid-js";
 
 import { useScriptConstructor } from "../../context";
 
-const SaveButton: Component = () => {
+const FinishButtons: Component = () => {
 	const { save, cancel } = useScriptConstructor();
 
 	return (
@@ -18,4 +18,4 @@ const SaveButton: Component = () => {
 	);
 };
 
-export { SaveButton };
+export { FinishButtons };

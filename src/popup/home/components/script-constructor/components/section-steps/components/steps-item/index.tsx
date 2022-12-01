@@ -1,4 +1,5 @@
 import { Button, Column, Row, Select } from "common/components";
+import { nanoid } from "nanoid";
 import { Component, Show } from "solid-js";
 
 import { actionOptions } from "../../../../action-variants";
@@ -17,6 +18,7 @@ interface StepsItemProps {
 
 const StepsItem: Component<StepsItemProps> = (props) => {
 	const { setStep, removeStep, steps } = useScriptConstructor();
+	const titleId = nanoid();
 
 	const isLast = () => props.index === steps().length - 1;
 
@@ -35,13 +37,18 @@ const StepsItem: Component<StepsItemProps> = (props) => {
 	};
 
 	return (
-		<Row aria-label={`Step ${props.index + 1}`}>
+		<Row aria-labelledby={titleId}>
 			<Column
 				horizontalAlignment={Column.Alignment.Horizontal.Stretch}
 				classList={{ [styles.item]: true, [styles.last]: isLast() }}
 			>
-				<Row horizontalAlignment={Row.Alignment.Horizontal.SpaceBetween}>
-					<h4 class={styles.title}>Step {props.index + 1}</h4>
+				<Row
+					aria-hidden
+					horizontalAlignment={Row.Alignment.Horizontal.SpaceBetween}
+				>
+					<h4 id={titleId} class={styles.title}>
+						Step {props.index + 1}
+					</h4>
 					<Show when={!isLast()} keyed>
 						<Button light onClick={removeHandler}>
 							&times;

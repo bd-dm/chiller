@@ -39,6 +39,7 @@ const ScriptsItem: Component<ScriptsItemProps> = (props) => {
 			<Column horizontalAlignment={Column.Alignment.Horizontal.Stretch}>
 				<Row
 					classList={{ [styles.row]: true }}
+					aria-label={props.script.name}
 					horizontalAlignment={Row.Alignment.Horizontal.SpaceBetween}
 					verticalAlignment={Row.Alignment.Vertical.Center}
 				>
