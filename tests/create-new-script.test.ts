@@ -1,20 +1,20 @@
 import { Page } from "../src/popup/home/enums";
 import { test } from "../test-utils";
 
-test.describe("Mechanics/AddScript", () => {
-	test('Opens add script page on click "Add script"', async ({
+test.describe("Mechanics/CreateNewScript", () => {
+	test('Opens create new script page on click "Create new"', async ({
 		page,
 		extension,
 		ui,
 	}) => {
 		await extension.goToPopup();
-		await ui.getButton("Add script").click();
-		page.getByTitle("Add script");
+		await ui.getButton("Create new").click();
+		page.getByTitle("Create new script");
 	});
 
-	test("Adds script - happy path", async ({ extension, ui }) => {
+	test("Creates script - happy path", async ({ extension, ui }) => {
 		await extension.goToPopup();
-		const button = ui.getButton("Add script");
+		const button = ui.getButton("Create new");
 		await button.click();
 
 		await ui.getInput("Name").fill("Test name");
