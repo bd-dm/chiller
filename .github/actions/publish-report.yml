@@ -1,8 +1,0 @@
-name: Publish report
-description: Publish report
-runs:
-  using: composite
-  main: scripts/deploy-report.sh
-outputs:
-  url:
-    description: Deployment url
