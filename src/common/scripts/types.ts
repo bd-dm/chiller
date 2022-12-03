@@ -12,6 +12,7 @@ interface ScriptData {
 }
 
 interface ScriptBody {
+	version: number;
 	variables: ScriptVariables;
 	steps: ScriptSteps;
 }

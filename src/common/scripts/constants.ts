@@ -1,0 +1,3 @@
+const SCRIPT_SCHEMA_VERSION = 1;
+
+export { SCRIPT_SCHEMA_VERSION };
