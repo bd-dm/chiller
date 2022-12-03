@@ -1,4 +1,4 @@
-name: Merge to master
+name: Bump version
 
 on:
   push:
@@ -25,10 +25,4 @@ jobs:
           node-version: ${{ env.node_version }}
           registry-url: 'https://registry.npmjs.org'
       - name: Bump version
-        uses: bcomnes/npm-bump@v2
-        with:
-          git_email: brd.dmitry@gmail.com
-          git_username: ${{ github.actor }}
-          newversion: 'patch'
-          push_version_commit: true
-          publish_cmd: ''
+        run: sh ./.github/scripts/bump-version.sh

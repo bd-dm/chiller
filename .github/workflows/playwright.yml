@@ -28,4 +28,4 @@ jobs:
     - name: Deploy report
       id: deploy
       if: always()
-      run: sh ./scripts/deploy-report.sh
+      run: sh ./.github/scripts/deploy-report.sh
