@@ -2,6 +2,7 @@ import {
 	getScriptOrDraft,
 	removeScriptDraft,
 	saveScriptDraft,
+	SCRIPT_SCHEMA_VERSION,
 	ScriptBody,
 	ScriptData,
 } from "common/scripts";
@@ -65,9 +66,10 @@ const ScriptConstructorContextProvider: ParentComponent<
 		id: id(),
 		name: name(),
 		body: JSON.stringify({
+			version: SCRIPT_SCHEMA_VERSION,
 			variables: variablesToObject(getFilledVariables(variables())),
 			steps: getFilledSteps(steps()),
-		}),
+		} as ScriptBody),
 		addedTimestamp: new Date().getTime(),
 	});
 
