@@ -2,7 +2,7 @@
 	"manifest_version": 3,
 	"name": "Chiller",
 	"description": "A Chrome extension that helps you fill anything with chill",
-	"version": "0.0.1",
+	"version": "0.0.16",
 	"action": {
 		"default_popup": "src/popup/popup.html"
 	},
@@ -10,10 +10,24 @@
 		"service_worker": "src/worker/index.js",
 		"type": "module"
 	},
-	"permissions": ["storage", "tabs", "activeTab", "scripting", "debugger"],
-	"host_permissions": ["<all_urls>"],
-	"web_accessible_resources": [{
-		"matches": ["<all_urls>"],
-		"resources": ["*"]
-	}]
+	"permissions": [
+		"storage",
+		"tabs",
+		"activeTab",
+		"scripting",
+		"debugger"
+	],
+	"host_permissions": [
+		"<all_urls>"
+	],
+	"web_accessible_resources": [
+		{
+			"matches": [
+				"<all_urls>"
+			],
+			"resources": [
+				"*"
+			]
+		}
+	]
 }
