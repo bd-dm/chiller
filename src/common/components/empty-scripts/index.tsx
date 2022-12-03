@@ -8,7 +8,8 @@ const EmptyScripts: Component = () => (
 		classList={{ [styles.block]: true }}
 		horizontalAlignment={Row.Alignment.Horizontal.Center}
 	>
-		No scripts yet
+		No scripts yet. <br />
+		To add a script, go to "Create new" tab
 	</Row>
 );
 
