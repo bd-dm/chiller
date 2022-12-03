@@ -12,6 +12,8 @@ VERSION=$(npm pkg get version | cut -d "\"" -f 2)
 node "./.github/scripts/bump-manifest-version.js" "${VERSION}"
 
 git add ./public/manifest.json
+git add ./package.json
+git add ./package-lock.json
 
 git commit -m "${VERSION}"
 git tag "v${VERSION}"
