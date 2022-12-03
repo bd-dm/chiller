@@ -1,5 +1,5 @@
-import path from "node:path";
-import fs from "node:fs";
+const path = require("node:path");
+const fs = require("node:fs");
 
 const [_, __, version] = process.argv;
 const MANIFEST_PATH = path.resolve(__dirname, "../public/manifest.json");
