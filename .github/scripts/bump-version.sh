@@ -11,5 +11,6 @@ VERSION=$(npm pkg get version | cut -d "\"" -f 2)
 
 node "./.github/scripts/bump-manifest-version.js" "${VERSION}"
 
+git add ./public/manifest.json
 git commit -m "${VERSION}"
 git push -u origin master
