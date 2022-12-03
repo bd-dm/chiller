@@ -1,5 +1,6 @@
 import { MessageType, sendMessage } from "common/message-carrier";
 import { getScripts, ScriptData } from "common/scripts";
+import { isNull } from "lodash-es";
 import {
 	Accessor,
 	createContext,
@@ -30,7 +31,10 @@ const HomeContextProvider: ParentComponent = (props) => {
 	const [scripts, { refetch }] = createResource(getScripts);
 
 	onMount(async () => {
-		setPage(await getPage());
+		const savedPage = await getPage();
+		if (!isNull(savedPage)) {
+			setPage(savedPage);
+		}
 	});
 
 	createEffect(() => {
