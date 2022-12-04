@@ -1,11 +1,5 @@
 #!/bin/bash
 
-contains() {
-    input="$1"
-    pattern="$2"
-    echo "$input" | grep -q "$pattern"
-}
-
 git fetch --all
 
 git config --global user.email "action@github.com"
@@ -30,7 +24,7 @@ git push origin "v${VERSION}"
 
 PUSHED_TAG=$(git ls-remote --tags origin "refs/tags/v${VERSION}")
 
-if (contains "refs/tags/v${VERSION}" "${PUSHED_TAG}") then
+if echo "${PUSHED_TAG}" | grep -q "refs/tags/v${VERSION}"; then
 		echo "Push was successful, continue"
 else
 		echo "No refs/tags/v${VERSION} found pushed. Found: ${PUSHED_TAG}"
