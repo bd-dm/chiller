@@ -24,7 +24,7 @@ type GetActionParamsComponentsMap<
 
 const actionOptions: ConstructorStepActionOption[] = [
 	{ value: "click", name: "Click" },
-	// { value: "pressKeyCustom", name: "Press Key" }, TODO implement press key params input
+	{ value: "pressKey", name: "Press Key" },
 	{ value: "type", name: "Type string" },
 	{ value: "typeRandom", name: "Type random string from list" },
 	{ value: "enterChar", name: "Enter character" },

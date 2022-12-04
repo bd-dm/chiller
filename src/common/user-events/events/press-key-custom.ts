@@ -27,8 +27,6 @@ interface PressKeyParams {
 	commands?: string;
 	windowsVirtualKeyCode?: number;
 	nativeVirtualKeyCode?: number;
-	/** Used to press key only by code */
-	keyCode?: number;
 }
 
 const pressKeyCustom: UserEvent<PressKeyParams> = async (
@@ -44,7 +42,6 @@ const pressKeyCustom: UserEvent<PressKeyParams> = async (
 			commands,
 			windowsVirtualKeyCode,
 			nativeVirtualKeyCode,
-			keyCode,
 		},
 	}
 ): Promise<void> => {
@@ -78,12 +75,6 @@ const pressKeyCustom: UserEvent<PressKeyParams> = async (
 	}
 	if (modifiers !== 0) {
 		commandParams.modifiers = modifiers;
-	}
-
-	if (!isUndefined(keyCode)) {
-		commandParams.windowsVirtualKeyCode = keyCode;
-		commandParams.nativeVirtualKeyCode = keyCode;
-		commandParams.code = keyCode;
 	}
 
 	await sendMessage(MessageType.SendDebuggerCommand, {
