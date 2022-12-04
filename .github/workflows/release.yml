@@ -12,6 +12,9 @@ on:
 env:
   node_version: 18
 
+concurrency:
+  group: release-actions
+
 jobs:
   build:
     runs-on: ubuntu-latest
