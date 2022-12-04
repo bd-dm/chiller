@@ -20,3 +20,11 @@ git tag "v${VERSION}"
 
 git push origin master
 git push origin "v${VERSION}"
+
+PUSHED_TAG=$(git ls-remote --tags origin "refs/tags/v${VERSION}")
+
+if (grep -q "refs/tags/v${VERSION}" in "${PUSHED_TAG}") then
+		echo "Push was successful, continue"
+else
+		exit 1
+fi
