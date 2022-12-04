@@ -2,7 +2,7 @@ import {
 	clearInput,
 	click,
 	enterChar,
-	pressKey,
+	pressKeyCustom,
 	sleep,
 	type,
 	typeRandom,
@@ -23,7 +23,7 @@ const userEvents = {
 	},
 
 	click: wrap(click),
-	pressKey: wrap(pressKey),
+	pressKey: wrap(pressKeyCustom),
 	enterChar: wrap(enterChar),
 	type: wrap(type),
 	clearInput: wrap(clearInput),

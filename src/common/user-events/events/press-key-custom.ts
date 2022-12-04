@@ -31,7 +31,7 @@ interface PressKeyParams {
 	keyCode?: number;
 }
 
-const pressKey: UserEvent<PressKeyParams> = async (
+const pressKeyCustom: UserEvent<PressKeyParams> = async (
 	tabId,
 	{
 		params: {
@@ -93,4 +93,4 @@ const pressKey: UserEvent<PressKeyParams> = async (
 	});
 };
 
-export { pressKey, PressKeyModifier, PressKeyType };
+export { pressKeyCustom, PressKeyModifier, PressKeyType };
