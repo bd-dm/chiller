@@ -1,7 +1,7 @@
 import { UserEventWithTarget } from "../types";
 import { getCtrlOrCmdModifier, getTargetElement } from "../utils";
 import { click } from "./click";
-import { pressKey, PressKeyType } from "./press-key";
+import { pressKeyCustom, PressKeyType } from "./press-key-custom";
 
 interface ClearInputParams {
 	selector: string;
@@ -20,7 +20,7 @@ const clearInput: UserEventWithTarget<ClearInputParams> = async (
 	const inputValueLength = element.value.length;
 
 	for (let i = 0; i < inputValueLength; i++) {
-		await pressKey(tabId, {
+		await pressKeyCustom(tabId, {
 			params: {
 				type: PressKeyType.KeyDown,
 				code: "End",
@@ -28,7 +28,7 @@ const clearInput: UserEventWithTarget<ClearInputParams> = async (
 				nativeVirtualKeyCode: 35,
 			},
 		});
-		await pressKey(tabId, {
+		await pressKeyCustom(tabId, {
 			params: {
 				type: PressKeyType.KeyUp,
 				code: "End",
@@ -36,7 +36,7 @@ const clearInput: UserEventWithTarget<ClearInputParams> = async (
 				nativeVirtualKeyCode: 35,
 			},
 		});
-		await pressKey(tabId, {
+		await pressKeyCustom(tabId, {
 			params: {
 				type: PressKeyType.KeyDown,
 				code: "Backspace",

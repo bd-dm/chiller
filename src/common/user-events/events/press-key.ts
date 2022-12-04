@@ -1,96 +1,29 @@
-import { MessageType, sendMessage } from "common/message-carrier";
-import { isUndefined } from "lodash-es";
-
 import { UserEvent } from "../types";
+import { pressKeyCustom, PressKeyType } from "./press-key-custom";
 
-enum PressKeyType {
-	KeyDown = "keyDown",
-	KeyUp = "keyUp",
-	RawKeyDown = "rawKeyDown",
-	Char = "char",
+enum Keys {
+	Tab,
 }
 
-enum PressKeyModifier {
-	Alt = 1,
-	Ctrl = 2,
-	Command = 4,
-	Shift = 8,
-}
+// https://www.toptal.com/developers/keycode
+const keyCodes = {
+	[Keys.Tab]: "Tab",
+};
 
 interface PressKeyParams {
-	type: PressKeyType;
-	modifiers?: PressKeyModifier[];
-	text?: string;
-	code?: string | number;
-	keyIdentifier?: string;
-	key?: string;
-	commands?: string;
-	windowsVirtualKeyCode?: number;
-	nativeVirtualKeyCode?: number;
-	/** Used to press key only by code */
-	keyCode?: number;
+	key: Keys;
 }
 
 const pressKey: UserEvent<PressKeyParams> = async (
 	tabId,
-	{
-		params: {
-			type,
-			modifiers: modifiersList = [],
-			text,
-			code,
-			keyIdentifier,
-			key,
-			commands,
-			windowsVirtualKeyCode,
-			nativeVirtualKeyCode,
-			keyCode,
-		},
-	}
+	{ params: { key } }
 ): Promise<void> => {
-	const modifiers = modifiersList?.reduce((acc, curr) => acc + curr, 0);
-	const debuggee = { tabId };
-
-	const commandParams: Record<string, unknown> = {
-		type,
-	};
-
-	if (!isUndefined(text)) {
-		commandParams.text = text;
-	}
-	if (!isUndefined(code)) {
-		commandParams.code = code;
-	}
-	if (!isUndefined(keyIdentifier)) {
-		commandParams.keyIdentifier = keyIdentifier;
-	}
-	if (!isUndefined(key)) {
-		commandParams.key = key;
-	}
-	if (!isUndefined(commands)) {
-		commandParams.commands = commands;
-	}
-	if (!isUndefined(windowsVirtualKeyCode)) {
-		commandParams.windowsVirtualKeyCode = windowsVirtualKeyCode;
-	}
-	if (!isUndefined(nativeVirtualKeyCode)) {
-		commandParams.nativeVirtualKeyCode = nativeVirtualKeyCode;
-	}
-	if (modifiers !== 0) {
-		commandParams.modifiers = modifiers;
-	}
-
-	if (!isUndefined(keyCode)) {
-		commandParams.windowsVirtualKeyCode = keyCode;
-		commandParams.nativeVirtualKeyCode = keyCode;
-		commandParams.code = keyCode;
-	}
-
-	await sendMessage(MessageType.SendDebuggerCommand, {
-		target: debuggee,
-		method: "Input.dispatchKeyEvent",
-		commandParams,
+	await pressKeyCustom(tabId, {
+		params: { type: PressKeyType.KeyDown, key: keyCodes[key] },
+	});
+	await pressKeyCustom(tabId, {
+		params: { type: PressKeyType.KeyUp, key: keyCodes[key] },
 	});
 };
 
-export { pressKey, PressKeyModifier, PressKeyType };
+export { Keys, pressKey };

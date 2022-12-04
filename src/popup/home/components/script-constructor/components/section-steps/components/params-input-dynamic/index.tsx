@@ -22,7 +22,7 @@ interface ParamsInputCommonProps {
 }
 
 const ParamTypeNames: Record<ActionDynamicParamType, string> = {
-	[ActionDynamicParamType.Variable]: "With variable",
+	[ActionDynamicParamType.Variable]: "From variable",
 	[ActionDynamicParamType.Text]: "Text",
 	[ActionDynamicParamType.Selector]: "CSS selector",
 };

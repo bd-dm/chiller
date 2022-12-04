@@ -34,8 +34,8 @@ test.describe("Mechanics/CreateNewScript", () => {
 				await ui.getButton("Click").click();
 
 				await ui.getSelect("Select input type...").click();
-				await ui.type("wit");
-				await ui.getButton("With variable").click();
+				await ui.type("fro");
+				await ui.getButton("From variable").click();
 
 				await ui.getSelect("Select variable...").click();
 				await ui.type("tes");

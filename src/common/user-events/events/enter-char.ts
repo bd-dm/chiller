@@ -1,5 +1,5 @@
 import { UserEvent } from "../types";
-import { pressKey, PressKeyType } from "./press-key";
+import { pressKeyCustom, PressKeyType } from "./press-key-custom";
 
 interface EnterCharParams {
 	char: string;
@@ -9,7 +9,9 @@ const enterChar: UserEvent<EnterCharParams> = async (
 	tabId,
 	{ params: { char } }
 ): Promise<void> => {
-	return pressKey(tabId, { params: { type: PressKeyType.Char, text: char } });
+	return pressKeyCustom(tabId, {
+		params: { type: PressKeyType.Char, text: char },
+	});
 };
 
 export { enterChar };
