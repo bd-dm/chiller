@@ -2,7 +2,7 @@
 	"manifest_version": 3,
 	"name": "Chiller",
 	"description": "A Chrome extension that helps you fill anything with chill",
-	"version": "0.0.23",
+	"version": "0.0.24",
 	"action": {
 		"default_popup": "src/popup/popup.html"
 	},
