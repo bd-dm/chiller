@@ -33,5 +33,6 @@ PUSHED_TAG=$(git ls-remote --tags origin "refs/tags/v${VERSION}")
 if (contains "refs/tags/v${VERSION}" "${PUSHED_TAG}") then
 		echo "Push was successful, continue"
 else
+		echo "No refs/tags/v${VERSION} found pushed. Found: ${PUSHED_TAG}"
 		exit 1
 fi
