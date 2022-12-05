@@ -1,0 +1,43 @@
+@use '../../../styles/variables';
+
+.page {
+	padding: 8px 0;
+}
+
+.input {
+	position: relative;
+
+	input {
+		cursor: pointer;
+		display: block;
+		position: absolute;
+		top: 0;
+		right: 0;
+		bottom: 0;
+		left: 0;
+		opacity: 0;
+	}
+}
+
+.button {
+	width: 100%;
+}
+
+.list {
+	list-style: none;
+}
+
+.no-items {
+	text-align: center;
+	padding: 24px 0;
+}
+
+.item {
+	cursor: default;
+	flex: 1;
+	margin-bottom: 8px;
+
+	&-name {
+		flex: 1;
+	}
+}

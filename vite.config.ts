@@ -37,13 +37,15 @@ export default defineConfig(({ mode }) => {
 			outDir: "dist",
 			rollupOptions: {
 				input: [
+					path.resolve(__dirname, "./src/devtools/devtools.html"),
+					path.resolve(__dirname, "./src/devtools/panel.html"),
 					path.resolve(__dirname, "./src/popup/popup.html"),
-					path.resolve(__dirname, "./src/worker/index.ts"),
-					path.resolve(__dirname, "./src/content/index.ts"),
+					path.resolve(__dirname, "./src/worker/worker.ts"),
+					path.resolve(__dirname, "./src/content/content.ts"),
 				],
 				output: {
-					preserveModules: true,
-					entryFileNames: "[name].js",
+					preserveModules: false,
+					entryFileNames: "entries/[name].js",
 					assetFileNames: "styles/[name]-[hash][extname]",
 					chunkFileNames: "chunks/[name]-[hash].js",
 				},

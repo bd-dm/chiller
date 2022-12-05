@@ -1,4 +1,4 @@
-import { Page } from "../src/popup/home/enums";
+import { Page } from "../src/common/control-panel/enums";
 import { test } from "../test-utils";
 
 test.describe("Mechanics/CreateNewScript", () => {
