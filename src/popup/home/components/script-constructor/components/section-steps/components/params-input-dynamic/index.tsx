@@ -2,6 +2,7 @@ import { Input, Row, Select } from "common/components";
 import {
 	ActionDynamicParam,
 	ActionDynamicParamType,
+	ActionDynamicParamWithScript,
 	ActionDynamicParamWithSelector,
 	ActionDynamicParamWithText,
 	ActionDynamicParamWithVariable,
@@ -10,6 +11,7 @@ import { Component, Match, Switch } from "solid-js";
 
 import { ConstructorStepParamChangeHandler } from "../../../../types";
 import styles from "./index.module.scss";
+import { InputScript } from "./input-script";
 import { InputSelector } from "./input-selector";
 import { InputText } from "./input-text";
 import { InputVariable } from "./input-variable";
@@ -25,6 +27,7 @@ const ParamTypeNames: Record<ActionDynamicParamType, string> = {
 	[ActionDynamicParamType.Variable]: "From variable",
 	[ActionDynamicParamType.Text]: "Text",
 	[ActionDynamicParamType.Selector]: "CSS selector",
+	[ActionDynamicParamType.Script]: "Text",
 };
 
 const ParamsInputDynamic: Component<ParamsInputCommonProps> = (props) => {
@@ -76,6 +79,15 @@ const ParamsInputDynamic: Component<ParamsInputCommonProps> = (props) => {
 					<Match when={props.param?.type === ActionDynamicParamType.Text} keyed>
 						<InputText
 							param={props.param as ActionDynamicParamWithText}
+							onChange={changeHandler}
+						/>
+					</Match>
+					<Match
+						when={props.param?.type === ActionDynamicParamType.Script}
+						keyed
+					>
+						<InputScript
+							param={props.param as ActionDynamicParamWithScript}
 							onChange={changeHandler}
 						/>
 					</Match>

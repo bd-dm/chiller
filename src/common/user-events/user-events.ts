@@ -3,6 +3,7 @@ import {
 	click,
 	enterChar,
 	pressKey,
+	runScript,
 	sleep,
 	type,
 	typeRandom,
@@ -27,10 +28,10 @@ const userEvents = {
 	enterChar: wrap(enterChar),
 	type: wrap(type),
 	clearInput: wrap(clearInput),
-
 	typeRandom: wrap(typeRandom),
 	sleep: wrap(sleep),
 	waitForElement: wrap(waitForElement),
+	runScript: wrap(runScript),
 };
 
 type UserEvents = Omit<typeof userEvents, "start">;

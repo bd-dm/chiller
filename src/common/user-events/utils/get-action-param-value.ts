@@ -17,6 +17,9 @@ const getActionParamValue = (
 		case ActionDynamicParamType.Text: {
 			return param.text;
 		}
+		case ActionDynamicParamType.Script: {
+			return param.script;
+		}
 		case ActionDynamicParamType.Selector: {
 			return param.selector;
 		}
