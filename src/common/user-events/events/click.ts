@@ -1,13 +1,14 @@
 import { MessageType, sendMessage } from "common/message-carrier";
 
 import { UserEventWithTarget } from "../types";
-import { getTargetElement } from "../utils";
+import { getTargetElement, scrollToElementIfNotVisible } from "../utils";
 
 const click: UserEventWithTarget = async (
 	tabId,
 	{ params: { target }, variables }
 ): Promise<void> => {
 	const { element, iframe } = getTargetElement(target, variables);
+	scrollToElementIfNotVisible(element);
 
 	const rect = element.getBoundingClientRect();
 	let x = (rect.left + rect.right) / 2;
