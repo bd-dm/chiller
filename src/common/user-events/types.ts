@@ -44,6 +44,7 @@ enum ActionDynamicParamType {
 	Variable = "variable",
 	Text = "text",
 	Selector = "selector",
+	Script = "script",
 }
 
 interface ActionDynamicParamEmpty {
@@ -65,11 +66,17 @@ interface ActionDynamicParamWithSelector {
 	selector: string;
 }
 
+interface ActionDynamicParamWithScript {
+	type: ActionDynamicParamType.Script;
+	script: string;
+}
+
 type ActionDynamicParam =
 	| ActionDynamicParamEmpty
 	| ActionDynamicParamWithVariable
 	| ActionDynamicParamWithText
-	| ActionDynamicParamWithSelector;
+	| ActionDynamicParamWithSelector
+	| ActionDynamicParamWithScript;
 
 /**
  * Exports
@@ -77,6 +84,7 @@ type ActionDynamicParam =
 
 export type {
 	ActionDynamicParam,
+	ActionDynamicParamWithScript,
 	ActionDynamicParamWithSelector,
 	ActionDynamicParamWithText,
 	ActionDynamicParamWithVariable,

@@ -5,6 +5,7 @@ import {
 	ParamsInputClick,
 	ParamsInputEnterChar,
 	ParamsInputPressKey,
+	ParamsInputRunScript,
 	ParamsInputSleep,
 	ParamsInputType,
 	ParamsInputTypeRandom,
@@ -31,6 +32,7 @@ const actionOptions: ConstructorStepActionOption[] = [
 	{ value: "waitForElement", name: "Wait for element" },
 	{ value: "clearInput", name: "Clear input" },
 	{ value: "sleep", name: "Sleep" },
+	{ value: "runScript", name: "Run script" },
 ];
 
 const getActionParamsComponents: GetActionParamsComponentsMap = (action) => {
@@ -58,6 +60,9 @@ const getActionParamsComponents: GetActionParamsComponentsMap = (action) => {
 		}
 		case "waitForElement": {
 			return ParamsInputWaitForElement;
+		}
+		case "runScript": {
+			return ParamsInputRunScript;
 		}
 	}
 };

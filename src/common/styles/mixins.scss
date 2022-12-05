@@ -100,3 +100,39 @@
 		border-spacing: 0;
 	}
 }
+
+@mixin scrollbar {
+	&::-webkit-scrollbar {
+		width: 4px;
+		height: 4px;
+	}
+
+	&::-webkit-scrollbar-button {
+		width: 0;
+		height: 0;
+	}
+
+	&::-webkit-scrollbar-thumb {
+		background: variables.$background-2;
+		border: none;
+		border-radius: 50px;
+	}
+
+	&::-webkit-scrollbar-track {
+		background: transparent;
+		border:none;
+		border-radius: 50px;
+	}
+
+	&::-webkit-scrollbar-track:hover {
+		background: transparent;
+	}
+
+	&::-webkit-scrollbar-track:active {
+		background: #333;
+	}
+
+	&::-webkit-scrollbar-corner {
+		background: transparent;
+	}
+}

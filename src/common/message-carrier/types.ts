@@ -4,16 +4,21 @@ interface MessageBase<Type extends MessageType> {
 	type: Type;
 }
 
+interface DebuggerMessageContent {
+	method:
+		| "Input.dispatchMouseEvent"
+		| "Input.dispatchKeyEvent"
+		| "Runtime.evaluate";
+	target: chrome.debugger.Debuggee;
+	// eslint-disable-next-line @typescript-eslint/ban-types
+	commandParams?: Object;
+}
+
 type MessageContent<Type extends MessageType> =
 	Type extends MessageType.GetCurrentTab
 		? void
 		: Type extends MessageType.SendDebuggerCommand
-		? {
-				target: chrome.debugger.Debuggee;
-				method: string;
-				// eslint-disable-next-line @typescript-eslint/ban-types
-				commandParams?: Object;
-		  }
+		? DebuggerMessageContent
 		: Type extends MessageType.InjectContent
 		? void
 		: Type extends MessageType.GetTabScreenshot
