@@ -1,6 +1,6 @@
 {
   "name": "chiller",
-  "version": "0.0.29",
+  "version": "0.0.30",
   "description": "A Chrome extension that helps you fill anything with chill",
   "scripts": {
     "dev": "npm run vite:dev",
