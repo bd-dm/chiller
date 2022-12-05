@@ -10,7 +10,6 @@ const ScriptsList: Component = () => {
 
 	return (
 		<ul class={styles.list}>
-			<h3>Scripts</h3>
 			<For each={scripts()} fallback={<EmptyScripts />}>
 				{(script) => <ScriptsItem script={script} />}
 			</For>

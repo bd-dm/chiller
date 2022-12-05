@@ -1,13 +1,16 @@
 @use '../../common/styles/variables';
+@use '../../common/styles/mixins';
 
-.overlay {
+.positioner {
 	position: fixed;
 	bottom: 8px;
 	right: 8px;
-	padding: 8px;
+	z-index: 2147483647;
+}
+
+.overlay {
 	color: variables.$text;
 	font-size: 16px;
-	z-index: 2147483647;
 	min-width: 200px;
 	max-width: 400px;
 
@@ -16,4 +19,26 @@
 	border-radius: 8px;
 	box-shadow: 0 4px 30px variables.$shadow;
 	backdrop-filter: blur(20px);
+}
+
+.content {
+	padding: 16px 12px;
+	max-height: 400px;
+	overflow: auto;
+
+	@include mixins.scrollbar;
+}
+
+.header {
+	border-top-left-radius: 8px;
+	border-top-right-radius: 8px;
+	cursor: move;
+	background-color: variables.$primary;
+	color: variables.$text-inverted;
+	padding: 8px;
+	transition: background-color .3s;
+
+	&:hover {
+		background-color: variables.$button-hovered;
+	}
 }
