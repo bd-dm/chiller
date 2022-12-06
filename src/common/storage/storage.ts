@@ -3,7 +3,7 @@ import { isNull, isObject, isUndefined } from "lodash-es";
 import { StorageMethods, StorageType } from "./types";
 
 const get: StorageMethods["get"] = async (key) => {
-	const data = await chrome.storage.sync.get(key);
+	const data = await chrome.storage.local.get(key);
 	if (!data) {
 		return null;
 	}
@@ -17,7 +17,7 @@ const get: StorageMethods["get"] = async (key) => {
 };
 
 const set: StorageMethods["set"] = async (key, value) =>
-	await chrome.storage.sync.set({
+	await chrome.storage.local.set({
 		[key]: value,
 	});
 
@@ -88,7 +88,7 @@ const removeItem: StorageMethods["removeItem"] = async (key, findFn) => {
 };
 
 const removeKey: StorageMethods["removeKey"] = async (key) => {
-	await chrome.storage.sync.remove(key);
+	await chrome.storage.local.remove(key);
 };
 
 const storage: StorageMethods = {
