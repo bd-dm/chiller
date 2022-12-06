@@ -2,7 +2,7 @@
 	"manifest_version": 3,
 	"name": "Chiller",
 	"description": "A Chrome extension that helps you automate interactions with websites with chill",
-	"version": "0.0.31",
+	"version": "0.0.32",
 	"minimum_chrome_version": "108.0",
 	"devtools_page": "src/devtools/devtools.html",
 	"action": {
