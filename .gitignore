@@ -8,3 +8,4 @@ dist
 /playwright-report/
 /playwright/.cache/
 /browser-context/
+.nyc_output
