@@ -30,8 +30,7 @@ const StepsItem: Component<StepsItemProps> = (props) => {
 		(key: keyof ConstructorStepItem) =>
 		(data: ConstructorStepItem[typeof key] | null) => {
 			setStep(props.index, {
-				action: props.step.action,
-				params: props.step.params,
+				...props.step,
 				...{ [key]: data },
 			});
 		};
@@ -51,19 +50,17 @@ const StepsItem: Component<StepsItemProps> = (props) => {
 					horizontalAlignment={Row.Alignment.Horizontal.SpaceBetween}
 					verticalAlignment={Row.Alignment.Vertical.Center}
 				>
-					<Row verticalAlignment={Row.Alignment.Vertical.Center}>
-						<h4 id={titleId} class={styles.title}>
-							Step {props.index + 1}
-						</h4>
-						<InputLight
-							classList={{ [styles.name]: true }}
-							onInput={({ currentTarget: { value } }) =>
-								changeHandler("name")(value)
-							}
-							value={props.step.name ?? ""}
-							placeholder={"Step name [optional]"}
-						/>
-					</Row>
+					<h4 id={titleId} class={styles.title}>
+						Step {props.index + 1}
+					</h4>
+					<InputLight
+						classList={{ [styles.name]: true }}
+						onInput={({ currentTarget: { value } }) =>
+							changeHandler("name")(value)
+						}
+						value={props.step.name ?? ""}
+						placeholder={"Step name [optional]"}
+					/>
 					<Show when={!isLast()} keyed>
 						<Row verticalAlignment={Row.Alignment.Vertical.Center}>
 							<Column gapLess classList={{ [styles.mover]: true }}>
