@@ -8,11 +8,12 @@
 	margin: 0 8px;
 }
 
-.name {
+input.name {
 	color: variables.$primary;
 	margin-top: 2px;
 	font-size: 12px;
 	font-weight: 700;
+	flex: 1;
 }
 
 .input {
