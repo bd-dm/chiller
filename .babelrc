@@ -1,3 +1,8 @@
 {
-	"presets": ["solid"]
+	"presets": ["solid"],
+	"env": {
+		"test": {
+			"plugins": [ "istanbul" ]
+		}
+	}
 }
