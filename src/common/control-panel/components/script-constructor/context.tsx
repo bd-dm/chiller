@@ -8,6 +8,7 @@ import {
 } from "common/scripts";
 import { ContextType } from "common/types";
 import { isNull } from "lodash-es";
+import { generateSlug } from "random-word-slugs";
 import {
 	Accessor,
 	createContext,
@@ -57,8 +58,10 @@ const Context = createContext<ScriptConstructorContextValue>();
 const ScriptConstructorContextProvider: ParentComponent<
 	ScriptConstructorProps
 > = (props) => {
+	const randomName = generateSlug(2, { format: "title" });
+
 	const [id, setId] = createSignal("");
-	const [name, setName] = createSignal("");
+	const [name, setName] = createSignal(randomName);
 	const [variables, setVariables] = createSignal<ConstructorVariableItems>([]);
 	const [steps, setSteps] = createSignal<ConstructorStepItems>([]);
 
@@ -85,13 +88,19 @@ const ScriptConstructorContextProvider: ParentComponent<
 	});
 
 	createEffect(() => {
-		if (getFilledVariables(variables()).length === variables().length) {
+		if (
+			getFilledVariables(variables()).length === variables().length &&
+			variables().length > 0
+		) {
 			addVariable();
 		}
 	});
 
 	createEffect(() => {
-		if (getFilledSteps(steps()).length === steps().length) {
+		if (
+			getFilledSteps(steps()).length === steps().length &&
+			steps().length > 0
+		) {
 			addStep();
 		}
 	});

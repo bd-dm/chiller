@@ -31,8 +31,15 @@ const StepsItem: Component<StepsItemProps> = (props) => {
 
 	const isLast = () => props.index === steps().length - 1;
 
+	const isFirst = () => props.index === 0;
+
+	const hasRemoveButton = () => !isLast() || isFirst();
+
 	const isMovableDown = () => props.index < steps().length - 2;
 	const isMovableUp = () => props.index > 0;
+	const isMovable = () => isMovableDown() || isMovableUp();
+
+	const hasControls = () => hasRemoveButton() || isMovable();
 
 	const changeHandler =
 		(key: keyof ConstructorStepItem) =>
@@ -69,31 +76,35 @@ const StepsItem: Component<StepsItemProps> = (props) => {
 						value={props.step.name ?? ""}
 						placeholder={"Step name [optional]"}
 					/>
-					<Show when={!isLast()} keyed>
+					<Show when={hasControls()} keyed>
 						<Row verticalAlignment={Row.Alignment.Vertical.Center}>
-							<Column gapLess classList={{ [styles.mover]: true }}>
-								<Show when={isMovableUp()} keyed fallback={<div />}>
-									<button
-										onClick={() => moveStepUp(props.index)}
-										class={styles.arrow}
-										type={"button"}
-									>
-										▲
-									</button>
-								</Show>
-								<Show when={isMovableDown()} keyed fallback={<div />}>
-									<button
-										onClick={() => moveStepDown(props.index)}
-										class={styles.arrow}
-										type={"button"}
-									>
-										▼
-									</button>
-								</Show>
-							</Column>
-							<Button light onClick={removeHandler}>
-								<Icon name={IconName.Close} />
-							</Button>
+							<Show when={isMovable()} keyed>
+								<Column gapLess classList={{ [styles.mover]: true }}>
+									<Show when={isMovableUp()} keyed fallback={<div />}>
+										<button
+											onClick={() => moveStepUp(props.index)}
+											class={styles.arrow}
+											type={"button"}
+										>
+											▲
+										</button>
+									</Show>
+									<Show when={isMovableDown()} keyed fallback={<div />}>
+										<button
+											onClick={() => moveStepDown(props.index)}
+											class={styles.arrow}
+											type={"button"}
+										>
+											▼
+										</button>
+									</Show>
+								</Column>
+							</Show>
+							<Show when={hasRemoveButton()} keyed>
+								<Button light onClick={removeHandler}>
+									<Icon name={IconName.Close} />
+								</Button>
+							</Show>
 						</Row>
 					</Show>
 				</Row>

@@ -1,7 +1,15 @@
 import { nanoid } from "nanoid";
 import { Component, createSignal, Index, Show } from "solid-js";
 
-import { Button, Column } from "../../../components";
+import {
+	Button,
+	Column,
+	Icon,
+	IconName,
+	Illustration,
+	Row,
+} from "../../../components";
+import { IllustrationName } from "../../../components/illustration/constants";
 import { addScript, ScriptData } from "../../../scripts";
 import { useControlPanelContext } from "../../context";
 import { Page } from "../../enums";
@@ -72,24 +80,27 @@ const ScriptImport: Component = () => {
 			classList={{ [styles.page]: true }}
 			horizontalAlignment={Column.Alignment.Horizontal.Stretch}
 		>
-			<ul class={styles.list}>
-				<Index
-					each={items()}
-					fallback={
-						<li class={styles.noItems}>
-							Add *.json files here to import scripts
-						</li>
-					}
-				>
-					{(item, index) => (
-						<FileItem
-							item={item()}
-							fileNameChangeHandler={fileNameChangeHandler(index)}
-							fileRemoveHandler={fileRemoveHandler(index)}
-						/>
-					)}
-				</Index>
-			</ul>
+			<Show when={items().length === 0}>
+				<Column horizontalAlignment={Column.Alignment.Horizontal.Center}>
+					<Illustration name={IllustrationName.Import} />
+					<Row horizontalAlignment={Row.Alignment.Horizontal.Center}>
+						<h3>Add *.json files here to import scripts</h3>
+					</Row>
+				</Column>
+			</Show>
+			<Show when={items().length > 0}>
+				<ul class={styles.list}>
+					<Index each={items()}>
+						{(item, index) => (
+							<FileItem
+								item={item()}
+								fileNameChangeHandler={fileNameChangeHandler(index)}
+								fileRemoveHandler={fileRemoveHandler(index)}
+							/>
+						)}
+					</Index>
+				</ul>
+			</Show>
 			<div class={styles.input}>
 				<input
 					ref={setInputRef}
@@ -99,7 +110,8 @@ const ScriptImport: Component = () => {
 					multiple
 				/>
 				<Button classList={{ [styles.button]: true }} light>
-					+ Add file(s)
+					<Icon name={IconName.Add} />
+					&nbsp; Add file(s)
 				</Button>
 			</div>
 			<Show when={items().length > 0} keyed>

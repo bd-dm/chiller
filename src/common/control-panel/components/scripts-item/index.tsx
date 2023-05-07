@@ -54,9 +54,9 @@ const ScriptsItem: Component<ScriptsItemProps> = (props) => {
 					verticalAlignment={Row.Alignment.Vertical.Center}
 				>
 					<div>{props.script.name}</div>
-					<Row>
+					<Row gapLess>
 						<Button type={"button"} light onClick={exportHandler}>
-							Export
+							<Icon name={IconName.Download} title={"Download"} />
 						</Button>
 						<Button
 							type={"button"}
@@ -64,10 +64,10 @@ const ScriptsItem: Component<ScriptsItemProps> = (props) => {
 							active={isEdit()}
 							onClick={editHandler}
 						>
-							Edit
+							<Icon name={IconName.Edit} title={"Edit"} />
 						</Button>
 						<Button light type={"button"} onClick={removeHandler}>
-							<Icon name={IconName.Close} />
+							<Icon name={IconName.Close} title={"Remove"} />
 						</Button>
 					</Row>
 				</Row>

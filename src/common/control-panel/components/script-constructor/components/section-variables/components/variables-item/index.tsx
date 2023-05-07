@@ -28,6 +28,10 @@ const VariablesItem: Component<VariablesItemProps> = (props) => {
 
 	const isLast = () => props.index === variables().length - 1;
 
+	const isFirst = () => props.index === 0;
+
+	const hasRemoveButton = () => !isLast() || isFirst();
+
 	return (
 		<Row
 			aria-label={`Variable ${props.index + 1}`}
@@ -54,12 +58,12 @@ const VariablesItem: Component<VariablesItemProps> = (props) => {
 					changeHandler("value")(newValue)
 				}
 			/>
-			<Show when={!isLast()} keyed>
+			<Show when={hasRemoveButton()} keyed>
 				<Button light onClick={removeHandler}>
 					<Icon name={IconName.Close} />
 				</Button>
 			</Show>
-			<Show when={isLast()} keyed>
+			<Show when={!hasRemoveButton()} keyed>
 				<Button disabled classList={{ [styles.buttonPlaceholder]: true }}>
 					<Icon name={IconName.Close} />
 				</Button>

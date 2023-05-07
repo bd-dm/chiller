@@ -4,7 +4,7 @@
   "description": "A Chrome extension that helps you fill anything with chill",
   "scripts": {
     "dev": "vite build --watch --mode development",
-		"storybook": "storybook dev -p 6006",
+    "storybook": "storybook dev -p 6006",
     "build": "vite build --mode production",
     "test": "turbo test:e2e test:unit",
     "test:e2e": "playwright test",
@@ -29,6 +29,7 @@
     "draggabilly": "^3.0.0",
     "lodash-es": "^4.17.21",
     "nanoid": "^4.0.0",
+    "random-word-slugs": "^0.1.7",
     "solid-js": "^1.6.2"
   },
   "devDependencies": {

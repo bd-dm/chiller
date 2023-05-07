@@ -2,6 +2,8 @@ import styles from "./index.module.scss";
 
 enum IconName {
 	Upload = "upload",
+	Download = "download",
+	Edit = "edit",
 	Overlay = "layers",
 	Add = "add_circle",
 	List = "list",
