@@ -5,10 +5,17 @@ import { StorageMethods, StorageType } from "./types";
 // Adapter for localStorage for environments where chrome.storage is not available
 // For example, for storybook
 const universalStorage = chrome.storage?.local ?? {
-	get: localStorage.getItem.bind(localStorage),
-	set: async (values: Record<string, string>): Promise<void> => {
+	get: async (key: string): Promise<unknown> => {
+		const data = localStorage.getItem(key);
+		if (!data) {
+			return null;
+		}
+
+		return { [key]: JSON.parse(data) };
+	},
+	set: async (values: Record<string, unknown>): Promise<void> => {
 		Object.entries(values).forEach(([key, value]) => {
-			localStorage.setItem(key, String(value));
+			localStorage.setItem(key, JSON.stringify(value));
 		});
 	},
 };

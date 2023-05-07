@@ -1,4 +1,4 @@
-import { Button, Input, Row } from "common/components";
+import { Button, Icon, IconName, Input, Row } from "common/components";
 import { Component, Show } from "solid-js";
 
 import { useScriptConstructor } from "../../../../context";
@@ -56,12 +56,12 @@ const VariablesItem: Component<VariablesItemProps> = (props) => {
 			/>
 			<Show when={!isLast()} keyed>
 				<Button light onClick={removeHandler}>
-					&times;
+					<Icon name={IconName.Close} />
 				</Button>
 			</Show>
 			<Show when={isLast()} keyed>
 				<Button disabled classList={{ [styles.buttonPlaceholder]: true }}>
-					&times;
+					<Icon name={IconName.Close} />
 				</Button>
 			</Show>
 		</Row>

@@ -1,3 +1,8 @@
-.flex {
-	flex: 1;
+.row {
+	position: relative;
+}
+
+.enableOverlayButton {
+	position: absolute;
+	left: 0;
 }

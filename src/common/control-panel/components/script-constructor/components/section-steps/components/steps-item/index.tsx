@@ -1,4 +1,12 @@
-import { Button, Column, InputLight, Row, Select } from "common/components";
+import {
+	Button,
+	Column,
+	Icon,
+	IconName,
+	InputLight,
+	Row,
+	Select,
+} from "common/components";
 import { nanoid } from "nanoid";
 import { Component, Show } from "solid-js";
 
@@ -84,7 +92,7 @@ const StepsItem: Component<StepsItemProps> = (props) => {
 								</Show>
 							</Column>
 							<Button light onClick={removeHandler}>
-								&times;
+								<Icon name={IconName.Close} />
 							</Button>
 						</Row>
 					</Show>

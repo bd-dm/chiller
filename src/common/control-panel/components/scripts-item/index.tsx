@@ -1,4 +1,4 @@
-import { Button, Column, Row } from "common/components";
+import { Button, Column, Icon, IconName, Row } from "common/components";
 import {
 	exportScript,
 	removeScript,
@@ -66,8 +66,8 @@ const ScriptsItem: Component<ScriptsItemProps> = (props) => {
 						>
 							Edit
 						</Button>
-						<Button type={"button"} onClick={removeHandler}>
-							&times;
+						<Button light type={"button"} onClick={removeHandler}>
+							<Icon name={IconName.Close} />
 						</Button>
 					</Row>
 				</Row>

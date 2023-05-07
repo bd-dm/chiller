@@ -1,6 +1,6 @@
 import { Component } from "solid-js";
 
-import { Button, Input, Row } from "../../../components";
+import { Button, Icon, IconName, Input, Row } from "../../../components";
 import styles from "./index.module.scss";
 import { ImportItem } from "./types";
 
@@ -21,7 +21,9 @@ const FileItem: Component<ItemProps> = (props) => {
 						props.fileNameChangeHandler(value)
 					}
 				/>
-				<Button onClick={() => props.fileRemoveHandler()}>&times;</Button>
+				<Button light onClick={() => props.fileRemoveHandler()}>
+					<Icon name={IconName.Close} />
+				</Button>
 			</Row>
 		</li>
 	);
