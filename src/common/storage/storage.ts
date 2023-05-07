@@ -2,8 +2,19 @@ import { isNull, isObject, isUndefined } from "lodash-es";
 
 import { StorageMethods, StorageType } from "./types";
 
+// Adapter for localStorage for environments where chrome.storage is not available
+// For example, for storybook
+const universalStorage = chrome.storage?.local ?? {
+	get: localStorage.getItem.bind(localStorage),
+	set: async (values: Record<string, string>): Promise<void> => {
+		Object.entries(values).forEach(([key, value]) => {
+			localStorage.setItem(key, String(value));
+		});
+	},
+};
+
 const get: StorageMethods["get"] = async (key) => {
-	const data = await chrome.storage.local.get(key);
+	const data = await universalStorage.get(key);
 	if (!data) {
 		return null;
 	}
@@ -17,7 +28,7 @@ const get: StorageMethods["get"] = async (key) => {
 };
 
 const set: StorageMethods["set"] = async (key, value) =>
-	await chrome.storage.local.set({
+	await universalStorage.set({
 		[key]: value,
 	});
 
@@ -88,7 +99,7 @@ const removeItem: StorageMethods["removeItem"] = async (key, findFn) => {
 };
 
 const removeKey: StorageMethods["removeKey"] = async (key) => {
-	await chrome.storage.local.remove(key);
+	await universalStorage.remove(key);
 };
 
 const storage: StorageMethods = {

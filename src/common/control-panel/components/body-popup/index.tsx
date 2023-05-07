@@ -8,11 +8,9 @@ import { Navigation } from "../navigation";
 
 const BodyPopup: Component = () => {
 	return (
-		<Column>
-			<div classList={{ [styles.popup]: true, ["chiller"]: true }}>
-				<ButtonsRow />
-				<Navigation />
-			</div>
+		<Column classList={{ [styles.popup]: true, ["chiller"]: true }}>
+			<ButtonsRow />
+			<Navigation />
 			<BetaMark />
 		</Column>
 	);
