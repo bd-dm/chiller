@@ -23,6 +23,7 @@ const ParamsInputRunScript: Component<
 				ActionDynamicParamType.Variable,
 				ActionDynamicParamType.Script,
 			]}
+			defaultParamType={ActionDynamicParamType.Script}
 			param={props.params?.script}
 			onChange={changeHandler}
 		/>

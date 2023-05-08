@@ -23,6 +23,7 @@ const ParamsInputType: Component<ConstructorParamsInputProps<"type">> = (
 				ActionDynamicParamType.Variable,
 				ActionDynamicParamType.Text,
 			]}
+			defaultParamType={ActionDynamicParamType.Text}
 			param={props.params?.text}
 			onChange={changeHandler}
 		/>

@@ -2,10 +2,12 @@ import { isNull } from "lodash-es";
 
 import { TargetElementData } from "../types";
 
-const getTargetElementBySelector = <ElementType extends HTMLElement>(
-	selector: string
+const getTargetElementByText = <ElementType extends HTMLElement>(
+	text: string
 ): TargetElementData<ElementType> | null => {
-	const element = document.querySelector<ElementType>(selector);
+	const element = document
+		.evaluate(`//*[contains(text(), '${text}')]`, document)
+		.iterateNext() as ElementType | null;
 
 	if (isNull(element)) {
 		const iframes = document.querySelectorAll("iframe");
@@ -13,8 +15,13 @@ const getTargetElementBySelector = <ElementType extends HTMLElement>(
 		let targetIframe: HTMLIFrameElement | null = null;
 
 		iframes.forEach((iframe) => {
-			const tryElement =
-				iframe.contentDocument?.querySelector<ElementType>(selector);
+			if (isNull(iframe.contentDocument)) {
+				return;
+			}
+
+			const tryElement = document
+				.evaluate(`//*[contains(text(), ${text})]`, iframe.contentDocument)
+				.iterateNext() as ElementType | null;
 
 			if (tryElement) {
 				elementInIframe = tryElement;
@@ -32,4 +39,4 @@ const getTargetElementBySelector = <ElementType extends HTMLElement>(
 	return { element };
 };
 
-export { getTargetElementBySelector };
+export { getTargetElementByText };

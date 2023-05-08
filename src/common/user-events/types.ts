@@ -22,7 +22,10 @@ type UserEvent<ParamsType = DefaultParamsType> = (
 
 type UserEventWithTarget<ParamsType = DefaultParamsType> = UserEvent<
 	ParamsType & {
-		target: ActionDynamicParamWithSelector | ActionDynamicParamWithVariable;
+		target:
+			| ActionDynamicParamWithText
+			| ActionDynamicParamWithSelector
+			| ActionDynamicParamWithVariable;
 	}
 >;
 

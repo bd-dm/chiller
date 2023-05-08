@@ -41,6 +41,7 @@ const ParamsInputWaitForElement: Component<
 					ActionDynamicParamType.Variable,
 					ActionDynamicParamType.Selector,
 				]}
+				defaultParamType={ActionDynamicParamType.Selector}
 				param={props.params?.target}
 				onChange={targetChangeHandler}
 			/>

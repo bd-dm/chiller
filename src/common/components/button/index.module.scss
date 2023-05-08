@@ -23,10 +23,11 @@
 	}
 
 	&.active {
-		cursor: default;
+		cursor: pointer;
 		background-color: variables.$button-hovered !important;
 		color: variables.$text-inverted !important;
 		outline: none;
+
 	}
 
 	&.light {

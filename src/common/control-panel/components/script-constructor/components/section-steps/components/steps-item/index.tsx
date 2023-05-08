@@ -109,7 +109,7 @@ const StepsItem: Component<StepsItemProps> = (props) => {
 					</Show>
 				</Row>
 				<Select<ConstructorStepActionOption>
-					placeholder={"Select action..."}
+					placeholder={"Action"}
 					onChange={changeHandler("action")}
 					initialValue={props.step.action}
 					options={actionOptions}

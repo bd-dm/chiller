@@ -26,13 +26,12 @@ type GetActionParamsComponentsMap<
 const actionOptions: ConstructorStepActionOption[] = [
 	{ value: "click", name: "Click" },
 	{ value: "pressKey", name: "Press Key" },
-	{ value: "type", name: "Type string" },
-	{ value: "typeRandom", name: "Type random string from list" },
-	{ value: "enterChar", name: "Enter character" },
+	{ value: "type", name: "Enter text" },
+	{ value: "typeRandom", name: "Enter random text from list" },
 	{ value: "waitForElement", name: "Wait for element" },
 	{ value: "clearInput", name: "Clear input" },
-	{ value: "sleep", name: "Sleep" },
-	{ value: "runScript", name: "Run script" },
+	{ value: "sleep", name: "Sleep/Wait" },
+	{ value: "runScript", name: "Execute script" },
 ];
 
 const getActionParamsComponents: GetActionParamsComponentsMap = (action) => {

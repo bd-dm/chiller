@@ -7,8 +7,9 @@ import {
 	ActionDynamicParamWithText,
 	ActionDynamicParamWithVariable,
 } from "common/user-events";
-import { Component, Match, Switch } from "solid-js";
+import { Component, Match, Show, Switch } from "solid-js";
 
+import { useScriptConstructor } from "../../../../context";
 import { ConstructorStepParamChangeHandler } from "../../../../types";
 import styles from "./index.module.scss";
 import { InputScript } from "./input-script";
@@ -21,6 +22,7 @@ interface ParamsInputCommonProps {
 	param?: ActionDynamicParam;
 	availableOptions: ActionDynamicParamType[];
 	onChange: ConstructorStepParamChangeHandler;
+	defaultParamType?: ActionDynamicParamType;
 }
 
 const ParamTypeNames: Record<ActionDynamicParamType, string> = {
@@ -31,63 +33,72 @@ const ParamTypeNames: Record<ActionDynamicParamType, string> = {
 };
 
 const ParamsInputDynamic: Component<ParamsInputCommonProps> = (props) => {
+	const { variables } = useScriptConstructor();
+
+	const hasVariables = () => variables().length > 0;
+
+	const param = () => props.param ?? { type: props.defaultParamType };
+
+	const availableOptions = () => {
+		return props.availableOptions.filter((option) => {
+			if (option === ActionDynamicParamType.Variable) {
+				return hasVariables();
+			}
+
+			return true;
+		});
+	};
+
 	const changeHandler: ChangeHandler = (key) => (value) => {
 		props.onChange({
-			...props.param,
+			...param(),
 			[key]: value,
 		} as ActionDynamicParam);
 	};
 
 	const typeOptions = () =>
-		props.availableOptions.map((option) => ({
+		availableOptions().map((option) => ({
 			value: option,
 			name: ParamTypeNames[option],
 		}));
 
-	const initialType = () => props.param?.type ?? undefined;
+	const initialType = () => param()?.type ?? undefined;
 
 	return (
 		<Row verticalAlignment={Row.Alignment.Vertical.Stretch}>
-			<div class={styles.input}>
-				<Select
-					placeholder={"Select input type..."}
-					initialValue={initialType()}
-					onChange={changeHandler("type")}
-					options={typeOptions()}
-				/>
-			</div>
+			<Show when={typeOptions().length > 1}>
+				<div class={styles.selectorType}>
+					<Select
+						placeholder={"Selector type"}
+						initialValue={initialType()}
+						onChange={changeHandler("type")}
+						options={typeOptions()}
+					/>
+				</div>
+			</Show>
 			<div class={styles.input}>
 				<Switch fallback={<Input type="text" disabled />}>
-					<Match
-						when={props.param?.type === ActionDynamicParamType.Variable}
-						keyed
-					>
+					<Match when={param()?.type === ActionDynamicParamType.Variable} keyed>
 						<InputVariable
-							param={props.param as ActionDynamicParamWithVariable}
+							param={param() as ActionDynamicParamWithVariable}
 							onChange={changeHandler}
 						/>
 					</Match>
-					<Match
-						when={props.param?.type === ActionDynamicParamType.Selector}
-						keyed
-					>
+					<Match when={param()?.type === ActionDynamicParamType.Selector} keyed>
 						<InputSelector
-							param={props.param as ActionDynamicParamWithSelector}
+							param={param() as ActionDynamicParamWithSelector}
 							onChange={changeHandler}
 						/>
 					</Match>
-					<Match when={props.param?.type === ActionDynamicParamType.Text} keyed>
+					<Match when={param()?.type === ActionDynamicParamType.Text} keyed>
 						<InputText
-							param={props.param as ActionDynamicParamWithText}
+							param={param() as ActionDynamicParamWithText}
 							onChange={changeHandler}
 						/>
 					</Match>
-					<Match
-						when={props.param?.type === ActionDynamicParamType.Script}
-						keyed
-					>
+					<Match when={param()?.type === ActionDynamicParamType.Script} keyed>
 						<InputScript
-							param={props.param as ActionDynamicParamWithScript}
+							param={param() as ActionDynamicParamWithScript}
 							onChange={changeHandler}
 						/>
 					</Match>

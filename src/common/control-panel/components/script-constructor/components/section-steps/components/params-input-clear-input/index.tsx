@@ -20,9 +20,11 @@ const ParamsInputClearInput: Component<
 	return (
 		<ParamsInputDynamic
 			availableOptions={[
+				ActionDynamicParamType.Text,
 				ActionDynamicParamType.Variable,
 				ActionDynamicParamType.Selector,
 			]}
+			defaultParamType={ActionDynamicParamType.Text}
 			param={props.params?.target}
 			onChange={changeHandler}
 		/>
