@@ -14,11 +14,8 @@
 	min-width: 200px;
 	max-width: 400px;
 
-	/* From https://css.glass */
 	background: variables.$background;
 	border-radius: 8px;
-	box-shadow: 0 4px 30px variables.$shadow;
-	backdrop-filter: blur(20px);
 }
 
 .content {
@@ -58,7 +55,8 @@
 	}
 
 	.content {
-		padding: 0;
+		padding-top: 0;
+		padding-bottom: 0;
 		max-height: 0;
 	}
 }
