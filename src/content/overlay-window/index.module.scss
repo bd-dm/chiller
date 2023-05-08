@@ -3,8 +3,8 @@
 
 .positioner {
 	position: fixed;
-	bottom: 8px;
-	right: 8px;
+	bottom: 16px;
+	right: 16px;
 	z-index: 2147483647;
 }
 
@@ -22,23 +22,38 @@
 }
 
 .content {
-	padding: 16px 12px;
+	padding: 8px;
 	max-height: 400px;
 	overflow: auto;
 
+	transition: max-height .3s, padding .3s;
+
 	@include mixins.scrollbar;
+}
+
+.drag {
+	cursor: move;
 }
 
 .header {
 	border-top-left-radius: 8px;
 	border-top-right-radius: 8px;
-	cursor: move;
-	background-color: variables.$primary;
-	color: variables.$text-inverted;
-	padding: 8px;
+	color: variables.$text;
+	cursor: default;
+	background: variables.$background-2;
+	padding: 6px;
 	transition: background-color .3s;
 
-	&:hover {
-		background-color: variables.$button-hovered;
+}
+
+.headerIcon {
+	height: 1.5em;
+	margin-right: 0.5em;
+}
+
+.collapsed {
+	.content {
+		padding: 0;
+		max-height: 0;
 	}
 }

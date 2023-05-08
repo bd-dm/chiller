@@ -1,11 +1,12 @@
 @use '../../../../common/styles/variables';
 
 .item {
-	padding: 8px;
+	padding: 4px;
 	border-radius: 8px;
 	background-color: variables.$background-2;
 }
 
 .name {
+	cursor: default;
 	padding-right: 8px;
 }

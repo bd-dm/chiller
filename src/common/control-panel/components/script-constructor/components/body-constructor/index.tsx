@@ -13,9 +13,11 @@ const VariablesConstructorSection: Component = () => {
 	return (
 		<>
 			<Show when={variables().length === 0}>
-				<Button light onClick={addVariable}>
-					<Icon name={IconName.Add} /> &nbsp; Add variable
-				</Button>
+				<Row horizontalAlignment={Row.Alignment.Horizontal.FlexStart}>
+					<Button light onClick={addVariable}>
+						<Icon name={IconName.Add} /> &nbsp; Add variable
+					</Button>
+				</Row>
 			</Show>
 			<Show when={variables().length > 0}>
 				<BodyConstructorSection title={"Variables"}>
@@ -37,9 +39,11 @@ const StepsConstructorSection: Component = () => {
 	return (
 		<>
 			<Show when={steps().length === 0}>
-				<Button light onClick={addStep}>
-					<Icon name={IconName.Add} /> &nbsp; Add step
-				</Button>
+				<Row horizontalAlignment={Row.Alignment.Horizontal.FlexStart}>
+					<Button light onClick={addStep}>
+						<Icon name={IconName.Add} /> &nbsp; Add step
+					</Button>
+				</Row>
 			</Show>
 			<Show when={steps().length > 0}>
 				<BodyConstructorSection title={"Steps"}>
@@ -61,12 +65,8 @@ const BodyConstructor: Component = () => {
 			class={styles.constructor}
 			horizontalAlignment={Column.Alignment.Horizontal.Stretch}
 		>
-			<Row horizontalAlignment={Row.Alignment.Horizontal.Stretch}>
-				<VariablesConstructorSection />
-			</Row>
-			<Row horizontalAlignment={Row.Alignment.Horizontal.Stretch}>
-				<StepsConstructorSection />
-			</Row>
+			<VariablesConstructorSection />
+			<StepsConstructorSection />
 		</Column>
 	);
 };

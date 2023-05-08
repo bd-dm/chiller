@@ -8,7 +8,10 @@ import { Navigation } from "../navigation";
 
 const BodyPopup: Component = () => {
 	return (
-		<Column classList={{ [styles.popup]: true, ["chiller"]: true }}>
+		<Column
+			classList={{ [styles.popup]: true, ["chiller"]: true }}
+			horizontalAlignment={Column.Alignment.Horizontal.Stretch}
+		>
 			<ButtonsRow />
 			<Navigation />
 			<BetaMark />

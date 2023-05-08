@@ -52,16 +52,15 @@ interface ScriptConstructorContextValue {
 	cancel?: () => void;
 	save?: () => void;
 }
+const getRandomName = () => generateSlug(2, { format: "title" });
 
 const Context = createContext<ScriptConstructorContextValue>();
 
 const ScriptConstructorContextProvider: ParentComponent<
 	ScriptConstructorProps
 > = (props) => {
-	const randomName = generateSlug(2, { format: "title" });
-
 	const [id, setId] = createSignal("");
-	const [name, setName] = createSignal(randomName);
+	const [name, setName] = createSignal(getRandomName());
 	const [variables, setVariables] = createSignal<ConstructorVariableItems>([]);
 	const [steps, setSteps] = createSignal<ConstructorStepItems>([]);
 
@@ -146,6 +145,10 @@ const ScriptConstructorContextProvider: ParentComponent<
 	};
 
 	const cancelHandler = async () => {
+		setSteps([]);
+		setVariables([]);
+		setName(getRandomName());
+
 		await removeDraft();
 
 		if (props.onCancel) {

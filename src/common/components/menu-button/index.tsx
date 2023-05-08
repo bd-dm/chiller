@@ -1,3 +1,5 @@
+import { Component } from "solid-js";
+
 import { Button } from "../button";
 import { Icon, IconName } from "../icon";
 import styles from "./index.module.scss";
@@ -9,7 +11,7 @@ interface MenuButtonProps {
 	active?: boolean;
 }
 
-const MenuButton = (props: MenuButtonProps) => {
+const MenuButton: Component<MenuButtonProps> = (props) => {
 	return (
 		<Button
 			light

@@ -1,3 +1,5 @@
+import { Component } from "solid-js";
+
 import styles from "./index.module.scss";
 
 enum IconName {
@@ -8,6 +10,10 @@ enum IconName {
 	Add = "add_circle",
 	List = "list",
 	Close = "close",
+	Collapse = "close_fullscreen",
+	Expand = "expand_content",
+	DragHandle = "drag_handle",
+	Play = "play_arrow",
 }
 
 interface IconProps {
@@ -15,7 +21,7 @@ interface IconProps {
 	title?: string;
 }
 
-const Icon = (props: IconProps) => {
+const Icon: Component<IconProps> = (props) => {
 	// @ts-ignore - TS doesn't know about computed styles
 	const iconStyle = () => styles[`icon-${props.name}`];
 

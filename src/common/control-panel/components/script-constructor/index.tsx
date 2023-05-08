@@ -19,7 +19,7 @@ const ScriptConstructor: Component<ScriptConstructorProps> = (props) => {
 		<ScriptConstructorContext.Provider
 			scriptId={props.scriptId}
 			onSave={saveHandler}
-			onCancel={() => props.onCancel && props.onCancel()}
+			onCancel={() => props.onCancel?.()}
 		>
 			<Column
 				classList={{ [styles.block]: true }}
@@ -27,7 +27,7 @@ const ScriptConstructor: Component<ScriptConstructorProps> = (props) => {
 			>
 				<NameInput />
 				<BodyConstructor />
-				<FinishButtons />
+				<FinishButtons saveText={"Add"} cancelText={"Reset"} />
 			</Column>
 		</ScriptConstructorContext.Provider>
 	);

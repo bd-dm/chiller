@@ -1,9 +1,9 @@
-import { ComponentProps } from "solid-js";
+import { Component, ComponentProps } from "solid-js";
 
 import { Icon } from "../icon";
 import styles from "./index.module.scss";
 
-const InlineIcon = (props: ComponentProps<typeof Icon>) => {
+const InlineIcon: Component<ComponentProps<typeof Icon>> = (props) => {
 	return (
 		<span class={styles.inlineIcon}>
 			<Icon {...props} />
