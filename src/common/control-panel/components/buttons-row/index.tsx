@@ -1,7 +1,6 @@
-import { Button, Column, Icon, IconName, Row } from "common/components";
+import { IconName, Row } from "common/components";
 import { MessageType, sendMessage } from "common/message-carrier";
 import { Component } from "solid-js";
-import { classList } from "solid-js/web";
 
 import { MenuButton } from "../../../components/menu-button";
 import { useControlPanelContext } from "../../context";
