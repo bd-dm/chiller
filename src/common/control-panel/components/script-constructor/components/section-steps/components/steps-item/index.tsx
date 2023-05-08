@@ -25,8 +25,7 @@ interface StepsItemProps {
 }
 
 const StepsItem: Component<StepsItemProps> = (props) => {
-	const { setStep, removeStep, steps, moveStepUp, moveStepDown } =
-		useScriptConstructor();
+	const { setStep, removeStep, steps } = useScriptConstructor();
 	const titleId = nanoid();
 
 	const isLast = () => props.index === steps().length - 1;
@@ -34,12 +33,6 @@ const StepsItem: Component<StepsItemProps> = (props) => {
 	const isFirst = () => props.index === 0;
 
 	const hasRemoveButton = () => !isLast() || isFirst();
-
-	const isMovableDown = () => props.index < steps().length - 2;
-	const isMovableUp = () => props.index > 0;
-	const isMovable = () => isMovableDown() || isMovableUp();
-
-	const hasControls = () => hasRemoveButton() || isMovable();
 
 	const changeHandler =
 		(key: keyof ConstructorStepItem) =>
@@ -65,6 +58,13 @@ const StepsItem: Component<StepsItemProps> = (props) => {
 					horizontalAlignment={Row.Alignment.Horizontal.SpaceBetween}
 					verticalAlignment={Row.Alignment.Vertical.Center}
 				>
+					<Row
+						classList={{ [styles.dragHandle]: true }}
+						horizontalAlignment={Row.Alignment.Horizontal.Center}
+						verticalAlignment={Row.Alignment.Vertical.Center}
+					>
+						<Icon name={IconName.DragHandle2} />
+					</Row>
 					<h4 id={titleId} class={styles.title}>
 						Step {props.index + 1}
 					</h4>
@@ -76,35 +76,11 @@ const StepsItem: Component<StepsItemProps> = (props) => {
 						value={props.step.name ?? ""}
 						placeholder={"Step name [optional]"}
 					/>
-					<Show when={hasControls()} keyed>
+					<Show when={hasRemoveButton()} keyed>
 						<Row verticalAlignment={Row.Alignment.Vertical.Center}>
-							<Show when={isMovable()} keyed>
-								<Column gapLess classList={{ [styles.mover]: true }}>
-									<Show when={isMovableUp()} keyed fallback={<div />}>
-										<button
-											onClick={() => moveStepUp(props.index)}
-											class={styles.arrow}
-											type={"button"}
-										>
-											▲
-										</button>
-									</Show>
-									<Show when={isMovableDown()} keyed fallback={<div />}>
-										<button
-											onClick={() => moveStepDown(props.index)}
-											class={styles.arrow}
-											type={"button"}
-										>
-											▼
-										</button>
-									</Show>
-								</Column>
-							</Show>
-							<Show when={hasRemoveButton()} keyed>
-								<Button light onClick={removeHandler}>
-									<Icon name={IconName.Close} />
-								</Button>
-							</Show>
+							<Button light onClick={removeHandler}>
+								<Icon name={IconName.Close} />
+							</Button>
 						</Row>
 					</Show>
 				</Row>

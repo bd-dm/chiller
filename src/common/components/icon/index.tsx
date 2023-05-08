@@ -13,6 +13,7 @@ enum IconName {
 	Collapse = "close_fullscreen",
 	Expand = "expand_content",
 	DragHandle = "drag_handle",
+	DragHandle2 = "drag_indicator",
 	Play = "play_arrow",
 }
 
