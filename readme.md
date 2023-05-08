@@ -6,5 +6,5 @@ Get it in [Chrome Web Store](https://chrome.google.com/webstore/detail/chiller/d
 ## Development
 To run local dev environment, run this command and install extension to Chrome from dist folder
 ```shell
-npm run build:live
+npm run dev
 ```

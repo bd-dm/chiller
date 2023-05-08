@@ -52,6 +52,11 @@
 }
 
 .collapsed {
+	.header {
+		border-bottom-left-radius: 8px;
+		border-bottom-right-radius: 8px;
+	}
+
 	.content {
 		padding: 0;
 		max-height: 0;

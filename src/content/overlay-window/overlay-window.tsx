@@ -1,13 +1,7 @@
 import Draggabilly from "draggabilly";
 import { Component, createSignal, onMount } from "solid-js";
 
-import {
-	Button,
-	EmptyScripts,
-	Icon,
-	IconName,
-	Row,
-} from "../../common/components";
+import { Button, Icon, IconName, Row } from "../../common/components";
 import { ScriptsList } from "./components";
 import styles from "./index.module.scss";
 
