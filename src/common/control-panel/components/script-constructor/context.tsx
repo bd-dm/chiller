@@ -8,6 +8,7 @@ import {
 } from "common/scripts";
 import { ContextType } from "common/types";
 import { isNull } from "lodash-es";
+import { nanoid } from "nanoid";
 import { generateSlug } from "random-word-slugs";
 import {
 	Accessor,
@@ -43,10 +44,10 @@ interface ScriptConstructorContextValue {
 	removeVariable: (index: number) => void;
 	addVariable: () => void;
 	steps: Accessor<ConstructorStepItems>;
-	setStep: (index: number, item: ConstructorStepItem) => void;
-	removeStep: (index: number) => void;
+	setSteps: (steps: ConstructorStepItems) => void;
+	setStep: (id: string, item: ConstructorStepItem) => void;
+	removeStep: (idToDelete: string) => void;
 	addStep: () => void;
-	moveStep: (idxFrom: number, idxTo: number) => void;
 	setName: Setter<string>;
 	cancel?: () => void;
 	save?: () => void;
@@ -175,31 +176,29 @@ const ScriptConstructorContextProvider: ParentComponent<
 		]);
 	};
 
-	const setStep = (index: number, item: ConstructorStepItem): void => {
+	const setStep = (id: string, item: ConstructorStepItem): void => {
 		setSteps((prevSteps) => {
-			prevSteps[index] = item;
+			const index = prevSteps.findIndex((step) => step.id === id);
+
+			if (index !== -1) {
+				prevSteps[index] = item;
+			}
+
 			return [...prevSteps];
 		});
 	};
 
-	const removeStep = (index: number): void => {
-		setSteps((prevSteps) =>
-			prevSteps.filter((_, prevIndex) => prevIndex !== index)
-		);
+	const removeStep = (idToDelete: string): void => {
+		setSteps((prevSteps) => prevSteps.filter(({ id }) => idToDelete !== id));
 	};
 
 	const addStep = (): void => {
-		setSteps((prevSteps) => [...prevSteps, {}]);
-	};
-
-	const moveStep = (idxFrom: number, idxTo: number): void => {
-		setSteps((prevSteps) => {
-			//move item from position idxFrom to position idxTo
-			const item = prevSteps.splice(idxFrom, 1)[0];
-			prevSteps.splice(idxTo, 0, item);
-
-			return [...prevSteps];
-		});
+		setSteps((prevSteps) => [
+			...prevSteps,
+			{
+				id: nanoid(),
+			},
+		]);
 	};
 
 	return (
@@ -215,7 +214,7 @@ const ScriptConstructorContextProvider: ParentComponent<
 					setStep,
 					removeStep,
 					addStep,
-					moveStep,
+					setSteps,
 					name,
 					setName,
 					cancel: cancelHandler,

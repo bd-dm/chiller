@@ -7,6 +7,7 @@ import {
 	Row,
 	Select,
 } from "common/components";
+import { isUndefined } from "lodash-es";
 import { nanoid } from "nanoid";
 import { Component, Show } from "solid-js";
 
@@ -20,7 +21,7 @@ import { ParamsInput } from "../params-input";
 import styles from "./index.module.scss";
 
 interface StepsItemProps {
-	index: number;
+	index?: number;
 	step: ConstructorStepItem;
 }
 
@@ -37,14 +38,14 @@ const StepsItem: Component<StepsItemProps> = (props) => {
 	const changeHandler =
 		(key: keyof ConstructorStepItem) =>
 		(data: ConstructorStepItem[typeof key] | null) => {
-			setStep(props.index, {
+			setStep(props.step.id, {
 				...props.step,
 				...{ [key]: data },
 			});
 		};
 
 	const removeHandler = () => {
-		removeStep(props.index);
+		removeStep(props.step.id);
 	};
 
 	return (
@@ -66,7 +67,7 @@ const StepsItem: Component<StepsItemProps> = (props) => {
 						<Icon name={IconName.DragHandle2} />
 					</Row>
 					<h4 id={titleId} class={styles.title}>
-						Step {props.index + 1}
+						Step {!isUndefined(props.index) ? props.index + 1 : ""}
 					</h4>
 					<InputLight
 						classList={{ [styles.name]: true }}

@@ -15,7 +15,7 @@ interface ConstructorVariableItem {
 type ConstructorVariableItems = ConstructorVariableItem[];
 
 type ConstructorStepItem<ActionType extends UserEventAction = UserEventAction> =
-	Partial<ScriptStep<ActionType>>;
+	Partial<ScriptStep<ActionType>> & Pick<ScriptStep<ActionType>, "id">;
 type ConstructorStepItemAction<
 	ActionType extends UserEventAction = UserEventAction
 > = ConstructorStepItem<ActionType>["action"];
