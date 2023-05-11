@@ -62,7 +62,7 @@ const StepsItem: Component<StepsItemProps> = (props) => {
 				>
 					{props.dragHandle}
 					<h4 id={titleId} class={styles.title}>
-						Step {!isUndefined(props.index) ? props.index + 1 : ""}
+						{!isUndefined(props.index) ? props.index + 1 : ""}
 					</h4>
 					<InputLight
 						classList={{ [styles.name]: true }}
@@ -70,7 +70,7 @@ const StepsItem: Component<StepsItemProps> = (props) => {
 							changeHandler("name")(value)
 						}
 						value={props.step.name ?? ""}
-						placeholder={"Step name [optional]"}
+						placeholder={"Step name"}
 					/>
 					<Show when={hasRemoveButton()} keyed>
 						<Row verticalAlignment={Row.Alignment.Vertical.Center}>

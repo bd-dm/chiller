@@ -13,9 +13,9 @@ const VariablesConstructorSection: Component = () => {
 	return (
 		<>
 			<Show when={variables().length === 0}>
-				<Row horizontalAlignment={Row.Alignment.Horizontal.FlexStart}>
+				<Row horizontalAlignment={Row.Alignment.Horizontal.Stretch}>
 					<Button light onClick={addVariable}>
-						<Icon name={IconName.Add} /> &nbsp; Add variable
+						<Icon name={IconName.Add} /> &nbsp; Create variable
 					</Button>
 				</Row>
 			</Show>
@@ -39,9 +39,9 @@ const StepsConstructorSection: Component = () => {
 	return (
 		<>
 			<Show when={steps.length === 0}>
-				<Row horizontalAlignment={Row.Alignment.Horizontal.FlexStart}>
+				<Row horizontalAlignment={Row.Alignment.Horizontal.Stretch}>
 					<Button light onClick={addStep}>
-						<Icon name={IconName.Add} /> &nbsp; Add step
+						<Icon name={IconName.Add} /> &nbsp; Create step
 					</Button>
 				</Row>
 			</Show>

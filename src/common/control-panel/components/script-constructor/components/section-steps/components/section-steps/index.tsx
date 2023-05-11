@@ -12,6 +12,7 @@ import { Component, createSignal, For, Show } from "solid-js";
 import { Column } from "../../../../../../../components";
 import { useScriptConstructor } from "../../../../context";
 import { StepsItem } from "../steps-item";
+import styles from "./index.module.scss";
 import { SortableStepsItem } from "./sortable-steps-item";
 
 const SectionSteps: Component = () => {
@@ -47,7 +48,10 @@ const SectionSteps: Component = () => {
 			collisionDetector={closestCenter}
 		>
 			<DragDropSensors />
-			<Column horizontalAlignment={Column.Alignment.Horizontal.Stretch}>
+			<Column
+				horizontalAlignment={Column.Alignment.Horizontal.Stretch}
+				classList={{ [styles.list]: true }}
+			>
 				<SortableProvider ids={ids()}>
 					<For each={steps}>
 						{(step, index) => <SortableStepsItem index={index()} step={step} />}
