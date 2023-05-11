@@ -22,6 +22,7 @@ import {
 	useContext,
 } from "solid-js";
 
+import { setSteps, steps } from "./stores";
 import {
 	ConstructorStepItem,
 	ConstructorStepItems,
@@ -43,7 +44,7 @@ interface ScriptConstructorContextValue {
 	setVariable: (index: number, item: ConstructorVariableItem) => void;
 	removeVariable: (index: number) => void;
 	addVariable: () => void;
-	steps: Accessor<ConstructorStepItems>;
+	steps: ConstructorStepItems;
 	setSteps: (steps: ConstructorStepItems) => void;
 	setStep: (id: string, item: ConstructorStepItem) => void;
 	removeStep: (idToDelete: string) => void;
@@ -62,7 +63,6 @@ const ScriptConstructorContextProvider: ParentComponent<
 	const [id, setId] = createSignal("");
 	const [name, setName] = createSignal(getRandomName());
 	const [variables, setVariables] = createSignal<ConstructorVariableItems>([]);
-	const [steps, setSteps] = createSignal<ConstructorStepItems>([]);
 
 	const scriptData = () => ({
 		id: id(),
@@ -70,7 +70,7 @@ const ScriptConstructorContextProvider: ParentComponent<
 		body: JSON.stringify({
 			version: SCRIPT_SCHEMA_VERSION,
 			variables: variablesToObject(getFilledVariables(variables())),
-			steps: getFilledSteps(steps()),
+			steps: getFilledSteps(steps),
 		} as ScriptBody),
 		addedTimestamp: new Date().getTime(),
 	});
@@ -96,10 +96,7 @@ const ScriptConstructorContextProvider: ParentComponent<
 	});
 
 	createEffect(() => {
-		if (
-			getFilledSteps(steps()).length === steps().length &&
-			steps().length > 0
-		) {
+		if (getFilledSteps(steps).length === steps.length && steps.length > 0) {
 			addStep();
 		}
 	});
@@ -177,15 +174,7 @@ const ScriptConstructorContextProvider: ParentComponent<
 	};
 
 	const setStep = (id: string, item: ConstructorStepItem): void => {
-		setSteps((prevSteps) => {
-			const index = prevSteps.findIndex((step) => step.id === id);
-
-			if (index !== -1) {
-				prevSteps[index] = item;
-			}
-
-			return prevSteps;
-		});
+		setSteps((step) => step.id === id, item);
 	};
 
 	const removeStep = (idToDelete: string): void => {

@@ -9,14 +9,7 @@ import {
 	SortableProvider,
 } from "@thisbeyond/solid-dnd";
 import { Column } from "common/components";
-import {
-	Component,
-	ComponentProps,
-	createSignal,
-	For,
-	Index,
-	Show,
-} from "solid-js";
+import { Component, ComponentProps, createSignal, For, Show } from "solid-js";
 
 import { useScriptConstructor } from "../../context";
 import { StepsItem } from "./components";
@@ -45,9 +38,9 @@ const SectionSteps: Component = () => {
 
 	const [activeItem, setActiveItem] = createSignal<Id | null>(null);
 
-	const ids = () => steps().map((step) => step.id);
+	const ids = () => steps.map((step) => step.id);
 
-	const getStep = (id: Id | null) => steps().find((step) => step.id === id);
+	const getStep = (id: Id | null) => steps.find((step) => step.id === id);
 
 	const activeStep = () => getStep(activeItem());
 
@@ -77,7 +70,7 @@ const SectionSteps: Component = () => {
 			<DragDropSensors />
 			<Column horizontalAlignment={Column.Alignment.Horizontal.Stretch}>
 				<SortableProvider ids={ids()}>
-					<For each={steps()}>
+					<For each={steps}>
 						{(step, index) => <SortableStepsItem index={index()} step={step} />}
 					</For>
 				</SortableProvider>

@@ -29,7 +29,7 @@ const StepsItem: Component<StepsItemProps> = (props) => {
 	const { setStep, removeStep, steps } = useScriptConstructor();
 	const titleId = nanoid();
 
-	const isLast = () => props.index === steps().length - 1;
+	const isLast = () => props.index === steps.length - 1;
 
 	const isFirst = () => props.index === 0;
 

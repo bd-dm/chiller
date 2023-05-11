@@ -38,14 +38,14 @@ const StepsConstructorSection: Component = () => {
 
 	return (
 		<>
-			<Show when={steps().length === 0}>
+			<Show when={steps.length === 0}>
 				<Row horizontalAlignment={Row.Alignment.Horizontal.FlexStart}>
 					<Button light onClick={addStep}>
 						<Icon name={IconName.Add} /> &nbsp; Add step
 					</Button>
 				</Row>
 			</Show>
-			<Show when={steps().length > 0}>
+			<Show when={steps.length > 0}>
 				<BodyConstructorSection title={"Steps"}>
 					<Column
 						classList={{ [styles.section]: true }}
