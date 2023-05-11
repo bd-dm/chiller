@@ -19,12 +19,12 @@
 	}
 
 	&:hover:not(.active) {
-		background-color: variables.$button-hovered
+		background-color: variables.$button-hovered;
 	}
 
 	&.active {
 		cursor: pointer;
-		background-color: variables.$button-hovered !important;
+		background-color: variables.$button-active !important;
 		color: variables.$text-inverted !important;
 		outline: none;
 
@@ -34,8 +34,8 @@
 		color: variables.$button;
 		background-color: transparent;
 
-		&:hover {
-			background-color: transparent;
+		&:hover:not(.active) {
+			background-color: variables.$button-light-hovered
 		}
 
 		&:focus {
