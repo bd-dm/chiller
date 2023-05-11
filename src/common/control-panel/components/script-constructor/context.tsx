@@ -78,6 +78,7 @@ const ScriptConstructorContextProvider: ParentComponent<
 	onMount(async () => {
 		const scriptId = props.scriptId;
 		const initialScript = await getScriptOrDraft(scriptId);
+		console.log("initialScript", initialScript);
 
 		if (!isNull(initialScript)) {
 			restoreScript(initialScript);
@@ -87,6 +88,7 @@ const ScriptConstructorContextProvider: ParentComponent<
 	});
 
 	createEffect(() => {
+		console.log(variables());
 		if (
 			getFilledVariables(variables()).length === variables().length &&
 			variables().length > 0
@@ -114,6 +116,7 @@ const ScriptConstructorContextProvider: ParentComponent<
 		setName(script.name);
 
 		const { variables, steps } = JSON.parse(script.body) as ScriptBody;
+		console.log("restoreScript", variables, steps);
 
 		if (variables) {
 			setVariables(variablesToArray(variables));
@@ -133,12 +136,12 @@ const ScriptConstructorContextProvider: ParentComponent<
 	};
 
 	const reset = async () => {
+		await removeScriptDraft(id());
+
+		setId(nanoid());
 		setVariables([]);
 		setSteps([]);
 		setName(getRandomName());
-		setId(nanoid());
-
-		await removeScriptDraft(id());
 	};
 
 	const saveHandler = async () => {
@@ -146,8 +149,8 @@ const ScriptConstructorContextProvider: ParentComponent<
 			return;
 		}
 
-		await reset();
 		props.onSave(scriptData());
+		await reset();
 	};
 
 	const cancelHandler = async () => {
