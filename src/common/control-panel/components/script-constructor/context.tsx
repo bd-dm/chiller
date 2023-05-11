@@ -184,7 +184,7 @@ const ScriptConstructorContextProvider: ParentComponent<
 				prevSteps[index] = item;
 			}
 
-			return [...prevSteps];
+			return prevSteps;
 		});
 	};
 

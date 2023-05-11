@@ -4,8 +4,8 @@ import { Component } from "solid-js";
 import { useScriptConstructor } from "../../context";
 
 interface FinishButtonsProps {
-	cancelText?: string;
-	saveText?: string;
+	cancelText: string;
+	saveText: string;
 }
 
 const FinishButtons: Component<FinishButtonsProps> = (props) => {
@@ -14,10 +14,10 @@ const FinishButtons: Component<FinishButtonsProps> = (props) => {
 	return (
 		<Column horizontalAlignment={Column.Alignment.Horizontal.Stretch}>
 			<Button type={"button"} onClick={save}>
-				{props.saveText ?? "Save"}
+				{props.saveText}
 			</Button>
 			<Button light type={"button"} onClick={cancel}>
-				{props.cancelText ?? "Cancel"}
+				{props.cancelText}
 			</Button>
 		</Column>
 	);

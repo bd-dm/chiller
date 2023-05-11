@@ -9,7 +9,14 @@ import {
 	SortableProvider,
 } from "@thisbeyond/solid-dnd";
 import { Column } from "common/components";
-import { Component, ComponentProps, createSignal, Index, Show } from "solid-js";
+import {
+	Component,
+	ComponentProps,
+	createSignal,
+	For,
+	Index,
+	Show,
+} from "solid-js";
 
 import { useScriptConstructor } from "../../context";
 import { StepsItem } from "./components";
@@ -70,9 +77,9 @@ const SectionSteps: Component = () => {
 			<DragDropSensors />
 			<Column horizontalAlignment={Column.Alignment.Horizontal.Stretch}>
 				<SortableProvider ids={ids()}>
-					<Index each={steps()}>
-						{(step, index) => <SortableStepsItem index={index} step={step()} />}
-					</Index>
+					<For each={steps()}>
+						{(step, index) => <SortableStepsItem index={index()} step={step} />}
+					</For>
 				</SortableProvider>
 			</Column>
 			<DragOverlay class={"chiller"}>

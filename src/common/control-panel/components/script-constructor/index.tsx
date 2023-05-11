@@ -27,7 +27,10 @@ const ScriptConstructor: Component<ScriptConstructorProps> = (props) => {
 			>
 				<NameInput />
 				<BodyConstructor />
-				<FinishButtons saveText={"Add"} cancelText={"Reset"} />
+				<FinishButtons
+					saveText={props.isEdit ? "Save" : "Add"}
+					cancelText={props.isEdit ? "Cancel" : "Reset"}
+				/>
 			</Column>
 		</ScriptConstructorContext.Provider>
 	);
