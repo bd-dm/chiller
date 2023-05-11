@@ -1,6 +1,5 @@
 import {
 	closestCenter,
-	createSortable,
 	DragDropProvider,
 	DragDropSensors,
 	DragEventHandler,
@@ -8,41 +7,21 @@ import {
 	Id,
 	SortableProvider,
 } from "@thisbeyond/solid-dnd";
-import { Column } from "common/components";
-import { Component, ComponentProps, createSignal, For, Show } from "solid-js";
+import { Component, createSignal, For, Show } from "solid-js";
 
-import { useScriptConstructor } from "../../context";
-import { StepsItem } from "./components";
-import styles from "./index.module.scss";
-
-const SortableStepsItem: Component<ComponentProps<typeof StepsItem>> = (
-	props
-) => {
-	const getSortable = () => createSortable(props.step.id);
-	const sortable = getSortable();
-
-	return (
-		<div
-			use:sortable
-			classList={{
-				[styles.activeDraggingElement]: sortable.isActiveDraggable,
-			}}
-		>
-			<StepsItem step={props.step} index={props.index} />
-		</div>
-	);
-};
+import { Column } from "../../../../../../../components";
+import { useScriptConstructor } from "../../../../context";
+import { StepsItem } from "../steps-item";
+import { SortableStepsItem } from "./sortable-steps-item";
 
 const SectionSteps: Component = () => {
 	const { steps, setSteps } = useScriptConstructor();
-
 	const [activeItem, setActiveItem] = createSignal<Id | null>(null);
 
 	const ids = () => steps.map((step) => step.id);
+	const activeStep = () => getStep(activeItem());
 
 	const getStep = (id: Id | null) => steps.find((step) => step.id === id);
-
-	const activeStep = () => getStep(activeItem());
 
 	const onDragStart: DragEventHandler = ({ draggable }) =>
 		setActiveItem(draggable.id);

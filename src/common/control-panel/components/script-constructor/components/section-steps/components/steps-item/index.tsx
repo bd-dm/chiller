@@ -9,7 +9,7 @@ import {
 } from "common/components";
 import { isUndefined } from "lodash-es";
 import { nanoid } from "nanoid";
-import { Component, Show } from "solid-js";
+import { Component, JSXElement, Show } from "solid-js";
 
 import { actionOptions } from "../../../../action-variants";
 import { useScriptConstructor } from "../../../../context";
@@ -23,6 +23,7 @@ import styles from "./index.module.scss";
 interface StepsItemProps {
 	index?: number;
 	step: ConstructorStepItem;
+	dragHandle?: JSXElement;
 }
 
 const StepsItem: Component<StepsItemProps> = (props) => {
@@ -59,13 +60,7 @@ const StepsItem: Component<StepsItemProps> = (props) => {
 					horizontalAlignment={Row.Alignment.Horizontal.SpaceBetween}
 					verticalAlignment={Row.Alignment.Vertical.Center}
 				>
-					<Row
-						classList={{ [styles.dragHandle]: true }}
-						horizontalAlignment={Row.Alignment.Horizontal.Center}
-						verticalAlignment={Row.Alignment.Vertical.Center}
-					>
-						<Icon name={IconName.DragHandle2} />
-					</Row>
+					{props.dragHandle}
 					<h4 id={titleId} class={styles.title}>
 						Step {!isUndefined(props.index) ? props.index + 1 : ""}
 					</h4>

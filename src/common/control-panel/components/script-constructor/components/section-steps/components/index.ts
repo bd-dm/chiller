@@ -7,4 +7,5 @@ export * from "./params-input-sleep";
 export * from "./params-input-type";
 export * from "./params-input-type-random";
 export * from "./params-input-wait-for-element";
+export * from "./section-steps";
 export * from "./steps-item";

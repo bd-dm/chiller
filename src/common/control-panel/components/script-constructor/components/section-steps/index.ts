@@ -1,2 +1,2 @@
 export * from "./components";
-export * from "./section-steps";
+export * from "./components/section-steps";
