@@ -1,6 +1,8 @@
+@use "../../../styles/variables";
+
 .list {
 	flex: 1;
 	list-style: none;
-	max-width: 500px;
-	min-width: min(400px, 100%);
+	max-width: variables.$devtools-container-width;
+	min-width: min(#{variables.$devtools-container-width}, 100%);
 }

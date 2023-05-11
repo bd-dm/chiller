@@ -21,8 +21,8 @@ import {
 	Show,
 	useContext,
 } from "solid-js";
+import { createStore } from "solid-js/store";
 
-import { setSteps, steps } from "./stores";
 import {
 	ConstructorStepItem,
 	ConstructorStepItems,
@@ -62,6 +62,7 @@ const ScriptConstructorContextProvider: ParentComponent<
 > = (props) => {
 	const [id, setId] = createSignal("");
 	const [name, setName] = createSignal(getRandomName());
+	const [steps, setSteps] = createStore<ConstructorStepItems>([]);
 	const [variables, setVariables] = createSignal<ConstructorVariableItems>([]);
 
 	const scriptData = () => ({
@@ -78,7 +79,6 @@ const ScriptConstructorContextProvider: ParentComponent<
 	onMount(async () => {
 		const scriptId = props.scriptId;
 		const initialScript = await getScriptOrDraft(scriptId);
-		console.log("initialScript", initialScript);
 
 		if (!isNull(initialScript)) {
 			restoreScript(initialScript);
@@ -88,7 +88,6 @@ const ScriptConstructorContextProvider: ParentComponent<
 	});
 
 	createEffect(() => {
-		console.log(variables());
 		if (
 			getFilledVariables(variables()).length === variables().length &&
 			variables().length > 0
@@ -108,6 +107,8 @@ const ScriptConstructorContextProvider: ParentComponent<
 
 		if (shouldSave) {
 			saveDraft();
+		} else {
+			removeScriptDraft(id());
 		}
 	});
 
@@ -116,7 +117,6 @@ const ScriptConstructorContextProvider: ParentComponent<
 		setName(script.name);
 
 		const { variables, steps } = JSON.parse(script.body) as ScriptBody;
-		console.log("restoreScript", variables, steps);
 
 		if (variables) {
 			setVariables(variablesToArray(variables));
@@ -141,7 +141,7 @@ const ScriptConstructorContextProvider: ParentComponent<
 		setId(nanoid());
 		setVariables([]);
 		setSteps([]);
-		setName(getRandomName());
+		setName("");
 	};
 
 	const saveHandler = async () => {

@@ -8,8 +8,6 @@ const getScriptOrDraft = async (
 ): Promise<ScriptData | null> => {
 	const scriptDraft = await getScriptDraft(scriptId);
 
-	console.log(scriptId, scriptDraft);
-
 	if (scriptDraft) {
 		return scriptDraft;
 	}
