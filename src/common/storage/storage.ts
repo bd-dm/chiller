@@ -18,6 +18,9 @@ const universalStorage = chrome.storage?.local ?? {
 			localStorage.setItem(key, JSON.stringify(value));
 		});
 	},
+	remove: async (key: string): Promise<void> => {
+		localStorage.removeItem(key);
+	},
 };
 
 const get: StorageMethods["get"] = async (key) => {
@@ -89,6 +92,7 @@ const updateItem: StorageMethods["updateItem"] = async (
 
 const removeItem: StorageMethods["removeItem"] = async (key, findFn) => {
 	const items = await get(key);
+	console.log("removeItem", key, items);
 	if (isNull(items)) {
 		return;
 	}
@@ -99,9 +103,11 @@ const removeItem: StorageMethods["removeItem"] = async (key, findFn) => {
 	if (isUndefined(itemIndex) || itemIndex === -1) {
 		return;
 	}
+	console.log("removeItem index", itemIndex);
 
 	items.splice(itemIndex, 1);
 
+	console.log("removeItem new items", items);
 	return await set(key, items);
 };
 

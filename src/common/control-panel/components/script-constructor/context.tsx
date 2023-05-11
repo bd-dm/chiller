@@ -102,7 +102,11 @@ const ScriptConstructorContextProvider: ParentComponent<
 	});
 
 	createEffect(() => {
-		saveDraft();
+		const shouldSave = variables().length > 0 || steps.length > 0;
+
+		if (shouldSave) {
+			saveDraft();
+		}
 	});
 
 	const restoreScript = (script: ScriptData): void => {
@@ -128,7 +132,12 @@ const ScriptConstructorContextProvider: ParentComponent<
 		await saveScriptDraft(scriptData());
 	};
 
-	const removeDraft = async () => {
+	const reset = async () => {
+		setVariables([]);
+		setSteps([]);
+		setName(getRandomName());
+		setId(nanoid());
+
 		await removeScriptDraft(id());
 	};
 
@@ -137,16 +146,12 @@ const ScriptConstructorContextProvider: ParentComponent<
 			return;
 		}
 
-		await removeDraft();
+		await reset();
 		props.onSave(scriptData());
 	};
 
 	const cancelHandler = async () => {
-		setSteps([]);
-		setVariables([]);
-		setName(getRandomName());
-
-		await removeDraft();
+		await reset();
 
 		if (props.onCancel) {
 			props.onCancel();
