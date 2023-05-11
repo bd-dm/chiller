@@ -136,12 +136,14 @@ const ScriptConstructorContextProvider: ParentComponent<
 	};
 
 	const reset = async () => {
-		await removeScriptDraft(id());
-
-		setId(nanoid());
 		setVariables([]);
 		setSteps([]);
 		setName("");
+
+		// After updating the state, we need to wait for the next tick
+		setTimeout(() => {
+			removeScriptDraft(id());
+		});
 	};
 
 	const saveHandler = async () => {
