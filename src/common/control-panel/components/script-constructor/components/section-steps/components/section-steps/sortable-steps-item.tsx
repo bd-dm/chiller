@@ -1,8 +1,4 @@
-import {
-	createSortable,
-	maybeTransformStyle,
-	transformStyle,
-} from "@thisbeyond/solid-dnd";
+import { createSortable, maybeTransformStyle } from "@thisbeyond/solid-dnd";
 import { Component, ComponentProps } from "solid-js";
 
 import { Icon, IconName, Row } from "../../../../../../../components";
