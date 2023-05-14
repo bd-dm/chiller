@@ -50,5 +50,14 @@
 		width: 100%;
 		padding: 8px;
 		text-align: left;
+
+		&-row {
+			gap: 8px;
+		}
+
+		&-text {
+			font-size: 0.9em;
+		}
 	}
+
 }

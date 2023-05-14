@@ -15,6 +15,10 @@ enum IconName {
 	DragHandle = "drag_handle",
 	DragHandle2 = "drag_indicator",
 	Play = "play_arrow",
+	Variable = "variables",
+	Text = "text_fields",
+	Css = "css",
+	Javascript = "javascript",
 }
 
 interface IconProps {

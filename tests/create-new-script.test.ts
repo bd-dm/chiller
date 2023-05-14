@@ -2,13 +2,13 @@ import { Page } from "../src/common/control-panel/enums";
 import { test } from "../test-utils";
 
 test.describe("Mechanics/CreateNewScript", () => {
-	test('Opens create new script page on click "Create new"', async ({
+	test('Opens Add Script page on click "Add"', async ({
 		page,
 		extension,
 		ui,
 	}) => {
 		await extension.goToPopup();
-		await ui.getButton("Create new").click();
+		await ui.getButton("Add").click();
 		page.getByTitle("Create new script");
 	});
 

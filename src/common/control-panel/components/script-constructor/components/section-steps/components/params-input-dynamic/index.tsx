@@ -1,4 +1,4 @@
-import { Input, Row, Select } from "common/components";
+import { Icon, IconName, Input, Row, Select } from "common/components";
 import {
 	ActionDynamicParam,
 	ActionDynamicParamType,
@@ -7,7 +7,7 @@ import {
 	ActionDynamicParamWithText,
 	ActionDynamicParamWithVariable,
 } from "common/user-events";
-import { Component, Match, Show, Switch } from "solid-js";
+import { Component, JSXElement, Match, Show, Switch } from "solid-js";
 
 import { useScriptConstructor } from "../../../../context";
 import { ConstructorStepParamChangeHandler } from "../../../../types";
@@ -26,10 +26,17 @@ interface ParamsInputCommonProps {
 }
 
 const ParamTypeNames: Record<ActionDynamicParamType, string> = {
-	[ActionDynamicParamType.Variable]: "From variable",
+	[ActionDynamicParamType.Variable]: "Variable",
 	[ActionDynamicParamType.Text]: "Text",
 	[ActionDynamicParamType.Selector]: "CSS selector",
 	[ActionDynamicParamType.Script]: "Text",
+};
+
+const ParamTypeIcons: Record<ActionDynamicParamType, JSXElement> = {
+	[ActionDynamicParamType.Variable]: <Icon name={IconName.Variable} />,
+	[ActionDynamicParamType.Text]: <Icon name={IconName.Text} />,
+	[ActionDynamicParamType.Selector]: <Icon name={IconName.Css} />,
+	[ActionDynamicParamType.Script]: <Icon name={IconName.Javascript} />,
 };
 
 const ParamsInputDynamic: Component<ParamsInputCommonProps> = (props) => {
@@ -60,6 +67,7 @@ const ParamsInputDynamic: Component<ParamsInputCommonProps> = (props) => {
 		availableOptions().map((option) => ({
 			value: option,
 			name: ParamTypeNames[option],
+			icon: ParamTypeIcons[option],
 		}));
 
 	const initialType = () => param()?.type ?? undefined;

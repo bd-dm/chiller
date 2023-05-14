@@ -21,9 +21,7 @@ const InputVariable: Component<
 
 	return (
 		<Select
-			placeholder={
-				hasVariables() ? "Select variable..." : "First add variables"
-			}
+			placeholder={hasVariables() ? "Variable" : "First add variables"}
 			initialValue={props.param.use}
 			onChange={(value) => props.onChange("use")(value)}
 			disabled={!hasVariables()}
