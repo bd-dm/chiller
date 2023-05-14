@@ -7,13 +7,13 @@ import {
 } from "../../../../types";
 import { ParamsInputDynamic } from "../params-input-dynamic";
 
-const ParamsInputType: Component<ConstructorParamsInputProps<"type">> = (
-	props
-) => {
+const ParamsInputEnterText: Component<
+	ConstructorParamsInputProps<"enterText">
+> = (props) => {
 	const changeHandler: ConstructorStepParamChangeHandler = (newParam) => {
 		props.onChange({
 			...props.params,
-			text: newParam,
+			target: newParam,
 		});
 	};
 
@@ -24,10 +24,10 @@ const ParamsInputType: Component<ConstructorParamsInputProps<"type">> = (
 				ActionDynamicParamType.Text,
 			]}
 			defaultParamType={ActionDynamicParamType.Text}
-			param={props.params?.text}
+			param={props.params?.target}
 			onChange={changeHandler}
 		/>
 	);
 };
 
-export { ParamsInputType };
+export { ParamsInputEnterText };

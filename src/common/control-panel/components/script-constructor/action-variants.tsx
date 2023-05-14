@@ -1,14 +1,15 @@
 import { Component } from "solid-js";
 
 import { Icon, IconName } from "../../../components";
+import { UserEventAction } from "../../../user-events";
 import {
 	ParamsInputClearInput,
 	ParamsInputClick,
 	ParamsInputEnterChar,
+	ParamsInputEnterText,
 	ParamsInputPressKey,
 	ParamsInputRunScript,
 	ParamsInputSleep,
-	ParamsInputType,
 	ParamsInputTypeRandom,
 	ParamsInputWaitForElement,
 } from "./components";
@@ -24,42 +25,70 @@ type GetActionParamsComponentsMap<
 	action: NonNullable<ActionType>
 ) => Component<ConstructorParamsInputProps<NonNullable<ActionType>>>;
 
+const actionNames: Record<UserEventAction, string> = {
+	click: "Click",
+	pressKey: "Press Key",
+	enterText: "Enter text",
+	typeRandom: "Enter random text from list",
+	waitForElement: "Wait for element",
+	enterChar: "Enter character",
+	clearInput: "Clear input",
+	sleep: "Sleep/Wait",
+	runScript: "Execute script",
+};
+
+const actionIcons: Record<UserEventAction, IconName> = {
+	click: IconName.Click,
+	pressKey: IconName.Keyboard,
+	enterText: IconName.Text,
+	typeRandom: IconName.Text,
+	waitForElement: IconName.Wait,
+	enterChar: IconName.Text,
+	clearInput: IconName.Backspace,
+	sleep: IconName.Sleep,
+	runScript: IconName.Javascript,
+};
+
 const actionOptions: ConstructorStepActionOption[] = [
-	{ value: "click", name: "Click", icon: () => <Icon name={IconName.Click} /> },
 	{
-		value: "pressKey",
-		name: "Press Key",
-		icon: () => <Icon name={IconName.Keyboard} />,
+		value: "click",
+		name: actionNames.click,
+		icon: () => <Icon name={actionIcons.click} />,
 	},
 	{
-		value: "type",
-		name: "Enter text",
-		icon: () => <Icon name={IconName.Text} />,
+		value: "pressKey",
+		name: actionNames.pressKey,
+		icon: () => <Icon name={actionIcons.pressKey} />,
+	},
+	{
+		value: "enterText",
+		name: actionNames.enterText,
+		icon: () => <Icon name={actionIcons.enterText} />,
 	},
 	{
 		value: "typeRandom",
-		name: "Enter random text from list",
-		icon: () => <Icon name={IconName.Text} />,
+		name: actionNames.typeRandom,
+		icon: () => <Icon name={actionIcons.typeRandom} />,
 	},
 	{
 		value: "waitForElement",
-		name: "Wait for element",
-		icon: () => <Icon name={IconName.Wait} />,
+		name: actionNames.waitForElement,
+		icon: () => <Icon name={actionIcons.waitForElement} />,
 	},
 	{
 		value: "clearInput",
-		name: "Clear input",
-		icon: () => <Icon name={IconName.Backspace} />,
+		name: actionNames.clearInput,
+		icon: () => <Icon name={actionIcons.clearInput} />,
 	},
 	{
 		value: "sleep",
-		name: "Sleep/Wait",
-		icon: () => <Icon name={IconName.Sleep} />,
+		name: actionNames.sleep,
+		icon: () => <Icon name={actionIcons.sleep} />,
 	},
 	{
 		value: "runScript",
-		name: "Execute script",
-		icon: () => <Icon name={IconName.Javascript} />,
+		name: actionNames.runScript,
+		icon: () => <Icon name={actionIcons.runScript} />,
 	},
 ];
 
@@ -80,8 +109,8 @@ const getActionParamsComponents: GetActionParamsComponentsMap = (action) => {
 		case "sleep": {
 			return ParamsInputSleep;
 		}
-		case "type": {
-			return ParamsInputType;
+		case "enterText": {
+			return ParamsInputEnterText;
 		}
 		case "typeRandom": {
 			return ParamsInputTypeRandom;
@@ -95,4 +124,4 @@ const getActionParamsComponents: GetActionParamsComponentsMap = (action) => {
 	}
 };
 
-export { actionOptions, getActionParamsComponents };
+export { actionIcons, actionNames, actionOptions, getActionParamsComponents };

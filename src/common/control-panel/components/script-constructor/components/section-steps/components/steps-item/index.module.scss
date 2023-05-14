@@ -19,10 +19,12 @@
 	aspect-ratio: 1 / 1;
 }
 
-input.name {
-	color: variables.$primary;
-	font-size: 0.95em;
-	flex: 1;
+.description-placeholder {
+	padding-left: 8px;
+}
+
+.inputs {
+	margin-top: 8px;
 }
 
 .input {

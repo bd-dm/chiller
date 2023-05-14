@@ -13,7 +13,7 @@ const ParamsInputRunScript: Component<
 	const changeHandler: ConstructorStepParamChangeHandler = (newParam) => {
 		props.onChange({
 			...props.params,
-			script: newParam,
+			target: newParam,
 		});
 	};
 
@@ -24,7 +24,7 @@ const ParamsInputRunScript: Component<
 				ActionDynamicParamType.Script,
 			]}
 			defaultParamType={ActionDynamicParamType.Script}
-			param={props.params?.script}
+			param={props.params?.target}
 			onChange={changeHandler}
 		/>
 	);

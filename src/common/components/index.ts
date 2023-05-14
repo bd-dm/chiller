@@ -3,6 +3,7 @@ export * from "./column";
 export * from "./empty-scripts";
 export * from "./icon";
 export * from "./illustration";
+export * from "./inline-icon";
 export * from "./input";
 export * from "./input-light";
 export * from "./row";

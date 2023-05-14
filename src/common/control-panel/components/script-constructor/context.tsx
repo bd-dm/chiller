@@ -42,6 +42,7 @@ interface ScriptConstructorContextValue {
 	id: Accessor<string>;
 	name: Accessor<string>;
 	variables: Accessor<ConstructorVariableItems>;
+	getVariable: (name: string) => string | undefined;
 	setVariable: (index: number, item: ConstructorVariableItem) => void;
 	removeVariable: (index: number) => void;
 	addVariable: () => void;
@@ -170,6 +171,16 @@ const ScriptConstructorContextProvider: ParentComponent<
 		}
 	};
 
+	const getVariable = (name: string): string | undefined => {
+		const variable = variables().find((item) => item.name === name);
+
+		if (!variable) {
+			return;
+		}
+
+		return variable.value;
+	};
+
 	const setVariable = (index: number, item: ConstructorVariableItem): void => {
 		setVariables((prevVariables) => {
 			prevVariables[index] = item;
@@ -215,6 +226,7 @@ const ScriptConstructorContextProvider: ParentComponent<
 					variables,
 					setVariable,
 					removeVariable,
+					getVariable,
 					addVariable,
 					steps,
 					setStep,
