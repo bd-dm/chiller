@@ -15,6 +15,7 @@ import {
 	createContext,
 	createEffect,
 	createSignal,
+	onCleanup,
 	onMount,
 	ParentComponent,
 	Setter,
@@ -87,6 +88,10 @@ const ScriptConstructorContextProvider: ParentComponent<
 		}
 	});
 
+	onCleanup(async () => {
+		await reset(false);
+	});
+
 	createEffect(() => {
 		if (
 			getFilledVariables(variables()).length === variables().length &&
@@ -135,15 +140,17 @@ const ScriptConstructorContextProvider: ParentComponent<
 		await saveScriptDraft(scriptData());
 	};
 
-	const reset = async () => {
+	const reset = async (shouldRemoveDraft = true) => {
 		setVariables([]);
 		setSteps([]);
 		setName("");
 
-		// After updating the state, we need to wait for the next tick
-		setTimeout(() => {
-			removeScriptDraft(id());
-		});
+		if (shouldRemoveDraft) {
+			// After updating the state, we need to wait for the next tick
+			setTimeout(() => {
+				removeScriptDraft(id());
+			});
+		}
 	};
 
 	const saveHandler = async () => {

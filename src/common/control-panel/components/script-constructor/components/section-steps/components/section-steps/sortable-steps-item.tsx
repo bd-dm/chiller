@@ -8,8 +8,8 @@ import styles from "./index.module.scss";
 const SortableStepsItem: Component<ComponentProps<typeof StepsItem>> = (
 	props
 ) => {
-	const getSortable = () => createSortable(props.step.id);
-	const sortable = getSortable();
+	const id = () => props.step.id;
+	const sortable = createSortable(id());
 
 	return (
 		<div

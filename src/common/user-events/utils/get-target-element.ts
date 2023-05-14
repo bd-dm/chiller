@@ -34,7 +34,9 @@ const getTargetElement: GetTargetElementFn = <ElementType extends HTMLElement>(
 			const variable = target.use;
 			const selector = variables[variable];
 
-			elementData = getTargetElementBySelector(selector);
+			elementData =
+				getTargetElementBySelector(selector) ??
+				getTargetElementByText(selector);
 			break;
 		}
 		default: {

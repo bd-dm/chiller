@@ -14,7 +14,11 @@ const VariablesConstructorSection: Component = () => {
 		<>
 			<Show when={variables().length === 0}>
 				<Row horizontalAlignment={Row.Alignment.Horizontal.Stretch}>
-					<Button light onClick={addVariable}>
+					<Button
+						light
+						onClick={addVariable}
+						classList={{ [styles.addButton]: true }}
+					>
 						<Icon name={IconName.Add} /> &nbsp; Create variable
 					</Button>
 				</Row>
@@ -40,7 +44,11 @@ const StepsConstructorSection: Component = () => {
 		<>
 			<Show when={steps.length === 0}>
 				<Row horizontalAlignment={Row.Alignment.Horizontal.Stretch}>
-					<Button light onClick={addStep}>
+					<Button
+						light
+						onClick={addStep}
+						classList={{ [styles.addButton]: true }}
+					>
 						<Icon name={IconName.Add} /> &nbsp; Create step
 					</Button>
 				</Row>
