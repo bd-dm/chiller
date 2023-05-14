@@ -97,7 +97,7 @@ const Collapsed: Component<CollapsedProps> = (props) => {
 		>
 			<Row>
 				<InlineIcon name={actionIcons[props.action]} />
-				{actionNames[props.action]}
+				{actionNames[props.action]}&nbsp;
 				<ParamsInfo {...props} />
 			</Row>
 		</Button>
