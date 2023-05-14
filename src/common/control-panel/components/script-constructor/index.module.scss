@@ -1,5 +1,12 @@
 @use '../../../styles/variables';
 
 .block {
-	margin-top: 24px;
+	margin: 0 -40px;
+	padding: 20px 40px;
+	border-radius: 4px;
+	background-color: variables.$darken;
+}
+
+.title {
+	margin-bottom: 16px;
 }

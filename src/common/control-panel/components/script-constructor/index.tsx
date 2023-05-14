@@ -1,7 +1,7 @@
-import { Column } from "common/components";
+import { Column, Row } from "common/components";
 import { ScriptData } from "common/scripts";
 import { isUndefined } from "lodash-es";
-import { Component, onCleanup } from "solid-js";
+import { Component, Show } from "solid-js";
 
 import { BodyConstructor, FinishButtons, NameInput } from "./components";
 import { ScriptConstructorContext } from "./context";
@@ -25,6 +25,14 @@ const ScriptConstructor: Component<ScriptConstructorProps> = (props) => {
 				classList={{ [styles.block]: true }}
 				horizontalAlignment={Column.Alignment.Horizontal.Stretch}
 			>
+				<Show when={props.isEdit}>
+					<Row
+						classList={{ [styles.title]: true }}
+						horizontalAlignment={Row.Alignment.Horizontal.Center}
+					>
+						<h1>Edit script</h1>
+					</Row>
+				</Show>
 				<NameInput />
 				<BodyConstructor />
 				<FinishButtons
