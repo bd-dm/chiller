@@ -71,7 +71,7 @@ const ScriptsItem: Component<ScriptsItemProps> = (props) => {
 						</Button>
 					</Row>
 				</Row>
-				<Show keyed when={isEdit()}>
+				<Show when={isEdit()}>
 					<ScriptConstructor
 						isEdit={true}
 						scriptId={props.script.id}

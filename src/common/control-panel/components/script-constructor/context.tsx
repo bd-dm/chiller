@@ -201,7 +201,7 @@ const ScriptConstructorContextProvider: ParentComponent<
 	};
 
 	return (
-		<Show keyed when={id()}>
+		<Show when={id()}>
 			<Context.Provider
 				value={{
 					id,

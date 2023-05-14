@@ -32,11 +32,11 @@ const ParamTypeNames: Record<ActionDynamicParamType, string> = {
 	[ActionDynamicParamType.Script]: "Text",
 };
 
-const ParamTypeIcons: Record<ActionDynamicParamType, JSXElement> = {
-	[ActionDynamicParamType.Variable]: <Icon name={IconName.Variable} />,
-	[ActionDynamicParamType.Text]: <Icon name={IconName.Text} />,
-	[ActionDynamicParamType.Selector]: <Icon name={IconName.Css} />,
-	[ActionDynamicParamType.Script]: <Icon name={IconName.Javascript} />,
+const ParamTypeIcons: Record<ActionDynamicParamType, () => JSXElement> = {
+	[ActionDynamicParamType.Variable]: () => <Icon name={IconName.Variable} />,
+	[ActionDynamicParamType.Text]: () => <Icon name={IconName.Text} />,
+	[ActionDynamicParamType.Selector]: () => <Icon name={IconName.Css} />,
+	[ActionDynamicParamType.Script]: () => <Icon name={IconName.Javascript} />,
 };
 
 const ParamsInputDynamic: Component<ParamsInputCommonProps> = (props) => {
@@ -86,25 +86,25 @@ const ParamsInputDynamic: Component<ParamsInputCommonProps> = (props) => {
 			</Show>
 			<div class={styles.input}>
 				<Switch fallback={<Input type="text" disabled />}>
-					<Match when={param()?.type === ActionDynamicParamType.Variable} keyed>
+					<Match when={param()?.type === ActionDynamicParamType.Variable}>
 						<InputVariable
 							param={param() as ActionDynamicParamWithVariable}
 							onChange={changeHandler}
 						/>
 					</Match>
-					<Match when={param()?.type === ActionDynamicParamType.Selector} keyed>
+					<Match when={param()?.type === ActionDynamicParamType.Selector}>
 						<InputSelector
 							param={param() as ActionDynamicParamWithSelector}
 							onChange={changeHandler}
 						/>
 					</Match>
-					<Match when={param()?.type === ActionDynamicParamType.Text} keyed>
+					<Match when={param()?.type === ActionDynamicParamType.Text}>
 						<InputText
 							param={param() as ActionDynamicParamWithText}
 							onChange={changeHandler}
 						/>
 					</Match>
-					<Match when={param()?.type === ActionDynamicParamType.Script} keyed>
+					<Match when={param()?.type === ActionDynamicParamType.Script}>
 						<InputScript
 							param={param() as ActionDynamicParamWithScript}
 							onChange={changeHandler}

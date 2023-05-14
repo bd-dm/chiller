@@ -1,5 +1,6 @@
 import { Component } from "solid-js";
 
+import { Icon, IconName } from "../../../components";
 import {
 	ParamsInputClearInput,
 	ParamsInputClick,
@@ -24,14 +25,42 @@ type GetActionParamsComponentsMap<
 ) => Component<ConstructorParamsInputProps<NonNullable<ActionType>>>;
 
 const actionOptions: ConstructorStepActionOption[] = [
-	{ value: "click", name: "Click" },
-	{ value: "pressKey", name: "Press Key" },
-	{ value: "type", name: "Enter text" },
-	{ value: "typeRandom", name: "Enter random text from list" },
-	{ value: "waitForElement", name: "Wait for element" },
-	{ value: "clearInput", name: "Clear input" },
-	{ value: "sleep", name: "Sleep/Wait" },
-	{ value: "runScript", name: "Execute script" },
+	{ value: "click", name: "Click", icon: () => <Icon name={IconName.Click} /> },
+	{
+		value: "pressKey",
+		name: "Press Key",
+		icon: () => <Icon name={IconName.Keyboard} />,
+	},
+	{
+		value: "type",
+		name: "Enter text",
+		icon: () => <Icon name={IconName.Text} />,
+	},
+	{
+		value: "typeRandom",
+		name: "Enter random text from list",
+		icon: () => <Icon name={IconName.Text} />,
+	},
+	{
+		value: "waitForElement",
+		name: "Wait for element",
+		icon: () => <Icon name={IconName.Wait} />,
+	},
+	{
+		value: "clearInput",
+		name: "Clear input",
+		icon: () => <Icon name={IconName.Backspace} />,
+	},
+	{
+		value: "sleep",
+		name: "Sleep/Wait",
+		icon: () => <Icon name={IconName.Sleep} />,
+	},
+	{
+		value: "runScript",
+		name: "Execute script",
+		icon: () => <Icon name={IconName.Javascript} />,
+	},
 ];
 
 const getActionParamsComponents: GetActionParamsComponentsMap = (action) => {

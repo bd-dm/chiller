@@ -19,6 +19,11 @@ enum IconName {
 	Text = "text_fields",
 	Css = "css",
 	Javascript = "javascript",
+	Click = "left_click",
+	Keyboard = "keyboard",
+	Wait = "hourglass_empty",
+	Backspace = "backspace",
+	Sleep = "sleep",
 }
 
 interface IconProps {

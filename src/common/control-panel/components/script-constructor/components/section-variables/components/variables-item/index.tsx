@@ -58,12 +58,12 @@ const VariablesItem: Component<VariablesItemProps> = (props) => {
 					changeHandler("value")(newValue)
 				}
 			/>
-			<Show when={hasRemoveButton()} keyed>
+			<Show when={hasRemoveButton()}>
 				<Button light onClick={removeHandler}>
 					<Icon name={IconName.Close} />
 				</Button>
 			</Show>
-			<Show when={!hasRemoveButton()} keyed>
+			<Show when={!hasRemoveButton()}>
 				<Button disabled classList={{ [styles.buttonPlaceholder]: true }}>
 					<Icon name={IconName.Close} />
 				</Button>

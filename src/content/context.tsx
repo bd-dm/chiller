@@ -32,7 +32,7 @@ const CoreContextProvider: ParentComponent = (props) => {
 	});
 
 	return (
-		<Show keyed when={currentTab()}>
+		<Show when={currentTab()}>
 			<Context.Provider
 				value={{ currentTab: currentTab as Accessor<chrome.tabs.Tab>, scripts }}
 			>

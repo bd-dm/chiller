@@ -72,7 +72,7 @@ const StepsItem: Component<StepsItemProps> = (props) => {
 						value={props.step.name ?? ""}
 						placeholder={"Step name"}
 					/>
-					<Show when={hasRemoveButton()} keyed>
+					<Show when={hasRemoveButton()}>
 						<Row verticalAlignment={Row.Alignment.Vertical.Center}>
 							<Button light onClick={removeHandler}>
 								<Icon name={IconName.Close} />
@@ -86,7 +86,7 @@ const StepsItem: Component<StepsItemProps> = (props) => {
 					initialValue={props.step.action}
 					options={actionOptions}
 				/>
-				<Show when={props.step.action} keyed>
+				<Show when={props.step.action}>
 					<ParamsInput
 						action={props.step.action!}
 						initialValue={props.step.params}

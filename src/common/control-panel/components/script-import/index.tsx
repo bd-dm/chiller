@@ -114,7 +114,7 @@ const ScriptImport: Component = () => {
 					&nbsp; Add file(s)
 				</Button>
 			</div>
-			<Show when={items().length > 0} keyed>
+			<Show when={items().length > 0}>
 				<Button classList={{ [styles.button]: true }} onClick={importHandler}>
 					Import
 				</Button>

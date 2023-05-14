@@ -16,10 +16,10 @@ const ControlPanel: Component<ControlPanelProps> = (props) => {
 	return (
 		<ControlPanelContext.Provider>
 			<Switch>
-				<Match when={props.type === ControlPanelType.Popup} keyed>
+				<Match when={props.type === ControlPanelType.Popup}>
 					<BodyPopup />
 				</Match>
-				<Match when={props.type === ControlPanelType.DevTools} keyed>
+				<Match when={props.type === ControlPanelType.DevTools}>
 					<BodyDevTools />
 				</Match>
 			</Switch>

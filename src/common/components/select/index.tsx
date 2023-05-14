@@ -8,7 +8,7 @@ import styles from "./index.module.scss";
 interface SelectOption {
 	value: string;
 	name: string;
-	icon?: JSXElement;
+	icon?: () => JSXElement;
 }
 
 interface SelectProps<OptionType extends SelectOption = SelectOption> {
@@ -193,7 +193,7 @@ const Select = <OptionType extends SelectOption = SelectOption>(
 												classList={{ [styles.itemButtonRow]: true }}
 												verticalAlignment={Row.Alignment.Vertical.Center}
 											>
-												{icon}
+												{icon?.()}
 												<span class={styles.itemButtonText}>{name}</span>
 											</Row>
 										</Button>
