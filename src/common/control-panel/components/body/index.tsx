@@ -20,6 +20,7 @@ const Body: Component = () => {
 			<Column
 				horizontalAlignment={Column.Alignment.Horizontal.Stretch}
 				classList={{ [styles.footer]: true }}
+				gapLess
 			>
 				<OverlayButton />
 				<BetaMark />

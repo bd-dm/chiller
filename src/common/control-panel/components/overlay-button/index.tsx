@@ -1,8 +1,9 @@
 import { Component } from "solid-js";
 
-import { IconName } from "../../../components";
+import { IconName, Row } from "../../../components";
 import { MenuButton } from "../../../components/menu-button";
 import { MessageType, sendMessage } from "../../../message-carrier";
+import styles from "./index.module.scss";
 
 const OverlayButton: Component = () => {
 	const enableOverlay = async () => {
@@ -10,9 +11,17 @@ const OverlayButton: Component = () => {
 	};
 
 	return (
-		<MenuButton icon={IconName.Overlay} onClick={enableOverlay}>
-			Overlay
-		</MenuButton>
+		<Row
+			horizontalAlignment={Row.Alignment.Horizontal.Stretch}
+			verticalAlignment={Row.Alignment.Vertical.Stretch}
+			classList={{
+				[styles.button]: true,
+			}}
+		>
+			<MenuButton icon={IconName.Overlay} onClick={enableOverlay}>
+				Overlay
+			</MenuButton>
+		</Row>
 	);
 };
 
