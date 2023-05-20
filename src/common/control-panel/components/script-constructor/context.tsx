@@ -1,4 +1,5 @@
 import {
+	getScriptBody,
 	getScriptOrDraft,
 	removeScriptDraft,
 	saveScriptDraft,
@@ -122,7 +123,7 @@ const ScriptConstructorContextProvider: ParentComponent<
 		setId(script.id);
 		setName(script.name);
 
-		const { variables, steps } = JSON.parse(script.body) as ScriptBody;
+		const { variables, steps } = getScriptBody(script);
 
 		if (variables) {
 			setVariables(variablesToArray(variables));

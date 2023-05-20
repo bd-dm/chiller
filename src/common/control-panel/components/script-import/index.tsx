@@ -11,6 +11,7 @@ import {
 } from "../../../components";
 import { IllustrationName } from "../../../components/illustration/constants";
 import { addScript, ScriptData } from "../../../scripts";
+import { migrateScript } from "../../../scripts/migrate/migrate-script";
 import { useControlPanelContext } from "../../context";
 import { Page } from "../../enums";
 import { FileItem } from "./file-item";
@@ -68,8 +69,10 @@ const ScriptImport: Component = () => {
 			};
 		});
 
-		for (let i = 0; i < scripts.length; i++) {
-			await addScript(scripts[i]);
+		const migratedScripts = await Promise.all(scripts.map(migrateScript));
+
+		for (let i = 0; i < migratedScripts.length; i++) {
+			await addScript(migratedScripts[i]);
 		}
 		setPage(Page.ScriptList);
 		updateScripts();
