@@ -13,10 +13,10 @@ const FinishButtons: Component<FinishButtonsProps> = (props) => {
 
 	return (
 		<Column horizontalAlignment={Column.Alignment.Horizontal.Stretch}>
-			<Button type={"button"} onClick={save}>
+			<Button type={"button"} onClick={save} aria-label={"Save"}>
 				{props.saveText}
 			</Button>
-			<Button light type={"button"} onClick={cancel}>
+			<Button light type={"button"} onClick={cancel} aria-label={"Cancel"}>
 				{props.cancelText}
 			</Button>
 		</Column>

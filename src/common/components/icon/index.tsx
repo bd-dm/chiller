@@ -37,6 +37,7 @@ const Icon: Component<IconProps> = (props) => {
 
 	return (
 		<span
+			aria-hidden="true"
 			title={props.title}
 			classList={{
 				"material-symbols-rounded": true,

@@ -19,7 +19,7 @@ const VariablesConstructorSection: Component = () => {
 						onClick={addVariable}
 						classList={{ [styles.addButton]: true }}
 					>
-						<Icon name={IconName.Add} /> &nbsp; Create variable
+						<Icon name={IconName.Add} /> Create variable
 					</Button>
 				</Row>
 			</Show>
@@ -49,7 +49,7 @@ const StepsConstructorSection: Component = () => {
 						onClick={addStep}
 						classList={{ [styles.addButton]: true }}
 					>
-						<Icon name={IconName.Add} /> &nbsp; Create step
+						<Icon name={IconName.Add} /> Create step
 					</Button>
 				</Row>
 			</Show>

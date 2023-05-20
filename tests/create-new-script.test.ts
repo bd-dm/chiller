@@ -9,16 +9,16 @@ test.describe("Mechanics/CreateNewScript", () => {
 	}) => {
 		await extension.goToPopup();
 		await ui.getButton("Add").click();
-		page.getByTitle("Create new script");
+		await page.getByLabel("AddScript").isVisible();
 	});
 
-	test("Creates script - happy path", async ({ extension, ui }) => {
+	test("Creates script - happy path", async ({ extension, page, ui }) => {
 		await extension.goToPopup();
-		const button = ui.getButton("Create new");
+		const button = ui.getButton("Add");
 		await button.click();
 
 		await ui.getInput("Name").fill("Test name");
-
+		await ui.getButton("Create variable").click();
 		await ui.within(
 			ui.getFieldSet("Variables").getRow("Variable 1"),
 			async (ui) => {
@@ -27,33 +27,35 @@ test.describe("Mechanics/CreateNewScript", () => {
 			}
 		);
 
+		await ui.getButton("Create step").click();
 		await ui.within(ui.getFieldSet("Steps"), async (ui) => {
-			await ui.within(ui.getRow("Step 1"), async (ui) => {
-				await ui.getSelect("Select action...").click();
+			await ui.within(ui.getRow("1"), async (ui) => {
+				await ui.getSelect("Action").click();
 				await ui.type("cl");
 				await ui.getButton("Click").click();
 
-				await ui.getSelect("Select input type...").click();
-				await ui.type("fro");
-				await ui.getButton("From variable").click();
+				await ui.getSelect("Selector type").click();
+				await page.keyboard.press("Backspace");
+				await page.keyboard.press("Backspace");
+				await page.keyboard.press("Backspace");
+				await page.keyboard.press("Backspace");
+				await ui.type("var");
+				await ui.getButton("Variable").click();
 
-				await ui.getSelect("Select variable...").click();
+				await ui.getSelect("Variable").click();
 				await ui.type("tes");
 				await ui.getButton("testSelector").click();
 			});
 
-			await ui.within(ui.getRow("Step 2"), async (ui) => {
-				await ui.getSelect("Select action...").click();
-				await ui.getButton("Type string").click();
-
-				await ui.getSelect("Select input type...").click();
-				await ui.getButton("Text").click();
+			await ui.within(ui.getRow("2"), async (ui) => {
+				await ui.getSelect("Action").click();
+				await ui.getButton("Enter text").click();
 
 				await ui.getInput("Text").type("Test text");
 			});
 		});
 
-		await ui.getRow("Step 3");
+		await ui.getRow("3");
 
 		await ui.getButton("Save").click();
 		await ui.getPage(Page.ScriptList).isVisible();
