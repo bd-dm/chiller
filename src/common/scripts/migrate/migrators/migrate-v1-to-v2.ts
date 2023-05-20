@@ -16,7 +16,6 @@ import { ScriptData } from "../../types";
 const migrateV1ToV2 = (script: ScriptData): ScriptData => {
 	const body = getScriptBody(script);
 	const { steps } = body;
-	console.log("migrating steps", { ...steps });
 
 	const nextSteps = steps.map((step) => {
 		// @ts-ignore comparing with old model so types are wrong
@@ -44,8 +43,6 @@ const migrateV1ToV2 = (script: ScriptData): ScriptData => {
 			params: step.params,
 		};
 	});
-
-	console.log("nextSteps", nextSteps);
 
 	const nextBody = {
 		...body,
