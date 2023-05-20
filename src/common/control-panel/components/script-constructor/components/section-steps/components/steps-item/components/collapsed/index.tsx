@@ -46,8 +46,12 @@ const TargetedParamsInfo: Component<CollapsedProps> = (props) => {
 				{(params().target as ActionDynamicParamWithSelector).selector}"
 			</Match>
 			<Match when={params().target.type === ActionDynamicParamType.Variable}>
-				"{getVariable((params().target as ActionDynamicParamWithVariable).use)}"
-				(variable "{(params().target as ActionDynamicParamWithVariable).use}")
+				"{getVariable((params().target as ActionDynamicParamWithVariable).use)}
+				"&nbsp;
+				<span class={styles.redundant}>
+					(variable "{(params().target as ActionDynamicParamWithVariable).use}
+					")
+				</span>
 			</Match>
 		</Switch>
 	);
@@ -95,10 +99,15 @@ const Collapsed: Component<CollapsedProps> = (props) => {
 			light
 			onClick={() => props.onExpand()}
 		>
-			<Row>
+			<Row
+				horizontalAlignment={Row.Alignment.Horizontal.FlexStart}
+				verticalAlignment={Row.Alignment.Vertical.Center}
+			>
 				<InlineIcon name={actionIcons[props.action]} />
-				{actionNames[props.action]}&nbsp;
-				<ParamsInfo {...props} />
+				<div>
+					{actionNames[props.action]}&nbsp;
+					<ParamsInfo {...props} />
+				</div>
 			</Row>
 		</Button>
 	);
