@@ -10,7 +10,8 @@ import {
 	UserEventParams,
 } from "common/user-events";
 import { Keys } from "common/user-events/events";
-import { Component, Match, Switch } from "solid-js";
+import { isUndefined } from "lodash-es";
+import { Component, Match, Show, Switch } from "solid-js";
 
 import { actionIcons, actionNames } from "../../../../../../action-variants";
 import { useScriptConstructor } from "../../../../../../context";
@@ -106,7 +107,9 @@ const Collapsed: Component<CollapsedProps> = (props) => {
 				<InlineIcon name={actionIcons[props.action]} />
 				<div>
 					{actionNames[props.action]}&nbsp;
-					<ParamsInfo {...props} />
+					<Show when={!isUndefined(props.params)}>
+						<ParamsInfo {...props} />
+					</Show>
 				</div>
 			</Row>
 		</Button>

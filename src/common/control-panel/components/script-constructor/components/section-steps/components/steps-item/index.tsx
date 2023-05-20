@@ -125,16 +125,14 @@ const StepsItem: Component<StepsItemProps> = (props) => {
 						{!isUndefined(props.index) ? props.index + 1 : ""}
 					</h4>
 					<Row style={{ flex: "1" }}>
-						<Show when={isCollapsed()}>
-							{props.step.action && props.step.params && (
-								<Collapsed
-									action={props.step.action}
-									params={props.step.params}
-									onExpand={handleExpand}
-								/>
-							)}
+						<Show when={isCollapsed() || props.step.action}>
+							<Collapsed
+								action={props.step.action!}
+								params={props.step.params!}
+								onExpand={handleExpand}
+							/>
 						</Show>
-						<Show when={!isCollapsed()}>
+						<Show when={!props.step.action}>
 							<div class={styles.descriptionPlaceholder}>
 								Choose action for this step
 							</div>
