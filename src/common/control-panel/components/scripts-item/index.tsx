@@ -1,4 +1,4 @@
-import { Button, Column, Row } from "common/components";
+import { Button, Column, Icon, IconName, Row } from "common/components";
 import {
 	exportScript,
 	removeScript,
@@ -54,9 +54,9 @@ const ScriptsItem: Component<ScriptsItemProps> = (props) => {
 					verticalAlignment={Row.Alignment.Vertical.Center}
 				>
 					<div>{props.script.name}</div>
-					<Row>
+					<Row gapLess>
 						<Button type={"button"} light onClick={exportHandler}>
-							Export
+							<Icon name={IconName.Download} title={"Download"} />
 						</Button>
 						<Button
 							type={"button"}
@@ -64,14 +64,14 @@ const ScriptsItem: Component<ScriptsItemProps> = (props) => {
 							active={isEdit()}
 							onClick={editHandler}
 						>
-							Edit
+							<Icon name={IconName.Edit} title={"Edit"} />
 						</Button>
-						<Button type={"button"} onClick={removeHandler}>
-							&times;
+						<Button light type={"button"} onClick={removeHandler}>
+							<Icon name={IconName.Close} title={"Remove"} />
 						</Button>
 					</Row>
 				</Row>
-				<Show keyed when={isEdit()}>
+				<Show when={isEdit()}>
 					<ScriptConstructor
 						isEdit={true}
 						scriptId={props.script.id}

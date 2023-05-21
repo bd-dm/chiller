@@ -5,15 +5,26 @@
 }
 
 .title {
-	margin: 0 8px;
+	cursor: default;
+	font-size: 0.85em;
+	margin: 0;
+	border-radius: 2px;
+	padding: 1px;
+	background-color: rgb(255, 255, 255, 0.14);
+	color: rgb(220, 220, 220);
+	width: 16px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	aspect-ratio: 1 / 1;
 }
 
-input.name {
-	color: variables.$primary;
-	margin-top: 2px;
-	font-size: 12px;
-	font-weight: 700;
-	flex: 1;
+.description-placeholder {
+	padding-left: 8px;
+}
+
+.inputs {
+	margin-top: 8px;
 }
 
 .input {

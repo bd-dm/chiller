@@ -1,5 +1,13 @@
 .block {
 	padding: 8px;
+	margin-top: 56px;
 	text-align: center;
 	line-height: 2.5em;
+}
+
+.compact {
+	&.block {
+		margin-top: 0;
+		line-height: 1.5em;
+	}
 }

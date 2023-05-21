@@ -1,4 +1,5 @@
 import {
+	getScriptBody,
 	getScriptOrDraft,
 	removeScriptDraft,
 	saveScriptDraft,
@@ -8,17 +9,21 @@ import {
 } from "common/scripts";
 import { ContextType } from "common/types";
 import { isNull } from "lodash-es";
+import { nanoid } from "nanoid";
+import { generateSlug } from "random-word-slugs";
 import {
 	Accessor,
 	createContext,
 	createEffect,
 	createSignal,
+	onCleanup,
 	onMount,
 	ParentComponent,
 	Setter,
 	Show,
 	useContext,
 } from "solid-js";
+import { createStore } from "solid-js/store";
 
 import {
 	ConstructorStepItem,
@@ -38,19 +43,20 @@ interface ScriptConstructorContextValue {
 	id: Accessor<string>;
 	name: Accessor<string>;
 	variables: Accessor<ConstructorVariableItems>;
+	getVariable: (name: string) => string | undefined;
 	setVariable: (index: number, item: ConstructorVariableItem) => void;
 	removeVariable: (index: number) => void;
 	addVariable: () => void;
-	steps: Accessor<ConstructorStepItems>;
-	setStep: (index: number, item: ConstructorStepItem) => void;
-	removeStep: (index: number) => void;
+	steps: ConstructorStepItems;
+	setSteps: (steps: ConstructorStepItems) => void;
+	setStep: (id: string, item: ConstructorStepItem) => void;
+	removeStep: (idToDelete: string) => void;
 	addStep: () => void;
-	moveStepUp: (index: number) => void;
-	moveStepDown: (index: number) => void;
 	setName: Setter<string>;
 	cancel?: () => void;
 	save?: () => void;
 }
+const getRandomName = () => generateSlug(2, { format: "title" });
 
 const Context = createContext<ScriptConstructorContextValue>();
 
@@ -58,9 +64,9 @@ const ScriptConstructorContextProvider: ParentComponent<
 	ScriptConstructorProps
 > = (props) => {
 	const [id, setId] = createSignal("");
-	const [name, setName] = createSignal("");
+	const [name, setName] = createSignal(getRandomName());
+	const [steps, setSteps] = createStore<ConstructorStepItems>([]);
 	const [variables, setVariables] = createSignal<ConstructorVariableItems>([]);
-	const [steps, setSteps] = createSignal<ConstructorStepItems>([]);
 
 	const scriptData = () => ({
 		id: id(),
@@ -68,7 +74,7 @@ const ScriptConstructorContextProvider: ParentComponent<
 		body: JSON.stringify({
 			version: SCRIPT_SCHEMA_VERSION,
 			variables: variablesToObject(getFilledVariables(variables())),
-			steps: getFilledSteps(steps()),
+			steps: getFilledSteps(steps),
 		} as ScriptBody),
 		addedTimestamp: new Date().getTime(),
 	});
@@ -84,27 +90,40 @@ const ScriptConstructorContextProvider: ParentComponent<
 		}
 	});
 
+	onCleanup(async () => {
+		await reset(false);
+	});
+
 	createEffect(() => {
-		if (getFilledVariables(variables()).length === variables().length) {
+		if (
+			getFilledVariables(variables()).length === variables().length &&
+			variables().length > 0
+		) {
 			addVariable();
 		}
 	});
 
 	createEffect(() => {
-		if (getFilledSteps(steps()).length === steps().length) {
+		if (getFilledSteps(steps).length === steps.length && steps.length > 0) {
 			addStep();
 		}
 	});
 
 	createEffect(() => {
-		saveDraft();
+		const shouldSave = variables().length > 0 || steps.length > 0;
+
+		if (shouldSave) {
+			saveDraft();
+		} else {
+			removeScriptDraft(id());
+		}
 	});
 
 	const restoreScript = (script: ScriptData): void => {
 		setId(script.id);
 		setName(script.name);
 
-		const { variables, steps } = JSON.parse(script.body) as ScriptBody;
+		const { variables, steps } = getScriptBody(script);
 
 		if (variables) {
 			setVariables(variablesToArray(variables));
@@ -123,8 +142,17 @@ const ScriptConstructorContextProvider: ParentComponent<
 		await saveScriptDraft(scriptData());
 	};
 
-	const removeDraft = async () => {
-		await removeScriptDraft(id());
+	const reset = async (shouldRemoveDraft = true) => {
+		setVariables([]);
+		setSteps([]);
+		setName("");
+
+		if (shouldRemoveDraft) {
+			// After updating the state, we need to wait for the next tick
+			setTimeout(() => {
+				removeScriptDraft(id());
+			});
+		}
 	};
 
 	const saveHandler = async () => {
@@ -132,16 +160,26 @@ const ScriptConstructorContextProvider: ParentComponent<
 			return;
 		}
 
-		await removeDraft();
 		props.onSave(scriptData());
+		await reset();
 	};
 
 	const cancelHandler = async () => {
-		await removeDraft();
+		await reset();
 
 		if (props.onCancel) {
 			props.onCancel();
 		}
+	};
+
+	const getVariable = (name: string): string | undefined => {
+		const variable = variables().find((item) => item.name === name);
+
+		if (!variable) {
+			return;
+		}
+
+		return variable.value;
 	};
 
 	const setVariable = (index: number, item: ConstructorVariableItem): void => {
@@ -164,56 +202,38 @@ const ScriptConstructorContextProvider: ParentComponent<
 		]);
 	};
 
-	const setStep = (index: number, item: ConstructorStepItem): void => {
-		setSteps((prevSteps) => {
-			prevSteps[index] = item;
-			return [...prevSteps];
-		});
+	const setStep = (id: string, item: ConstructorStepItem): void => {
+		setSteps((step) => step.id === id, item);
 	};
 
-	const removeStep = (index: number): void => {
-		setSteps((prevSteps) =>
-			prevSteps.filter((_, prevIndex) => prevIndex !== index)
-		);
+	const removeStep = (idToDelete: string): void => {
+		setSteps((prevSteps) => prevSteps.filter(({ id }) => idToDelete !== id));
 	};
 
 	const addStep = (): void => {
-		setSteps((prevSteps) => [...prevSteps, {}]);
-	};
-
-	const moveStepUp = (index: number): void => {
-		setSteps((prevSteps) => {
-			const upperStep = prevSteps[index - 1];
-			prevSteps[index - 1] = prevSteps[index];
-			prevSteps[index] = upperStep;
-			return [...prevSteps];
-		});
-	};
-
-	const moveStepDown = (index: number): void => {
-		setSteps((prevSteps) => {
-			const bottomStep = prevSteps[index + 1];
-			prevSteps[index + 1] = prevSteps[index];
-			prevSteps[index] = bottomStep;
-			return [...prevSteps];
-		});
+		setSteps((prevSteps) => [
+			...prevSteps,
+			{
+				id: nanoid(),
+			},
+		]);
 	};
 
 	return (
-		<Show keyed when={id()}>
+		<Show when={id()}>
 			<Context.Provider
 				value={{
 					id,
 					variables,
 					setVariable,
 					removeVariable,
+					getVariable,
 					addVariable,
 					steps,
 					setStep,
 					removeStep,
 					addStep,
-					moveStepUp,
-					moveStepDown,
+					setSteps,
 					name,
 					setName,
 					cancel: cancelHandler,

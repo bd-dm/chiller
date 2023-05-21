@@ -1,13 +1,12 @@
 @use '../../../styles/variables';
 
 .block {
-	background-color: variables.$background-2;
-	margin: 8px -8px;
-	padding: 0 8px 24px;
+	margin: 0 -40px;
+	padding: 20px 40px;
+	border-radius: 4px;
+	background-color: variables.$darken;
 }
 
 .title {
-	font-size: 2em;
-	text-align: center;
-	margin: 12px 0;
+	margin-bottom: 16px;
 }

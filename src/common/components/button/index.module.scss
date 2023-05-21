@@ -6,8 +6,11 @@
 	background-color: variables.$button;
 	padding: 8px;
 	color: variables.$text-inverted;
-	border-radius: 4px;
+	border-radius: 2px;
 	transition: background-color .3s;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
 
 	&:focus {
 		border: none;
@@ -16,29 +19,31 @@
 	}
 
 	&:hover:not(.active) {
-		background-color: variables.$button-hovered
+		background-color: variables.$button-hovered;
 	}
 
 	&.active {
-		cursor: default;
-		background-color: transparent;
-		color: variables.$button;
-		border-radius: 0;
+		cursor: pointer;
+		background-color: variables.$button-active !important;
+		color: variables.$text-inverted !important;
 		outline: none;
-		border: 2px none;
-		border-bottom-style: solid;
+
 	}
 
 	&.light {
 		color: variables.$button;
 		background-color: transparent;
 
-		&:hover {
-			background-color: transparent;
+		&:hover:not(.active) {
+			background-color: variables.$button-light-hovered
 		}
 
 		&:focus {
 			outline-color: variables.$button;
+		}
+
+		&.active:focus {
+			outline: 2px solid variables.$button-outline;
 		}
 	}
 }

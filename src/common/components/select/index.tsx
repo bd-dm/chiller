@@ -1,13 +1,14 @@
-import { Button, Column } from "common/components";
+import { Button, Column, Row } from "common/components";
 import commonStyles from "common/styles/index.module.scss";
 import { isNull, isUndefined } from "lodash-es";
-import { createEffect, createSignal, For, onMount } from "solid-js";
+import { createEffect, createSignal, For, JSXElement, onMount } from "solid-js";
 
 import styles from "./index.module.scss";
 
 interface SelectOption {
 	value: string;
 	name: string;
+	icon?: () => JSXElement;
 }
 
 interface SelectProps<OptionType extends SelectOption = SelectOption> {
@@ -168,7 +169,7 @@ const Select = <OptionType extends SelectOption = SelectOption>(
 										: filteredOptions()
 								}
 							>
-								{({ value: itemValue, name }, index) => (
+								{({ value: itemValue, name, icon }, index) => (
 									<li class={styles.item}>
 										<Button
 											notStyled
@@ -188,7 +189,13 @@ const Select = <OptionType extends SelectOption = SelectOption>(
 											}}
 											onClick={() => selectHandler(itemValue)}
 										>
-											{name}
+											<Row
+												classList={{ [styles.itemButtonRow]: true }}
+												verticalAlignment={Row.Alignment.Vertical.Center}
+											>
+												{icon?.()}
+												<span class={styles.itemButtonText}>{name}</span>
+											</Row>
 										</Button>
 									</li>
 								)}

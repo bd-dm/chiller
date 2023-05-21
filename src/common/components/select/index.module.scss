@@ -30,7 +30,6 @@
 		transition: height 300ms;
 		max-height: 300px;
 		overflow-y: auto;
-		box-shadow: 0 10px 5px 0 variables.$shadow-primary;
 	}
 }
 
@@ -49,7 +48,16 @@
 
 	&-button {
 		width: 100%;
-		padding: 12px;
+		padding: 8px;
 		text-align: left;
+
+		&-row {
+			gap: 8px;
+		}
+
+		&-text {
+			font-size: 1em;
+		}
 	}
+
 }

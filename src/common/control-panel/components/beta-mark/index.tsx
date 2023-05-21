@@ -1,6 +1,6 @@
 import { Component } from "solid-js";
 
-import styles from "../../index.module.scss";
+import styles from "./index.module.scss";
 
 const BetaMark: Component = () => {
 	return (

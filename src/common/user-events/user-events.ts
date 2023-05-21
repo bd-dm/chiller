@@ -2,10 +2,10 @@ import {
 	clearInput,
 	click,
 	enterChar,
+	enterText,
 	pressKey,
 	runScript,
 	sleep,
-	type,
 	typeRandom,
 	waitForElement,
 } from "./events";
@@ -23,15 +23,18 @@ const userEvents = {
 		_tabId = tabId;
 	},
 
+	// With target (dynamic params)
 	click: wrap(click),
+	clearInput: wrap(clearInput),
+	waitForElement: wrap(waitForElement),
+	enterText: wrap(enterText),
+	runScript: wrap(runScript),
+
+	// Without target (static params)
 	pressKey: wrap(pressKey),
 	enterChar: wrap(enterChar),
-	type: wrap(type),
-	clearInput: wrap(clearInput),
 	typeRandom: wrap(typeRandom),
 	sleep: wrap(sleep),
-	waitForElement: wrap(waitForElement),
-	runScript: wrap(runScript),
 };
 
 type UserEvents = Omit<typeof userEvents, "start">;

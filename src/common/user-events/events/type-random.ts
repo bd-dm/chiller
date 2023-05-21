@@ -1,6 +1,6 @@
 import { ActionDynamicParamType, UserEvent } from "../types";
 import { pickRandomFromArray } from "../utils";
-import { type } from "./type";
+import { enterText } from "./enter-text";
 
 interface TypeRandomParams {
 	variants: string[];
@@ -12,8 +12,8 @@ const typeRandom: UserEvent<TypeRandomParams> = (
 ) => {
 	const text = pickRandomFromArray(variants);
 
-	return type(tabId, {
-		params: { text: { type: ActionDynamicParamType.Text, text } },
+	return enterText(tabId, {
+		params: { target: { type: ActionDynamicParamType.Text, text } },
 	});
 };
 

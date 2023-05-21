@@ -2,19 +2,16 @@ import { MessageType, sendMessage } from "../../message-carrier";
 import {
 	ActionDynamicParamWithScript,
 	ActionDynamicParamWithVariable,
-	UserEvent,
+	DefaultParamsType,
+	UserEventWithTarget,
 } from "../types";
 import { getActionParamValue } from "../utils";
 
-interface RunScriptParams {
-	script: ActionDynamicParamWithVariable | ActionDynamicParamWithScript;
-}
-
-const runScript: UserEvent<RunScriptParams> = async (
-	tabId,
-	{ params: { script }, variables }
-): Promise<void> => {
-	const scriptString = getActionParamValue(script, variables);
+const runScript: UserEventWithTarget<
+	DefaultParamsType,
+	ActionDynamicParamWithVariable | ActionDynamicParamWithScript
+> = async (tabId, { params: { target }, variables }): Promise<void> => {
+	const scriptString = getActionParamValue(target, variables);
 
 	const debuggee = { tabId };
 	await sendMessage(MessageType.SendDebuggerCommand, {

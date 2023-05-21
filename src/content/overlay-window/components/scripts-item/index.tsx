@@ -1,4 +1,4 @@
-import { Button, Row } from "common/components";
+import { Button, Icon, IconName, Row } from "common/components";
 import { ScriptData, scriptRunner } from "common/scripts";
 import { Component } from "solid-js";
 
@@ -19,13 +19,13 @@ const ScriptsItem: Component<ScriptsItemProps> = (props) => {
 	return (
 		<li class={styles.item}>
 			<Row
-				horizontalAlignment={Row.Alignment.Horizontal.SpaceBetween}
+				horizontalAlignment={Row.Alignment.Horizontal.FlexStart}
 				verticalAlignment={Row.Alignment.Vertical.Center}
 			>
-				<div class={styles.name}>{props.script.name}</div>
-				<Button type={"button"} onClick={runScriptHandler}>
-					Run
+				<Button light type={"button"} onClick={runScriptHandler}>
+					<Icon name={IconName.Play} />
 				</Button>
+				<div class={styles.name}>{props.script.name}</div>
 			</Row>
 		</li>
 	);

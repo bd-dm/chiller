@@ -12,7 +12,7 @@ interface ScriptData {
 }
 
 interface ScriptBody {
-	version: number;
+	version?: number;
 	variables: ScriptVariables;
 	steps: ScriptSteps;
 }
@@ -20,7 +20,7 @@ interface ScriptBody {
 interface ScriptStep<
 	UserEventActionType extends UserEventAction = UserEventAction
 > {
-	name?: string;
+	id: string;
 	action: UserEventActionType;
 	params: UserEventParams<UserEventActionType>;
 }

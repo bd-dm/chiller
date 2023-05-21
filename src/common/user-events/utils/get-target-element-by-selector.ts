@@ -25,9 +25,7 @@ const getTargetElementBySelector = <ElementType extends HTMLElement>(
 		if (!isNull(elementInIframe)) {
 			return { element: elementInIframe, iframe: targetIframe ?? undefined };
 		}
-	}
 
-	if (isNull(element)) {
 		return null;
 	}
 

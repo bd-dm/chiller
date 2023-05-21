@@ -20,9 +20,15 @@ type UserEvent<ParamsType = DefaultParamsType> = (
  * Target element types
  */
 
-type UserEventWithTarget<ParamsType = DefaultParamsType> = UserEvent<
+type UserEventWithTarget<
+	ParamsType = DefaultParamsType,
+	TargetType =
+		| ActionDynamicParamWithText
+		| ActionDynamicParamWithSelector
+		| ActionDynamicParamWithVariable
+> = UserEvent<
 	ParamsType & {
-		target: ActionDynamicParamWithSelector | ActionDynamicParamWithVariable;
+		target: TargetType;
 	}
 >;
 
@@ -88,6 +94,7 @@ export type {
 	ActionDynamicParamWithSelector,
 	ActionDynamicParamWithText,
 	ActionDynamicParamWithVariable,
+	DefaultParamsType,
 	GetTargetElementFn,
 	TargetElementData,
 	UserEvent,

@@ -1,5 +1,6 @@
 import { ScriptData, ScriptStep } from "common/scripts";
 import { ActionDynamicParam, UserEventAction } from "common/user-events";
+import { JSXElement } from "solid-js";
 
 interface ScriptConstructorProps {
 	scriptId: ScriptData["id"];
@@ -15,7 +16,7 @@ interface ConstructorVariableItem {
 type ConstructorVariableItems = ConstructorVariableItem[];
 
 type ConstructorStepItem<ActionType extends UserEventAction = UserEventAction> =
-	Partial<ScriptStep<ActionType>>;
+	Partial<ScriptStep<ActionType>> & Pick<ScriptStep<ActionType>, "id">;
 type ConstructorStepItemAction<
 	ActionType extends UserEventAction = UserEventAction
 > = ConstructorStepItem<ActionType>["action"];
@@ -27,6 +28,7 @@ type ConstructorStepItems = ConstructorStepItem[];
 interface ConstructorStepActionOption {
 	value: NonNullable<ConstructorStepItemAction>;
 	name: string;
+	icon?: () => JSXElement;
 }
 
 type ConstructorStepParamsChangeHandler<

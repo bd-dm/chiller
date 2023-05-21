@@ -1,7 +1,7 @@
 .row {
 	display: flex;
 	flex-direction: row;
-	gap: 8px;
+	gap: 4px;
 
 	&.horizontal {
 		&-flex-start {
@@ -44,4 +44,8 @@
 			align-items: stretch;
 		}
 	}
+}
+
+.gap-less {
+	gap: 0;
 }

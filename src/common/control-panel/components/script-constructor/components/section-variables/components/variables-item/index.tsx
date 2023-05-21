@@ -1,4 +1,4 @@
-import { Button, Input, Row } from "common/components";
+import { Button, Icon, IconName, Input, Row } from "common/components";
 import { Component, Show } from "solid-js";
 
 import { useScriptConstructor } from "../../../../context";
@@ -28,6 +28,10 @@ const VariablesItem: Component<VariablesItemProps> = (props) => {
 
 	const isLast = () => props.index === variables().length - 1;
 
+	const isFirst = () => props.index === 0;
+
+	const hasRemoveButton = () => !isLast() || isFirst();
+
 	return (
 		<Row
 			aria-label={`Variable ${props.index + 1}`}
@@ -54,14 +58,14 @@ const VariablesItem: Component<VariablesItemProps> = (props) => {
 					changeHandler("value")(newValue)
 				}
 			/>
-			<Show when={!isLast()} keyed>
+			<Show when={hasRemoveButton()}>
 				<Button light onClick={removeHandler}>
-					&times;
+					<Icon name={IconName.Close} />
 				</Button>
 			</Show>
-			<Show when={isLast()} keyed>
+			<Show when={!hasRemoveButton()}>
 				<Button disabled classList={{ [styles.buttonPlaceholder]: true }}>
-					&times;
+					<Icon name={IconName.Close} />
 				</Button>
 			</Show>
 		</Row>

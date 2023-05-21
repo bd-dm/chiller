@@ -8,6 +8,7 @@ import {
 	TargetElementData,
 } from "../types";
 import { getTargetElementBySelector } from "./get-target-element-by-selector";
+import { getTargetElementByText } from "./get-target-element-by-text";
 
 const getTargetElement: GetTargetElementFn = <ElementType extends HTMLElement>(
 	target: ActionDynamicParam,
@@ -16,6 +17,10 @@ const getTargetElement: GetTargetElementFn = <ElementType extends HTMLElement>(
 	let elementData: TargetElementData<ElementType> | null;
 
 	switch (target.type) {
+		case ActionDynamicParamType.Text: {
+			elementData = getTargetElementByText(target.text);
+			break;
+		}
 		case ActionDynamicParamType.Selector: {
 			elementData = getTargetElementBySelector(target.selector);
 			break;
@@ -29,7 +34,9 @@ const getTargetElement: GetTargetElementFn = <ElementType extends HTMLElement>(
 			const variable = target.use;
 			const selector = variables[variable];
 
-			elementData = getTargetElementBySelector(selector);
+			elementData =
+				getTargetElementBySelector(selector) ??
+				getTargetElementByText(selector);
 			break;
 		}
 		default: {

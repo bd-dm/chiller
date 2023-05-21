@@ -1,16 +1,32 @@
-import { Component } from "solid-js";
+import { Component, JSXElement } from "solid-js";
 
-import { Row } from "../row";
+import { Column } from "../column";
+import { IconName } from "../icon";
+import { Illustration } from "../illustration";
+import { IllustrationName } from "../illustration/constants";
+import { InlineIcon } from "../inline-icon";
 import styles from "./index.module.scss";
 
-const EmptyScripts: Component = () => (
-	<Row
-		classList={{ [styles.block]: true }}
-		horizontalAlignment={Row.Alignment.Horizontal.Center}
+interface EmptyScriptsProps {
+	message?: JSXElement;
+	compact?: boolean;
+}
+
+const EmptyScripts: Component<EmptyScriptsProps> = (props) => (
+	<Column
+		classList={{ [styles.block]: true, [styles.compact]: props.compact }}
+		horizontalAlignment={Column.Alignment.Horizontal.Center}
 	>
-		No scripts yet. <br />
-		To add a script, go to "Create new" tab
-	</Row>
+		<Illustration name={IllustrationName.Empty} />
+		<h3>
+			{props.message ?? (
+				<>
+					Scripts will be here as soon as you <InlineIcon name={IconName.Add} />
+					add them
+				</>
+			)}
+		</h3>
+	</Column>
 );
 
 export { EmptyScripts };

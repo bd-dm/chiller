@@ -10,7 +10,7 @@ const InputSelector: Component<
 	return (
 		<Input
 			type="text"
-			placeholder={"Selector"}
+			placeholder={"CSS selector"}
 			value={props.param.selector ?? ""}
 			onInput={({ currentTarget: { value } }) =>
 				props.onChange("selector")(value)

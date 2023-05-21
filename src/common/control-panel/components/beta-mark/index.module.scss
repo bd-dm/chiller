@@ -1,0 +1,18 @@
+.beta {
+	text-align: center;
+	background-color: #000;
+	border-radius: 2px;
+	color: #fff;
+	padding: 4px;
+	font-weight: 700;
+
+	&-link {
+		display: inline-block;
+		font-weight: 400;
+		padding-left: 16px;
+
+		a, a:visited, a:active {
+			color: #fff;
+		}
+	}
+}

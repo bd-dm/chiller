@@ -1,7 +1,7 @@
-import { Column } from "common/components";
+import { Column, Row } from "common/components";
 import { ScriptData } from "common/scripts";
 import { isUndefined } from "lodash-es";
-import { Component } from "solid-js";
+import { Component, Show } from "solid-js";
 
 import { BodyConstructor, FinishButtons, NameInput } from "./components";
 import { ScriptConstructorContext } from "./context";
@@ -19,18 +19,26 @@ const ScriptConstructor: Component<ScriptConstructorProps> = (props) => {
 		<ScriptConstructorContext.Provider
 			scriptId={props.scriptId}
 			onSave={saveHandler}
-			onCancel={() => props.onCancel && props.onCancel()}
+			onCancel={() => props.onCancel?.()}
 		>
 			<Column
 				classList={{ [styles.block]: true }}
 				horizontalAlignment={Column.Alignment.Horizontal.Stretch}
 			>
-				<h1 class={styles.title}>
-					{props.isEdit ? "Edit" : "Create new"} script
-				</h1>
+				<Show when={props.isEdit}>
+					<Row
+						classList={{ [styles.title]: true }}
+						horizontalAlignment={Row.Alignment.Horizontal.Center}
+					>
+						<h1>Edit script</h1>
+					</Row>
+				</Show>
 				<NameInput />
 				<BodyConstructor />
-				<FinishButtons />
+				<FinishButtons
+					saveText={props.isEdit ? "Save" : "Add"}
+					cancelText={props.isEdit ? "Cancel" : "Reset"}
+				/>
 			</Column>
 		</ScriptConstructorContext.Provider>
 	);

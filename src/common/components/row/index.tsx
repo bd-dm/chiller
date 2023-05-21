@@ -21,6 +21,7 @@ interface RowProps extends JSX.HTMLAttributes<HTMLDivElement> {
 	classList?: Record<string, boolean | undefined>;
 	verticalAlignment?: RowVerticalAlignment;
 	horizontalAlignment?: RowHorizontalAlignment;
+	gapLess?: boolean;
 }
 
 interface RowInterface extends ParentComponent<RowProps> {
@@ -37,6 +38,7 @@ const Row: RowInterface = (props) => {
 			role={"row"}
 			classList={{
 				[styles.row]: true,
+				[styles.gapLess]: props.gapLess,
 				[styles[
 					`horizontal${
 						props.horizontalAlignment ?? RowHorizontalAlignment.FlexStart

@@ -13,13 +13,13 @@ const Navigation: Component = () => {
 	return (
 		<section role={"main"} aria-label={page()} class={styles.scripts}>
 			<Switch>
-				<Match keyed when={page() === Page.AddScript}>
+				<Match when={page() === Page.AddScript}>
 					<AddScript />
 				</Match>
-				<Match keyed when={page() === Page.ScriptList}>
+				<Match when={page() === Page.ScriptList}>
 					<ScriptsList />
 				</Match>
-				<Match keyed when={page() === Page.ImportScript}>
+				<Match when={page() === Page.ImportScript}>
 					<ScriptImport />
 				</Match>
 			</Switch>

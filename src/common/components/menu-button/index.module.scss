@@ -1,0 +1,12 @@
+@use '../../styles/variables';
+
+.button {
+	display: flex;
+	position: relative;
+	transition: all 0.4s ease;
+}
+
+.text {
+	margin-left: 0.5em;
+	white-space: nowrap;
+}
