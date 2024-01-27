@@ -4,7 +4,7 @@ import { ActionDynamicParam, ActionDynamicParamType } from "../types";
 
 const getActionParamValue = (
 	param: ActionDynamicParam,
-	variables?: ScriptVariables
+	variables?: ScriptVariables,
 ): string => {
 	switch (param.type) {
 		case ActionDynamicParamType.Variable: {

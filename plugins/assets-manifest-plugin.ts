@@ -2,7 +2,7 @@
 import fs from "node:fs";
 import path from "node:path";
 
-import minimatch from "minimatch";
+import { minimatch } from "minimatch";
 import { OutputChunk } from "rollup";
 import { Plugin } from "vite";
 
@@ -29,7 +29,7 @@ const assetsManifestPlugin = ({ entries }: Config): Plugin => {
 					// If we have entries config, parse only bundles mentioned there
 					if (entries) {
 						const shouldParseEntry = entries.some((entryGlob) =>
-							minimatch(bundleKey, entryGlob)
+							minimatch(bundleKey, entryGlob),
 						);
 						if (!shouldParseEntry) {
 							return prev;
@@ -49,13 +49,13 @@ const assetsManifestPlugin = ({ entries }: Config): Plugin => {
 						};
 					}
 				},
-				{ scripts: [], assets: [] } as Manifest
+				{ scripts: [], assets: [] } as Manifest,
 			);
 
 			const manifest = JSON.stringify(assetPaths);
 			await fs.promises.writeFile(
 				path.resolve(dir, "assets-manifest.json"),
-				manifest
+				manifest,
 			);
 		},
 	};

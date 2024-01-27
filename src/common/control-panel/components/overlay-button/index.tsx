@@ -19,7 +19,7 @@ const OverlayButton: Component = () => {
 			}}
 		>
 			<MenuButton icon={IconName.Overlay} onClick={enableOverlay}>
-				Overlay
+				Toggle overlay
 			</MenuButton>
 		</Row>
 	);

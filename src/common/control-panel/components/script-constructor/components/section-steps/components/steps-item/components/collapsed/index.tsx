@@ -30,7 +30,7 @@ const TargetedParamsInfo: Component<CollapsedProps> = (props) => {
 			| "clearInput"
 			| "waitForElement"
 			| "enterText"
-			| "runScript"
+			| "runScript",
 	>() => props.params as UserEventParams<Type>;
 	const { getVariable } = useScriptConstructor();
 

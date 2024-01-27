@@ -5,7 +5,7 @@ import { restoreContentInjection } from "./restore-content-injection";
 const onPageReady = async (
 	tabId: number,
 	changeInfo: chrome.tabs.TabChangeInfo,
-	tab: chrome.tabs.Tab
+	tab: chrome.tabs.Tab,
 ): Promise<void> => {
 	if (changeInfo.status !== "complete") {
 		return;

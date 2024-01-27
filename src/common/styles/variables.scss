@@ -1,12 +1,12 @@
 $text: rgb(255 255 255);
-$text-disabled: rgb(168, 168, 168);
+$text-disabled: rgb(168 168 168);
 $text-placeholder: rgb(153 153 153);
 $text-inverted: rgb(51 51 51);
-$primary: rgb(255, 255, 255);
+$primary: rgb(255 255 255);
 $button: $primary;
-$button-active: rgb(229, 229, 229);
-$button-hovered: rgb(255, 255, 255);
-$button-light-hovered: rgba(80, 80, 80, 0.5);
+$button-active: rgb(229 229 229);
+$button-hovered: rgb(255 255 255);
+$button-light-hovered: rgb(80 80 80 / 50%);
 $button-outline: rgb(0 0 0);
 $border: rgb(18 18 18);
 $background-solid: rgb(70 70 70);
@@ -20,6 +20,5 @@ $input: rgb(255 255 255 / 6%);
 $input-hover: rgb(255 255 255 / 7%);
 $block-header: rgb(32 32 32);
 $close: rgb(253 104 104);
-
 $content-container-width: 300px;
 $devtools-container-width: 400px;

@@ -70,7 +70,7 @@ const StepsConstructorSection: Component = () => {
 const BodyConstructor: Component = () => {
 	return (
 		<Column
-			class={styles.constructor}
+			class={styles.root}
 			horizontalAlignment={Column.Alignment.Horizontal.Stretch}
 		>
 			<VariablesConstructorSection />

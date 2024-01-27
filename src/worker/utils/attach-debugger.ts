@@ -2,7 +2,7 @@ import { detachDebugger } from "./detach-debugger";
 import { getSavedInjectedTabs } from "./get-saved-injected-tabs";
 
 const attachDebugger = async (
-	target: chrome.debugger.Debuggee
+	target: chrome.debugger.Debuggee,
 ): Promise<void> => {
 	const attach = async () => chrome.debugger.attach(target, "1.3");
 

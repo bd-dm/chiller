@@ -9,7 +9,7 @@ interface ClearInputParams {
 
 const clearInput: UserEventWithTarget<ClearInputParams> = async (
 	tabId,
-	{ params: { target }, variables }
+	{ params: { target }, variables },
 ) => {
 	const { element } = getTargetElement<HTMLInputElement>(target, variables);
 	if (!element) {

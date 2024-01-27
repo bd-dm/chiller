@@ -9,23 +9,23 @@ import {
 } from "../../../../types";
 
 interface ConstructorParamsInputSwitchProps<
-	ActionType extends ConstructorStepItemAction
+	ActionType extends ConstructorStepItemAction,
 > {
 	action: NonNullable<ActionType>;
 	initialValue?: ConstructorStepItemParams<NonNullable<ActionType>>;
 	onChange: (
-		params: ConstructorStepItemParams<NonNullable<ActionType>>
+		params: ConstructorStepItemParams<NonNullable<ActionType>>,
 	) => void;
 }
 
 const ParamsInput = <ActionType extends ConstructorStepItemAction>(
-	props: ConstructorParamsInputSwitchProps<ActionType>
+	props: ConstructorParamsInputSwitchProps<ActionType>,
 ): JSXElement => {
 	const changeHandler: ConstructorStepParamsChangeHandler<
 		NonNullable<ActionType>
 	> = (params) => {
 		props.onChange(
-			params as ConstructorStepItemParams<NonNullable<ActionType>>
+			params as ConstructorStepItemParams<NonNullable<ActionType>>,
 		);
 	};
 

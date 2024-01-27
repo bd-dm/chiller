@@ -4,7 +4,7 @@ const onMessage: onMessageFn = (messageType, callback) => {
 	const newListener: MessageListener<typeof messageType> = (
 		message,
 		sender,
-		sendResponse
+		sendResponse,
 	) => {
 		if (message.type === messageType) {
 			return callback(message, sender, sendResponse);

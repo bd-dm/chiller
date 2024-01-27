@@ -4,7 +4,7 @@ import { getScripts } from "./get-scripts";
 import { ScriptData } from "./types";
 
 const getScriptOrDraft = async (
-	scriptId: ScriptData["id"]
+	scriptId: ScriptData["id"],
 ): Promise<ScriptData | null> => {
 	const scriptDraft = await getScriptDraft(scriptId);
 
@@ -22,7 +22,7 @@ const getScriptOrDraft = async (
 
 	const scriptDrafts = await storage.get(StorageKeys.ScriptDrafts);
 	const lastUnsavedDraft = scriptDrafts?.find(
-		({ id }) => !scriptIds.includes(id)
+		({ id }) => !scriptIds.includes(id),
 	);
 
 	if (lastUnsavedDraft) {

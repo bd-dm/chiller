@@ -191,7 +191,7 @@ const ScriptConstructorContextProvider: ParentComponent<
 
 	const removeVariable = (index: number): void => {
 		setVariables((prevVariables) =>
-			prevVariables.filter((_, prevIndex) => prevIndex !== index)
+			prevVariables.filter((_, prevIndex) => prevIndex !== index),
 		);
 	};
 

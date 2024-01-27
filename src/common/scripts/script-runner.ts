@@ -6,7 +6,7 @@ import { ScriptData } from "./types";
 
 const scriptRunner = async (
 	tabId: chrome.tabs.Tab["id"],
-	scriptId: ScriptData["id"]
+	scriptId: ScriptData["id"],
 ) => {
 	const script = await getScript(scriptId);
 	const { steps, variables } = getScriptBody(script);

@@ -6,10 +6,9 @@ import { StepsItem } from "../steps-item";
 import styles from "./index.module.scss";
 
 const SortableStepsItem: Component<ComponentProps<typeof StepsItem>> = (
-	props
+	props,
 ) => {
-	const id = () => props.step.id;
-	const sortable = createSortable(id());
+	const sortable = createSortable(props.step.id);
 
 	return (
 		<div

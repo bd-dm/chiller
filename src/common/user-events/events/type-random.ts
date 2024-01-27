@@ -8,7 +8,7 @@ interface TypeRandomParams {
 
 const typeRandom: UserEvent<TypeRandomParams> = (
 	tabId,
-	{ params: { variants } }
+	{ params: { variants } },
 ) => {
 	const text = pickRandomFromArray(variants);
 

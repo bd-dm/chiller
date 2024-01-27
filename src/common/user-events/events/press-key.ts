@@ -16,7 +16,7 @@ interface PressKeyParams {
 
 const pressKey: UserEvent<PressKeyParams> = async (
 	tabId,
-	{ params: { key } }
+	{ params: { key } },
 ): Promise<void> => {
 	await pressKeyCustom(tabId, {
 		params: { type: PressKeyType.KeyDown, key: keyCodes[key] },

@@ -9,7 +9,7 @@ interface BodyConstructorSectionProps {
 }
 
 const BodyConstructorSection: ParentComponent<BodyConstructorSectionProps> = (
-	props
+	props,
 ) => {
 	const titleId = nanoid();
 

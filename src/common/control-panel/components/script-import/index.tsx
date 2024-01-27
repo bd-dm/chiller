@@ -34,7 +34,7 @@ const ScriptImport: Component = () => {
 			newFiles.map(async (newFile) => ({
 				content: await newFile.text(),
 				name: await getScriptNameFromFile(newFile),
-			}))
+			})),
 		);
 
 		setItems((prevItems) => [...prevItems, ...importItems]);

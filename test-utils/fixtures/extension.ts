@@ -8,7 +8,7 @@ interface ExtensionFixture {
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const extensionFixture: TestFixture<ExtensionFixture, any> = async (
 	{ context, page },
-	use
+	use,
 ) => {
 	let [worker] = context.serviceWorkers();
 	if (!worker) {

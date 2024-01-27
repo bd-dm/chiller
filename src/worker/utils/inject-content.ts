@@ -6,7 +6,7 @@ import { saveInjectedTab } from "./save-injected-tab";
 
 const injectContent = async (
 	tabId: NonNullable<chrome.tabs.Tab["id"]>,
-	isFromPopup = false
+	isFromPopup = false,
 ): Promise<void> => {
 	if (isFromPopup) {
 		const prevInjectedTabs = await getSavedInjectedTabs();

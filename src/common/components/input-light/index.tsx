@@ -3,7 +3,7 @@ import { Component, JSX } from "solid-js";
 import styles from "./index.module.scss";
 
 const InputLight: Component<JSX.InputHTMLAttributes<HTMLInputElement>> = (
-	props
+	props,
 ) => {
 	return (
 		<input

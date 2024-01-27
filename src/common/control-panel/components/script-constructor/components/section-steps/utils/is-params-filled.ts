@@ -7,7 +7,7 @@ import { isEmpty, isUndefined } from "lodash-es";
 
 const isParamsFilled = (
 	action?: UserEventAction,
-	params?: UserEventParams<UserEventAction>
+	params?: UserEventParams<UserEventAction>,
 ) => {
 	if (isUndefined(action) || isUndefined(params)) {
 		return false;

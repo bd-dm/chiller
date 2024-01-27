@@ -7,7 +7,7 @@ interface SleepParams {
 
 const sleep: UserEvent<SleepParams> = async (
 	_tabId,
-	{ params: { ms } }
+	{ params: { ms } },
 ): Promise<void> => {
 	return await sleepFn(ms);
 };

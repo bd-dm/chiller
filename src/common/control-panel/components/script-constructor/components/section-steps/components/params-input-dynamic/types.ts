@@ -2,11 +2,11 @@ import { ActionDynamicParam } from "common/user-events";
 
 type ChangeHandler<ParamType extends ActionDynamicParam = ActionDynamicParam> =
 	<Key extends keyof ParamType>(
-		key: Key
+		key: Key,
 	) => (value: ParamType[Key] | null) => void;
 
 interface InputExactTypeProps<
-	ParamType extends ActionDynamicParam = ActionDynamicParam
+	ParamType extends ActionDynamicParam = ActionDynamicParam,
 > {
 	param: ParamType;
 	onChange: ChangeHandler<ParamType>;

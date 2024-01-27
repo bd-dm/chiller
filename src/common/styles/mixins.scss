@@ -14,10 +14,7 @@
 		color: variables.$text-placeholder;
 		content: attr(data-placeholder);
 		position: absolute;
-		top: 0;
-		bottom: 0;
-		left: 10px;
-		right: 0;
+		inset: 0 0 0 10px;
 		display: flex;
 		flex-direction: row;
 		justify-content: flex-start;

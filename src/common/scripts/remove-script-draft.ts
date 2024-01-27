@@ -5,7 +5,7 @@ import { ScriptData } from "./types";
 const removeScriptDraft = async (scriptId: ScriptData["id"]): Promise<void> => {
 	await storage.removeItem(
 		StorageKeys.ScriptDrafts,
-		({ id }) => id === scriptId
+		({ id }) => id === scriptId,
 	);
 };
 
