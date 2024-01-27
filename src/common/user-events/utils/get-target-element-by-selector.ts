@@ -3,7 +3,7 @@ import { isNull } from "lodash-es";
 import { TargetElementData } from "../types";
 
 const getTargetElementBySelector = <ElementType extends HTMLElement>(
-	selector: string
+	selector: string,
 ): TargetElementData<ElementType> | null => {
 	const element = document.querySelector<ElementType>(selector);
 

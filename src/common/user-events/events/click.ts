@@ -5,7 +5,7 @@ import { getTargetElement, scrollToElementIfNotVisible } from "../utils";
 
 const click: UserEventWithTarget = async (
 	tabId,
-	{ params: { target }, variables }
+	{ params: { target }, variables },
 ): Promise<void> => {
 	const { element, iframe } = getTargetElement(target, variables);
 	scrollToElementIfNotVisible(element);

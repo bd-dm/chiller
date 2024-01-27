@@ -2,7 +2,7 @@ import { injectAssets } from "./inject-assets";
 
 const executeAssetsInjection = async (
 	tabId: NonNullable<chrome.tabs.Tab["id"]>,
-	assetPaths: string[]
+	assetPaths: string[],
 ) =>
 	chrome.scripting.executeScript({
 		target: { tabId },

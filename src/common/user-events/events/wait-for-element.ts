@@ -10,7 +10,7 @@ const WAIT_FOR_ELEMENT_TIMEOUT = 10000;
 
 const waitForElement: UserEventWithTarget<WaitForElementParams> = async (
 	_tabId,
-	{ params: { target, timeout: timeoutParam }, variables }
+	{ params: { target, timeout: timeoutParam }, variables },
 ): Promise<void> => {
 	const timeout = timeoutParam ?? WAIT_FOR_ELEMENT_TIMEOUT;
 
@@ -26,7 +26,9 @@ const waitForElement: UserEventWithTarget<WaitForElementParams> = async (
 			} catch (_error) {
 				if (isTimedOut) {
 					reject(
-						new Error("Target " + JSON.stringify(target) + " not found on page")
+						new Error(
+							"Target " + JSON.stringify(target) + " not found on page",
+						),
 					);
 				}
 			}

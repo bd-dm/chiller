@@ -4,7 +4,7 @@ import { Component } from "solid-js";
 import { ConstructorParamsInputProps } from "../../../../types";
 
 const ParamsInputSleep: Component<ConstructorParamsInputProps<"sleep">> = (
-	props
+	props,
 ) => {
 	return (
 		<Input

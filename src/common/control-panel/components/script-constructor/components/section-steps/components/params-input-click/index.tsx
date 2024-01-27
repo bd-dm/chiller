@@ -8,7 +8,7 @@ import {
 import { ParamsInputDynamic } from "../params-input-dynamic";
 
 const ParamsInputClick: Component<ConstructorParamsInputProps<"click">> = (
-	props
+	props,
 ): JSXElement => {
 	const changeHandler: ConstructorStepParamChangeHandler = (newParam) => {
 		props.onChange({

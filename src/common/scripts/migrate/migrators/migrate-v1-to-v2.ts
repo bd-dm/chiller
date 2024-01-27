@@ -1,6 +1,5 @@
 import { nanoid } from "nanoid";
 
-import { ActionDynamicParamType } from "../../../user-events";
 import { getScriptBody } from "../../get-script-body";
 import { ScriptData } from "../../types";
 

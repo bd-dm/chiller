@@ -18,10 +18,10 @@ type ConstructorVariableItems = ConstructorVariableItem[];
 type ConstructorStepItem<ActionType extends UserEventAction = UserEventAction> =
 	Partial<ScriptStep<ActionType>> & Pick<ScriptStep<ActionType>, "id">;
 type ConstructorStepItemAction<
-	ActionType extends UserEventAction = UserEventAction
+	ActionType extends UserEventAction = UserEventAction,
 > = ConstructorStepItem<ActionType>["action"];
 type ConstructorStepItemParams<
-	ActionType extends UserEventAction = UserEventAction
+	ActionType extends UserEventAction = UserEventAction,
 > = ConstructorStepItem<ActionType>["params"];
 type ConstructorStepItems = ConstructorStepItem[];
 
@@ -32,17 +32,17 @@ interface ConstructorStepActionOption {
 }
 
 type ConstructorStepParamsChangeHandler<
-	ActionType extends UserEventAction = UserEventAction
+	ActionType extends UserEventAction = UserEventAction,
 > = (
 	params: Record<
 		keyof ConstructorStepItemParams<ActionType>,
 		ConstructorStepItemParams<ActionType>
-	>
+	>,
 ) => void;
 type ConstructorStepParamChangeHandler = (param: ActionDynamicParam) => void;
 
 interface ConstructorParamsInputProps<
-	ActionType extends UserEventAction = UserEventAction
+	ActionType extends UserEventAction = UserEventAction,
 > {
 	action: NonNullable<ConstructorStepItemAction>;
 	params?: ConstructorStepItemParams<ActionType>;

@@ -3,5 +3,5 @@ import { createAppInElement } from "common/utils";
 
 createAppInElement(
 	() => <ControlPanel type={ControlPanelType.DevTools} />,
-	"root"
+	"root",
 );

@@ -3,7 +3,7 @@ import { isNull } from "lodash-es";
 import { TargetElementData } from "../types";
 
 const getTargetElementByText = <ElementType extends HTMLElement>(
-	text: string
+	text: string,
 ): TargetElementData<ElementType> | null => {
 	const element = document
 		.evaluate(`//*[contains(text(), '${text}')]`, document)

@@ -20,9 +20,9 @@ import {
 } from "./types";
 
 type GetActionParamsComponentsMap<
-	ActionType extends ConstructorStepItemAction = ConstructorStepItemAction
+	ActionType extends ConstructorStepItemAction = ConstructorStepItemAction,
 > = (
-	action: NonNullable<ActionType>
+	action: NonNullable<ActionType>,
 ) => Component<ConstructorParamsInputProps<NonNullable<ActionType>>>;
 
 const actionNames: Record<UserEventAction, string> = {

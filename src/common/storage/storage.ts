@@ -51,7 +51,7 @@ const getItem: StorageMethods["getItem"] = async (key, findFn) => {
 
 	// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 	// @ts-ignore https://github.com/microsoft/TypeScript/issues/44373
-	return items.find(findFn);
+	return (items.find(findFn) ?? null) as Parameters<typeof findFn>[0];
 };
 
 const addItem: StorageMethods["addItem"] = async (key, item) => {
@@ -63,7 +63,7 @@ const addItem: StorageMethods["addItem"] = async (key, item) => {
 const updateItem: StorageMethods["updateItem"] = async (
 	key,
 	findFn,
-	updateData
+	updateData,
 ) => {
 	const items = await get<typeof key>(key);
 	if (isNull(items)) {

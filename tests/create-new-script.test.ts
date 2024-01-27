@@ -24,7 +24,7 @@ test.describe("Mechanics/CreateNewScript", () => {
 			async (ui) => {
 				await ui.getInput("Variable name").fill("testSelector");
 				await ui.getInput("Value").fill("[data-chiller]");
-			}
+			},
 		);
 
 		await ui.getButton("Create step").click();

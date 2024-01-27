@@ -34,12 +34,12 @@
 		color: variables.$button;
 		background-color: transparent;
 
-		&:hover:not(.active) {
-			background-color: variables.$button-light-hovered
-		}
-
 		&:focus {
 			outline-color: variables.$button;
+		}
+
+		&:hover:not(.active) {
+			background-color: variables.$button-light-hovered
 		}
 
 		&.active:focus {

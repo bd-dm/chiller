@@ -24,7 +24,7 @@ const KEY_UP_ARROW = 38;
 const KEY_ESCAPE = 27;
 
 const Select = <OptionType extends SelectOption = SelectOption>(
-	props: SelectProps<OptionType>
+	props: SelectProps<OptionType>,
 ) => {
 	const getOption = (value: OptionType["value"] | null): OptionType | null => {
 		return props.options.find((option) => option.value === value) ?? null;
@@ -33,7 +33,7 @@ const Select = <OptionType extends SelectOption = SelectOption>(
 		getOption(props.initialValue ?? null)?.value ?? null;
 
 	const [value, setValue] = createSignal<OptionType["value"] | null>(
-		getValueWithFallback()
+		getValueWithFallback(),
 	);
 	const [manualInput, setManualInput] = createSignal("");
 	const [deferredManualInput, setDeferredManualInput] = createSignal("");
@@ -47,7 +47,7 @@ const Select = <OptionType extends SelectOption = SelectOption>(
 	const currentOption = () => getOption(value());
 	const filteredOptions = () =>
 		props.options.filter(({ name }) =>
-			name.toLowerCase().includes(manualInput().toLowerCase())
+			name.toLowerCase().includes(manualInput().toLowerCase()),
 		);
 	const updateContent = () => {
 		const contentElement = contentRef();
@@ -74,7 +74,7 @@ const Select = <OptionType extends SelectOption = SelectOption>(
 
 	const selectHandler = (
 		newValue: OptionType["value"] | null,
-		shouldBlur = true
+		shouldBlur = true,
 	): void => {
 		// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 		// @ts-ignore Expects fn, but we pass value
@@ -94,7 +94,7 @@ const Select = <OptionType extends SelectOption = SelectOption>(
 		}
 
 		const currentFocusedButton = document.querySelector(
-			`.${styles.suggestionsList} li>button:focus`
+			`.${styles.suggestionsList} li>button:focus`,
 		);
 		const targetButton = currentFocusedButton?.parentNode?.nextSibling
 			?.firstChild as HTMLElement | undefined;
@@ -110,7 +110,7 @@ const Select = <OptionType extends SelectOption = SelectOption>(
 		}
 
 		const currentFocusedButton = document.querySelector(
-			`.${styles.suggestionsList} li>button:focus`
+			`.${styles.suggestionsList} li>button:focus`,
 		);
 		const targetButton = currentFocusedButton?.parentNode?.previousSibling
 			?.firstChild as HTMLElement | undefined;
@@ -140,7 +140,7 @@ const Select = <OptionType extends SelectOption = SelectOption>(
 					onKeyDown={(e) => {
 						if (e.keyCode === KEY_DOWN_ARROW) {
 							focusNext(
-								(listRef()?.firstChild?.firstChild as HTMLElement) ?? undefined
+								(listRef()?.firstChild?.firstChild as HTMLElement) ?? undefined,
 							);
 						} else if (e.keyCode === KEY_ESCAPE) {
 							e.preventDefault();
@@ -180,7 +180,7 @@ const Select = <OptionType extends SelectOption = SelectOption>(
 													focusNext();
 												} else if (e.keyCode === KEY_UP_ARROW) {
 													focusPrevious(
-														index() === 0 ? contentRef() : undefined
+														index() === 0 ? contentRef() : undefined,
 													);
 												} else if (e.keyCode === KEY_ESCAPE) {
 													e.preventDefault();

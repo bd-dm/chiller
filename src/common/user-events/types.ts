@@ -13,7 +13,7 @@ type UserEvent<ParamsType = DefaultParamsType> = (
 	options: {
 		params: ParamsType;
 		variables?: UserEventVariables;
-	}
+	},
 ) => Promise<void>;
 
 /**
@@ -25,7 +25,7 @@ type UserEventWithTarget<
 	TargetType =
 		| ActionDynamicParamWithText
 		| ActionDynamicParamWithSelector
-		| ActionDynamicParamWithVariable
+		| ActionDynamicParamWithVariable,
 > = UserEvent<
 	ParamsType & {
 		target: TargetType;
@@ -39,7 +39,7 @@ interface TargetElementData<ElementType extends HTMLElement> {
 
 type GetTargetElementFn = <ElementType extends HTMLElement>(
 	target: ActionDynamicParam,
-	variables?: UserEventVariables
+	variables?: UserEventVariables,
 ) => TargetElementData<ElementType>;
 
 /**

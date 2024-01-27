@@ -43,7 +43,7 @@ const pressKeyCustom: UserEvent<PressKeyParams> = async (
 			windowsVirtualKeyCode,
 			nativeVirtualKeyCode,
 		},
-	}
+	},
 ): Promise<void> => {
 	const modifiers = modifiersList?.reduce((acc, curr) => acc + curr, 0);
 	const debuggee = { tabId };

@@ -5,7 +5,7 @@ import { Component } from "solid-js";
 import { InputExactTypeProps } from "./types";
 
 const InputText: Component<InputExactTypeProps<ActionDynamicParamWithText>> = (
-	props
+	props,
 ) => {
 	return (
 		<Input

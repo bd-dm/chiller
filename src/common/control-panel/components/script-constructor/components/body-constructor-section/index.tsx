@@ -1,6 +1,6 @@
-import { Column, Row } from "common/components";
+import { Column } from "common/components";
 import { nanoid } from "nanoid";
-import { JSXElement, ParentComponent } from "solid-js";
+import { ParentComponent } from "solid-js";
 
 import styles from "./index.module.scss";
 
@@ -9,7 +9,7 @@ interface BodyConstructorSectionProps {
 }
 
 const BodyConstructorSection: ParentComponent<BodyConstructorSectionProps> = (
-	props
+	props,
 ) => {
 	const titleId = nanoid();
 

@@ -7,7 +7,7 @@ import { getCurrentTab } from "../utils/get-current-tab";
 const onInjectContent: MessageListener<MessageType.InjectContent> = (
 	message,
 	sender,
-	sendResponse
+	sendResponse,
 ) => {
 	getCurrentTab().then((tab) => {
 		if (isUndefined(tab) || isUndefined(tab.id)) {

@@ -12,7 +12,7 @@ import { getTargetElementByText } from "./get-target-element-by-text";
 
 const getTargetElement: GetTargetElementFn = <ElementType extends HTMLElement>(
 	target: ActionDynamicParam,
-	variables?: ScriptVariables
+	variables?: ScriptVariables,
 ): TargetElementData<ElementType> => {
 	let elementData: TargetElementData<ElementType> | null;
 

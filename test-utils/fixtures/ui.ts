@@ -9,7 +9,7 @@ interface UILocatorBase {
 	getRow: (name: string) => UILocator;
 	within: (
 		locator: UILocatorLike,
-		withinFn: (ui: UILocator) => void
+		withinFn: (ui: UILocator) => void,
 	) => Promise<void>;
 }
 
